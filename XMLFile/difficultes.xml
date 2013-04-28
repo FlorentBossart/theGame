@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE difficultes [
+<!ELEMENT difficultes (type+)>
+<!ELEMENT difficulte (intitule, longueurCarte, largeurCarte, energieDepart, energieMax, nbRepos, pnjAmisDepart, pnjAmisParGeneration, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)>
+<!ELEMENT longueurCarte (#PCDATA)>
+<!ELEMENT largeurCarte (#PCDATA)>
+<!ELEMENT energieDepart (#PCDATA)>
+<!ELEMENT energieMax (#PCDATA)>
+<!ELEMENT nbRepos (#PCDATA)>
+<!ELEMENT pnjAmisDepart (#PCDATA)>
+<!ELEMENT pnjAmisParGeneration (#PCDATA)>
+<!ELEMENT pnjEnnemisDepart (#PCDATA)>
+<!ELEMENT pnjEnnemisParGeneration (#PCDATA)>
+<!ELEMENT objetsDepart (#PCDATA)>
+<!ELEMENT objetsParGeneration (#PCDATA)>
+<!ELEMENT nbToursInterGenerations (#PCDATA)>
+<!ELEMENT pourcentageTerrain (#PCDATA)>
+]>
+
+<difficultes>
+
+	<difficulte>
+	    <intitule>facile</intitule>
+	    <longueurCarte>10</longueurCarte>
+	    <largeurCarte>10</largeurCarte>
+	    <energieDepart>1000</energieDepart>
+	    <energieMax>1000</energieMax>
+	    <nbRepos>3</nbRepos>
+	    <pnjAmisDepart>45</pnjAmisDepart>
+	    <pnjAmisParGeneration>3</pnjAmisParGeneration>
+	    <pnjEnnemisDepart>25</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
+	    <objetsDepart>30</objetsDepart>
+	    <objetsParGeneration>2</objetsParGeneration>
+	    <nbToursInterGenerations>15</nbToursInterGenerations>
+	    <pourcentageTerrain>100</pourcentageTerrain>
+	</difficulte>
+	<difficulte>
+	    <intitule>moyen</intitule>
+	    <longueurCarte>25</longueurCarte>
+	    <largeurCarte>25</largeurCarte>
+	    <energieDepart>1000</energieDepart>
+	    <energieMax>500</energieMax>
+	    <nbRepos>3</nbRepos>
+	    <pnjAmisDepart>45</pnjAmisDepart>
+	    <pnjAmisParGeneration>3</pnjAmisParGeneration>
+	    <pnjEnnemisDepart>25</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
+	    <objetsDepart>30</objetsDepart>
+	    <objetsParGeneration>2</objetsParGeneration>
+	    <nbToursInterGenerations>15</nbToursInterGenerations>
+	    <pourcentageTerrain>100</pourcentageTerrain>
+	</difficulte>
+	<difficulte>
+	    <intitule>difficile</intitule>
+	    <longueurCarte>50</longueurCarte>
+	    <largeurCarte>50</largeurCarte>
+	    <energieDepart>1000</energieDepart>
+	    <energieMax>500</energieMax>
+	    <nbRepos>3</nbRepos>
+	    <pnjAmisDepart>45</pnjAmisDepart>
+	    <pnjAmisParGeneration>3</pnjAmisParGeneration>
+	    <pnjEnnemisDepart>25</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
+	    <objetsDepart>30</objetsDepart>
+	    <objetsParGeneration>2</objetsParGeneration>
+	    <nbToursInterGenerations>15</nbToursInterGenerations>
+	    <pourcentageTerrain>100</pourcentageTerrain>
+	</difficulte>
+
+</difficultes>
+
+

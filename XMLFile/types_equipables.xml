@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE types_equipables [
+<!ELEMENT types_equipables (type+)>
+<!ELEMENT type (intitule, pourcentageProtection, nbTours, prix, sePorteSur)>
+<!ELEMENT intitule (#PCDATA)>
+<!ELEMENT pourcentageProtection (#PCDATA)>
+<!ELEMENT nbTours (#PCDATA)>
+<!ELEMENT prix (#PCDATA)>
+<!ELEMENT sePorteSur (#PCDATA)>
+]>
+
+<types_equipables>
+
+	<type>
+	   <intitule>bottesDe7Lieux</intitule>
+	   <pourcentageProtection>0.10</pourcentageProtection>
+	   <nbTours>5</nbTours>
+	   <prix>10</prix>
+	   <sePorteSur>bottes</sePorteSur>
+	</type>
+	<type>
+	   <intitule>soulier</intitule>
+	   <pourcentageProtection>0.20</pourcentageProtection>
+	   <nbTours>5</nbTours>
+	   <prix>15</prix>
+	   <sePorteSur>pieds</sePorteSur>
+	</type>
+
+</types_equipables>

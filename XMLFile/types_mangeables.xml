@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE types_mangeables [
+<!ELEMENT types_mangeables (type+)>
+<!ELEMENT type (intitule, energieRendue, prix)>
+<!ELEMENT intitule (#PCDATA)>
+<!ELEMENT energieRendue (#PCDATA)>
+<!ELEMENT prix (#PCDATA)>
+]>
+
+<types_mangeables>
+
+<type>
+   <intitule>pomme</intitule>
+   <energieRendue>20</energieRendue>
+   <prix>10</prix>
+</type>
+
+
+
+</types_mangeables>

@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE types_ennemis [
+<!ELEMENT types_ennemis (type+)>
+<!ELEMENT type (intitule, energieBase)>
+<!ELEMENT intitule (#PCDATA)>
+<!ELEMENT energieBase (#PCDATA)>
+]>
+
+<types_ennemis>
+
+	<type>
+	   <intitule>brigand</intitule>
+	   <energieBase>100</energieBase>
+	</type>
+	<type>
+	   <intitule>brigand2</intitule>
+	   <energieBase>200</energieBase>
+	</type>
+
+</types_ennemis>
