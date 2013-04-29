@@ -13,6 +13,7 @@
 # == un compteur de tour de jeu
 #
 
+require './AffichageDebug.rb'
 require './Enum/EnumStadePartie.rb'
 require './Joueur.rb'
 require './Inventaire.rb'
@@ -101,7 +102,8 @@ class Modele
    def initialiseToi()
      
       @compteurTour = 0
-      
+      @tourDejaPasse=false
+     
       @notifications=Array.new()
       @notifications.push("Debut de partie")
       
@@ -111,8 +113,8 @@ class Modele
       # Initialisation de la case du joueur
       pasTrouver = true
       while(pasTrouver)
-         larg_cj = rand(@carte.largeur)-1
-         long_cj = rand(@carte.longueur)-1
+         larg_cj = rand(@carte.largeur-1)
+         long_cj = rand(@carte.longueur-1)
          caseJoueur = @carte.getCaseAt(larg_cj, long_cj)
          if(caseJoueur.typeTerrain.isAccessible)
             pasTrouver = false
@@ -120,16 +122,15 @@ class Modele
       end
       
       # Creation du joueur
-      @joueur = Joueur.creer(@difficulte.nbRepos, @difficulte.energieDepart, 100, Inventaire.creer(12), self, caseJoueur, @pseudPartiepseudo)
+      @joueur = Joueur.creer(@difficulte.nbRepos, @difficulte.energieDepart, 100, Inventaire.creer(12), self, caseJoueur, @pseudoPartie)
       caseJoueur.joueur = @joueur # Attribution du joueur à la case
            
       # Creation des PNJ Amis de depart
-      puts "\nAjout des PNJ Amis de depart :"
       for i in 0..@difficulte.pnjAmisDepart-1
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull()))
+         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type de PNJ Ami
          choix = rand(2)-1 # Nb aleatoire -1 ou 0
@@ -141,17 +142,15 @@ class Modele
 
          # Ajout du PNJ Ami dans la case aleatoire
          caseAleatoire.ajouterElement(element)
-         puts "Ajout de " + element.to_s + " sur la case " + caseAleatoire.to_s
       end
       
       # Creation des PNJ ennemis de depart
-      puts "\nAjout des PNJ Ennemis de depart :"
       @listeEnnemis = Array.new()
       for i in 0 .. @difficulte.pnjEnnemisDepart-1
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull()))
+         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type de PNJ Ennemi
          choix = rand(2)-1 #Nb aleatoire -1 ou 0
@@ -164,16 +163,14 @@ class Modele
          # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
          caseAleatoire.ajouterEnnemi(ennemi)
          @listeEnnemis.push(ennemi)
-         puts "Ajout de " + ennemi.to_s + " sur la case " + caseAleatoire.to_s
       end
       
       # Creation des items disséminer sur la carte
-      puts "\nAjout des items sur la carte :"
       for i in 0 .. @difficulte.objetsDepart-1
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1,rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull()))
+         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type d'item
          choix = rand(3)-1 #Nb aleatoire -1, 0 ou 1
@@ -190,7 +187,6 @@ class Modele
          
         # Ajout de l'item dans la case aleatoire       
         caseAleatoire.ajouterElement(element)
-        puts "Ajout de " + element.to_s + " sur la case " + caseAleatoire.to_s
       end
       
      changerStadePartie(EnumStadePartie.ETAPE_FINIE)
@@ -198,22 +194,16 @@ class Modele
 
    def changerStadePartie(nouveauStade)
      @stadePartie=nouveauStade
+     AffichageDebug.Afficher("Stade Partie=#{nouveauStade}")
      #METHODE VUE
      @vue.actualiser()
      @notifications.clear
      @stadePartie=EnumStadePartie.ETAPE_FINIE
+     AffichageDebug.Afficher("Stade Partie Terminé")
    end
    
    def notifier(notification)
        @notifications.push(notification)
-   end
-   
-   ##
-   # Permet de savoir si le joueur à perdu.
-   #
-   def partiePerdue()
-      puts "\nEnergie du joueur : " + @joueur.energie.to_s + "\n"
-      return @joueur.energie <= 0
    end
 
 
@@ -225,7 +215,7 @@ class Modele
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull()))
+         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type de PNJ Ennemi
          choix = rand(2)-1 #Nb aleatoire -1 ou 0
@@ -238,7 +228,6 @@ class Modele
          # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
          caseAleatoire.ajouterEnnemi(ennemi)
          @listeEnnemis.push(ennemi)
-         puts "Ajout de " + ennemi.to_s + " sur la case " + caseAleatoire.to_s
       end
    end
 
@@ -251,7 +240,7 @@ class Modele
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1,rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull()))
+         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type d'item
          choix = rand(3)-1 #Nb aleatoire -1, 0 ou 1
@@ -266,7 +255,6 @@ class Modele
 
          # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
          element = Item.creer(caseAleatoire, caracteristique)
-         puts "Ajout de " + element.to_s + " sur la case " + caseAleatoire.to_s
       end
    end
 
@@ -289,6 +277,7 @@ class Modele
    # Permet de faire passer un tour. 
    # 
    def tourPasse()
+     notifier("Un tour passe")
       @tourDejaPasse=true
       @compteurTour += 1
       # Deplacement des ennemis
@@ -300,8 +289,6 @@ class Modele
       if(@compteurTour % @difficulte.nbToursInterGenerations == 0)
          ajoutEnnemis()
       end
-      
-      notifier("Un tour a passé")
    end
 
    ##
@@ -310,13 +297,13 @@ class Modele
    # il faut attaquer les ennemis deja present si il y en a
    #
    def debutTour()
-     if(!@joueur.toujourEnVie)
+     if(!@joueur.toujoursEnVie?())
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
      else
-        if(@joueur.casePosition.presenceEnnemis && @joueur.peutSEquiper)
+        if(@joueur.casePosition.presenceEnnemis?() && @joueur.peutSEquiper)
             choixEquipementAvantCombat()
-        elsif(@joueur.casePosition.presenceEnnemis && !@joueur.peutSEquiper)
+        elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
             declencherCombat()
         else
             choixLibre()
@@ -330,8 +317,8 @@ class Modele
   def choixEquipementAvantCombat()
      #on commence par les armures
      compteurArmures=0
-     for i in @joueur.inventaire.item
-       if(i.estEquipable && i.caracteristique.typeEquipable.sePorteSur == "armure")
+     for i in @joueur.inventaire.items
+       if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
           compteurArmures+=1
        end
      end
@@ -349,8 +336,8 @@ class Modele
   def suiteEquipementChoixArme()
 
     compteurArmes=0
-    for i in @joueur.inventaire.item
-      if(i.estEquipable && i.caracteristique.typeEquipable.sePorteSur == "arme")
+    for i in @joueur.inventaire.items
+      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
          compteurArmes+=1
       end
     end
@@ -369,38 +356,27 @@ class Modele
      itemsEnnemis = Array.new()
      
      for ennemi in @joueur.casePosition.listeEnnemis
-       descriptionEnnemi=ennemi.to_s()
-       if(@joueur.armureEquip)
-         descriptionArmure=@joueur.armure.to_s()
-       else
-         descriptionArmure="aucune"
-       end
-       if(@joueur.armeEquip)
-         descriptionArme=@joueur.arme.to_s()
-       else
-         descriptionArme="aucune"
-       end
        itemsUnEnnemi = Array.new() 
        itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
-       notifier("combatu: "+descriptionEnnemi+" armure: "+descriptionArmure+" arme: "+descriptionArme)
        
-       if(@joueur.toujourEnVie)
+       if(@joueur.toujoursEnVie?())
          itemsEnnemis += itemsUnEnnemi 
        else
-         @messageDefaite=@joueur.causeMort+" "+"->lors du combat avec "+descriptionEnnemi
+         @messageDefaite=@joueur.causeMort+" "+"->lors du combat avec "+ennemi.getIntitule()
          changerStadePartie(EnumStadePartie.PARTIE_PERDU) 
          break
        end
      end
      
-     if(@joueur.toujourEnVie)
+     if(@joueur.toujoursEnVie?())
       # Recuperation des items gagnés du/des combat(s)
       for i in itemsEnnemis
-        if(@joueur.inventaire.estPlein)
+        if(@joueur.inventaire.estPlein?())
           @itemAttenteAjout
           changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
         else
           @joueur.inventaire.ajouter(i) 
+          notifier("Vous avez récupérez #{i.getIntitule} lors du dernier combat")
         end
       end
       choixLibre()
@@ -412,8 +388,15 @@ class Modele
    # Une fois le combat fini
    #
    def choixLibre()
+     changerStadePartie(EnumStadePartie.ETAPE_FINIE)
      changerStadePartie(EnumStadePartie.CHOIX_LIBRE)
-     debutTour()
+     AffichageDebug.Afficher("Lancement de la méthode 'debutTour' à la fin de 'choixLibre'")
+   end
+   
+   def lancerPartie()
+     while(@joueur.toujoursEnVie?())
+       debutTour()
+     end
    end
    
    ##
@@ -421,7 +404,7 @@ class Modele
    # de l'objet Modele sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Modele: difficulte=#{@difficulte}, carte=#{@carte}, joueur=#{@joueur}, liste d'ennemis=#{@listeEnnemis}, compteur de tours=#{@compteurTour}]"
+      return "[MODELE]"
    end
 
 end

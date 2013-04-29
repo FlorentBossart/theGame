@@ -14,8 +14,6 @@ require './Element.rb'
 class Item < Element
 
    @caracteristique
-
-   attr_reader :caracteristique
    
    def initialize(casePosition, caracteristique)
       super(casePosition)
@@ -27,23 +25,26 @@ class Item < Element
    end
 
    def getIntitule()
-      return caracteristique.getIntitule()
+      return @caracteristique.getIntitule()
    end
 
    def utiliseToi(joueur)
-      caracteristique.utiliseToi(joueur)
+      @caracteristique.utiliseToi(joueur)
       joueur.inventaire.retirer(self)
+      return nil
    end
    
-   def estEquipable()
-       return caracteristique.estEquipable()
+   def estEquipable?()
+       return @caracteristique.estEquipable?()
    end
    
    ##
    # Represente l'interaction avec un element present sur une case (dans ce cas ramasser un item)
    #
    def interaction(joueur)
-     joueur.ramasser(self)
+     joueur.ramasserItem(self)
+     @casePosition=nil
+     return nil
    end
    
    ##
@@ -51,7 +52,10 @@ class Item < Element
    # de l'objet Item sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Item: position="+super()+" , caracteristique=#{@caracteristique}]"
+      s= "[==Item >>> | "
+      s+= super()
+      s+= "Caracteristique: #{@caracteristique} | "
+      s+= "<<< Item==]"
    end
 
 end

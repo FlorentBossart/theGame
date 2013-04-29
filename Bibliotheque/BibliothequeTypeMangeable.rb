@@ -5,7 +5,8 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe permet de
+# Cette classe représente la bibliothèque des types d'item mangeable définie par:
+#* Une table de hachage statique contenant les types d'item mangeable (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
 class BibliothequeTypeMangeable
@@ -18,8 +19,10 @@ class BibliothequeTypeMangeable
    ##
    # Ajouter un type dans la bibliothèque (écrase si déjà présente).
    #
-   def BibliothequeTypeMangeable.ajouter(cle,difficulte)
-      @@tabletype[cle] = difficulte
+   def BibliothequeTypeMangeable.ajouter(cle,type)
+     AffichageDebug.Afficher("Ajout dans BibliothequeTypeMangeable-> clé:#{cle}, type:#{type}")
+     @@tabletype[cle] = type
+     return nil
    end
    
    
@@ -27,7 +30,9 @@ class BibliothequeTypeMangeable
    # Retirer un type de la bibliothèque.
    #
    def BibliothequeTypeMangeable.retirer(cle)
-      @@tabletype.delete(cle)
+     AffichageDebug.Afficher("Suppression dans BibliothequeTypeMangeable-> clé:#{cle}")
+     @@tabletype.delete(cle)
+     return nil
    end
    
    
@@ -44,7 +49,7 @@ class BibliothequeTypeMangeable
    #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasard()
       valeurs=@@tabletype.values()
-      return valeurs[rand(valeurs.length)-1]
+      return valeurs[rand(valeurs.length-1)]
    end
 
 end

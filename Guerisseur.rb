@@ -54,12 +54,15 @@ class Guerisseur < Ami
          when 0
             energieG = joueur.energie + joueur.energieMax * 0.25
             joueur.debourser(30)
+            joueur.modele.notifier("Vous avez été guérri de 25% de votre énergie maximale")
          when 1
             energieG = joueur.energie + joueur.energieMax * 0.5
             joueur.debourser(50)
+            joueur.modele.notifier("Vous avez été guérri de 50% de votre énergie maximale")
          else
             energieG = joueur.energie + joueur.energieMax * 0.75
             joueur.debourser(70)
+        joueur.modele.notifier("Vous avez été guérri de 75% de votre énergie maximale")
       end
     
       if(energieG > joueur.energieMax)
@@ -68,15 +71,15 @@ class Guerisseur < Ami
          joueur.energie = energieG
       end
     
-      return self
+      return nil
    end
   
   ##
   # Represente l'interaction avec un element present sur une case (dans ce cas interargir avec un commercant)
   #
   def interaction(joueur)
-    @modele.pnjAideInteraction=self  
-    changerStadePartie(EnumStadePartie.INTERACTION_GUERISSEUR)
+    joueur.modele.pnjAideEnInteraction=self  
+    joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_GUERISSEUR)
   end
    
    
@@ -85,7 +88,9 @@ class Guerisseur < Ami
    # de l'objet Guerisseur sur lequel la méthode est appellée.
    #
    def to_s
-     return "[Guerisseur]"
+     s= "[==Guerisseur >>> | "
+     s+= super()
+     s+= "<<< Guerisseur==]"
    end
 
 end

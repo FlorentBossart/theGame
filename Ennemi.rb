@@ -26,7 +26,7 @@ class Ennemi < PNJ
    @energie
    @niveau
    
-   attr_accessor :energie
+   attr_reader :energie, :type, :niveau
   
    
    ##
@@ -42,7 +42,7 @@ class Ennemi < PNJ
       @niveau = niveau
       @type = type
       @energie = @type.energieBase * 1.2
-      remplirListeItems()
+      remplirListeItems(1,5)
    end
   
 
@@ -60,32 +60,6 @@ class Ennemi < PNJ
       end
       return new(casePosition, niveau, type)
    end
-   
-   
-   ##
-   # Permet de remplir aleatoirement la liste d'items.
-   #
-   def remplirListeItems()
-      nbItems = rand(4) + 1
-    
-      for i in 1..nbItems
-         # Choix du type
-         type = rand(2)
-      
-         case type
-            when 0 # TypeEquipable
-               type = BibliothequeTypeEquipable.getTypeEquipableAuHasard()
-               caract = Equipable.creer(type) 
-            else # TypeMangeable
-               type = BibliothequeTypeMangeable.getTypeMangeableAuHasard()
-               caract = Mangeable.creer(type)
-         end # Fin case type
-      
-         @listeItem.push(Item.creer(@casePosition, caract))
-      end # Fin for
-    
-      return self
-   end
   
 
    ##
@@ -95,25 +69,18 @@ class Ennemi < PNJ
    #* <b>cible :</b> la cible de destination
    #
    def deplacement(cible)
-      case cible
-         when EnumDirection.NORD
-            cible = @casePosition.CaseNord
-         when EnumDirection.SUD
-            cible = @casePosition.CaseSud
-         when EnumDirection.EST
-            cible = @casePosition.CaseEst
-         else
-            cible = @casePosition.CaseOuest
-      end
       
-      if(!cible.isFull && cible.typeTerrain.isAccessible)
-         puts "Deplacement de l'ennemi sur la case " + cible.to_s
+     caseCible= @casePosition.getDestination(cible)
+      
+      if(!caseCible.isFull?() && caseCible.typeTerrain.isAccessible)
          @casePosition.retirerEnnemi(self)
-         cible.ajouterEnnemi(self)
-         @casePosition = cible
+        caseCible.ajouterEnnemi(self)
+         @casePosition = caseCible
+         AffichageDebug.Afficher("#{self} \ndéplacé dans \n#{caseCible}")
+      else
+     AffichageDebug.Afficher("#{self}\n pas déplacé")
       end
-    
-      return self
+      return nil
    end
   
 
@@ -126,22 +93,28 @@ class Ennemi < PNJ
       case cible
          when 0
             cible = EnumDirection.NORD
-            if(!@casePosition.CaseNord.isFull && @casePosition.CaseNord.typeTerrain.isAccessible)
+            if(!@casePosition.caseNord.isFull?() && @casePosition.caseNord.typeTerrain.isAccessible)
                deplacement(cible)
+            else
+              deplacement(EnumDirection.SUD)
             end
          when 1
             cible = EnumDirection.SUD
-            if(!@casePosition.CaseSud.isFull && @casePosition.CaseSud.typeTerrain.isAccessible)
+            if(!@casePosition.caseSud.isFull?() && @casePosition.caseSud.typeTerrain.isAccessible)
                deplacement(cible)
-            end
+              else
+                deplacement(EnumDirection.EST)
+              end
          when 2
             cible = EnumDirection.EST
-            if(!@casePosition.CaseEst.isFull && @casePosition.CaseEst.typeTerrain.isAccessible)
+            if(!@casePosition.caseEst.isFull?() && @casePosition.caseEst.typeTerrain.isAccessible)
                deplacement(cible)
-            end
+              else
+                deplacement(EnumDirection.OUEST)
+              end
          else
             cible = EnumDirection.OUEST
-            if(!@casePosition.CaseOuest.isFull && @casePosition.CaseOuest.typeTerrain.isAccessible)
+            if(!@casePosition.caseOuest.isFull?() && @casePosition.caseOuest.typeTerrain.isAccessible)
                deplacement(cible)
             end
       end 
@@ -151,7 +124,7 @@ class Ennemi < PNJ
    ##
    # Retourne l'image representant le PNJ Ennemi.
    #
-   def representation()
+   def getIntitule()
       return @type.intitule
    end
   
@@ -161,7 +134,10 @@ class Ennemi < PNJ
    # de l'objet Ennemi sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Ennemi Type #{@type} | Energie #{@energie} | Niveau #{@niveau}]"
+     s= "Energie: #{@energie} | "
+     s+= "Niveau: #{@niveau} | "
+     s+= "Type: #{@type} | "
+     s+= super()
    end
    
 end

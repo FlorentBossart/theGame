@@ -33,6 +33,7 @@ class XmlRefGraphiquesReader
          #... on ajout la référence à la bibliothèque
          biblioRefGgraphiques.addRefGraphique(s.elements['intitule_objet'].text,s.elements['img_ihm'].text)
       end
+     return nil
    end
 
 

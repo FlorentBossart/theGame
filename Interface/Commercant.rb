@@ -58,5 +58,18 @@ module Commercant
    def retirerDuStock(item)
       Commercant.api_not_implemented(self)
    end
+   
+  ##
+     # Encaisse une somme d'argent
+     # methode d'ajout de revenue
+     def encaisser(revenue)
+       Commercant.api_not_implemented(self)
+     end
   
-end
+     ##
+     # Debourse une somme d'argent
+     def debourser(revenue)
+       Commercant.api_not_implemented(self)
+     end
+  
+end 

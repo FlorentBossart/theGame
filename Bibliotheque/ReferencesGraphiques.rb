@@ -5,8 +5,8 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de créer une "bibliothèque" de références graphiques. 
-# Elle permet d'associer une image avec un intitulé unique d'un élément aggichable à la manière d'une HashMap
+# Cette classe représente la bibliothèque de références graphiques définie par:
+#* Une table de hachage contenant les images d'éléments affichables (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
 class ReferencesGraphiques
@@ -29,7 +29,10 @@ class ReferencesGraphiques
    #* <b>cheminImg :</b> le chemin vers le fichier image représentant l'objet affichable dans l'IHM
    # 
    def addRefGraphique(intitutle, cheminImg)
-  @biblioGraphique[intitutle] = cheminImg
+     
+   @biblioGraphique[intitutle] = cheminImg
+      AffichageDebug.Afficher("Ajout dans du couple clé:#{intitutle}, type:#{cheminImg} dans #{self}")
+      return nil
    end
 
 
@@ -52,8 +55,9 @@ class ReferencesGraphiques
    #* <b>s :</b> ne chaîne de caractères représentant la bibliothèque d'éléments graphiques
    # 
    def to_s
-      s = ""
-      @biblioGraphique.each {|key, value| s += "#{key} à pour image #{value}\n" }
+      s = "[==ReferencesGraphiques >>> | "
+      @biblioGraphique.each {|key, value| s += "#{key} à pour image #{value} |" }
+      s+= " <<< ReferencesGraphiques==]"
       return s
    end
 

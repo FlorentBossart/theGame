@@ -24,7 +24,7 @@
 	   <pourcentageProtection>0.20</pourcentageProtection>
 	   <nbTours>5</nbTours>
 	   <prix>15</prix>
-	   <sePorteSur>pieds</sePorteSur>
+	   <sePorteSur>bottes</sePorteSur>
 	</type>
 
 </types_equipables>

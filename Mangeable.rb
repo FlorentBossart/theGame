@@ -40,11 +40,12 @@ class Mangeable < Caracteristique
     
     
     def utiliseToi(joueur)
-        if(joueur.energie+type.energieRendue>=joueur.energieMax)
+        if((joueur.energie+typeMangeable.energieRendue)>=joueur.energieMax)
             joueur.energie=joueur.energieMax
         else
-            joueur.energie=joueur.energie+energieRendue
+            joueur.energie=joueur.energie+typeMangeable.energieRendue
         end
+      joueur.modele.notifier("Vous venez de manger #{getIntitule()}")
     end
     
     
@@ -53,7 +54,9 @@ class Mangeable < Caracteristique
     # de l'objet Mangeable sur lequel la méthode est appellée.
     #
     def to_s
-        return "[Caracteristique Mangeable: type=#{@typeMangeable}]"
+        s= "[==Mangeable >>> | "
+        s+= "Type=: #{@typeMangeable} | "
+        s+= "<<< Mangeable==]"
   end
     
 end

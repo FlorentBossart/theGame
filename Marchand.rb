@@ -35,7 +35,7 @@ class Marchand < Ami
    def initialize(casePosition)
       super(casePosition)
       @intitule = "Marchand"
-      remplirListeItems()
+      remplirListeItems(40,50)
    end
   
    
@@ -59,10 +59,11 @@ class Marchand < Ami
    #
    def acheter(vendeur, item)
       vendeur.retirerDuStock(item)
-      self.ajouterAuStock(item)
-      self.debourser(item.caracteristique.type.prix)
+      ajouterAuStock(item)
+      debourser(item.caracteristique.type.prix)
       vendeur.encaisser(item.caracteristique.type.prix)
-      return self
+      AffichageDebug.Afficher("#{item} \nacheté à \n#{vendeur}")
+      return nil
    end
 
    
@@ -74,11 +75,12 @@ class Marchand < Ami
    #* <b>item :</b> l'item vendu
    #
    def vendre(acheteur, item)
-      self.retirerDuStock(item)
+      retirerDuStock(item)
       acheteur.ajouterAuStock(item)
       acheteur.debourser(item.caracteristique.type.prix)
-      self.encaisser(item.caracteristique.type.prix)
-      return self
+      encaisser(item.caracteristique.type.prix)
+      AffichageDebug.Afficher("#{item} \nvendu à \n#{acheteur}")
+      return nil
    end
  
     
@@ -90,7 +92,8 @@ class Marchand < Ami
    #
    def ajouterAuStock(item)
       @listeItem.push(item)
-      return self
+      AffichageDebug.Afficher("#{item} \najouté au stock de \n#{self}")
+      return nil
    end
    
    
@@ -102,44 +105,26 @@ class Marchand < Ami
    #
    def retirerDuStock(item)
       @listeItem.delete(item)
-      return self
+      AffichageDebug.Afficher("#{item} \nretiré du stock de \n#{self}")
+      return nil
    end
-  
    
-   ##
-   # Permet de remplir aleatoirement la liste d'items.
-   #
-   def remplirListeItems()
-      nbItems = rand(10) + 40
-    
-      for i in 1..nbItems
-         # Choix du type
-         type = rand(2)
-      
-         case type
-            when 0 # TypeEquipable
-               type = BibliothequeTypeEquipable.getTypeEquipableAuHasard()
-               #type = TypeEquipable.new("Soulier","pieds",10,1,2.50)
-               #puts type
-               #puts BibliothequeTypeEquipable.getTypeEquipable("Soulier")
-               caract = Equipable.creer(type)
-            else # TypeMangeable
-               type = BibliothequeTypeMangeable.getTypeMangeableAuHasard()
-               caract = Mangeable.creer(type)
-         end # Fin case type
-      
-         @listeItem.push(Item.creer(@casePosition, caract))
-      end # Fin for
-    
-      return self
+   def encaisser(revenue)
+         return nil
    end
+    
+    ##
+    # Debourse une somme d'argent
+    def debourser(revenue)
+       return nil
+    end
    
   ##
   # Represente l'interaction avec un element present sur une case (dans ce cas interargir avec un commercant)
   #
   def interaction(joueur)
-    @modele.pnjAideInteraction=self  
-    changerStadePartie(EnumStadePartie.INTERACTION_MARCHAND)
+    joueur.modele.pnjAideEnInteraction=self  
+    joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_MARCHAND)
   end
    
    ##
@@ -147,7 +132,9 @@ class Marchand < Ami
    # de l'objet Marchand sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Marchand]"
+      s= "[==Marchand >>> |"
+      s+= super()
+      s+= "<<< Marchand==]"
    end
   
 end

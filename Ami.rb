@@ -49,7 +49,7 @@ class Ami < PNJ
    ##
    # Retourne l'image representant le PNJ Ami.
    #
-   def representation()
+   def getIntitule()
       return @intitule
    end
   
@@ -66,7 +66,9 @@ class Ami < PNJ
    # de l'objet Ami sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Ami Case #{@Case} | Image #{@image}]"
+     s= "Intitule: #{@intitule} | "
+     s+= super()
+     return s
    end
 
 end

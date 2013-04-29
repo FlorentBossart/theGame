@@ -75,33 +75,33 @@ class Pisteur < Ennemi
 
             for c in list_case[indice]
 
-               if(!existe(c.CaseNord, list_case, indice) && estAccessible(c.CaseNord))
-                  ajoutList.push(c.CaseNord)
-                  if(estCible(c.CaseNord))
+               if(!existe?(c.caseNord, list_case, indice) && estAccessible?(c.caseNord))
+                  ajoutList.push(c.caseNord)
+                  if(estCible?(c.caseNord))
                      find = true
                      break
                   end
                end
 
-               if(!existe(c.CaseSud, list_case, indice) && estAccessible(c.CaseSud))
-                  ajoutList.push(c.CaseSud)
-                  if(estCible(c.CaseSud))
+               if(!existe?(c.caseSud, list_case, indice) && estAccessible?(c.caseSud))
+                  ajoutList.push(c.caseSud)
+                  if(estCible?(c.caseSud))
                      find = true
                      break
                   end
                end
 
-               if(!existe(c.CaseEst, list_case, indice) && estAccessible(c.CaseEst))
-                  ajoutList.push(c.CaseEst)
-                  if(estCible(c.CaseEst))
+               if(!existe?(c.caseEst, list_case, indice) && estAccessible?(c.caseEst))
+                  ajoutList.push(c.caseEst)
+                  if(estCible?(c.caseEst))
                      find = true
                      break
                   end
                end
 
-               if(!existe(c.CaseOuest, list_case, indice) && estAccessible(c.CaseOuest))
-                  ajoutList.push(c.CaseOuest)
-                  if(estCible(c.CaseOuest))
+               if(!existe?(c.caseOuest, list_case, indice) && estAccessible?(c.caseOuest))
+                  ajoutList.push(c.caseOuest)
+                  if(estCible?(c.caseOuest))
                      find = true
                      break
                   end
@@ -122,7 +122,7 @@ class Pisteur < Ennemi
 
          # Determination de la case de deplacement
          if(find)
-            puts "Le pisteur de la case " + @casePosition.to_s + " a repéré Le Joueur !"
+           @joueur.modele.notifier("Le pisteur de la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) vous traque !")
             # Remplacement de la liste de case du derniere indice par la case du joueur
             list_case[indice] = Array.new().push(cj)
 
@@ -130,14 +130,14 @@ class Pisteur < Ennemi
                caseFind = list_case[indice][0] # Derniere case du chemin trouvé
                listFind = list_case[indice-1]  # Liste contenant la case suivante du chemin
 
-               if(listFind.index(caseFind.CaseNord) != nil)
-                  listFind = Array.new().push(caseFind.CaseNord)
-               elsif(listFind.index(caseFind.CaseSud) != nil)
-                  listFind = Array.new().push(caseFind.CaseSud)
-               elsif(listFind.index(caseFind.CaseEst) != nil)
-                  listFind = Array.new().push(caseFind.CaseEst)
-               elsif(listFind.index(caseFind.CaseOuest) != nil)
-                  listFind = Array.new().push(caseFind.CaseOuest)
+               if(listFind.index(caseFind.caseNord) != nil)
+                  listFind = Array.new().push(caseFind.caseNord)
+               elsif(listFind.index(caseFind.caseSud) != nil)
+                  listFind = Array.new().push(caseFind.caseSud)
+               elsif(listFind.index(caseFind.caseEst) != nil)
+                  listFind = Array.new().push(caseFind.caseEst)
+               elsif(listFind.index(caseFind.caseOuest) != nil)
+                  listFind = Array.new().push(caseFind.caseOuest)
                end
 
                list_case[indice-1] = listFind
@@ -145,11 +145,11 @@ class Pisteur < Ennemi
 
             end # Fin while
             
-            if(list_case[1][0] == @casePosition.CaseNord)
+            if(list_case[1][0] == @casePosition.caseNord)
                deplacement(EnumDirection.NORD)
-            elsif(list_case[1][0] == @casePosition.CaseSud)
+            elsif(list_case[1][0] == @casePosition.caseSud)
                deplacement(EnumDirection.SUD)
-            elsif(list_case[1][0] == @casePosition.CaseEst)
+            elsif(list_case[1][0] == @casePosition.caseEst)
                deplacement(EnumDirection.EST)
             else
                deplacement(EnumDirection.OUEST)
@@ -163,7 +163,7 @@ class Pisteur < Ennemi
          end # Fin if(find)
 
       end # Fin if(!(cj == self.casePosition))
-
+       return nil
    end # Fin methode
 
    
@@ -175,7 +175,7 @@ class Pisteur < Ennemi
    #* <b>list_case :</b> la liste qui contient les cases marquées
    #* <b>indice :</b> l'indice du dernier ajout
    #
-   def existe(uneCase, list_case, indice)
+   def existe?(uneCase, list_case, indice)
       for i in 0..indice
          if(list_case[i].index(uneCase) != nil)
             return true
@@ -192,8 +192,8 @@ class Pisteur < Ennemi
    # == Parameters:
    #* <b>uneCase :</b> la case à vérifier
    #
-   def estAccessible(uneCase)
-      if(uneCase.isFull || !uneCase.typeTerrain.isAccessible)
+   def estAccessible?(uneCase)
+      if(uneCase.isFull?() || !uneCase.typeTerrain.isAccessible)
          return false
       end
 
@@ -207,7 +207,7 @@ class Pisteur < Ennemi
    # == Parameters:
    #* <b>uneCase :</b> la case à vérifier
    #
-   def estCible(uneCase)
+   def estCible?(uneCase)
       if(uneCase == @joueur.casePosition)
          return true
       end
@@ -221,7 +221,10 @@ class Pisteur < Ennemi
    # de l'objet Pisteur sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Pisteur Type #{@type} | Energie #{@energie} | Niveau #{@niveau} | DistancePistage #{@distancePistage}]"
+     s= "[==Pisteur >>> | "
+     s+= super()
+     s+= "Distance de pistage: #{@distancePistage} | "
+     s+= "<<< Pisteur==]"
    end
 
 end

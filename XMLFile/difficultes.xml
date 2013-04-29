@@ -1,8 +1,9 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!DOCTYPE difficultes [
-<!ELEMENT difficultes (type+)>
+<!ELEMENT difficultes (difficulte+)>
 <!ELEMENT difficulte (intitule, longueurCarte, largeurCarte, energieDepart, energieMax, nbRepos, pnjAmisDepart, pnjAmisParGeneration, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)>
+<!ELEMENT intitule (#PCDATA)>
 <!ELEMENT longueurCarte (#PCDATA)>
 <!ELEMENT largeurCarte (#PCDATA)>
 <!ELEMENT energieDepart (#PCDATA)>
@@ -22,19 +23,19 @@
 
 	<difficulte>
 	    <intitule>facile</intitule>
-	    <longueurCarte>10</longueurCarte>
-	    <largeurCarte>10</largeurCarte>
+	    <longueurCarte>5</longueurCarte>
+	    <largeurCarte>5</largeurCarte>
 	    <energieDepart>1000</energieDepart>
 	    <energieMax>1000</energieMax>
 	    <nbRepos>3</nbRepos>
-	    <pnjAmisDepart>45</pnjAmisDepart>
+	    <pnjAmisDepart>10</pnjAmisDepart>
 	    <pnjAmisParGeneration>3</pnjAmisParGeneration>
-	    <pnjEnnemisDepart>25</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
-	    <objetsDepart>30</objetsDepart>
+	    <pnjEnnemisDepart>5</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
+	    <objetsDepart>10</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
 	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>100</pourcentageTerrain>
+	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
 	    <intitule>moyen</intitule>
@@ -50,7 +51,7 @@
 	    <objetsDepart>30</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
 	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>100</pourcentageTerrain>
+	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
 	    <intitule>difficile</intitule>
@@ -66,7 +67,7 @@
 	    <objetsDepart>30</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
 	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>100</pourcentageTerrain>
+	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 
 </difficultes>

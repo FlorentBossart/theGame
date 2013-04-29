@@ -14,7 +14,7 @@ class Element
     
     @casePosition
     
-    attr_accessor :casePosition
+    attr_reader :casePosition
     
     private_class_method :new
     
@@ -55,8 +55,12 @@ class Element
     # Retourne une chaîne de caractères reprenant les différentes caractéristiques
     # de l'objet Element sur lequel la méthode est appellée.
     #
-    def to_s
-  return "#{@casePosition}"
+    def to_s()
+      if(@casePosition==nil)
+        return "Position: n'est pas sur la carte | "
+      else
+        return "Position: (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) | "
+      end
     end
     
 end

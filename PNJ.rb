@@ -47,13 +47,46 @@ class PNJ < Personnage
       return new(casePosition)
    end
    
+  ##
+  # Permet de remplir aleatoirement la liste d'items.
+  #
+  def remplirListeItems(min,max)
+     nbItems = rand(max-min) + min
+   
+     for i in 1..nbItems
+        # Choix du type
+        type = rand(2)
+     
+        case type
+           when 0 # TypeEquipable
+              type = BibliothequeTypeEquipable.getTypeEquipableAuHasard()
+              caract = Equipable.creer(type)
+           else # TypeMangeable
+              type = BibliothequeTypeMangeable.getTypeMangeableAuHasard()
+              caract = Mangeable.creer(type)
+        end # Fin case type
+     
+        @listeItem.push(Item.creer(nil, caract))
+     end # Fin for
+   
+     return self
+  end
    
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet PNJ sur lequel la méthode est appellée.
    #
    def to_s
-      return "[PNJ Case #{@Case}]"
+      s= super()
+      s+= "Items: "
+      if(@listeItem.empty?)
+        s+= "aucun "
+      end
+      for i in @listeItem
+        s+= "#{i}, "
+      end
+      s+="| "
+      return s
    end
   
 end

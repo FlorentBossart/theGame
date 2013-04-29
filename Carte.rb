@@ -10,11 +10,10 @@ class Carte
    @cases
    @joueur
 
-   attr_accessor :longueur
-   attr_accessor :largeur
-   attr_accessor :cases
-
    private_class_method :new
+   
+   attr_reader :longueur, :largeur
+   
    ##
    #Initialisation d'une carte avec pour argument sa longueur et sa largeur
    #==Parameters
@@ -32,22 +31,24 @@ class Carte
       end
       for i in 0..long-1
          for j in 0..larg-1
-            self.getCaseAt(i,j).initVoisines(self.getCaseAt(i,j-1),self.getCaseAt(i,j+1),self.getCaseAt(i-1,j),self.getCaseAt(i+1,j))
-            self.getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
+            getCaseAt(i,j).initVoisines(self.getCaseAt(i,j-1),self.getCaseAt(i,j+1),self.getCaseAt(i-1,j),self.getCaseAt(i+1,j))
+            #getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
+            #-> par défaut plaine dans le constructeur de Case
          end
       end
       generationMapSemiAleatoire()
    end
 
    def generationMapSemiAleatoire()
-      0.upto(longueur+largeur*2){
+      0.upto(@longueur+@largeur*2){
          tt = BibliothequeTypeTerrain.getTypeTerrainAuHasard
-         repartitionType(tt,tt.probaRepartition,rand(longueur),rand(largeur))
+         repartitionType(tt,tt.probaRepartition,rand(@longueur),rand(@largeur))
       }
+     return nil
    end
 
    def repartitionType(type, proba, coordX, coordY)
-      if(coordX >= longueur || coordY >= largeur || coordX < 0 || coordY < 0)
+      if(coordX >= @longueur || coordY >= @largeur || coordX < 0 || coordY < 0)
          return
       elsif(getCaseAt(coordX,coordY).typeTerrain == type)
          return
@@ -73,13 +74,19 @@ class Carte
    def Carte.nouvelle(long,larg)
       return new(long,larg)
    end
-
-   ##
-   #Méthode de test
-   def Carte.main
-      carte = Carte.nouvelle(50,100)
-      print carte.getCaseAt(51,101).typeTerrain
+   
+   def to_s()
+     s= "[==Carte >>> | "
+     s+= "Longueur: #{@longueur} | "
+     s+= "Largeur: #{@largeur} | "
+     s+= "Joueur: #{@joueur} | "
+     s+= "Cases: "
+     for c in @cases
+      s+= "#{c} ,"
+     end
+     s+="| "
+     s+= "<<< Carte==]"
+     return s
    end
 
-   #Carte.main
 end

@@ -49,6 +49,7 @@ class XmlDifficultesReader
                                     s.elements['pourcentageTerrain)'].text.to_i
                                   ))
       end
+     return nil
    end
 
 

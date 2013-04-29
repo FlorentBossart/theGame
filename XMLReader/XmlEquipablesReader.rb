@@ -41,6 +41,7 @@ class XmlEquipablesReader
                                                             
                                                             ))
         end
+      return nil
     end
     
     

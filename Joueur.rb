@@ -53,8 +53,10 @@ class Joueur < Personnage
    @causeMort
    @peutSEquiper
 
-   attr_reader :intitule, :nombreRepos, :niveau, :energie, :energieMax, :experience, :experienceSeuil, :inventaire, :casePosition, :armure, :arme, :bottes, :pseudo, :nbEnnemiTues, :distanceParcourue, :causeMort, :peutSEquiper
-   attr_writer :armure, :arme, :bottes, :pseudo
+   attr_reader :nombreRepos, :niveau, :experience,
+               :experienceSeuil, :inventaire, :casePosition, :nbEnnemiTues, :distanceParcourue,
+               :causeMort, :peutSEquiper, :modele
+   attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax
    
    
    ##
@@ -100,7 +102,7 @@ class Joueur < Personnage
    ##
    # Retourne une chaine de caractere representant la cle de l'image
    #
-   def getIntitule
+   def getIntitule()
       return @intitule
    end
 
@@ -117,28 +119,38 @@ class Joueur < Personnage
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
       end
-      if(self.toujourEnVie())
+      if(self.toujoursEnVie?())
          @modele.tourDejaPasse = false;
-         dest = getDestination(cible)
+         dest = @casePosition.getDestination(cible)
          if(dest != nil)
             dest.joueur = self
             @casePosition.joueur = nil
             @casePosition = dest
+            @modele.notifier("Vous vous êtes déplacé à la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) demandant #{@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain} points d'énergie.")
             if(@bottes!=nil)
-               @energie -= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.pourcentageProtect()))
-               @bottes.nbTour=@bottes.nbTour-1
-               if(@bottes.nbTour==0)
+              @modele.notifier("Vous avez utilisé vos #{@bottes.getIntitule()} ayant une protection de #{@bottes.typeEquipable.pourcentageProtection()*100}%")
+              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
+              @modele.notifier("Vous perdez #{energiePerdu} points d'énergie")              
+              @energie -= energiePerdu
+              @bottes.nbTour=@bottes.nbTour-1
+              if(@bottes.nbTour==0)
                  @bottes=nil
-               end
+                 @modele.notifier("Vous perdez vos bottes.")
+              else
+                 @modele.notifier("Vos bottes peuvent êtres utilisées encore #{@bottes.nbTour} fois.")
+              end
             else
-               @energie -= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
+              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
+              @energie -= energiePerdue
+              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")
             end
             @distanceParcourue += 1
          end
-         if(!toujourEnVie())
+         if(!toujoursEnVie?())
             @causeMort= "Vous êtes mort de fatigue !!"
          end
       end
+      return nil
    end
 
    ##
@@ -149,20 +161,25 @@ class Joueur < Personnage
    # Si l'energie de l'ennemi est égale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remporté, on signal au modele la mort du joueur, retourne un tableau vide
    # Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
    def combattreEnnemi(ennemi)
-
-      protection=0;
+     @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} ayant une énergie de #{ennemi.energie}.")
+     protection=0;
       if(self.armureEquip)
-        protection=protection+@armure.typeEquipable.pourcentageProtect()
+        protection=protection+@armure.typeEquipable.pourcentageProtection()
         @armure=nil
+        @modele.notifier("Vous avez utilisé votre #{@armure.getIntule()} ayant une protection de #{@armure.pourcentageProtection()*100}%")
       end
       if(self.armeEquip)
-        protection=protection+@arme.typeEquipable.pourcentageProtect()
+        protection=protection+@arme.typeEquipable.pourcentageProtection()
         @arme=nil
+        @modele.notifier("Vous avez utilisé votre #{@arme.getIntule()} ayant une protection de #{@arme.pourcentageProtection()*100}%")
       end
       if(protection>1)
         protection=1
+        @modele.notifier("Votre équipement vous apporte une protection totale !")
       end
-      @energie -= ennemi.energie*(1-protection)
+      energiePerdue=ennemi.energie*(1-protection)
+      @energie -= energiePerdue
+      @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")
       if(@energie > 0)
          @modele.eliminerEnnemi(ennemi)
          gainExperience(ennemi.energie)
@@ -176,6 +193,7 @@ class Joueur < Personnage
       else
          @causeMort ="Vous êtes mort au combat !!"
       end
+      
       return Array.new()
    end
 
@@ -195,11 +213,14 @@ class Joueur < Personnage
    # Demande a l'item de s'utiliser sur le joueur
    def utiliserItem(item)
       item.utiliseToi(self)
+      @modele.tourPasse()
+      return nil
    end
 
    # Definit la methode _deplacementIntelligent_.
    # non utilisée pour le joueur
    def deplacementIntelligent()
+     return nil
    end
 
    ##
@@ -207,9 +228,14 @@ class Joueur < Personnage
    def passeNiveau()
       @niveau += 1
       @experienceSeuil *= 1.2
+      @energieMax*=1.2
+      @energie=energieMax
+      @modele.notifier("LVL UP #{@niveau}!! Votre énergie est réstitué et est plus grande désormais.")
       if(@niveau%5 == 0)
          @nombreRepos += 1
+         @modele.notifier("Vous gagnez un repos supplémentaire.")
       end
+      return nil
    end
 
    ##
@@ -217,11 +243,17 @@ class Joueur < Personnage
    # a voir le calcul du seuil d'experience
    def gainExperience(xp)
       @experience=@experience+xp
-      if(@experience>=@experienceSeuil)
-         self.passeNiveau()
-         @experience=@experience-@experienceSeuil
+      @modele.notifier("+ #{xp}XP")
+     
+     while(@experience>=@experienceSeuil) do
+       @experience=@experience-@experienceSeuil  
+       passeNiveau()
+         
       end
+      
+      return nil
    end
+   
 
    ##
    # Transfert un item du vendeur vers le joueur
@@ -229,8 +261,9 @@ class Joueur < Personnage
    def acheter(vendeur,item)
       vendeur.retirerDuStock(item)
       vendeur.encaisser(itemAchete.prix())
-      self.ajouterAuStock(item)
-      self.debourser(itemAchete.prix())
+      ajouterAuStock(item)
+      debourser(itemAchete.prix())
+      @modele.notifier("Vous avez acheté #{item.getIntitule}.")
       @modele.tourPasse()
    end
 
@@ -239,10 +272,11 @@ class Joueur < Personnage
    # Gain d'argent du joueur
    #
    def vendre(acheteur,item)
-      self.retirerDuStock(item)
-      self.encaisser(itemAchete.prix())
+      retirerDuStock(item)
+      encaisser(itemAchete.prix())
       acheteur.ajouterAuStock(item)
       acheteur.debourser(itemAchete.prix())
+      @modele.notifier("Vous avez vendu #{item.getIntitule}.")
       @modele.tourPasse()
    end
 
@@ -262,24 +296,27 @@ class Joueur < Personnage
    # Encaisse une somme d'argent
    # methode d'ajout de revenue
    def encaisser(revenue)
-      @inventaire.ajouterCapital(revenue)
+      @inventaire.capital+=revenue
+      @modele.notifier("Vous avez empochez #{revenue}.")
    end
 
    ##
    # Debourse une somme d'argent
    def debourser(revenue)
-      @inventaire.retirerCapital(revenue)
+      @inventaire.capital-=revenue
+      @modele.notifier("Vous déboursez #{revenue}.")
    end
 
-   def toujourEnVie()
+   def toujoursEnVie?()
       return @energie > 0
    end
 
    ##
    # Consomme un repos
    def utiliserRepos()
-      @peutSEquiper=true
-      @repos=@repos-1
+     @peutSEquiper=true
+     @nombreRepos=@nombreRepos-1
+     @modele.notifier("Vous utilisez un repos.")
       i=10
       begin
          @energie=@energie+@energieMax*0.1
@@ -288,45 +325,29 @@ class Joueur < Personnage
          end
          i=i-1
          @modele.tourPasse()
-         if(@casePosition.presenceEnnemis())
+         if(@casePosition.presenceEnnemis?())
+           @modele.notifier("Vous êtes attaqué pendant votre sommeil, seul #{10-i} tours sur 10 sont passé.")
            @peutSEquiper=false
            break
          end
       end while(i>0)
+      if(i==10)
+        @modele.notifier("Votre repos a été ininterompue, vous recouvrez toutes votre santé.")
+      end
    end
 
    ##
    # Ramasse un item
    def ramasserItem(item)
      @itemAttenteAjout=item
-     if(joueur.inventaire.estPlein)
+     if(@inventaire.estPlein?())
         @modele.changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
      else
-        @inventaire.ajouter(item) 
+        @inventaire.ajouter(item)
+        @modele.notifier("Vous avez ramassé #{item.getIntitule}.")
      end
+     @casePosition.retirerElement(item)
      @modele.tourPasse()
-   end
-   
-   
-   ##
-   # Retourne la case de destination   
-   def getDestination(cible)
-      case cible
-         when EnumDirection.NORD
-            cible = @casePosition.CaseNord
-         when EnumDirection.SUD
-            cible = @casePosition.CaseSud
-         when EnumDirection.EST
-            cible = @casePosition.CaseEst
-         else
-            cible = @casePosition.CaseOuest
-      end
-      
-      if(cible.typeTerrain.isAccessible)
-         return cible
-      else
-         return nil
-      end
    end
    
 
@@ -334,21 +355,29 @@ class Joueur < Personnage
    # Retourne une chaine de caracteres reprenant les différentes caracteristiques
    # de l'objet Joueur sur lequel il a été appelé
    def to_s
-      s= "[image #{@image} ]"
-      s+= "[nombreRepos #{@nombreRepos}]"
-      s+= "[niveau #{@niveau}]"
-      s+= "[energie #{@energie}]"
-      s+= "[energieMax #{@energieMax}]"
-      s+= "[experience #{@experience}]"
-      s+= "[experienceSeuil #{@experienceSeuil}]"
-      s+= "[tourDejaPasse #{@tourDejPasse}]"
-      s+= "[inventaire #{@inventaire}]"
-      s+= "[armure #{@armure}]"
-      s+= "[arme #{@arme}]"
-      s+= "[bottes #{@bottes}]"
-      s+= "[pseudo #{@pseudo}]"
-      s+= "[nbEnnemiTues #{@nbEnnemiTues}]"
-      s+= "[distanceParcourue #{@distanceParcourue}]"
+      s= "[==Joueur >>> | "
+      s+= super()
+      s+= "Intitulé: #{@intitule} | "
+      s+= "Nb de repos: #{@nombreRepos} | "
+      s+= "Niveau: #{@niveau} | "
+      s+= "Energie #{@energie} | "
+      s+= "EnergieMax #{@energieMax} | "
+      s+= "Experience #{@experience} | "
+      s+= "ExperienceSeuil #{@experienceSeuil} | "
+      s+= "Inventaire #{@inventaire} | "
+      s+= "Armure #{@armure} | "
+      s+= "Arme #{@arme} | "
+      s+= "Bottes #{@bottes} | "
+      s+= "Pseudo #{@pseudo} | "
+      s+= "Nb ennemi tués #{@nbEnnemiTues} | "
+      s+= "Distance parcourue #{@distanceParcourue} | "
+      s+= "Message cause mort: #{@causeMort} | "
+      if(@peutSEquiper)
+        s+= "Peut s'équiper | "
+      else
+        s+= "Ne peut pas s'équiper | "
+      end
+      s+= "<<< Joueur==]"
       return s
    end
 

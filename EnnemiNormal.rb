@@ -51,7 +51,9 @@ class EnnemiNormal < Ennemi
    # de l'objet EnnemiNormal sur lequel la méthode est appellée.
    #
    def to_s
-      return "[EnnemiNormal Type #{@type} | Energie #{@energie} | Niveau #{@niveau}]"
+     s= "[==EnnemiNormal >>> | "
+     s+= super()
+     s+= "<<< EnnemiNormal==]"
    end
   
 end

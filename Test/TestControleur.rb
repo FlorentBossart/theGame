@@ -1,4 +1,6 @@
-require 'Enum/EnumDirection.rb'
+require './Modele.rb'
+require './Joueur.rb'
+require './Enum/EnumDirection.rb'
 
 class TestControleur
   
@@ -20,14 +22,14 @@ class TestControleur
   #fonction reliée à chaque icone d'amure pour le popup de choix d'équipement d'armure avant un combat (l'armure cliquée est le paramètre)
   def equipeArmure(armure)
       if(armure!=nil)
-        @modele.joueur.armure=armure
+        @modele.joueur.utiliser(armure)
       end
   end
   
   #fonction reliée à chaque icone d'arme pour le popup de choix d'équipement d'arme avant un combat (l'arme cliquée est le paramètre)
   def equipeArme(arme)
       if(arme!=nil)
-        @modele.joueur.arme=arme
+        @modele.joueur.utiliser(arme)
       end
   end
   
@@ -36,6 +38,7 @@ class TestControleur
       if(nouvelItem!=itemSuppr)
           @modele.joueur.inventaire.retirer(itemSuppr)
           @modele.joueur.inventaire.ajouter(nouvelItem)
+          @modele.joueur().notifier("Vous supprimez #{itemSuppr.getIntitule()} de votre inventaire pour y ajouter #{nouvelItem.getIntitule()}.")
       end
   end
   
@@ -43,19 +46,19 @@ class TestControleur
   
   #deplacements: reliées aux touches directionnelles
   def deplacementNord()
-      @modele.joueur.deplacementCible(EnumDirection.NORD)
+      @modele.joueur.deplacement(EnumDirection.NORD)
   end
   
   def deplacementSud()
-      @modele.joueur.deplacementCible(EnumDirection.SUD)
+      @modele.joueur.deplacement(EnumDirection.SUD)
   end
   
   def deplacementEst()
-      @modele.joueur.deplacementCible(EnumDirection.EST)
+      @modele.joueur.deplacement(EnumDirection.EST)
   end
   
   def deplacementOuest()
-      @modele.joueur.deplacementCible(EnumDirection.OUEST)
+      @modele.joueur.deplacement(EnumDirection.OUEST)
   end
   
   #relié au bouton repos 
@@ -65,13 +68,14 @@ class TestControleur
   
   #action via inventaire: relié au bouton utiliser et prend en paramètre l'item séléctionné
   def utiliserItem(item)
-      @modele.joueur.utiliser(item)
+      @modele.joueur.utiliserItem(item)
   end
   
   #action via inventaire: relié au bouton supprimer et prend en paramètre les items séléctionnés
   def supprimerItems(items)
       for i in items
         @modele.joueur.inventaire.retirer(i)
+        @modele.notifier("Vous avez supprimé #{i.getIntitule}.")
       end
   end
   
@@ -81,7 +85,7 @@ class TestControleur
   end
   
   #relié à un choix (en paramètre) dans la fenêtre d'interaction d'un guerisseur (en paramètre)
-  def interactionGueriseur(guerrisseur,choix)
+  def interactionGuerisseur(guerrisseur,choix)
       guerrisseur.guerrir(@modele.joueur,choix)
   end
   

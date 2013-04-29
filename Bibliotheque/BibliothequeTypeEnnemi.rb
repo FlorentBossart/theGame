@@ -5,7 +5,8 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe permet de...
+# Cette classe représente la bibliothèque des types de terrain définie par:
+#* Une table de hachage statique contenant les types de terrain (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
 class BibliothequeTypeEnnemi
@@ -19,7 +20,9 @@ class BibliothequeTypeEnnemi
     # Ajouter un type dans la bibliothèque (écrase si déjà présente).
     #
     def BibliothequeTypeEnnemi.ajouter(cle,type)
-        @@tableType[cle] = type
+      AffichageDebug.Afficher("Ajout dans BibliothequeTypeEnnemi-> clé:#{cle}, type:#{type}")
+      @@tableType[cle] = type
+      return nil
     end
     
     
@@ -27,7 +30,9 @@ class BibliothequeTypeEnnemi
     # Retirer un type de la bibliothèque.
     #
     def BibliothequeTypeEnnemi.retirer(cle)
-        @@tableType.delete(cle)
+      AffichageDebug.Afficher("Suppression dans BibliothequeTypeEnnemi-> clé:#{cle}")
+      @@tableType.delete(cle)
+      return nil
     end
     
     
@@ -44,7 +49,7 @@ class BibliothequeTypeEnnemi
     #
     def BibliothequeTypeEnnemi.getTypeEnnemiAuHasard()
         valeurs=@@tableType.values()
-        return valeurs[rand(valeurs.length)-1]
+        return valeurs[rand(valeurs.length-1)]
     end
     
 end

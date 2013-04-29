@@ -44,7 +44,9 @@ class Encaissable < Caracteristique
 
    
    def utiliseToi(joueur)
-      joueur.inventaire.capital=joueur.inventaire.capital+montant
+      joueur.inventaire.capital=joueur.inventaire.capital+@montant
+      joueur.modele.notifier("#{montant} pièces d'or ont été ajoutées à votre capital")
+      return nil
    end
 
    
@@ -53,7 +55,11 @@ class Encaissable < Caracteristique
    # de l'objet Encaissable sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Caracteristique Encaissable: montant=#{@montant}]"
+      s= "[==Encaissable >>> | "
+      s+= "Intitulé: #{@intitule} | "
+      s+= "Montant: #{@montant} | "
+      s+= "<<< Encaissable==]"
+      return s
    end
 
 end

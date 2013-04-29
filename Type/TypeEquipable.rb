@@ -33,7 +33,7 @@ class TypeEquipable
    # nbTours : le nombre de tours durant lequel le personnage conservera l'équipement avant qu'il ne disparaisse
    # prix : le prix à l'achat ou à la revente de l'équipement
    #
-   def initialize(intitule, endroisDePort, pourcentageProtection, nbTours, prix)
+   def initialize(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
       @intitule              = intitule
       @sePorteSur            = endroisDePort
       @pourcentageProtection = pourcentageProtection
@@ -42,8 +42,8 @@ class TypeEquipable
    end
    
    
-   def TypeEquipable.creer(intitule, endroisDePort, pourcentageProtection, nbTours, prix)
-      return new(intitule, endroisDePort, pourcentageProtection, nbTours, prix)
+   def TypeEquipable.creer(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
+      return new(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
    end
 
    
@@ -52,20 +52,15 @@ class TypeEquipable
    # de l'objet TypeEquipable sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Equipement de type #{@intitule} | Se porte sur #{@sePorteSur} | Pourcentage de protection #{@pourcentageProtection} | Valable pour #{@nbTours} tours | Prix #{@prix}]"
+     s= "[==TypeEquipable >>> | "
+     s+= "Intitulé: #{@intitule} | "
+     s+= "Se porte sur: #{@sePorteSur} | "
+     s+= "Pourcentage de protection: #{@pourcentageProtection*100}% | "
+     s+= "Valable pour #{@nbTours} tours | "
+     s+= "Prix: #{@prix} | "
+     s+= "<<< TypeEquipable==]"
+     return s
    end
 
 end
 
-
-#Test de la classe :
-=begin
-nouveauTypeEquipable = TypeEquipable.new("Soulier","pieds",10,1,2.50)
-BibliothequeTypeEquipable.ajouter("Soulier",nouveauTypeEquipable)
-puts nouveauTypeEquipable
-puts "On vient de créer le type d'équipable #{nouveauTypeEquipable.intitule}."
-puts "Qui se porte sur #{nouveauTypeEquipable.sePorteSur}."
-puts "Il offre une protection de #{nouveauTypeEquipable.pourcentageProtection}%."
-puts "Et ce pendant #{nouveauTypeEquipable.nbTours} tours."
-puts "Son prix est de #{nouveauTypeEquipable.prix}."
-=end

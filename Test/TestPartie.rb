@@ -1,8 +1,11 @@
 #!/usr/bin/env ruby
 
+require './AffichageDebug.rb'
 require './Test/TestControleur.rb'
 require './Test/TestVue.rb'
 require './Modele.rb'
+
+#AffichageDebug.On()
 
 # Initialisation de la fausse vue
 vueDeTest=TestVue.creer()
@@ -35,7 +38,7 @@ vueDeTest.defMetC(modele,controleurDeTest)
 
 modele.initialiseToi()
 
-modele.debutTour()
+modele.lancerPartie()
 
 
 

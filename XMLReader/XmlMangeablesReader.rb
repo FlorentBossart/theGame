@@ -38,6 +38,7 @@ class XmlMangeablesReader
                                                             s.elements['prix'].text.to_i
                                                             ))
         end
+      return nil
     end
     
     

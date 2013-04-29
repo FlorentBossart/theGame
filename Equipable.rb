@@ -22,6 +22,7 @@ class Equipable < Caracteristique
    
    attr_reader :typeEquipable
    attr_accessor :nbUtilisationsRestantes
+   
    def initialize(typeEquipable)
       @typeEquipable = typeEquipable
       @nbUtilisationsRestantes = typeEquipable.nbTours
@@ -51,10 +52,11 @@ class Equipable < Caracteristique
       elsif(@typeEquipable.sePorteSur == "bottes")
          joueur.bottes=self
       end
+      joueur.modele.notifier("Vous vous êtes équipé de #{getIntitule()}")
    end
 
    
-   def estEquipable()
+   def estEquipable?()
       return true
    end
 
@@ -64,7 +66,11 @@ class Equipable < Caracteristique
    # de l'objet Equipable sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Caracteristique Equipable: type=#{@typeEquipable}]"
+      s= "[==Equipable >>> | "
+      s+= "Type #{@typeEquipable}  | "
+      s+= "Reste #{@nbUtilisationsRestantes} utilisation  | "
+      s+= "<<< Equipable==]"
+      return s
    end
 
 end

@@ -20,6 +20,7 @@ class TypeMangeable
    @prix
 
    attr_reader :intitule, :energieRendue, :prix
+   
    ##
    # Crée un nouveau TypeTerrain à partir des informations passées en paramètre.
    #
@@ -45,17 +46,11 @@ class TypeMangeable
    # de l'objet TypeMangeable sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Mangeable de type #{@intitule} | Energie délivrée #{@energieRendue} | Prix #{@prix}]"
+      s= "[==TypeMangeable >>> | "
+      s+= "Intitulé: #{@intitule} | "
+      s+= "Energie délivrée: #{@energieRendue} | "
+      s+= "Prix: #{@prix} | "
+      s+= "<<< TypeMangeable==]"
    end
 
 end
-
-#Test de la classe :
-=begin
-nouveauTypeMangeable = TypeMangeable.new("Cuisse de poulet",42,3.50)
-BibliothequeTypeMangeable.ajouter("Cuisse de poulet",nouveauTypeMangeable)
-puts nouveauTypeMangeable
-puts "On vient de créer le type de mangeable #{nouveauTypeMangeable.intitule}."
-puts "Il permet de regagner #{nouveauTypeMangeable.energieRendue} d'énergie."
-puts "Son prix est de #{nouveauTypeMangeable.prix}."
-=end

@@ -40,7 +40,7 @@ class Caracteristique
     def utiliseToi(joueur)
     end
     
-    def estEquipable()
+    def estEquipable?()
         return false
     end
     

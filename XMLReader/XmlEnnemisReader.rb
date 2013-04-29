@@ -37,6 +37,7 @@ class XmlEnnemisReader
                                                              s.elements['energieBase'].text.to_i
                                                              ))
         end
+      return nil
     end
     
     

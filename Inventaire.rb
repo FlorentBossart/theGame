@@ -21,10 +21,13 @@
 class Inventaire
 
   @capital
-  @item
+  @items
   @taille
   @nbItem
-  attr_reader :capital, :item, :taille, :nbItem
+  
+  attr_reader :items, :taille, :nbItem
+  attr_accessor :capital
+  
   ##
   # Cree un nouvel inventaire a  partir des informations passees en parametre.
   #
@@ -37,7 +40,7 @@ class Inventaire
   
   def initialize(taille)
     @capital=0
-    @item=Array.new()
+    @items=Array.new()
     @taille=taille
     @nbItem=0
   end
@@ -47,9 +50,11 @@ class Inventaire
   #
   #
   def ajouter(item)
-    if(!self.estPlein())
-      @item.push(item)
+    if(!self.estPlein?())
+      @items.push(item)
       @nbItem=@nbItem+1
+      AffichageDebug.Afficher("Ajout de \n#{item} dans \n#{self}")
+      return nil
     end
   end
   
@@ -58,15 +63,17 @@ class Inventaire
   #
   #
   def retirer(item)
-    @item.delete(item)
+    @items.delete(item)
     @nbItem=@nbItem-1
+    AffichageDebug.Afficher("Retrait de \n#{item} de \n#{self}")
+    return nil
   end
   
   ##
   # Test si l'inventaire est plein
   #
   #
-  def estPlein()
+  def estPlein?()
     return @nbItem >= @taille
   end
   
@@ -75,13 +82,20 @@ class Inventaire
   # de l'objet Inventaire sur lequel il a été appelé
   #
   def to_s
-    s= "[taille #{@taille} ]"
-    s+= "[capital #{@capital}]"
-    s+= "[item #{@item}]"
+    s= "[==Inventaire  >>> | "
+    s+= "Taille: #{@taille} | "
+    s+= "Capital: #{@capital} | "
+    s+= "Items: "
+    if(@nbItem==0)
+      s+="aucun "
+    end
+    for i in @items
+      s+= "#{i} ,"
+    end
+    s+="| "
+    s+="<<< Inventaire==]"
     return s
   end
 
 end
 
-
-#Test de la classe :

@@ -3,10 +3,10 @@ class Case
   
   
   ##
+  @@NombreMaxElementsEnnemis = 5
   #Variables d'instance
   @coordonneeX
   @coordonneeY
-  @@NombreMaxElements = 5
   @listeElements
   @listeEnnemis
   @caseNord
@@ -16,7 +16,8 @@ class Case
   @typeTerrain
   @joueur
 
-  attr_accessor :joueur, :listeEnnemis, :listeElements, :typeTerrain, :caseNord, :caseSud, :caseEst, :caseOuest
+  attr_reader :caseNord, :caseSud, :caseEst, :caseOuest, :listeEnnemis, :listeElements, :coordonneeX, :coordonneeY
+  attr_accessor :typeTerrain,:joueur
   
   private_class_method :new
 
@@ -31,21 +32,20 @@ class Case
     @coordonneeY = y
     @listeEnnemis = Array.new()
     @listeElements = Array.new()
+    @typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
   end
   
   
-  def estAccessible()
+  def estAccessible?()
     return @typeTerrain.isAccessible
   end
   
-  def presenceEnnemis
-    puts "Nombre d'ennemis sur la case : " + @listeEnnemis.length.to_s
+  def presenceEnnemis?()
     return @listeEnnemis.length != 0
   end
   
-  def presenceAides
-      puts "Nombre d'aide sur la case : " + @listeElements.length.to_s
-      return @listeElements.length != 0
+  def presenceAides?()
+    return @listeElements.length != 0
   end
   
 
@@ -58,10 +58,11 @@ class Case
   #==Parameters
   #ennemi correspondant à l'ennemi à poser sur la case
   def ajouterEnnemi(ennemi)
-    if(!self.isFull)
+    if(!self.isFull?())
       @listeEnnemis.push(ennemi)
     end
-    return self
+    AffichageDebug.Afficher("#{ennemi} \najouté dans \n#{self}")
+    return nil
   end
  
     
@@ -71,7 +72,8 @@ class Case
     #ennemi correspondant à l'ennemi à retirer
     def retirerEnnemi(ennemi)
        @listeEnnemis.delete(ennemi)
-       return self
+       AffichageDebug.Afficher("#{ennemi} \nsupprimé de \n#{self}")
+       return nil
     end
 
   
@@ -80,10 +82,11 @@ class Case
   #==Parameters
   #element correspondant à l'element à ajouter
   def ajouterElement(element)
-    if(!self.isFull)
+    if(!self.isFull?())
       @listeElements.push(element)
     end
-    return self
+    AffichageDebug.Afficher("#{element} \najouté à dans \n#{self}")
+    return nil
   end
 
   
@@ -93,7 +96,8 @@ class Case
   #element correspondant à l'element à retirer
   def retirerElement(element)
     @listeElements.delete(element)
-    return self
+    AffichageDebug.Afficher("#{element} \nsupprimé de \n#{self}")
+    return nil
   end
 
   def getDestination(direction)
@@ -116,8 +120,8 @@ class Case
   #Retourne un booleen indiquant si la case est pleine ou non
   #==Returns
   #Boolean indiquant si le case est pleine
-  def isFull
-    return @@NombreMaxElements <= (@listeElements.length + @listeEnnemis.length)
+  def isFull?()
+    return @@NombreMaxElementsEnnemis <= (@listeElements.length + @listeEnnemis.length)
   end
 
   
@@ -130,11 +134,39 @@ class Case
     @caseSud = sud
     @caseEst = est
     @caseOuest = ouest
-    return self
+    return nil
   end
 
   
   def to_s
-    return "[#{@coordonneeX}, #{@coordonneeY}, #{@typeTerrain}]"
+    s= "[==Case >>> | "
+    s+= "X: #{@coordonneeX} | "
+    s+= "Y: #{@coordonneeY} | "
+    s+= "Elements: "
+    if(@listeElements.empty?)
+      s+="aucun "
+    end
+    for e in @listeElements
+      s+= "#{e} ,"
+    end
+    s+="| "
+    s+= "Ennemis: "
+    if(@listeEnnemis.empty?)
+      s+="aucun "
+    end
+    for e in @listeEnnemis
+       s+= "#{e} ,"
+    end
+    s+="| "
+    s+= "Terrain de type: #{@typeTerrain} | "
+    if(@joueur==nil)
+      s+= "Joueur: absent | "
+    else
+      s+= "Joueur: présent | "
+    end
+    s+= "Nombre max d'élements/ennemis: #{@@NombreMaxElementsEnnemis} | "
+    s+= "<<< Case==]"
+    return s
   end
+ 
 end

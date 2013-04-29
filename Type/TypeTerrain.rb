@@ -48,27 +48,18 @@ class TypeTerrain
    # de l'objet TypeTerrain sur lequel la méthode est appellée.
    #
    def to_s
-      s= "[Terrain de type #{@intitule} | "
+      s= "[==TypeTerrain >>> | "
+      s+= "Intitulé: #{@intitule} | "
       if(@isAccessible)
          s+= "Accessible | "
-      else
+      else 
          s+= "Non Accessible | "
       end
-      s+= "Cout de déplacement #{@coutDeplacement}]"
-      return @intitule.chars.to_a[0]
+      s+= "Cout de déplacement: #{@coutDeplacement} | "
+      s+= "<<< TypeTerrain==]"
+      return s
    end
 
 end
 
 
-#Test de la classe :
-=begin
-nouveauTypeTerrain = TypeTerrain.new("Eau",false,-1,65)
-BibliothequeTypeTerrain.ajouter("Eau",nouveauTypeTerrain)
-nouveauTypeTerrain = TypeTerrain.new("Sable",true,4,80)
-BibliothequeTypeTerrain.ajouter("Sable",nouveauTypeTerrain)
-nouveauTypeTerrain = TypeTerrain.new("Rocher",true,5,60)
-BibliothequeTypeTerrain.ajouter("Rocher",nouveauTypeTerrain)
-nouveauTypeTerrain = TypeTerrain.new("Plaine",true,2,50)
-BibliothequeTypeTerrain.ajouter("Plaine",nouveauTypeTerrain)
-=end

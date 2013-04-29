@@ -42,8 +42,9 @@ class Difficulte
    @pourcentageTerrain
 
 
-   attr_reader :intitule, :longueurCarte, :largeurCarte, :energieDepart, :energieMax, :nbRepos, :pnjAmisDepart, :pnjAmisParGeneration, 
-               :pnjEnnemisDepart, :pnjEnnemisParGeneration, :objetsDepart, :objetsParGeneration, :nbToursInterGenerations, :pourcentageTerrain
+   attr_reader :intitule, :longueurCarte, :largeurCarte, :energieDepart, :energieMax,
+               :nbRepos, :pnjAmisDepart, :pnjAmisParGeneration, :pnjEnnemisDepart, :pnjEnnemisParGeneration,
+               :objetsDepart, :objetsParGeneration, :nbToursInterGenerations, :pourcentageTerrain
 
 
    ##
@@ -77,14 +78,24 @@ class Difficulte
    # de l'objet Difficulte sur lequel la méthode est appellée.
    #
    def to_s
-      return "[Intitule #{@intitule} | Longueur carte #{@longueurCarte} | Longueur carte #{@largeurCarte} | Energie dep. #{@energieDepart} | Energie max. #{@energieMax} | Nb repos #{@nbRepos} | Nb PNJ amis #{@pnjAmisDepart} , +#{@pnjAmisParGeneration}/généraion | Nb PNJ ennemis #{@pnjEnnemisDepart} , +#{@pnjEnnemisParGeneration}/généraion | Nb objets #{@objetsDepart} , +#{@objetsParGeneration}/généraion | Nb tours entre générations  #{@nbToursInterGenerations} | Pourcentage conso. terrain #{@pourcentageTerrain}]"
+      s= "[==Difficulte >>> | "
+      s+= "Intitulé: #{@intitule} | "
+      s+= "Longueur carte: #{@longueurCarte} | "
+      s+= "Largeur carte: #{@largeurCarte} | "
+      s+= "Energie depart: #{@energieDepart} | "
+      s+= "Energie max.: #{@energieMax} | "
+      s+= "Nb repos: #{@nbRepos} | "
+      s+= "Nb PNJ amis: #{@pnjAmisDepart} | "
+      s+= "+#{@pnjAmisParGeneration}/généraion | "
+      s+= "Nb PNJ ennemis: #{@pnjEnnemisDepart} | "
+      s+= "+#{@pnjEnnemisParGeneration}/généraion | "
+      s+= "Nb objets: #{@objetsDepart} | "
+      s+= "+#{@objetsParGeneration}/généraion | "
+      s+= "Nb tours entre générations:  #{@nbToursInterGenerations} | "
+      s+= "Pourcentage conso. terrain: #{@pourcentageTerrain*100}% | "
+      s+= "<<< Difficulte==]"
+      return s
    end
 
 end
 
-
-#Test de la classe
-=begin
-nouvelleDifficulte = Difficulte.creer("facile",100,100,250,500,3,45,3,25,5,30,2,15,100)
-puts nouvelleDifficulte
-=end
