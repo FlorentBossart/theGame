@@ -5,7 +5,7 @@ require './XmlRefGraphiquesReader.rb'
 
 
 class PopUp
-  
+  private_class_method :new
   @vue
   @referencesGraphiques
   

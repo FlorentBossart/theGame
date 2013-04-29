@@ -356,9 +356,9 @@ class Controller
       # == Parameters:
       # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
       #
-      def initialize(btInteraction,elem)
+      def initialize(btInteraction,elem,joueur)
           btInteraction.signal_connect('clicked'){
-              elem.interaction(@modele.joueur)
+              elem.interaction(joueur)
               action(elem)
           }
       end
@@ -370,8 +370,8 @@ class Controller
       # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
       # elem : l'element avec lequel on souhaite interagir
       #
-      def InteractionElement.creer(btInteraction,elem)
-        new(btInteraction,elem)
+      def InteractionElement.creer(btInteraction,elem,joueur)
+        new(btInteraction,elem,joueur)
       end    
       
       ##
