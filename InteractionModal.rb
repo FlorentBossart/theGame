@@ -36,6 +36,7 @@ class InterfaceModal
       listeElements.each{ |element| 
         #Faut que je vois pour l'affichage des elements, mais pas sur d'afficher vraiment des images pour le choix guerisseur etc, l'intitulé pourrait suffire ?
         #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+        #dialog.vbox.add(Gtk::Label.new(element.intitule))
         
         #version juste textuelle
         button=Gtk::Button.new(element.intitule())

@@ -41,9 +41,11 @@ class CombatModal
     listeArmure.each{ |item|
         #Faut que je vois pour l'affichage des item, bouton image + un string a coté ou juste un string
         #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
-        
+        #dialog.vbox.add(Gtk::Label.new(item.typeEquipable.pourcentageProtection()+"energie"))
+      
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
-        button=Gtk::Button.new(item.intitule())
+        button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
+        
 
         Controller::InteractionElement.creer(button,item,@vue.modele.joueur);
         dialog.vbox.add(button)
@@ -71,9 +73,10 @@ def majEquipementOffensif(joueur)
   listeArmure.each{ |item|
       #Faut que je vois pour l'affichage des item, bouton image + un string a coté ou juste un string
       #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+      #dialog.vbox.add(Gtk::Label.new(item.typeEquipable.pourcentageProtection()+"energie"))
       
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
-      button=Gtk::Button.new(item.intitule())
+      button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
       Controller::InteractionElement.creer(button,item,@vue.modele.joueur);
       dialog.vbox.add(button)

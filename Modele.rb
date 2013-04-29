@@ -303,6 +303,7 @@ class Modele
      else
         if(@joueur.casePosition.presenceEnnemis?() && @joueur.peutSEquiper)
             choixEquipementAvantCombat()
+        elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
             declencherCombat()
         else
             choixLibre()
