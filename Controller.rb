@@ -327,24 +327,13 @@ class Controller
         end
         
         ##
-        # Crée un nouvel Inventaire : classe interne pour gérer l'action d'un clic sur le bouton inventaire
+        # Crée un nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton inventaire
         #
         # == Parameters:
         # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
         #
         def Interaction.creer(btInteraction)
-          # Create the dialog
-          dialog = Gtk::Dialog.new("Message",
-                                   $main_application_window,
-                                   Gtk::Dialog::DESTROY_WITH_PARENT,
-                                   [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
-      
-          # Ensure that the dialog box is destroyed when the user responds.
-          #dialog.signal_connect('response') { dialog.destroy }
-      
-          # Add the message in a label, and show everything we've added to the dialog.
-          dialog.vbox.add(Gtk::Label.new(message))
-          dialog.show_all  
+          new(btInteraction)
         end    
         
         ##
@@ -357,6 +346,42 @@ class Controller
         
     end
     
+  class InteractionElement
+      
+      private_class_method :new
+      
+      ##
+      # Constructeur privé : crée une nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton Interaction
+      #
+      # == Parameters:
+      # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+      #
+      def initialize(btInteraction,elem)
+          btInteraction.signal_connect('clicked'){
+              elem.interaction(@modele.joueur)
+              action(elem)
+          }
+      end
+      
+      ##
+      # Crée un nouveau bouton d'interaction a un element: classe interne pour gérer l'action d'un clic sur le bouton inventaire
+      #
+      # == Parameters:
+      # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+      # elem : l'element avec lequel on souhaite interagir
+      #
+      def InteractionElement.creer(btInteraction,elem)
+        new(btInteraction,elem)
+      end    
+      
+      ##
+      # Action(s) à effectuer lors du clic sur le bouton inventaire
+      #
+      def action(elem)
+          print "oO Bt interaction "+elem.intitule+" pressé!"
+      end
+      
+  end
 
 end
 
