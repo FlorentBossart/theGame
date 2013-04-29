@@ -319,10 +319,10 @@ class Controller
         #
         # == Parameters:
         # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
-        #
-        def initialize(btInteraction)
+        # vue : reference a la vue a passer aux instances d'InteractionModal
+        def initialize(btInteraction,vue)
             btInteraction.signal_connect('clicked'){
-                action();
+                action(vue);
             }
         end
         
@@ -332,16 +332,16 @@ class Controller
         # == Parameters:
         # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
         #
-        def Interaction.creer(btInteraction)
-          new(btInteraction)
+        def Interaction.creer(btInteraction,vue)
+          new(btInteraction,vue)
         end    
         
         ##
         # Action(s) à effectuer lors du clic sur le bouton inventaire
         #
-        def action
+        def action(vue)
             print "oO Bt interaction pressé!"
-            InteractionModal.new()
+            InteractionModal.new(vue)
         end
         
     end

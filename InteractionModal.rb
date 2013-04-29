@@ -8,17 +8,25 @@ require './Controller.rb'
 
 class InterfaceModal
   
+  @vue
   @referencesGraphiques
-  def initialize()
+  def initialize(vue)
+    @vue=vue
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
     initInterface();
   end
   
+  
+  def InterfaceModal(vue)
+    new(vue)
+  end
+  
+  
   def initInterface()
     if(@vue.modele.joueur.casePosition.presenceAides())
       listeElements=@vue.modele.joueur.casePosition.listeElements()
-      dialog = Gtk::Dialog.new("Interaction", @vue,
+      dialog = Gtk::Dialog.new("Interaction", controller.vue,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
 
       # Ensure that the dialog box is destroyed when the user responds.
