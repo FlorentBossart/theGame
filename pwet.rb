@@ -13,3 +13,5 @@ def declencherCombat
     end 
   }
 end
+
+bfwdndng
