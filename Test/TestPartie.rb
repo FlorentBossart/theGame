@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#test
+#test++
 require './AffichageDebug.rb'
 require './Test/TestControleur.rb'
 require './Test/TestVue.rb'
