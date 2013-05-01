@@ -32,6 +32,7 @@ class PopUp
     # Add the message in a label, and show everything we've added to the dialog.
     dialog.vbox.add(Gtk::Label.new(message))
     dialog.show_all
+    test=1
   end
 
   
