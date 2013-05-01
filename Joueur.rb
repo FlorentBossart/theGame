@@ -349,7 +349,6 @@ class Joueur < Personnage
      end
      @casePosition.retirerElement(item)
      @modele.tourPasse()
-     test=1
    end
    
 
