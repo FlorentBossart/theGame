@@ -338,6 +338,7 @@ class Joueur < Personnage
 
    ##
    # Ramasse un item
+   # params: item
    def ramasserItem(item)
      @itemAttenteAjout=item
      if(@inventaire.estPlein?())
