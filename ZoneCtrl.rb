@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'gtk2'
-require './ReferencesGraphiques.rb'
-require './XmlRefGraphiquesReader.rb'
+require './Bibliotheque/ReferencesGraphiques.rb'
+require './XMLReader/XmlRefGraphiquesReader.rb'
 require './Controller.rb'
 
 

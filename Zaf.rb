@@ -3,8 +3,8 @@
 require 'gtk2'
 require './Console.rb'
 require './Jauges.rb'
-require './ReferencesGraphiques.rb'
-require './XmlRefGraphiquesReader.rb'
+require './Bibliotheque/ReferencesGraphiques.rb'
+require './XMLReader/XmlRefGraphiquesReader.rb'
 
 #affiche console + jauges
 
