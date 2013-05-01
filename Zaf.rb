@@ -1,10 +1,11 @@
-"#!/usr/bin/env ruby"
+#!/usr/bin/env ruby
+
 
 require 'gtk2'
 require './Console.rb'
 require './Jauges.rb'
-require './ReferencesGraphiques.rb'
-require './XmlRefGraphiquesReader.rb'
+require './Bibliotheque/ReferencesGraphiques.rb'
+require './XMLReader/XmlRefGraphiquesReader.rb'
 
 #affiche console + jauges
 
@@ -22,27 +23,18 @@ class Zaf < Gtk::Frame
       @jauges = Jauges.new(0,5,50,80,100,1);
       initInterface();
            
-      #Gtk.main();
-         
+      #Gtk.main();      
   end
   
   def initInterface()
-    
-      
+
       #window.set_default_size 400,150;
       hbox = Gtk::HBox.new(true, 2);
       hbox.add(@console);
       hbox2 = Gtk::HBox.new(true, 4);
       vbox = Gtk::VBox.new(true,4);
       vbox.add(hbox2);
-      
 
-    
-    
-      
-    
-   
-      
       hbox2.add(Gtk::Label.new(@jauges.getJaugeNbRepos().to_s()));
       hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("repos")));
       hbox2.add(Gtk::Label.new(@jauges.getJaugeOr().to_s()));
@@ -52,19 +44,22 @@ class Zaf < Gtk::Frame
       vbox.add(Gtk::Label.new("Niveau : "+Gtk::Label.new(@jauges.getNiveau().to_s()).text));
       
       hbox.add(vbox);
-      
-   
-      
-  
+
       add(hbox);
-     
-     
 
       show_all();
     
   end
 
   
+  def getJauges
+    return @jauges;
+  end
+  
+  def getConsole
+    return @console;
+  end
+
 end
 
 #Zaf.new();

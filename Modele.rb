@@ -13,8 +13,6 @@
 # == un compteur de tour de jeu
 #
 
-#retrait de 3 comm de test
-#...
 require './AffichageDebug.rb'
 require './Enum/EnumStadePartie.rb'
 require './Joueur.rb'
@@ -97,6 +95,8 @@ class Modele
       @vue = vue
       @difficulte=difficulte
       @pseudoPartie=pseudo
+     # Creation de la carte   on a besoin de la carte pour la vue
+     @carte = Carte.nouvelle(@difficulte.longueurCarte, @difficulte.largeurCarte)
    end
      
    
@@ -109,8 +109,7 @@ class Modele
       @notifications=Array.new()
       @notifications.push("Debut de partie")
       
-      # Creation de la carte
-      @carte = Carte.nouvelle(@difficulte.longueurCarte, @difficulte.largeurCarte)
+      
 
       # Initialisation de la case du joueur
       pasTrouver = true
