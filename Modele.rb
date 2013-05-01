@@ -13,6 +13,9 @@
 # == un compteur de tour de jeu
 #
 
+#faisage de comm pour voir :D
+#2e faisage de comm yo
+#3e test EGIT!
 require './AffichageDebug.rb'
 require './Enum/EnumStadePartie.rb'
 require './Joueur.rb'
