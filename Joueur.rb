@@ -338,7 +338,7 @@ class Joueur < Personnage
 
    ##
    # Ramasse un item
-   # params: item
+   # params:  item
    def ramasserItem(item)
      @itemAttenteAjout=item
      if(@inventaire.estPlein?())
@@ -349,7 +349,6 @@ class Joueur < Personnage
      end
      @casePosition.retirerElement(item)
      @modele.tourPasse()
-     test=1
    end
    
 
