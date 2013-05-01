@@ -16,7 +16,7 @@ class InterfaceModal
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
   end
   
-  #test
+  
   def InterfaceModal(vue)
     new(vue)
   end

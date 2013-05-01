@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
 
-require './Modele.rb'
 require './AffichageDebug.rb'
-require './Controller.rb'
-require './Vue.rb'
-
+require './Test/TestControleur.rb'
+require './Test/TestVue.rb'
+require './Modele.rb'
 
 #AffichageDebug.On()
 
 # Initialisation de la fausse vue
+vueDeTest=TestVue.creer()
 
-
-
+# Initialisation du faux controleur
+controleurDeTest=TestControleur.creer()
 
 puts "\nChoix pseudo:"
 pseudo = gets.chomp
@@ -30,17 +30,22 @@ begin
   end
 end while(choixDifficulte!="F" && choixDifficulte!="M" && choixDifficulte!="D")
 
-vueDeTest=Vue.new();
 # Initialisation du modele
 modele = Modele.creer(vueDeTest,difficulte,pseudo)
-vueDeTest.defM(modele);
-vueDeTest.initInterface();
-# Initialisation du faux controleur
-controleurDeTest=Controller.new(modele,vueDeTest)
 
-#controleurDeTest.defM(modele)
-#vueDeTest.defMetC(modele,controleurDeTest)
+controleurDeTest.defM(modele)
+vueDeTest.defMetC(modele,controleurDeTest)
 
 modele.initialiseToi()
 
 modele.lancerPartie()
+
+
+
+
+
+
+
+
+
+

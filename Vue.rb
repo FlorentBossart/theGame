@@ -1,13 +1,11 @@
-#!/usr/bin/env ruby
-
+"#!/usr/bin/env ruby"
 
 require 'gtk2'
 require './Zaf.rb'
 require './ZoneCtrl.rb'
 require './Carte.rb'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
-
+require './ReferencesGraphiques.rb'
+require './XmlRefGraphiquesReader.rb'
 
 class Vue
 
@@ -20,36 +18,32 @@ class Vue
   @carteVue; #tableau pour affichager la carte
   @hauteurAfficheCarte; #hauteurVisible
   @largeurAfficheCarte; #largeurVisible
-  @modele
+  
   @x; #coordonné actuel
   @y; #coordonné actuel
   
   attr_accessor :x ,:y;
   
   def initialize()
-    #Gtk.init();
-  
-    #@carteVue = Modele.carte;
-    #initInterface();
-    #Gtk.main();
-
-  end
-  
-  def defM(modele)
-    @modele = modele;
-  end
-  
-  def initInterface()
+    Gtk.init();
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
-    
+  
     @hauteurAfficheCarte = 11;
     @largeurAfficheCarte = 23; 
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new();
     @zoneCtrl = ZoneCtrl.new();
-    @carte = @modele.carte;
     
+    
+    @carte = Carte.nouvelle(100,100);
+
+    initInterface();
+    Gtk.main();
+
+  end
+  
+  def initInterface()
    
     window = Gtk::Window.new();
        window.signal_connect('destroy') { 
@@ -78,7 +72,7 @@ class Vue
     
     window.set_title("THE GAME");
     window.show_all();
- 
+    
   end
   
   def initCarte(debutX,debutY)
@@ -102,11 +96,10 @@ class Vue
       end
     end
   end
+  
 
-
-  def getZaf()
-    return @zaf;
-  end
+  
   
 end
 
+Vue.new()
