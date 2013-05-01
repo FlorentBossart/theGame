@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+#truc
 ##
 # Fichier        : Modele.rb
 # Auteur         : L3SPI - Groupe de projet B
