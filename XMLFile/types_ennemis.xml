@@ -10,12 +10,25 @@
 <types_ennemis>
 
 	<type>
-	   <intitule>brigand</intitule>
-	   <energieBase>100</energieBase>
+	   <intitule>chauve-souris</intitule>
+	   <energieBase>30</energieBase>
 	</type>
 	<type>
-	   <intitule>brigand2</intitule>
-	   <energieBase>200</energieBase>
+	   <intitule>loup</intitule>
+	   <energieBase>50</energieBase>
 	</type>
+	<type>
+	   <intitule>brigand</intitule>
+	   <energieBase>90</energieBase>
+	</type>
+	<type>
+	   <intitule>soldat</intitule>
+	   <energieBase>150</energieBase>
+	</type>
+	<type>
+	   <intitule>ogre</intitule>
+	   <energieBase>210</energieBase>
+	</type>
+	
 
 </types_ennemis>
