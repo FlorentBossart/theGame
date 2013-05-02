@@ -10,8 +10,8 @@ require './Vue.rb'
 
 # Initialisation de la fausse vue
 
+#comm truc
 
-#commentaire
 
 #commentaire++
 
