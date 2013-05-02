@@ -161,7 +161,7 @@ class Joueur < Personnage
    # Si l'energie de l'ennemi est égale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remporté, on signal au modele la mort du joueur, retourne un tableau vide
    # Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
    def combattreEnnemi(ennemi)
-     @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} ayant une énergie de #{ennemi.energie}.")
+     @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
      protection=0;
       if(self.armureEquip)
         protection=protection+@armure.typeEquipable.pourcentageProtection()

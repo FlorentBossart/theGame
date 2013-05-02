@@ -1,17 +1,17 @@
 class EnumEmplacementEquipement
   @@ARMURE                  = 1
-  @@EPEE                    = 2
+  @@ARME                    = 2
   @@BOTTES                  = 3
 
-  def EnumStadePartie.ARMURE
+  def EnumEmplacementEquipement.ARMURE
     return @@ARMURE
   end
     
-  def EnumStadePartie.EPEE
-    return @@EPEE
+  def EnumEmplacementEquipement.ARME
+    return @@ARME
   end
   
-  def EnumStadePartie.BOTTES
+  def EnumEmplacementEquipement.BOTTES
     return @@BOTTES
   end
   

@@ -13,6 +13,7 @@
 require './Caracteristique.rb'
 require './Type/TypeEquipable.rb'
 require './Joueur.rb'
+require './Enum/EnumEmplacementEquipement.rb'
 
 class Equipable < Caracteristique
 

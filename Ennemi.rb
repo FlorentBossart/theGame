@@ -38,10 +38,14 @@ class Ennemi < PNJ
    #* <b>type :</b> le type de PNJ Ennemi
    #
    def initialize(casePosition, niveau, type)
+      fourchette=3
       super(casePosition)
-      @niveau = niveau
+      @niveau = niveau-fourchette + rand(niveau-fourchette+1)
+      if(@niveau<1)
+        @niveau=1
+      end
       @type = type
-      @energie = @type.energieBase * 1.2
+      @energie = @type.energieBase * 1.2**(@niveau-1)
       remplirListeItems(1,5)
    end
   
