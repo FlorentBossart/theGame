@@ -8,20 +8,14 @@ require './Vue.rb'
 
 #AffichageDebug.On()
 
-# Initialisation de la fausse vue
-
-#comm truc
-
-
-#test
-
-
-
+# Choix pseudo
 puts "\nChoix pseudo:"
 pseudo = gets.chomp
 
+# Remplissage des bibliothèque
 Modele.initialisationBibliotheques()
 
+# Choix difficulté
 begin
   puts "\nChoix difficulte (F,M,D):"
   choixDifficulte = gets.chomp
@@ -35,14 +29,15 @@ begin
 end while(choixDifficulte!="F" && choixDifficulte!="M" && choixDifficulte!="D")
 
 
-# Initialisation du modele
-vueDeTest=Vue.new()
-modele = Modele.creer(vueDeTest,difficulte,pseudo)
+# Creation de la vue
+vue=Vue.new()
 
+# Creation du modele
+modele = Modele.creer(vue,difficulte,pseudo)
 
+vue.defM(modele)
+vue.initInterface()
 
-vueDeTest.defM(modele)
-vueDeTest.initInterface()
 # Initialisation du faux controleur
 #controleurDeTest=Controller.new(modele,vueDeTest)
 
