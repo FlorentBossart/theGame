@@ -31,7 +31,7 @@ class ReferencesGraphiques
    def addRefGraphique(intitule, cheminImg)
      
    @biblioGraphique[intitule] = cheminImg
-      AffichageDebug.Afficher("Ajout dans du couple clé:#{intitutle}, type:#{cheminImg} dans #{self}")
+      AffichageDebug.Afficher("Ajout dans du couple clé:#{intitule}, type:#{cheminImg} dans #{self}")
       return nil
    end
 
@@ -44,7 +44,7 @@ class ReferencesGraphiques
    #* <b>fichierImg :</b> le chemin vers le fichier image représentant l'objet affichable dans l'IHM
    # 
    def getRefGraphique(intitule)
-      return @biblioGraphique[intitutle]
+      return @biblioGraphique[intitule]
    end 
 
 

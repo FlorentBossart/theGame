@@ -23,6 +23,7 @@ class CombatModal
   
   
   def majEquipementDefensif(joueur)
+    tooltips = Gtk::Tooltips.new
     listeArmure=Array.new()
     for i in joueur.inventaire.items
       if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
@@ -40,11 +41,11 @@ class CombatModal
     dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous enfiler une armure?"))
     listeArmure.each{ |item|
         #Faut que je vois pour l'affichage des item, bouton image + un string a coté ou juste un string
-        #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
-        #dialog.vbox.add(Gtk::Label.new(item.typeEquipable.pourcentageProtection()+"energie"))
+        button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+        tooltips.set_tip( button, element.to_s, nil )
       
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
-        button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
+       # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
         
 
         Controller::InteractionElement.creer(button,item,@vue.modele.joueur);
@@ -55,6 +56,7 @@ class CombatModal
   end
   
 def majEquipementOffensif(joueur)
+  tooltips = Gtk::Tooltips.new
   listeArme=Array.new()
   for i in joueur.inventaire.items
     if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
@@ -72,11 +74,11 @@ def majEquipementOffensif(joueur)
   dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous utiliser une arme?"))
   listeArmure.each{ |item|
       #Faut que je vois pour l'affichage des item, bouton image + un string a coté ou juste un string
-      #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
-      #dialog.vbox.add(Gtk::Label.new(item.typeEquipable.pourcentageProtection()+"energie"))
+      button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+      tooltips.set_tip( button, element.to_s, nil )
       
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
-      button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
+      #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
       Controller::InteractionElement.creer(button,item,@vue.modele.joueur);
       dialog.vbox.add(button)

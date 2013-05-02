@@ -6,23 +6,21 @@ require './XmlRefGraphiquesReader.rb'
 
 class PopUp
   private_class_method :new
-  @vue
   @referencesGraphiques
   
-  def initialize(vue,message)
-    @vue=vue
+  def initialize(message)
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
     initInterface(message);
   end
   
-  def PopUp.creer(vue,message)
+  def PopUp.creer(message)
     new(vue,message)
   end
   
   def initInterface(message)
      # Create the dialog
-    dialog = Gtk::Dialog.new("Ceci est un message important !", @vue,
+    dialog = Gtk::Dialog.new("Ceci est un message important !",$main_application_window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 

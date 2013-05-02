@@ -23,6 +23,7 @@ class InterfaceModal
   
   
   def majInteractionModal()
+    tooltips = Gtk::Tooltips.new
     if(@vue.modele.joueur.casePosition.presenceAides())
       listeElements=@vue.modele.joueur.casePosition.listeElements()
       dialog = Gtk::Dialog.new("Interaction", @vue,
@@ -34,12 +35,13 @@ class InterfaceModal
       # Add the message in a label, and show everything we've added to the dialog.
       dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
       listeElements.each{ |element| 
-        #Faut que je vois pour l'affichage des elements, mais pas sur d'afficher vraiment des images pour le choix guerisseur etc, l'intitulé pourrait suffire ?
-        #button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
-        #dialog.vbox.add(Gtk::Label.new(element.intitule))
+
+        button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+        tooltips.set_tip( button, element.to_s, nil )
         
         #version juste textuelle
-        button=Gtk::Button.new(element.intitule())
+       # button=Gtk::Button.new(element.intitule())
+        #tooltips.set_tip( button, element.to_s, nil )
 
         Controller::InteractionElement.creer(button,elem,@vue.modele.joueur);
         dialog.vbox.add(button)

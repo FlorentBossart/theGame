@@ -242,7 +242,7 @@ class Controller
         # == Parameters:
         # btInventaire : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
         #
-        def initialize(btInventaire)
+        def initialize(btInventaire,vue)
             btInventaire.signal_connect('clicked'){
                 action();
             }
@@ -254,8 +254,8 @@ class Controller
         # == Parameters:
         # btInventaire : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
         #
-        def Inventaire.creer(btInventaire)
-            new(btInventaire)    
+        def Inventaire.creer(btInventaire,vue)
+            new(btInventaire,vue)    
         end    
         
         ##

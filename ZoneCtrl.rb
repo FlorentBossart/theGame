@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
@@ -15,17 +16,21 @@ require './Controller.rb'
 
 
 class ZoneCtrl <  Gtk::Frame
-  
   @referencesGraphiques
-  def initialize()
+  def initialize(vue)
     super(); #Frame
     #Gtk.init();
+    @vue=vue
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
     initInterface();
+
     #Gtk.main();
   end
   
+  def ZoneCtrl.creer(vue)
+    new(vue)
+  end
   def initInterface()
     #creation image bouton
     gauche = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("gauche")));
@@ -78,9 +83,16 @@ class ZoneCtrl <  Gtk::Frame
     show_all();
     
   end
-
+  
+  
+  
+  
+  
+  
+  
   
 end
+
 
 
 

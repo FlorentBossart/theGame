@@ -47,7 +47,7 @@ class Vue
     @largeurAfficheCarte = 23; 
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new();
-    @zoneCtrl = ZoneCtrl.new();
+    @zoneCtrl = ZoneCtrl.creer();
     @carte = @modele.carte;
     
    
@@ -93,12 +93,13 @@ class Vue
   
   
   def afficheCarte(debutX,debutY)
-    @x=debutX;
-    @y=debutY;
+    @x=debutX
+    @y=debutY
+
 
      0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
-         @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).typeTerrain().intitule.downcase)));
+         @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).typeTerrain().intitule.downcase)))
       end
     end
   end
@@ -107,6 +108,7 @@ class Vue
   def getZaf()
     return @zaf;
   end
+
   
 end
 

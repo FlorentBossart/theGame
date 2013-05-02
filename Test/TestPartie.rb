@@ -30,17 +30,22 @@ begin
   end
 end while(choixDifficulte!="F" && choixDifficulte!="M" && choixDifficulte!="D")
 
-vueDeTest=Vue.new();
+
 # Initialisation du modele
+vueDeTest=Vue.new()
 modele = Modele.creer(vueDeTest,difficulte,pseudo)
-vueDeTest.defM(modele);
-vueDeTest.initInterface();
+
+
+
+vueDeTest.defM(modele)
+vueDeTest.initInterface()
 # Initialisation du faux controleur
-controleurDeTest=Controller.new(modele,vueDeTest)
+#controleurDeTest=Controller.new(modele,vueDeTest)
 
 #controleurDeTest.defM(modele)
 #vueDeTest.defMetC(modele,controleurDeTest)
 
-modele.initialiseToi()
 
+modele.initialiseToi()
 modele.lancerPartie()
+
