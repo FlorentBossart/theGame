@@ -11,9 +11,8 @@ require './Vue.rb'
 # Initialisation de la fausse vue
 
 
-#commentaire
 
-#commentaire++
+#test
 
 
 
