@@ -47,7 +47,7 @@ class Vue
     @largeurAfficheCarte = 23; 
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new();
-    @zoneCtrl = ZoneCtrl.creer();
+    @zoneCtrl = ZoneCtrl.creer(@vue);
     @carte = @modele.carte;
     
    
