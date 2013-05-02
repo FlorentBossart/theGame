@@ -17,16 +17,18 @@ Modele.initialisationBibliotheques()
 
 # Choix difficulté
 begin
-  puts "\nChoix difficulte (F,M,D):"
+  puts "\nChoix difficulte (T(est),N(ovice),M(oyen),E(xpert)):"
   choixDifficulte = gets.chomp
-  if(choixDifficulte == "F")
-    difficulte = BibliothequeDifficulte.getDifficulte("facile")
+  if(choixDifficulte == "T")
+    difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
+  elsif(choixDifficulte == "N")
+    difficulte = BibliothequeDifficulte.getDifficulte("novice")
   elsif(choixDifficulte == "M")
     difficulte = BibliothequeDifficulte.getDifficulte("moyen")
-  elsif(choixDifficulte == "D")
-    difficulte = BibliothequeDifficulte.getDifficulte("difficile")
+  elsif(choixDifficulte == "E")
+      difficulte = BibliothequeDifficulte.getDifficulte("expert")
   end
-end while(choixDifficulte!="F" && choixDifficulte!="M" && choixDifficulte!="D")
+end while(choixDifficulte!="T" && choixDifficulte!="N" && choixDifficulte!="M" && choixDifficulte!="E" )
 
 
 # Creation de la vue

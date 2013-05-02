@@ -73,7 +73,7 @@ class Joueur < Personnage
    # pseudo : pseudo du joueur
    #
    def Joueur.creer(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
-      new(nbRepos,energieMax,experienceSeuil,inventaire,modele,casePosition,pseudo)
+      new(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
    end
 
    
