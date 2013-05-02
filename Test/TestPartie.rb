@@ -10,7 +10,7 @@ require './Vue.rb'
 
 # Initialisation de la fausse vue
 
-
+#commentaire
 
 
 puts "\nChoix pseudo:"
