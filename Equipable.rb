@@ -45,11 +45,11 @@ class Equipable < Caracteristique
 
    
    def utiliseToi(joueur)
-      if(@typeEquipable.sePorteSur == "armure")
+      if(@typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
          joueur.armure=self
-      elsif(@typeEquipable.sePorteSur == "arme")
+      elsif(@typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
          joueur.arme=self
-      elsif(@typeEquipable.sePorteSur == "bottes")
+      elsif(@typeEquipable.sePorteSur == EnumEmplacementEquipement.BOTTES)
          joueur.bottes=self
       end
       joueur.modele.notifier("Vous vous êtes équipé de #{getIntitule()}")

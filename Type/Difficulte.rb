@@ -30,10 +30,8 @@ class Difficulte
    @longueurCarte
    @largeurCarte
    @energieDepart
-   @energieMax
    @nbRepos
    @pnjAmisDepart
-   @pnjAmisParGeneration
    @pnjEnnemisDepart
    @pnjEnnemisParGeneration
    @objetsDepart
@@ -42,23 +40,21 @@ class Difficulte
    @pourcentageTerrain
 
 
-   attr_reader :intitule, :longueurCarte, :largeurCarte, :energieDepart, :energieMax,
-               :nbRepos, :pnjAmisDepart, :pnjAmisParGeneration, :pnjEnnemisDepart, :pnjEnnemisParGeneration,
+   attr_reader :intitule, :longueurCarte, :largeurCarte, :energieDepart,
+               :nbRepos, :pnjAmisDepart, :pnjEnnemisDepart, :pnjEnnemisParGeneration,
                :objetsDepart, :objetsParGeneration, :nbToursInterGenerations, :pourcentageTerrain
 
 
    ##
    # Construit une nouvelle Difficulté à partir des informations passées en paramètre.
    #
-   def initialize(intitule, longueurCarte, largeurCarte, energieDepart, energieMax, nbRepos, pnjAmisDepart, pnjAmisParGeneration, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
+   def initialize(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
       @intitule=intitule
       @longueurCarte = longueurCarte
       @largeurCarte = largeurCarte
       @energieDepart = energieDepart
-      @energieMax = energieMax
       @nbRepos = nbRepos
       @pnjAmisDepart = pnjAmisDepart
-      @pnjAmisParGeneration = pnjAmisParGeneration
       @pnjEnnemisDepart = pnjEnnemisDepart
       @pnjEnnemisParGeneration = pnjEnnemisParGeneration
       @objetsDepart = objetsDepart
@@ -68,8 +64,8 @@ class Difficulte
    end
     
     # Appel de la méthode initialize.
-    def Difficulte.creer(intitule, longueurCarte, largeurCarte, energieDepart, energieMax, nbRepos, pnjAmisDepart, pnjAmisParGeneration, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
-        return new(intitule, longueurCarte, largeurCarte, energieDepart, energieMax, nbRepos, pnjAmisDepart, pnjAmisParGeneration, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
+    def Difficulte.creer(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
+        return new(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
     end
                
 
@@ -83,10 +79,8 @@ class Difficulte
       s+= "Longueur carte: #{@longueurCarte} | "
       s+= "Largeur carte: #{@largeurCarte} | "
       s+= "Energie depart: #{@energieDepart} | "
-      s+= "Energie max.: #{@energieMax} | "
       s+= "Nb repos: #{@nbRepos} | "
       s+= "Nb PNJ amis: #{@pnjAmisDepart} | "
-      s+= "+#{@pnjAmisParGeneration}/généraion | "
       s+= "Nb PNJ ennemis: #{@pnjEnnemisDepart} | "
       s+= "+#{@pnjEnnemisParGeneration}/généraion | "
       s+= "Nb objets: #{@objetsDepart} | "

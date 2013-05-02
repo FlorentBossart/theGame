@@ -32,7 +32,7 @@ class Case
     @coordonneeY = y
     @listeEnnemis = Array.new()
     @listeElements = Array.new()
-    @typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
+    @typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("plaine")
   end
   
   
