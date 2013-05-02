@@ -72,18 +72,18 @@ class Joueur < Personnage
    # casePosition : case ou se situe le joueur
    # pseudo : pseudo du joueur
    #
-   def Joueur.creer(nbRepos,energieMax,experienceSeuil,inventaire,modele,casePosition,pseudo)
+   def Joueur.creer(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
       new(nbRepos,energieMax,experienceSeuil,inventaire,modele,casePosition,pseudo)
    end
 
    
-   def initialize(nbRepos,energieMax,experienceSeuil,inventaire,modele,casePosition,pseudo)
+   def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
       super(casePosition)
       @intitule="Joueur"
       @nombreRepos = nbRepos
       @niveau = 1
-      @energie = energieMax
-      @energieMax = energieMax
+      @energie = energieDepart
+      @energieMax = energieDepart
       @experience = 0
       @experienceSeuil = experienceSeuil
       @tourDejaPasse = false
