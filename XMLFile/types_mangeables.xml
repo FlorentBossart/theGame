@@ -10,11 +10,32 @@
 
 <types_mangeables>
 
-<type>
-   <intitule>pomme</intitule>
-   <energieRendue>20</energieRendue>
-   <prix>10</prix>
-</type>
+   <type>
+      <intitule>bout de pain</intitule>
+      <energieRendue>70</energieRendue>
+      <prix>5</prix>
+   </type>
+   <type>
+      <intitule>brocolie vapeur</intitule>
+      <energieRendue>100</energieRendue>
+      <prix>10</prix>
+   </type>
+   <type>
+      <intitule>steack de dinde</intitule>
+      <energieRendue>200</energieRendue>
+      <prix>25</prix>
+   </type>
+   <type>
+      <intitule>pavé d'émeu</intitule>
+      <energieRendue>500</energieRendue>
+      <prix>50</prix>
+   </type>
+   <type>
+      <intitule>poulet rôti</intitule>
+      <energieRendue>800</energieRendue>
+      <prix>100</prix>
+   </type>
+   
 
 
 
