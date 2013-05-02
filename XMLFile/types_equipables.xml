@@ -13,18 +13,68 @@
 <types_equipables>
 
 	<type>
-	   <intitule>bottesDe7Lieux</intitule>
+	   <intitule>bottes en cuir</intitule>
 	   <pourcentageProtection>0.10</pourcentageProtection>
 	   <nbTours>5</nbTours>
 	   <prix>10</prix>
-	   <sePorteSur>bottes</sePorteSur>
+	   <sePorteSur>3</sePorteSur>
 	</type>
 	<type>
-	   <intitule>soulier</intitule>
-	   <pourcentageProtection>0.20</pourcentageProtection>
-	   <nbTours>5</nbTours>
-	   <prix>15</prix>
-	   <sePorteSur>bottes</sePorteSur>
+	   <intitule>bottes en fer</intitule>
+	   <pourcentageProtection>0.40</pourcentageProtection>
+	   <nbTours>8</nbTours>
+	   <prix>30</prix>
+	   <sePorteSur>3</sePorteSur>
 	</type>
+	<type>
+	   <intitule>bottes en acier</intitule>
+	   <pourcentageProtection>0.70</pourcentageProtection>
+	   <nbTours>10</nbTours>
+	   <prix>50</prix>
+	   <sePorteSur>3</sePorteSur>
+	</type>
+	<type>
+	   <intitule>armure en cuir</intitule>
+	   <pourcentageProtection>0.10</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>20</prix>
+	   <sePorteSur>1</sePorteSur>
+	</type>
+	<type>
+	   <intitule>armure en fer</intitule>
+	   <pourcentageProtection>0.40</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>50</prix>
+	   <sePorteSur>1</sePorteSur>
+	</type>
+	<type>
+	   <intitule>armure en acier</intitule>
+	   <pourcentageProtection>0.70</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>70</prix>
+	   <sePorteSur>1</sePorteSur>
+	</type>
+	<type>
+	   <intitule>epee en bois</intitule>
+	   <pourcentageProtection>0.10</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>15</prix>
+	   <sePorteSur>2</sePorteSur>
+	</type>
+	<type>
+	   <intitule>epee en fer</intitule>
+	   <pourcentageProtection>0.40</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>45</prix>
+	   <sePorteSur>2</sePorteSur>
+	</type>
+	<type>
+	   <intitule>epee en acier</intitule>
+	   <pourcentageProtection>0.70</pourcentageProtection>
+	   <nbTours>1</nbTours>
+	   <prix>65</prix>
+	   <sePorteSur>2</sePorteSur>
+	</type>
+	
 
 </types_equipables>
