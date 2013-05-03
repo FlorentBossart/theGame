@@ -182,7 +182,7 @@ class TestVue
                       puts "déjà selectionné"
                     end
                   end
-                end while(choixItem != -1 && !(choixItem >=1 && choixItem <=listeItemsJoueur.length))
+                end while(choixItem != -1 || listeASuppr.empty?())
                 @controleurDeTest.supprimerItems(listeASuppr)
               end
             end while(uOUs!="u" && uOUs!="s" && uOUs!="a")    
@@ -216,8 +216,8 @@ class TestVue
     #ETAPE EQUIPEMENT ARMURE   
     when EnumStadePartie.EQUIPEMENT_ARMURE
       listeArmures = Array.new()
-      for i in @modele.joueur.inventaire.item
-        if(i.estEquipable && i.caracteristique.typeEquipable.sePorteSur == "armure")
+      for i in @modele.joueur.inventaire.items
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
           listeArmures.push(i)
         end
       end
@@ -236,8 +236,8 @@ class TestVue
     #ETAPE EQUIPEMENT ARME           
     when EnumStadePartie.EQUIPEMENT_ARME
       listeArmes = Array.new()
-      for i in @joueur.inventaire.item
-        if(i.estEquipable && i.caracteristique.typeEquipable.sePorteSur == "arme")
+      for i in @modele.joueur.inventaire.items
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
           listeArmes.push(i)
         end
       end

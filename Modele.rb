@@ -322,11 +322,12 @@ class Modele
      
      if(!@joueur.armureEquip?())
        for i in @joueur.inventaire.items
-         if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
+         if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
             compteurArmures+=1
          end
        end
       
+       AffichageDebug.Afficher("compteurArmures=#{compteurArmures}")
        if(compteurArmures!=0)
           changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)            
        end
@@ -344,14 +345,15 @@ class Modele
     
     if(!@joueur.armeEquip?())
       for i in @joueur.inventaire.items
-        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
            compteurArmes+=1
         end
       end
       
-       if(compteurArmes != 0)
+      AffichageDebug.Afficher("compteurArmes=#{compteurArmes}")
+      if(compteurArmes != 0)
           changerStadePartie(EnumStadePartie.EQUIPEMENT_ARME)      
-       end
+      end
     end
     declencherCombat()
   end
@@ -403,6 +405,7 @@ class Modele
    def lancerPartie()
      while(@joueur.toujoursEnVie?())
        debutTour()
+       @joueur.peutSEquiper=true
      end
    end
    

@@ -55,8 +55,8 @@ class Joueur < Personnage
 
    attr_reader :nombreRepos, :niveau, :experience,
                :experienceSeuil, :inventaire, :casePosition, :nbEnnemiTues, :distanceParcourue,
-               :causeMort, :peutSEquiper, :modele
-   attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax
+               :causeMort, :modele
+   attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax, :peutSEquiper
    
    
    ##
@@ -132,12 +132,12 @@ class Joueur < Personnage
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
               @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")              
               @energie -= energiePerdue
-              @bottes.nbTour=@bottes.nbTour-1
-              if(@bottes.nbTour==0)
+              @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
+              if(@bottes.nbUtilisationsRestantes==0)
                  @bottes=nil
                  @modele.notifier("Vous perdez vos bottes.")
               else
-                 @modele.notifier("Vos bottes peuvent êtres utilisées encore #{@bottes.nbTour} fois.")
+                 @modele.notifier("Vos bottes peuvent êtres utilisées encore #{@bottes.nbUtilisationsRestantes} fois.")
               end
             else
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
@@ -165,12 +165,12 @@ class Joueur < Personnage
      protection=0;
       if(self.armureEquip?())
         protection=protection+@armure.typeEquipable.pourcentageProtection()
-        @modele.notifier("Vous avez utilisé votre #{@armure.getIntitule()} ayant une protection de #{@armure.pourcentageProtection()*100}%")
+        @modele.notifier("Vous avez utilisé votre #{@armure.getIntitule()} ayant une protection de #{@armure.typeEquipable.pourcentageProtection()*100}%")
         @armure=nil
       end
       if(self.armeEquip?())
         protection=protection+@arme.typeEquipable.pourcentageProtection()
-        @modele.notifier("Vous avez utilisé votre #{@arme.getIntitule()} ayant une protection de #{@arme.pourcentageProtection()*100}%")
+        @modele.notifier("Vous avez utilisé votre #{@arme.getIntitule()} ayant une protection de #{@arme.typeEquipable.pourcentageProtection()*100}%")
         @arme=nil
       end
       if(protection>1)
