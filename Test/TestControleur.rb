@@ -50,19 +50,31 @@ class TestControleur
   
   #deplacements: reliées aux touches directionnelles
   def deplacementNord()
-      @modele.joueur.deplacement(EnumDirection.NORD)
+    if(@modele.tourDejaPasse == false)
+       @modele.tourPasse()
+    end
+    @modele.joueur.deplacement(EnumDirection.NORD)
   end
   
   def deplacementSud()
-      @modele.joueur.deplacement(EnumDirection.SUD)
+    if(@modele.tourDejaPasse == false)
+       @modele.tourPasse()
+    end
+    @modele.joueur.deplacement(EnumDirection.SUD)
   end
   
   def deplacementEst()
-      @modele.joueur.deplacement(EnumDirection.EST)
+    if(@modele.tourDejaPasse == false)
+       @modele.tourPasse()
+    end
+    @modele.joueur.deplacement(EnumDirection.EST)
   end
   
   def deplacementOuest()
-      @modele.joueur.deplacement(EnumDirection.OUEST)
+    if(@modele.tourDejaPasse == false)
+       @modele.tourPasse()
+    end
+    @modele.joueur.deplacement(EnumDirection.OUEST)
   end
   
   #relié au bouton repos 
@@ -73,6 +85,7 @@ class TestControleur
   #action via inventaire: relié au bouton utiliser et prend en paramètre l'item séléctionné
   def utiliserItem(item)
       @modele.joueur.utiliserItem(item)
+      @modele.tourPasse()
   end
   
   #action via inventaire: relié au bouton supprimer et prend en paramètre les items séléctionnés
@@ -81,11 +94,13 @@ class TestControleur
         @modele.joueur.inventaire.retirer(i)
         @modele.notifier("Vous avez supprimé #{i.getIntitule}.")
       end
+      @modele.tourPasse()
   end
   
   #relié à un élément de la liste précedente
   def interargir(element)
       element.interaction(@modele.joueur)
+      @modele.tourPasse()
   end
   
   #relié à un choix (en paramètre) dans la fenêtre d'interaction d'un guerisseur (en paramètre)
