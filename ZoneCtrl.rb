@@ -17,10 +17,14 @@ require './Controller.rb'
 
 class ZoneCtrl <  Gtk::Frame
   @referencesGraphiques
-  def initialize(vue)
+  @vue
+  @controller
+  
+  def initialize(vue,controller)
     super(); #Frame
     #Gtk.init();
     @vue=vue
+    @controller=controller
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
     initInterface();
@@ -28,9 +32,11 @@ class ZoneCtrl <  Gtk::Frame
     #Gtk.main();
   end
   
-  def ZoneCtrl.creer(vue)
-    new(vue)
+  def ZoneCtrl.creer(vue,controller)
+    new(vue,controller)
   end
+  
+  
   def initInterface()
     #creation image bouton
     gauche = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("gauche")));
@@ -38,20 +44,20 @@ class ZoneCtrl <  Gtk::Frame
     haut = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("haut")));
     bas = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("bas")));
     #association au controlleur
-    Controller::DeplacementGauche.creer(gauche);  
-    Controller::DeplacementDroite.creer(droite);
-    Controller::DeplacementHaut.creer(haut);
-    Controller::DeplacementBas.creer(bas);
+    @controller.deplacementGaucheCreer(gauche);  
+    @controller.deplacementDroiteCreer(droite);
+    @controller.deplacementHautCreer(haut);
+    @controller.deplacementBasCreer(bas);
     #creation bouton  
     repos = Gtk::Button.new("REPOS");
     inventaire = Gtk::Button.new("INVENTAIRE");
     menu = Gtk::Button.new("MENU");
     interaction = Gtk::Button.new("INTERACTON");
     #association au controler
-    Controller::Repos.creer(repos);
-    Controller::Inventaire.creer(inventaire);
-    Controller::Menu.creer(menu);
-    Controller::Interaction.creer(interaction);
+    @controller.reposCreer(repos);
+    @controller.inventaireCreer(inventaire);
+    @controller.menuCreer(menu);
+    @controller.interactionCreer(interaction);
     
     
     
