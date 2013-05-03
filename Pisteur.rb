@@ -122,7 +122,7 @@ class Pisteur < Ennemi
 
          # Determination de la case de deplacement
          if(find)
-           @joueur.modele.notifier("Le pisteur de la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) vous traque !")
+           @joueur.modele.notifier("Le #{getIntitule()} pisteur de la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) vous traque !")
             # Remplacement de la liste de case du derniere indice par la case du joueur
             list_case[indice] = Array.new().push(cj)
 

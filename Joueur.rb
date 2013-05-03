@@ -130,8 +130,8 @@ class Joueur < Personnage
             if(@bottes!=nil)
               @modele.notifier("Vous avez utilisé vos #{@bottes.getIntitule()} ayant une protection de #{@bottes.typeEquipable.pourcentageProtection()*100}%")
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
-              @modele.notifier("Vous perdez #{energiePerdu} points d'énergie")              
-              @energie -= energiePerdu
+              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")              
+              @energie -= energiePerdue
               @bottes.nbTour=@bottes.nbTour-1
               if(@bottes.nbTour==0)
                  @bottes=nil
@@ -163,15 +163,15 @@ class Joueur < Personnage
    def combattreEnnemi(ennemi)
      @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
      protection=0;
-      if(self.armureEquip)
+      if(self.armureEquip?())
         protection=protection+@armure.typeEquipable.pourcentageProtection()
+        @modele.notifier("Vous avez utilisé votre #{@armure.getIntitule()} ayant une protection de #{@armure.pourcentageProtection()*100}%")
         @armure=nil
-        @modele.notifier("Vous avez utilisé votre #{@armure.getIntule()} ayant une protection de #{@armure.pourcentageProtection()*100}%")
       end
-      if(self.armeEquip)
+      if(self.armeEquip?())
         protection=protection+@arme.typeEquipable.pourcentageProtection()
+        @modele.notifier("Vous avez utilisé votre #{@arme.getIntitule()} ayant une protection de #{@arme.pourcentageProtection()*100}%")
         @arme=nil
-        @modele.notifier("Vous avez utilisé votre #{@arme.getIntule()} ayant une protection de #{@arme.pourcentageProtection()*100}%")
       end
       if(protection>1)
         protection=1
@@ -199,14 +199,14 @@ class Joueur < Personnage
 
    ##
    # Verifie si le joueur a equipé une armure
-   def armureEquip()
-      return self.armure!=nil
+   def armureEquip?()
+      return @armure!=nil
    end
 
    ##
    # Verifie si le joueur a equipé une arme
-   def armeEquip()
-      return self.arme!=nil
+   def armeEquip?()
+      return @arme!=nil
    end
 
    ##

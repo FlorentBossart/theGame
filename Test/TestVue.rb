@@ -271,7 +271,7 @@ class TestVue
      when EnumStadePartie.INTERACTION_MARCHAND  
        listeItemsJoueur = @modele.joueur.inventaire.items
        begin
-         puts "\nachat(u) ou vente(v):"
+         puts "\nachat(a) ou vente(v):"
          aOUv = gets.chomp
          if(aOUv=="v")
            begin
@@ -286,7 +286,7 @@ class TestVue
              end
            end while(!(choixItem >=1 && choixItem <=listeItemsJoueur.length))     
          elsif(aOUv=="a")
-           if(@modele.joueur.inventaire.estPlein)
+           if(@modele.joueur.inventaire.estPlein?())
              puts "Achat impossible: votre inventaire est plein"
            else
              listeItemsMarchand = @modele.pnjAideEnInteraction.listeItem
@@ -303,7 +303,7 @@ class TestVue
              end while(!(choixItem >=1 && choixItem <=listeItemsJoueur.length))
            end
          end
-       end while(aOUv!="v" && !(aOUv=="a" && !@modele.joueur.inventaire.estPlein)) 
+       end while(aOUv!="v" && !(aOUv=="a" && !@modele.joueur.inventaire.estPlein?())) 
     
     #ETAPE INTERACTOIN GUERISSEUR      
     when EnumStadePartie.INTERACTION_GUERISSEUR    

@@ -320,14 +320,17 @@ class Modele
   def choixEquipementAvantCombat()
      #on commence par les armures
      compteurArmures=0
-     for i in @joueur.inventaire.items
-       if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
-          compteurArmures+=1
+     
+     if(!@joueur.armureEquip?())
+       for i in @joueur.inventaire.items
+         if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
+            compteurArmures+=1
+         end
        end
-     end
-    
-     if(compteurArmures!=0)
-        changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)            
+      
+       if(compteurArmures!=0)
+          changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)            
+       end
      end
      suiteEquipementChoixArme()
   end
@@ -339,16 +342,19 @@ class Modele
   def suiteEquipementChoixArme()
 
     compteurArmes=0
-    for i in @joueur.inventaire.items
-      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
-         compteurArmes+=1
-      end
-    end
     
-     if(compteurArmes != 0)
-        changerStadePartie(EnumStadePartie.EQUIPEMENT_ARME)      
-     end
-     declencherCombat()
+    if(!@joueur.armeEquip())
+      for i in @joueur.inventaire.items
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
+           compteurArmes+=1
+        end
+      end
+      
+       if(compteurArmes != 0)
+          changerStadePartie(EnumStadePartie.EQUIPEMENT_ARME)      
+       end
+    end
+    declencherCombat()
   end
 
 

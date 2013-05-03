@@ -15,6 +15,8 @@ class Item < Element
 
    @caracteristique
    
+   attr_reader :caracteristique
+   
    def initialize(casePosition, caracteristique)
       super(casePosition)
       @caracteristique = caracteristique
