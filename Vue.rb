@@ -103,7 +103,7 @@ class Vue
      0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
          @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).typeTerrain().intitule.downcase)))
-      end
+      end   
     end
   end
 
@@ -111,7 +111,6 @@ class Vue
   def getZaf()
     return @zaf
   end
-
   
 end
 

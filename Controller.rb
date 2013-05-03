@@ -27,6 +27,10 @@ class Controller
       @modele = modele
       @vue    = vue;
    end
+   
+   def Controller.creer(modele,vue)
+     new(modele,vue)
+   end
 
     
     
@@ -148,7 +152,7 @@ class Controller
         # == Parameters:
         # btInventaire : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
         #
-  def inventaireCreer(btInventaire,vue)
+  def inventaireCreer(btInventaire)
      btInventaire.signal_connect('clicked'){
         inventaireAction();
       }

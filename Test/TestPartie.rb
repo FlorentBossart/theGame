@@ -36,8 +36,10 @@ vue=Vue.new()
 
 # Creation du modele
 modele = Modele.creer(vue,difficulte,pseudo)
-
+controller=Controller.creer(modele,vue)
 vue.defM(modele)
+vue.defC(controller)
+modele.initialiseToi()
 vue.initInterface()
 
 # Initialisation du faux controleur
@@ -47,6 +49,6 @@ vue.initInterface()
 #vueDeTest.defMetC(modele,controleurDeTest)
 
 
-modele.initialiseToi()
+
 modele.lancerPartie()
 

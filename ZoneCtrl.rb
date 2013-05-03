@@ -47,7 +47,7 @@ class ZoneCtrl <  Gtk::Frame
     @controller.deplacementGaucheCreer(gauche);  
     @controller.deplacementDroiteCreer(droite);
     @controller.deplacementHautCreer(haut);
-    @controller.DeplacementBasCreer(bas);
+    @controller.deplacementBasCreer(bas);
     #creation bouton  
     repos = Gtk::Button.new("REPOS");
     inventaire = Gtk::Button.new("INVENTAIRE");
