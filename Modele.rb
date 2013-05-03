@@ -183,7 +183,7 @@ class Modele
          elsif(choix == 1)
             caracteristique = Equipable.creer(BibliothequeTypeEquipable.getTypeEquipableAuHasard())
          else
-            montant = rand(1000)-100+1
+            montant = rand(1000)+1
             caracteristique = Encaissable.creer(montant)
          end
 
@@ -255,9 +255,8 @@ class Modele
             montant = rand(1000)+1
             caracteristique = Encaissable.creer(montant)
          end
-
-         # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
          element = Item.creer(caseAleatoire, caracteristique)
+         caseAleatoire.ajouterElement(element)
       end
    end
 
@@ -343,7 +342,7 @@ class Modele
 
     compteurArmes=0
     
-    if(!@joueur.armeEquip())
+    if(!@joueur.armeEquip?())
       for i in @joueur.inventaire.items
         if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
            compteurArmes+=1

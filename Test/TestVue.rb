@@ -29,6 +29,7 @@ class TestVue
   end
   
   def affichageDonneeJoueur()
+    puts "==========================================="
     for n in @modele.notifications
       puts "CONSOLE ->"+n
     end
@@ -96,10 +97,12 @@ class TestVue
       puts "* Tours passées: #{@modele.compteurTour}\n"
       puts "\n"
     end
+    puts "==========================================="
   end
   
   def actualiser()
     
+    puts "a"
     affichageDonneeJoueur()
     
     case @modele.stadePartie
@@ -319,6 +322,7 @@ class TestVue
       end while(!(choixGuerison >=1 && choixGuerison <=3))
     end #fin case
     
+    puts "b"
     affichageDonneeJoueur()
     
   end
