@@ -27,7 +27,7 @@ class CombatModal
     tooltips = Gtk::Tooltips.new
     listeArmure=Array.new()
     for i in @modele.joueur.inventaire.items
-      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "armure")
+      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
         listeArmure.push(i)
       end
     end
@@ -60,7 +60,7 @@ class CombatModal
     tooltips = Gtk::Tooltips.new
     listeArme=Array.new()
     for i in @modele.joueur.inventaire.items
-     if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == "arme")
+     if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
        listeArmure.push(i)
      end
     end
