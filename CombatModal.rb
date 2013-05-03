@@ -49,7 +49,7 @@ class CombatModal
        # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
         
 
-        @vue.controller.interactionElementCreer(button,item,@modele.joueur);
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur);
         dialog.vbox.add(button)
        }
    dialog.show_all
@@ -81,7 +81,7 @@ class CombatModal
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
       #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
-      @vue.controller.interactionElementCreer(button,item,@modele.joueur);
+      @vue.controller.equiperItemCreer(button,item,@modele.joueur);
       dialog.vbox.add(button)
     }
     dialog.show_all
