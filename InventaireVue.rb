@@ -2,6 +2,7 @@ require 'gtk2'
 class InventaireVue
     @refGraphiques
     @vueInventaire
+    @eventInventaire
     @inventaire
     @nbItemH
     @nbItemL
@@ -10,12 +11,17 @@ class InventaireVue
         @nbItemH = 5
         @nbItemL = 5
         @inventaire = Array.new(@nbItemH){|x| Array.new(@nbItemL){|y| Gtk::Image.new()}}
+        @eventInventaire = Array.new(@nbItemH){|x| Array.new(@nbItemL){|y| Gtk::EventBox.new()}}
         @vueInventaire = Gtk::Table.new(@nbItemH,@nbItemL,true);
         
         0.upto(@nbItemH-1) do |x|
             0.upto(@nbItemL-1)do |y|
                 @inventaire[x][y].file = "coloris_noir.png"
-                @vueInventaire.attach(@inventaire[x][y],y,y+1,x,x+1);
+                @eventInventaire[x][y].add(@inventaire[x][y])
+                
+                #Associer l'événement ici
+                
+                @vueInventaire.attach(@eventInventaire[x][y],y,y+1,x,x+1);
             end
         end
         
