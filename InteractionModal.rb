@@ -3,29 +3,36 @@ require './ReferencesGraphiques.rb'
 require './XmlRefGraphiquesReader.rb'
 require './Controller.rb'
 
-
+##
+# Classe qui instancie un popup permettant de faire un choix sur les interactions possibles
+# Depend de la vue
+#
 
 
 class InterfaceModal
   private_class_method :new
-  @vue
+  @modele
   @referencesGraphiques
-  def initialize(vue)
+  def initialize(modele,vue)
     @vue=vue
+    @modele=modele
     @referencesGraphiques = ReferencesGraphiques.new();
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
   end
   
   
-  def InterfaceModal(vue)
-    new(vue)
+  def InterfaceModal(modele,vue)
+    new(modele,vue)
   end
   
   
   def majInteractionModal()
     tooltips = Gtk::Tooltips.new
-    if(@vue.modele.joueur.casePosition.presenceAides())
-      listeElements=@vue.modele.joueur.casePosition.listeElements()
+    
+    if(@modele.joueur.casePosition.presenceAides())
+      
+      listeElements=@modele.joueur.casePosition.listeElements()
+      # Creation du popup
       dialog = Gtk::Dialog.new("Interaction", @vue,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
 
@@ -43,10 +50,11 @@ class InterfaceModal
        # button=Gtk::Button.new(element.intitule())
         #tooltips.set_tip( button, element.to_s, nil )
 
-        Controller::InteractionElement.creer(button,elem,@vue.modele.joueur);
+        @vue.controller.interactionElementCreer(button,elem,@modele.joueur);
         dialog.vbox.add(button)
        }
       dialog.show_all
+      
     else
                 # Create the dialog
           dialog = Gtk::Dialog.new("Interaction", @vue,
