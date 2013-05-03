@@ -389,6 +389,7 @@ class Modele
           notifier("Vous avez récupérez #{i.getIntitule} lors du dernier combat")
         end
       end
+      @joueur.peutSEquiper=true
       choixLibre()
     end
     
@@ -405,7 +406,6 @@ class Modele
    def lancerPartie()
      while(@joueur.toujoursEnVie?())
        debutTour()
-       @joueur.peutSEquiper=true
      end
    end
    

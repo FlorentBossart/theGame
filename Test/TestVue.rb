@@ -243,7 +243,7 @@ class TestVue
       end
       begin
         for i in 0 .. listeArmes.length-1
-          puts (i+1)+") "+listeArmes[i]
+          puts (i+1).to_s+") "+listeArmes[i].getIntitule()
         end
         puts "\nChoix arme à équiper (numero ou -1 pour aucune):"
         choix = gets.chomp.to_i
@@ -255,7 +255,7 @@ class TestVue
      
     #ETAPE INVENTAIRE PLEIN   
     when EnumStadePartie.INVENTAIRE_PLEIN
-      listeItemsJoueur = @modele.inventaire.item
+      listeItemsJoueur = @modele.joueur.inventaire.items
       aAjouter= @modele.itemAttenteAjout
       begin
         for i in 0 .. listeItemsJoueur.length-1

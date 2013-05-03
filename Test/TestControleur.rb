@@ -26,14 +26,14 @@ class TestControleur
   #fonction reliée à chaque icone d'amure pour le popup de choix d'équipement d'armure avant un combat (l'armure cliquée est le paramètre)
   def equipeArmure(armure)
       if(armure!=nil)
-        @modele.joueur.utiliser(armure)
+        @modele.joueur.utiliserItem(armure)
       end
   end
   
   #fonction reliée à chaque icone d'arme pour le popup de choix d'équipement d'arme avant un combat (l'arme cliquée est le paramètre)
   def equipeArme(arme)
       if(arme!=nil)
-        @modele.joueur.utiliser(arme)
+        @modele.joueur.utiliserItem(arme)
       end
   end
   
