@@ -234,6 +234,25 @@ class Controller
     print "oO Bt interaction "+elem.intitule+" pressé!"
   end
       
+  ##
+  # equipe un item lors de l'appuie sur le bouton correspondant
+  #
+  
+  def equiperItemCreer(btInteraction,elem,joueur)
+      btInteraction.signal_connect('clicked'){
+        equiperItemAction(joueur,elem)
+     }
+  end
+      
+      
+      ##
+      # Action(s) à effectuer lors du clic sur le bouton inventaire
+      #
+  def equiperItemAction(joueur,elem)
+    joueur.utiliser(elem)
+    print "oO Bt interaction "+elem.intitule+" pressé!"
+  end
+      
 end
 
 

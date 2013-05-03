@@ -42,6 +42,7 @@ vue.defC(controller)
 modele.initialiseToi()
 vue.initInterface()
 
+
 # Initialisation du faux controleur
 #controleurDeTest=Controller.new(modele,vueDeTest)
 

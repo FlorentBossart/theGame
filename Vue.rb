@@ -111,6 +111,8 @@ class Vue
   def getZaf()
     return @zaf
   end
+  def actualiser
+  end
   
 end
 
