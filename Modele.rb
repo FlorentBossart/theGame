@@ -63,8 +63,8 @@ class Modele
 
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :notifications, :messageDefaite
-   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite
+   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications
    
    
    def Modele.initialisationBibliotheques()
@@ -201,7 +201,6 @@ class Modele
      AffichageDebug.Afficher("Stade Partie=#{nouveauStade}")
      #METHODE VUE
      @vue.actualiser()
-     @notifications.clear
      @stadePartie=EnumStadePartie.ETAPE_FINIE
      AffichageDebug.Afficher("Stade Partie Terminé")
    end
@@ -392,9 +391,8 @@ class Modele
    # Une fois le combat fini
    #
    def choixLibre()
-     changerStadePartie(EnumStadePartie.ETAPE_FINIE)
      changerStadePartie(EnumStadePartie.CHOIX_LIBRE)
-     AffichageDebug.Afficher("Lancement de la méthode 'debutTour' à la fin de 'choixLibre'")
+     AffichageDebug.Afficher("Fin de 'choixLibre'")
    end
    
    def lancerPartie()

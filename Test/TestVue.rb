@@ -2,6 +2,20 @@ class TestVue
   
   @controleurDeTest
   @modele
+  #donnees pour les champs d'info du joueur
+  @niveauJoueur
+  @xpJoueur
+  @xpSeuilJoueur
+  @energieJoueur
+  @energieSeuilJoueur
+  @nbReposJoueur
+  @capitalJoueur
+  @armureJoueur
+  @armeJoueur
+  @bottesJoueur
+  @nbEnnemisTuesJoueur
+  @distanceParcourueJoueur
+  @nbTourJoueur
   
   private_class_method :new
       
@@ -14,7 +28,80 @@ class TestVue
     @controleurDeTest=controleurDeTest
   end
   
+  def affichageDonneeJoueur()
+    for n in @modele.notifications
+      puts "CONSOLE ->"+n
+    end
+    @controleurDeTest.resetNotifications()
+    
+    if(
+      @niveauJoueur!=@modele.joueur.niveau                      || 
+      @xpJoueur!=@modele.joueur.experience                      || 
+      @xpSeuilJoueur!=@modele.joueur.experienceSeuil            || 
+      @energieJoueur!=@modele.joueur.energie                    || 
+      @energieSeuilJoueur!=@modele.joueur.energieMax            || 
+      @nbReposJoueur!=@modele.joueur.nombreRepos                || 
+      @capitalJoueur!=@modele.joueur.inventaire.capital         || 
+      @armureJoueur!=@modele.joueur.armure                      || 
+      @armeJoueur!=@modele.joueur.arme                          || 
+      @bottesJoueur!=@modele.joueur.bottes                      || 
+      @nbEnnemisTuesJoueur!=@modele.joueur.nbEnnemiTues         || 
+      @distanceParcourueJoueur!=@modele.joueur.distanceParcourue|| 
+      @nbTourJoueur!=@modele.compteurTour                       
+    )
+      @niveauJoueur=@modele.joueur.niveau
+      @xpJoueur=@modele.joueur.experience
+      @xpSeuilJoueur=@modele.joueur.experienceSeuil
+      @energieJoueur=@modele.joueur.energie
+      @energieSeuilJoueur=@modele.joueur.energieMax 
+      @nbReposJoueur=@modele.joueur.nombreRepos
+      @capitalJoueur=@modele.joueur.inventaire.capital
+      @armureJoueur=@modele.joueur.armure
+      @armeJoueur=@modele.joueur.arme
+      @bottesJoueur=@modele.joueur.bottes
+      @nbEnnemisTuesJoueur=@modele.joueur.nbEnnemiTues
+      @distanceParcourueJoueur=@modele.joueur.distanceParcourue
+      @nbTourJoueur=@modele.compteurTour
+        
+      puts "\n>>>Données du Joueur<<<"
+      puts "* Nom: #{@modele.joueur.pseudo}\n"
+      puts "* LvL: #{@modele.joueur.niveau}\n"
+      puts "* XP: #{@modele.joueur.experience}/#{@modele.joueur.experienceSeuil}\n"
+      puts "* Energie: #{@modele.joueur.energie}/#{@modele.joueur.energieMax}\n"
+      puts "* Repos: #{@modele.joueur.nombreRepos}\n"
+      puts "* Or: #{@modele.joueur.inventaire.capital}\n"
+      s= "* Armure:"
+      if(@modele.joueur.armure==nil)
+        s+= "aucune\n"
+      else
+        s+= "#{@modele.joueur.armure.getIntitule()}\n"
+      end
+      puts s
+      s= "* Arme:"
+      if(@modele.joueur.arme==nil)
+        s+= "aucune\n"
+      else
+        s+= "#{@modele.joueur.arme.getIntitule()}\n"
+      end
+      puts s
+      s= "* Bottes:"
+      if(@modele.joueur.bottes==nil)
+        s+= "aucune\n"
+      else
+        s+= "#{@modele.joueur.bottes.getIntitule()}\n"
+      end
+      puts s
+      puts "* Ennemis tués: #{@modele.joueur.nbEnnemiTues}\n"
+      puts "* Distance parcourue: #{@modele.joueur.distanceParcourue}\n"
+      puts "* Tours passées: #{@modele.compteurTour}\n"
+      puts "\n"
+    end
+  end
+  
   def actualiser()
+    
+    affichageDonneeJoueur()
+    
     case @modele.stadePartie
       
     #ETAPE CHOIX LIBRE
@@ -232,42 +319,8 @@ class TestVue
       end while(!(choixGuerison >=1 && choixGuerison <=3))
     end #fin case
     
-    for n in @modele.notifications
-      puts "CONSOLE ->"+n
-    end
+    affichageDonneeJoueur()
     
-    puts "\n>>>Données du Joueur<<<"
-    puts "* Nom: #{@modele.joueur.pseudo}\n"
-    puts "* LvL: #{@modele.joueur.niveau}\n"
-    puts "* XP: #{@modele.joueur.experience}/#{@modele.joueur.experienceSeuil}\n"
-    puts "* Energie: #{@modele.joueur.energie}/#{@modele.joueur.energieMax}\n"
-    puts "* Repos: #{@modele.joueur.nombreRepos}\n"
-    puts "* Or: #{@modele.joueur.inventaire.capital}\n"
-    s= "* Armure:"
-    if(@modele.joueur.armure==nil)
-      s+= "aucune\n"
-    else
-      s+= "#{@modele.joueur.armure.getIntitule()}\n"
-    end
-    puts s
-    s= "* Arme:"
-    if(@modele.joueur.arme==nil)
-      s+= "aucune\n"
-    else
-      s+= "#{@modele.joueur.arme.getIntitule()}\n"
-    end
-    puts s
-    s= "* Bottes:"
-    if(@modele.joueur.bottes==nil)
-      s+= "aucune\n"
-    else
-      s+= "#{@modele.joueur.bottes.getIntitule()}\n"
-    end
-    puts s
-    puts "* Ennemis tués: #{@modele.joueur.nbEnnemiTues}\n"
-    puts "* Distance parcourue: #{@modele.joueur.distanceParcourue}\n"
-    puts "* Tours passées: #{@modele.compteurTour}\n"
-    puts "\n"
   end
   
 end

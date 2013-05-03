@@ -19,6 +19,10 @@ class TestControleur
   
 # ===FONCTIONS DU FICHIER "Fonctions pour le controleur.rb"===
   
+  def resetNotifications()
+    @modele.notifications.clear
+  end
+  
   #fonction reliée à chaque icone d'amure pour le popup de choix d'équipement d'armure avant un combat (l'armure cliquée est le paramètre)
   def equipeArmure(armure)
       if(armure!=nil)
