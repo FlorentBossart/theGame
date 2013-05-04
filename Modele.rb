@@ -13,9 +13,6 @@
 # == un compteur de tour de jeu
 #
 
-#rajout commm
-#rajout comm2
-#rajout comm3
 
 require './AffichageDebug.rb'
 require './Enum/EnumStadePartie.rb'
