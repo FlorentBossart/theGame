@@ -1,4 +1,4 @@
-#Test par ludo
+#Test GIT par ludo coucou
 
 require 'gtk2'
 
