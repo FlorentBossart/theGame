@@ -14,6 +14,7 @@ require './Element.rb'
 class Item < Element
 
    @caracteristique
+   @selected
    
    attr_reader :caracteristique
    
@@ -38,6 +39,14 @@ class Item < Element
    
    def estEquipable?()
        return @caracteristique.estEquipable?()
+   end
+    
+   def selectionner()
+       selected = true
+   end
+    
+   def deselectionner()
+        selected = true
    end
    
    ##
