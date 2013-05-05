@@ -1,6 +1,9 @@
 require 'gtk2'
 require 'Bibliotheque/ReferencesGraphiques.rb'
+require 'Enum/EnumStadePartie.rb'
+
 class InventaireVue
+    #Variables d'instance
     @refGraphiques
     @vueInventaire
     @eventInventaire
@@ -12,7 +15,21 @@ class InventaireVue
     @hbox
     @boutonInteraction
     
-    def initialize
+    #Variables de classe/globales
+    @@boutonVente = Gtk::Button.new("Vendre")
+    @@boutonEquiper = Gtk::Button.new("Equiper")
+    @@boutonAcheter = Gtk::Button.new("Acheter")
+    @@boutonJeter = Gtk::Button.new("Jeter")
+    
+    attr_reader :vbox
+    
+    private_class_method :new
+    
+    def InventaireVue.creer(mode)
+        return new(mode)
+    end
+    
+    def initialize(mode)
         @nbItemH = 5
         @nbItemL = 5
         @inventaire = Array.new(@nbItemH){|x| Array.new(@nbItemL){|y| Gtk::Image.new()}}
@@ -22,8 +39,19 @@ class InventaireVue
         @vbox = Gtk::VBox.new(false,10)
         @hbox = Gtk::HBox.new(false,10)
         @vueInventaire = Gtk::Table.new(@nbItemH,@nbItemL,true);
-        @boutonInteraction = Gtk::Button.new("Jeter")
         
+        case mode
+            when EnumStadePartie.INVENTAIRE_PLEIN then
+            @boutonInteraction = @@boutonJeter
+            when EnumStadePartie.EQUIPEMENT_ARME then
+            @boutonInteraction = @@boutonEquiper
+            when EnumStadePartie.EQUIPEMENT_ARMURE then
+            @boutonInteraction = @@boutonEquiper
+            when EnumStadePartie.INTERACTION_MARCHAND then
+            @boutonInteraction = @@boutonAcheter
+            when EnumStadePartie.INTERACTION_GUERISSEUR then
+            @boutonInteraction = @@boutonVente
+        end
         0.upto(@nbItemH-1) do |x|
             0.upto(@nbItemL-1)do |y|
                 @inventaire[x][y].file = "img/coloris_noir.png"
@@ -36,14 +64,13 @@ class InventaireVue
         @vbox.pack_start(@hbox,true,true,0)
         @hbox.pack_start(@imageItemSelected,true,true,0)
         @hbox.pack_start(@boutonInteraction,true,true,0)
+        return self
     end
     
-    def afficherInventaireModeInteractif(joueur,fenetre, mode)
-        
-        fenetre.add(@vbox)
-        #joueur.inventaire.item.each{|x|
-        #   @inventaire[x%nbItemH][y/nbItemL].file=((@referencesGraphiques.getRefGraphique(x.intitule.downcase)));
-        #}
+    def obtenirVueInventaire(joueur)
+        joueur.inventaire.item.each{|x|
+           @inventaire[x%nbItemH][y/nbItemL].file=((@referencesGraphiques.getRefGraphique(x.intitule.downcase)));
+        }
     end
     
 end
@@ -53,6 +80,8 @@ window = Gtk::Window.new();
 window.signal_connect('destroy') {
     Gtk.main_quit();
 }
-InventaireVue.new.afficherInventaireModeInteractif(nil,window,"Test")
+iv = InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND)
+iv.obtenirVueInventaire(nil)
+window.add(iv.vbox)
 window.show_all
 Gtk.main()
