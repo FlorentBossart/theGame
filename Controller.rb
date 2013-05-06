@@ -8,7 +8,6 @@
 # Cette classe représente le Controlleur du jeu
 #
 
-require 'Vue.rb'
 
 
 class Controller
