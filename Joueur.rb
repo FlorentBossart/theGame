@@ -152,6 +152,7 @@ class Joueur < Personnage
          #JUSTE POUR TEST
          @modele.tourPasse()
          @modele.changerStadePartie(EnumStadePartie.ETAPE_FINIE)
+         puts "Joueur à la case #{@casePosition.coordonneeX}:#{@casePosition.coordonneeY}"
          #JUSTE POUR TEST
       end
       return nil
