@@ -1,6 +1,6 @@
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
-require './Bibliotheque/XmlRefGraphiquesReader.rb'
+require './XMLReader/XmlRefGraphiquesReader.rb'
 require './Controller.rb'
 
 ##

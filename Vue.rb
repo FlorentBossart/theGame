@@ -66,8 +66,8 @@ class Vue
     @zoneCtrl = ZoneCtrl.creer(@vue,@controller)
     @carte = @modele.carte
     @popUp=PopUp.creer(self)
-    @interactionModal=InteractionModal.creer(@modele,@vue)
-    @combatModal=CombatModal.creer(@vue,@modele)
+    @interactionModal=InteractionModal.creer(@modele,self)
+    @combatModal=CombatModal.creer(self,@modele)
 
     window = Gtk::Window.new()
     window.signal_connect('destroy') {
