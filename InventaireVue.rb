@@ -47,9 +47,9 @@ class InventaireVue
             @boutonInteraction = @@boutonEquiper
             when EnumStadePartie.EQUIPEMENT_ARMURE then
             @boutonInteraction = @@boutonEquiper
-            when EnumStadePartie.INTERACTION_MARCHAND_ACHETER then
+            when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction = @@boutonAcheter
-            when EnumStadePartie.INTERACTION_MARCHAND_VENDRE then
+            when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction = @@boutonVente
         end
         0.upto(@nbItemH-1) do |x|
