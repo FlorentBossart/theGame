@@ -69,7 +69,7 @@ class Jauges
   def mafJaugeEnergie(quantite)
     @energie  = quantite;
     #@barEnergie.set_fraction(@energie/Difficulte.energieMax)
-    @barEnergie.fraction = @energie/100;
+    @barEnergie.fraction = @energie/100.to_f();
     #@barEnergie.set_fraction(@energie/100);
     @barEnergie.set_text("Energie : "+@energie.to_s + " / " + 100.to_s());
 
@@ -80,7 +80,7 @@ class Jauges
     @experience = quantite;
     @experienceMax = experienceMax;
 
-    @barExperience.fraction = @experience/@experienceMax;
+    @barExperience.fraction = @experience/@experienceMax.to_f();
     #@barExperience.set_fraction(@experience/@experienceMax);
     @barExperience.set_text("Experience : "+@experience.to_s + " / " + @experienceMax.to_s());
     Gtk.main_iteration
