@@ -4,7 +4,7 @@ require './Enum/EnumDirection.rb'
 require './Bibliotheque/BibliothequeTypeTerrain.rb'
 
 class Carte
-
+    #machin
    @longueur
    @largeur
    @cases
