@@ -269,6 +269,19 @@ class Controller
     joueur.utiliser(elem)
     print "oO Bt interaction "+elem.intitule+" pressé!"
   end
+  
+  
+  
+  ## AFR
+  # Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+  #
+  def selectionnerItem(btItem,indiceItem)
+      btItem.signal_connect('button_press_event'){
+        #equiperItemAction(joueur,elem)
+        puts "(S) Sélection de l'item "+indiceItem.to_s+"."
+        #InventaireVue.
+     }
+  end
       
 end
 

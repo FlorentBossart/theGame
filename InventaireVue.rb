@@ -2,6 +2,11 @@ require 'gtk2'
 require 'Bibliotheque/ReferencesGraphiques.rb'
 require 'Enum/EnumStadePartie.rb'
 
+#AFR
+require 'Modele.rb'
+require 'Vue.rb'
+require 'Controller.rb'
+
 class InventaireVue
     #Variables d'instance
     @refGraphiques
@@ -20,6 +25,14 @@ class InventaireVue
     @@boutonEquiper = Gtk::Button.new("Equiper")
     @@boutonAcheter = Gtk::Button.new("Acheter")
     @@boutonJeter = Gtk::Button.new("Jeter")
+    
+    
+    
+#AFR    
+@@vue=Vue.new()
+@@modele=Modele.creer(@@vue,'T',"Lecarpla")
+@@controller=Controller.creer(@@modele,@@vue)
+
     
     attr_reader :vbox
     
@@ -54,10 +67,14 @@ class InventaireVue
         end
         0.upto(@nbItemH-1) do |x|
             0.upto(@nbItemL-1)do |y|
-                @inventaire[x][y].file = "img/coloris_noir.png"
+                @inventaire[x][y].file = "img/test/"+(x*@nbItemL+y).to_s+".png"
                 @eventInventaire[x][y].add(@inventaire[x][y])
-                
+                #(@eventInventaire[x][y])
                 @vueInventaire.attach(@eventInventaire[x][y],y,y+1,x,x+1);
+                                
+                #AFR
+                @@controller.selectionnerItem(@eventInventaire[x][y],x*@nbItemL+y)
+      
             end
         end
         @vbox.pack_start(@vueInventaire,true,true,0)
@@ -65,6 +82,10 @@ class InventaireVue
         @hbox.pack_start(@imageItemSelected,true,true,0)
         @hbox.pack_start(@boutonInteraction,true,true,0)
         return self
+    end
+    
+    def setImageSelection(image)
+        @imageItemSelected.file=image
     end
     
     def obtenirVueInventaire(joueur)

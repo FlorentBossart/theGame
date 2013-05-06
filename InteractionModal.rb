@@ -1,6 +1,6 @@
 require 'gtk2'
-require './ReferencesGraphiques.rb'
-require './XmlRefGraphiquesReader.rb'
+require './Bibliotheque/ReferencesGraphiques.rb'
+require './XMLReader/XmlRefGraphiquesReader.rb'
 require './Controller.rb'
 
 ##
@@ -11,6 +11,7 @@ require './Controller.rb'
 
 class InterfaceModal
   private_class_method :new
+  @vue
   @modele
   @referencesGraphiques
   def initialize(modele,vue)
@@ -21,7 +22,8 @@ class InterfaceModal
   end
   
   
-  def InterfaceModal(modele,vue)
+  
+  def InterfaceModal.creer(modele,vue)
     new(modele,vue)
   end
   

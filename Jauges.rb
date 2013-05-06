@@ -1,4 +1,12 @@
-"#!/usr/bin/env ruby"
+#!/usr/bin/env ruby 
+
+## 
+# Fichier            : Jauges.rb 
+# Auteur            : L3SPI - Groupe de projet B 
+# Fait partie de : TheGame 
+# 
+# Cette classe représente les jauges du joueur
+# 
 
 require 'gtk2'
 
