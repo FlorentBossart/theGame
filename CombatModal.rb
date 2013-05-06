@@ -12,7 +12,7 @@
 # 
 
 
-
+#com
 require 'gtk2'
 require './ReferencesGraphiques.rb'
 require './XmlRefGraphiquesReader.rb'
