@@ -14,12 +14,6 @@ require './Controller.rb'
 
 
 
-#pour le model
-#haut @vue.afficheCarte(@vue.x-1,@vue.y);
-#bas  @vue.afficheCarte(@vue.x+1,@vue.y);
-#gauche  @vue.afficheCarte(@vue.x,@vue.y-1);
-#droite   @vue.afficheCarte(@vue.x,@vue.y+1);
-
 
 class ZoneCtrl <  Gtk::Frame
   @referencesGraphiques
