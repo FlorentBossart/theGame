@@ -97,6 +97,9 @@ class Vue
     window.set_title("THE GAME")
 
     window.show_all()
+    
+    #lancé ici car on a pas encore de bouton debut partie
+    @modele.debutTour()
 
     Gtk.main();
   end
@@ -134,6 +137,38 @@ class Vue
 
   def actualiser
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+    
+    case @modele.stadePartie
+          
+        #ETAPE CHOIX LIBRE
+        when EnumStadePartie.CHOIX_LIBRE
+        
+        #ETAPE PARTIE PERDUE 
+        when EnumStadePartie.PERDU
+        
+        #ETAPE EQUIPEMENT ARMURE   
+        when EnumStadePartie.EQUIPEMENT_ARMURE
+       
+        #ETAPE EQUIPEMENT ARME           
+        when EnumStadePartie.EQUIPEMENT_ARME
+        
+        #ETAPE INVENTAIRE PLEIN   
+        when EnumStadePartie.INVENTAIRE_PLEIN
+        
+        #ETAPE INTERACTION MARCHAND      
+        when EnumStadePartie.INTERACTION_MARCHAND  
+          
+        #ETAPE INTERACTION MARCHAND ACHAT      
+        when EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+          
+        #ETAPE INTERACTION MARCHAND VENTE    
+        when EnumStadePartie.INTERACTION_MARCHAND_VENTE
+         
+        #ETAPE INTERACTOIN GUERISSEUR      
+        when EnumStadePartie.INTERACTION_GUERISSEUR    
+        
+        end #fin case
+      
   end
 
 end
