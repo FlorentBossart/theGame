@@ -17,27 +17,40 @@ class BibliothequeTypeEquipable
     
    
    ##
-   # Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #===Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type équipable à ajouter
+   #* <b>type :</b> le type du type equipable à ajouter
    #
    def BibliothequeTypeEquipable.ajouter(cle,type)
      AffichageDebug.Afficher("Ajout dans BibliothequeTypeEquipable-> clé:#{cle}, type:#{type}")
      @@tableType[cle] = type
-     return nil
+     return self
    end
    
    
    ##
-   # Retirer un type de la bibliothèque.
+   #===Retirer un type de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type équipable à retirer
    #
    def BibliothequeTypeEquipable.retirer(cle)
      AffichageDebug.Afficher("Suppression dans BibliothequeTypeEquipable-> clé:#{cle}")
      @@tableType.delete(cle)
-     return nil
+     return self
    end
    
    
    ##
-   # 
+   #===Permet de recuperer un type equipable de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type equipable souhaitée
+   #
+   #===Retourne:
+   #* <b>TypeEquipable :</b> le type equipable souhaité
    #
    def BibliothequeTypeEquipable.getTypeEquipable(cle)
       return @@tableType[cle]
@@ -45,7 +58,10 @@ class BibliothequeTypeEquipable
    
    
    ##
-   # 
+   #===Permet de recuperer un type equipable au hasard
+   #
+   #===Retourne:
+   #* <b>TypeEquipable :</b> un type equipable au hasard
    #
    def BibliothequeTypeEquipable.getTypeEquipableAuHasard()
       valeurs=@@tableType.values()

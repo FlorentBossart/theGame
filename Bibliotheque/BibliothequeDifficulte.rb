@@ -19,37 +19,40 @@ class BibliothequeDifficulte
 
       
    ##
-   # Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
+   #===Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>cle :</b> la clé de la difficulté à ajouter
    #* <b>difficulte :</b> la difficulté
    # 
    def BibliothequeDifficulte.ajouter(cle,difficulte)
       AffichageDebug.Afficher("Ajout dans BibliothequeDifficulte-> clé:#{cle}, Difficulte:#{difficulte}")
       @@tableDifficulte[cle] = difficulte
-      return nil
+      return self
    end
 
    
    ##
-   # Retirer une difficulté de la bibliothèque.
+   #===Retirer une difficulté de la bibliothèque.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>cle :</b> la clé de la difficulté à retirer
    #
    def BibliothequeDifficulte.retirer(cle)
       AffichageDebug.Afficher("Suppression dans BibliothequeDifficulte-> clé:#{cle}")
       @@tableDifficulte.delete(cle)
-      return nil
+      return self
    end
 
    
    ##
-   # Permet de recuperer une difficulté de la bibliothèque.
+   #===Permet de recuperer une difficulté de la bibliothèque.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>cle :</b> la clé de la difficulté souhaitée
+   #
+   #===Retourne:
+   #* <b>difficulte :</b> la difficulté souhaitée
    #
    def BibliothequeDifficulte.getDifficulte(cle)
       return @@tableDifficulte[cle]
@@ -57,7 +60,10 @@ class BibliothequeDifficulte
 
    
    ##
-   # Permet de recupérer une difficulté de la bibliothèque au hasard
+   #===Permet de recupérer une difficulté de la bibliothèque au hasard
+   #
+   #===Retourne:
+   #* <b>difficulte :</b> une difficulté au hasard
    #
    def BibliothequeDifficulte.getDifficulteAuHasard()
       valeurs = @@tableDifficulte.values()
