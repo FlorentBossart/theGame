@@ -20,8 +20,6 @@ require 'BibliothequeSlot.rb'
 require 'YamlSlot.rb'
 require 'Slot.rb'
 
-require 'ControllerLudo.rb'
-
 #require "./Joueur.rb"
 
 # On inclu le module Gtk, cela évite de préfixer les classes par Gtk::
