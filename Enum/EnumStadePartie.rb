@@ -1,53 +1,144 @@
-class EnumStadePartie
-  @@ETAPE_FINIE             = 1
-  @@CHOIX_LIBRE             = 2
-  @@PERDU                   = 3
-  @@EQUIPEMENT_ARMURE       = 4
-  @@EQUIPEMENT_ARME         = 5
-  @@INVENTAIRE_PLEIN        = 6
-  @@INTERACTION_MARCHAND    = 7 
-  @@INTERACTION_GUERISSEUR  = 8
-  @@INTERACTION_MARCHAND_ACHAT  = 9
-  @@INTERACTION_MARCHAND_VENTE  = 10
+#!/usr/bin/env ruby
 
-  def EnumStadePartie.ETAPE_FINIE
-    return @@ETAPE_FINIE
-  end
-    
-  def EnumStadePartie.CHOIX_LIBRE
-    return @@CHOIX_LIBRE
-  end
-  
-  def EnumStadePartie.PERDU
-    return @@PERDU
-  end
-  
-  def EnumStadePartie.EQUIPEMENT_ARMURE
-    return @@EQUIPEMENT_ARMURE
-  end
-    
-  def EnumStadePartie.EQUIPEMENT_ARME
-    return @@EQUIPEMENT_ARME
-  end
-  
-  def EnumStadePartie.INVENTAIRE_PLEIN
-    return @@INVENTAIRE_PLEIN
-  end
-  
-  def EnumStadePartie.INTERACTION_MARCHAND
-    return @@INTERACTION_MARCHAND
-  end
-  
-  def EnumStadePartie.INTERACTION_GUERISSEUR
-    return @@INTERACTION_GUERISSEUR
-  end
-  
-  def EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+##
+# Fichier        : EnumStadePartie.rb
+# Auteur         : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+#
+# Cette classe représente les différents stades de la partie définie par:
+#* Un stade ETAPE_FINIE
+#* Un stade CHOIX_LIBRE
+#* Un stade PERDU
+#* Un stade EQUIPEMENT_ARMURE
+#* Un stade EQUIPEMENT_ARME
+#* Un stade INVENTAIRE_PLEIN
+#* Un stade INTERACTION_MARCHAND
+#* Un stade INTERACTION_GUERISSEUR
+#* Un stade INTERACTION_MARCHAND_ACHAT
+#* Un stade INTERACTION_MARCHAND_VENTE
+#
+
+class EnumStadePartie
+   
+   @@ETAPE_FINIE                = 1
+   @@CHOIX_LIBRE                = 2
+   @@PERDU                      = 3
+   @@EQUIPEMENT_ARMURE          = 4
+   @@EQUIPEMENT_ARME            = 5
+   @@INVENTAIRE_PLEIN           = 6
+   @@INTERACTION_MARCHAND       = 7
+   @@INTERACTION_GUERISSEUR     = 8
+   @@INTERACTION_MARCHAND_ACHAT = 9
+   @@INTERACTION_MARCHAND_VENTE = 10
+   
+   
+   ##
+   #===Indique le stade ETAPE_FINIE.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade ETAPE_FINIE
+   #
+   def EnumStadePartie.ETAPE_FINIE
+      return @@ETAPE_FINIE
+   end
+
+   
+   ##
+   #===Indique le stade CHOIX_LIBRE.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade CHOIX_LIBRE
+   #
+   def EnumStadePartie.CHOIX_LIBRE
+      return @@CHOIX_LIBRE
+   end
+
+   
+   ##
+   #===Indique le stade PERDU.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade PERDU
+   #
+   def EnumStadePartie.PERDU
+      return @@PERDU
+   end
+
+   
+   ##
+   #===Indique le stade EQUIPEMENT_ARMURE.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade EQUIPEMENT_ARMURE
+   #
+   def EnumStadePartie.EQUIPEMENT_ARMURE
+      return @@EQUIPEMENT_ARMURE
+   end
+
+   
+   ##
+   #===Indique le stade EQUIPEMENT_ARME.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade EQUIPEMENT_ARME
+   #
+   def EnumStadePartie.EQUIPEMENT_ARME
+      return @@EQUIPEMENT_ARME
+   end
+
+   
+   ##
+   #===Indique le stade INVENTAIRE_PLEIN.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INVENTAIRE_PLEIN
+   #
+   def EnumStadePartie.INVENTAIRE_PLEIN
+      return @@INVENTAIRE_PLEIN
+   end
+
+   
+   ##
+   #===Indique le stade INTERACTION_MARCHAND.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INTERACTION_MARCHAND
+   #
+   def EnumStadePartie.INTERACTION_MARCHAND
+      return @@INTERACTION_MARCHAND
+   end
+
+   
+   ##
+   #===Indique le stade INTERACTION_GUERISSEUR.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INTERACTION_GUERISSEUR
+   #
+   def EnumStadePartie.INTERACTION_GUERISSEUR
+      return @@INTERACTION_GUERISSEUR
+   end
+
+   
+   ##
+   #===Indique le stade INTERACTION_MARCHAND_ACHAT.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INTERACTION_MARCHAND_ACHAT
+   #
+   def EnumStadePartie.INTERACTION_MARCHAND_ACHAT
       return @@INTERACTION_MARCHAND_ACHAT
-  end  
-  
-  def EnumStadePartie.INTERACTION_MARCHAND_VENTE
+   end
+
+   
+   ##
+   #===Indique le stade INTERACTION_MARCHAND_VENTE.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INTERACTION_MARCHAND_VENTE
+   #
+   def EnumStadePartie.INTERACTION_MARCHAND_VENTE
       return @@INTERACTION_MARCHAND_VENTE
-  end
-  
+   end
+
 end
