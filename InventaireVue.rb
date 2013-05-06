@@ -71,6 +71,7 @@ class InventaireVue
         joueur.inventaire.item.each{|x|
            @inventaire[x%nbItemH][y/nbItemL].file=((@referencesGraphiques.getRefGraphique(x.intitule.downcase)));
         }
+	return @vbox
     end
     
 end
@@ -80,8 +81,8 @@ window = Gtk::Window.new();
 window.signal_connect('destroy') {
     Gtk.main_quit();
 }
-iv = InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND)
-iv.obtenirVueInventaire(nil)
+iv = InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND_VENTE)
+#iv.obtenirVueInventaire(nil)
 window.add(iv.vbox)
 window.show_all
 Gtk.main()
