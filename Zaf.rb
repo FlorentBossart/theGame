@@ -1,4 +1,12 @@
-"#!/usr/bin/env ruby"
+#!/usr/bin/env ruby 
+
+## 
+# Fichier            : Zaf.rb 
+# Auteur            : L3SPI - Groupe de projet B 
+# Fait partie de : TheGame 
+# 
+# Cette classe représente la zone d'affichage qui est en bas de la vue
+# 
 
 require 'gtk2'
 require './Console.rb'
@@ -28,21 +36,17 @@ class Zaf < Gtk::Frame
   
   def initInterface()
     
-      
-      #window.set_default_size 400,150;
+
+    
       hbox = Gtk::HBox.new(true, 2);
+      
+      #ajout console
       hbox.add(@console);
       hbox2 = Gtk::HBox.new(true, 4);
       vbox = Gtk::VBox.new(true,4);
       vbox.add(hbox2);
       
-
-    
-    
-      
-    
-   
-      
+      #ajout jauges
       hbox2.add(Gtk::Label.new(@jauges.getJaugeNbRepos().to_s()));
       hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("repos")));
       hbox2.add(Gtk::Label.new(@jauges.getJaugeOr().to_s()));
@@ -52,13 +56,8 @@ class Zaf < Gtk::Frame
       vbox.add(Gtk::Label.new("Niveau : "+Gtk::Label.new(@jauges.getNiveau().to_s()).text));
       
       hbox.add(vbox);
-      
-   
-      
   
       add(hbox);
-     
-     
 
       show_all();
     
