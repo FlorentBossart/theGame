@@ -25,6 +25,10 @@ class InventaireVue
     
     private_class_method :new
     
+    ##
+    #===Création d'une vue spécifique de l'inventaire
+    #==Parameters
+    #mode, stade de la partie auquel on veut associer un affichage de l'inventaire
     def InventaireVue.creer(mode)
         return new(mode)
     end
@@ -48,6 +52,7 @@ class InventaireVue
             when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction = @@boutonVente
         end
+
         0.upto(@nbItemH-1) do |x|
             0.upto(@nbItemL-1)do |y|
                 @inventaire[x][y].file = "img/coloris_noir.png"
@@ -63,22 +68,30 @@ class InventaireVue
         return self
     end
     
+    ##
+    #===Récupération de l'élément graphique correspondant à l'affichage de l'inventaire
+    #==Parameter
+    #Joueur
     def obtenirVueInventaire(joueur)
         joueur.inventaire.item.each{|x|
            @inventaire[x%nbItemH][y/nbItemL].file=((@referencesGraphiques.getRefGraphique(x.intitule.downcase)));
         }
 	return @vbox
     end
+
+    def InventaireVue.afficherVueInventaire(joueur,mode)
+       window = Gtk::Window.new()
+       window.signal_connect('destroy') {
+          
+       }
+       iv = InventaireVue.creer(mode)
+       #iv.obtenirVueInventaire(nil) 
+       window.add(iv.vbox)
+       window.show_all
+    end
     
 end
 
 Gtk.init()
-window = Gtk::Window.new();
-window.signal_connect('destroy') {
-    Gtk.main_quit();
-}
-iv = InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND_VENTE)
-#iv.obtenirVueInventaire(nil)
-window.add(iv.vbox)
-window.show_all
+InventaireVue.afficherVueInventaire(nil,EnumStadePartie.INTERACTION_MARCHAND_VENTE)
 Gtk.main()
