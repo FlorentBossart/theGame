@@ -22,6 +22,9 @@ class CombatModal
     new(vue,modele)
   end
   
+  def majCombatModal(ennemi)
+    popUp=PopUp.creer(@vue,"Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
+  end
   
   def majEquipementDefensif()
     tooltips = Gtk::Tooltips.new
@@ -90,3 +93,4 @@ class CombatModal
 
   
 end
+
