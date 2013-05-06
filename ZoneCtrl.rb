@@ -1,6 +1,12 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby 
 
-
+## 
+# Fichier            : ZoneCtrl.rb 
+# Auteur            : L3SPI - Groupe de projet B 
+# Fait partie de : TheGame 
+# 
+# Cette classe représente la zone de controle en bas a droite du jeu, avec les boutons d'intération
+# 
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
