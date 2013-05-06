@@ -68,7 +68,7 @@ class Carte
    #x la coordonnée en X
    #y la coordonnée en Y
    def getCaseAt(x,y)
-      return @cases[y%@longueur+(y%@largeur)*@longueur
+      return @cases[y%@largeur+(x%@longueur)*@largeur]
    end
 
    def Carte.nouvelle(long,larg)
