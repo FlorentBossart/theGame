@@ -7,6 +7,8 @@ class EnumStadePartie
   @@INVENTAIRE_PLEIN        = 6
   @@INTERACTION_MARCHAND    = 7 
   @@INTERACTION_GUERISSEUR  = 8
+  @@INTERACTION_MARCHAND_ACHAT  = 9
+  @@INTERACTION_MARCHAND_VENTE  = 10
 
   def EnumStadePartie.ETAPE_FINIE
     return @@ETAPE_FINIE
@@ -38,6 +40,14 @@ class EnumStadePartie
   
   def EnumStadePartie.INTERACTION_GUERISSEUR
     return @@INTERACTION_GUERISSEUR
+  end
+  
+  def EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+      return @@INTERACTION_MARCHAND_ACHAT
+  end  
+  
+  def EnumStadePartie.INTERACTION_MARCHAND_VENTE
+      return @@INTERACTION_MARCHAND_VENTE
   end
   
 end
