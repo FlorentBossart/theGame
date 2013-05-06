@@ -20,7 +20,7 @@ require './PopUp.rb'
 class Vue
 
   @vue; #affichage carte
-  @zaf;
+  @zaf
   @zoneCtrl;
   @carte; #la classe carte
   @referencesGraphiques; #fichier xml des images
@@ -137,9 +137,10 @@ class Vue
 
   def actualiser
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+    @zaf.majZaf(@modele.joueur)
     
     case @modele.stadePartie
-          
+      
         #ETAPE CHOIX LIBRE
         when EnumStadePartie.CHOIX_LIBRE
         
@@ -168,7 +169,9 @@ class Vue
         when EnumStadePartie.INTERACTION_GUERISSEUR    
         
         end #fin case
-      
+        
+        afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+        @zaf.majZaf(@modele.joueur)
   end
 
 end

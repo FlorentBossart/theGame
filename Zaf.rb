@@ -63,7 +63,7 @@ class Zaf < Gtk::Frame
     
   end
   
-  def majZaf
+  def majZaf(joueur)
     
   end
 
