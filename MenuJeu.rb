@@ -39,16 +39,16 @@ class MenuJeu
 	private_class_method :new
 	
 	def initialize(isEnJeu, controleur)
-		Gtk.init()
+		#Gtk.init()
 		
 		@isInGame 		= isEnJeu
 		@controleur 	= controleur
 		@fenetreMenu 	= Window.new()
 		@fenetreMenu.set_default_size(300,300)
 		
-		afficherMenu()
+		#afficherMenu()
 		
-		Gtk.main()
+		#Gtk.main()
 	end
 	
 	
