@@ -201,7 +201,8 @@ class Controller
         # Action(s) à effectuer lors du clic sur le bouton inventaire
         #
   def menuAction
-    print "<--> Affichage du menu"
+    puts "<--> Affichage du menu"
+    @vue.menu.afficherMenu()
   end
 
     
