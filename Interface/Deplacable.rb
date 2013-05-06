@@ -15,9 +15,9 @@ module Deplacable
   
 
    ##
-   # Permet le deplacement sur une cible donnée.
+   #===Permet le deplacement sur une cible donnée.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>cible :</b> la direction du deplacement à réaliser
    #
    def deplacement(cible)
@@ -26,7 +26,7 @@ module Deplacable
   
    
    ##
-   # Permet le deplacement intelligent.
+   #===Permet le deplacement intelligent.
    #
    def deplacementIntelligent()
       Deplacable.api_not_implemented(self)

@@ -5,19 +5,19 @@
 # Auteur          : L3SPI - Groupe de projet B
 # Fait partie de  : TheGame
 #
-#  Cette interface definit les actions d'un commercant.
+# Cette interface definit les actions d'un commercant.
 #
 
 require './AbstractInterface.rb'
 
 module Commercant
    include AbstractInterface
-  
-  
+   
+   
    ##
-   # Permet au commercant d'acheter un item à un vendeur.
+   #===Permet au commercant d'acheter un item à un vendeur.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>vendeur :</b> le vendeur à qui on achéte l'item
    #* <b>item :</b> l'item acheté
    #
@@ -27,49 +27,58 @@ module Commercant
 
    
    ##
-   # Permet au commercant de vendre un item à un acheteur.
+   #===Permet au commercant de vendre un item à un acheteur.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>acheteur :</b> l'acheteur à qui on vend l'item
    #* <b>item :</b> l'item vendu
    #
    def vendre(acheteur, item)
       Commercant.api_not_implemented(self)
    end
-   
+
    
    ##
-   # Permet au commercant d'ajouter un item à son stock.
+   #===Permet au commercant d'ajouter un item à son stock.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>item :</b> l'item à ajouter au stock
    #
    def ajouterAuStock(item)
       Commercant.api_not_implemented(self)
    end
-  
-  
+
+   
    ##
-   # Permet au commercant de retirer un item de son stock.
+   #===Permet au commercant de retirer un item de son stock.
    #
-   # == Parameters:
+   #===Paramètres:
    #* <b>item :</b> l'item à retirer du stock
    #
    def retirerDuStock(item)
       Commercant.api_not_implemented(self)
    end
+
    
-  ##
-     # Encaisse une somme d'argent
-     # methode d'ajout de revenue
-     def encaisser(revenue)
-       Commercant.api_not_implemented(self)
-     end
-  
-     ##
-     # Debourse une somme d'argent
-     def debourser(revenue)
-       Commercant.api_not_implemented(self)
-     end
-  
+   ##
+   #===Encaisse une somme d'argent
+   #
+   #===Paramètres:
+   #* <b>revenue :</b> le revenue à encaisser
+   #
+   def encaisser(revenue)
+      Commercant.api_not_implemented(self)
+   end
+
+   
+   ##
+   #===Debourse une somme d'argent
+   #
+   #===Paramètres:
+   #* <b>revenue :</b> le revenue à debourser
+   #
+   def debourser(revenue)
+      Commercant.api_not_implemented(self)
+   end
+
 end 

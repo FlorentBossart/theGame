@@ -13,6 +13,7 @@ class ReferencesGraphiques
 
    @biblioGraphique
 
+   
    ##
    #===Constucteur : permet d'initialiser un Hash qui contiendra pour chaque intitulé unique d'élément affichable
    # la référence vers le fichier image qui le représente.
