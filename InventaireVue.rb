@@ -94,16 +94,20 @@ class InventaireVue
         }
 	return @vbox
     end
+
+    def InventaireVue.afficherInventaire(joueur, mode)
+        window = Gtk::Window.new();
+        window.signal_connect('destroy') {
+           Gtk.main_quit();
+        }
+        iv = InventaireVue.creer(mode)
+        #iv.obtenirVueInventaire(nil)
+        window.add(iv.vbox)
+        window.show_all
+    end
     
 end
 
 Gtk.init()
-window = Gtk::Window.new();
-window.signal_connect('destroy') {
-    Gtk.main_quit();
-}
-iv = InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND_VENTE)
-#iv.obtenirVueInventaire(nil)
-window.add(iv.vbox)
-window.show_all
+InventaireVue.afficherInventaire(nil,EnumStadePartie.INTERACTION_MARCHAND_VENTE)
 Gtk.main()
