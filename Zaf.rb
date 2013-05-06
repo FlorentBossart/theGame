@@ -62,6 +62,10 @@ class Zaf < Gtk::Frame
       show_all();
     
   end
+  
+  def majZaf
+    
+  end
 
   
 end

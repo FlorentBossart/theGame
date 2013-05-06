@@ -55,7 +55,7 @@ class Jauges
     majJaugeExperience(@experience,@experienceMax);
     
     #on remplit la jauge
-    mafJaugeEnergie(@energie);
+    majJaugeEnergie(@energie);
    
     @barExperience.show();
     @barEnergie.show();
@@ -74,7 +74,7 @@ class Jauges
   end
   
   #mise a jour  de l'energie
-  def mafJaugeEnergie(quantite)
+  def majJaugeEnergie(quantite)
     @energie  = quantite;
     #@barEnergie.set_fraction(@energie/Difficulte.energieMax)
     @barEnergie.fraction = @energie/100.to_f();
