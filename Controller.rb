@@ -25,7 +25,7 @@ class Controller
    #
    def initialize(modele, vue)
       @modele = modele
-      @vue    = vue;
+      @vue    = vue
    end
    
    def Controller.creer(modele,vue)
@@ -224,7 +224,7 @@ class Controller
         #
   def interactionAction()
     print "oO Bt interaction pressé!"
-    InteractionModal.new(@modele,@vue)
+    @vue.InteractionModal.new(@modele,@vue)
   end
 
     
