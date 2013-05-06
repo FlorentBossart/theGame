@@ -11,6 +11,7 @@ require './Controller.rb'
 
 class InterfaceModal
   private_class_method :new
+  @vue
   @modele
   @referencesGraphiques
   def initialize(modele,vue)
