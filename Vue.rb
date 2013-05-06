@@ -39,6 +39,8 @@ class Vue
 
   
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal
+  
+  def initialize()
     #Gtk.init();
     #@carteVue = Modele.carte;
     #initInterface();
