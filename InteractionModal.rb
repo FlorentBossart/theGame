@@ -9,7 +9,7 @@ require './Controller.rb'
 #
 
 
-class InterfaceModal
+class InteractionModal
   private_class_method :new
   @vue
   @modele
@@ -23,7 +23,7 @@ class InterfaceModal
   
   
   
-  def InterfaceModal.creer(modele,vue)
+  def InteractionModal.creer(modele,vue)
     new(modele,vue)
   end
   
