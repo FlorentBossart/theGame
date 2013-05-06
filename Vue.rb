@@ -9,6 +9,7 @@
 # 
 require 'gtk2'
 require './Zaf.rb'
+require './MenuJeu.rb'
 require './ZoneCtrl.rb'
 require './Carte.rb'
 require './Bibliotheque/ReferencesGraphiques.rb'
@@ -21,6 +22,7 @@ class Vue
 
   @vue; #affichage carte
   @zaf
+  @menu
   @zoneCtrl;
   @carte; #la classe carte
   @referencesGraphiques; #fichier xml des images
@@ -63,6 +65,7 @@ class Vue
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
+    @menu = MenuJeu.creer(true, @controller)
     @zoneCtrl = ZoneCtrl.creer(@vue,@controller)
     @carte = @modele.carte
     @popUp=PopUp.creer(self)
