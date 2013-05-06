@@ -8,13 +8,14 @@
 # Cette classe représente un CombatModal. Un CombatModal est défini par : 
 # * Une vue auquel il est lié
 # * Des references Graphiques representant la base de donnée image
+# * Un modele sur lequel l'objet ira chercher les informations
 # 
 
 
 
 require 'gtk2'
-require './ReferencesGraphiques.rb'
-require './XmlRefGraphiquesReader.rb'
+require './Bibliotheque/ReferencesGraphiques.rb'
+require './Bibliotheque/XmlRefGraphiquesReader.rb'
 require './Controller.rb'
 
 
@@ -23,14 +24,15 @@ class CombatModal
   private_class_method :new
   @vue
   @referencesGraphiques
-  attr_reader :vue, :referencesGraphiques
+  @modele
+  attr_reader :vue, :referencesGraphiques, :modele
   
   ## 
   # Crée un nouveau CombatModal à partir des informations passées en paramètre. 
   # 
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
-  # * <b>referencesGraphiques :</b> une base de donnée pour les images
+  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachée
+  # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   # 
   def initialize(vue,modele)
     @vue=vue
@@ -45,7 +47,7 @@ class CombatModal
   # 
   # == Parameters: 
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
-  # * <b>referencesGraphiques :</b> une base de donnée pour les images
+  # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   # 
   def CombatModal.creer(vue,modele)
     new(vue,modele)
@@ -59,7 +61,7 @@ class CombatModal
   # * <b>ennemi :</b> reference de l'ennemi dont on veut afficher les informations.
   # 
   def majCombatModal(ennemi)
-    popUp=PopUp.creer(@vue,"Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
+    popUp=PopUp.creer("Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
   end
   
   
@@ -88,7 +90,7 @@ class CombatModal
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
        # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
-        @vue.controller.equiperItemCreer(button,item,@modele.joueur);
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur)
         dialog.vbox.add(button)
        }
    dialog.show_all
@@ -122,7 +124,7 @@ class CombatModal
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
       #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
-      @vue.controller.equiperItemCreer(button,item,@modele.joueur);
+      @vue.controller.equiperItemCreer(button,item,@modele.joueur)
       dialog.vbox.add(button)
     }
     dialog.show_all
