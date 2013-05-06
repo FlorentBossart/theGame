@@ -22,7 +22,8 @@ class InterfaceModal
   end
   
   
-  def InterfaceModal(modele,vue)
+  
+  def InterfaceModal.creer(modele,vue)
     new(modele,vue)
   end
   
