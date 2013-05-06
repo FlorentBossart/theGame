@@ -2,7 +2,7 @@ require './Case.rb'
 require './Type/TypeTerrain.rb'
 require './Enum/EnumDirection.rb'
 require './Bibliotheque/BibliothequeTypeTerrain.rb'
-
+#comcom
 class Carte
 
    @longueur
