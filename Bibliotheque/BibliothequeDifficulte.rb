@@ -20,6 +20,10 @@ class BibliothequeDifficulte
       
    ##
    # Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
+   #
+   # == Parameters:
+   #* <b>cle :</b> la clé de la difficulté à ajouter
+   #* <b>difficulte :</b> la difficulté
    # 
    def BibliothequeDifficulte.ajouter(cle,difficulte)
       AffichageDebug.Afficher("Ajout dans BibliothequeDifficulte-> clé:#{cle}, Difficulte:#{difficulte}")
@@ -30,6 +34,8 @@ class BibliothequeDifficulte
    
    ##
    # Retirer une difficulté de la bibliothèque.
+   #
+   # == Parameters:
    #* <b>cle :</b> la clé de la difficulté à retirer
    #
    def BibliothequeDifficulte.retirer(cle)
