@@ -13,44 +13,61 @@ require './AffichageDebug.rb'
 
 class BibliothequeDifficulte
 
-  @@tableDifficulte = Hash.new()
+   @@tableDifficulte = Hash.new()
 
-  private_class_method :new
+   private_class_method :new
+
+      
+   ##
+   #===Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé de la difficulté à ajouter
+   #* <b>difficulte :</b> la difficulté
+   # 
+   def BibliothequeDifficulte.ajouter(cle,difficulte)
+      AffichageDebug.Afficher("Ajout dans BibliothequeDifficulte-> clé:#{cle}, Difficulte:#{difficulte}")
+      @@tableDifficulte[cle] = difficulte
+      return self
+   end
+
    
-  ##
-  # Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
-  #
-  def BibliothequeDifficulte.ajouter(cle,difficulte)
-    AffichageDebug.Afficher("Ajout dans BibliothequeDifficulte-> clé:#{cle}, Difficulte:#{difficulte}")
-    @@tableDifficulte[cle] = difficulte
-    return nil
-  end
+   ##
+   #===Retirer une difficulté de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé de la difficulté à retirer
+   #
+   def BibliothequeDifficulte.retirer(cle)
+      AffichageDebug.Afficher("Suppression dans BibliothequeDifficulte-> clé:#{cle}")
+      @@tableDifficulte.delete(cle)
+      return self
+   end
+
    
+   ##
+   #===Permet de recuperer une difficulté de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé de la difficulté souhaitée
+   #
+   #===Retourne:
+   #* <b>difficulte :</b> la difficulté souhaitée
+   #
+   def BibliothequeDifficulte.getDifficulte(cle)
+      return @@tableDifficulte[cle]
+   end
+
    
-  ##
-  # Retirer une difficulté de la bibliothèque.
-  #
-  def BibliothequeDifficulte.retirer(cle)
-    AffichageDebug.Afficher("Suppression dans BibliothequeDifficulte-> clé:#{cle}")
-    @@tableDifficulte.delete(cle)
-    return nil
-  end
-   
-   
-  ##
-  #
-  #
-  def BibliothequeDifficulte.getDifficulte(cle)
-    return @@tableDifficulte[cle]
-  end
-   
-   
-  ##
-  #
-  #
-  def BibliothequeDifficulte.getDifficulteAuHasard()
-    valeurs = @@tableDifficulte.values()
-    return valeurs[rand(valeurs.length-1)]
-  end
+   ##
+   #===Permet de recupérer une difficulté de la bibliothèque au hasard
+   #
+   #===Retourne:
+   #* <b>difficulte :</b> une difficulté au hasard
+   #
+   def BibliothequeDifficulte.getDifficulteAuHasard()
+      valeurs = @@tableDifficulte.values()
+      return valeurs[rand(valeurs.length-1)]
+   end
 
 end

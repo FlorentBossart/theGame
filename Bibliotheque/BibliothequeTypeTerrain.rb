@@ -10,46 +10,62 @@
 #
 
 class BibliothequeTypeTerrain
-    
-    @@tableType = Hash.new()
-    
-    private_class_method :new
-    
-    
-    ##
-    # Ajouter un type dans la bibliothèque (écrase si déjà présente).
-    #
-    def BibliothequeTypeTerrain.ajouter(cle,type)
+
+   @@tableType = Hash.new()
+
+   private_class_method :new
+   
+   
+   ##
+   #===Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type de terrain à ajouter
+   #* <b>type :</b> le type du type de terrain à ajouter
+   #
+   def BibliothequeTypeTerrain.ajouter(cle,type)
       AffichageDebug.Afficher("Ajout dans BibliothequeTypeTerrain-> clé:#{cle}, type:#{type}")
       @@tableType[cle] = type
-      return nil
-    end
-    
-    
-    ##
-    # Retirer un type de la bibliothèque.
-    #
-    def BibliothequeTypeTerrain.retirer(cle)
+      return self
+   end
+
+   
+   ##
+   # Retirer un type de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type de terrain à retirer
+   #
+   def BibliothequeTypeTerrain.retirer(cle)
       AffichageDebug.Afficher("Suppression dans BibliothequeTypeTerrain-> clé:#{cle}")
       @@tableType.delete(cle)
-      return nil
-    end
-    
-    
-    ##
-    # 
-    #
-    def BibliothequeTypeTerrain.getTypeTerrain(cle)
-        return @@tableType[cle]
-    end
-    
-    
-    ##
-    # 
-    #
-    def BibliothequeTypeTerrain.getTypeTerrainAuHasard()
-        valeurs=@@tableType.values()
-        return valeurs[rand(valeurs.length-1)]
-    end
-    
+      return self
+   end
+
+   
+   ##
+   #===Permet de recuperer un type de terrain de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type de terrain souhaité
+   #
+   #===Retourne:
+   #* <b>TypeTerrain :</b> le type de terrain souhaité
+   #
+   def BibliothequeTypeTerrain.getTypeTerrain(cle)
+      return @@tableType[cle]
+   end
+
+   
+   ##
+   #===Permet de recuperer un type de terrain de la bibliothèque au hasard. 
+   #
+   #===Retourne:
+   #* <b>TypeTerrain :</b> un type de terrain au hasard
+   #
+   def BibliothequeTypeTerrain.getTypeTerrainAuHasard()
+      valeurs=@@tableType.values()
+      return valeurs[rand(valeurs.length-1)]
+   end
+
 end

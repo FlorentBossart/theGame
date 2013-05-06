@@ -14,7 +14,7 @@ class ReferencesGraphiques
    @biblioGraphique
 
    ##
-   # Constucteur : permet d'initialiser un Hash qui contiendra pour chaque intitulé unique d'élément affichable
+   #===Constucteur : permet d'initialiser un Hash qui contiendra pour chaque intitulé unique d'élément affichable
    # la référence vers le fichier image qui le représente.
    #
    def initialize
@@ -23,8 +23,9 @@ class ReferencesGraphiques
 
 
    ##
-   # Permet d'ajouter une référence graphique à la bibliothèque
-   # == Parameters: 
+   #===Permet d'ajouter une référence graphique à la bibliothèque
+   #
+   #===Paramètres:
    #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné à l'objet affichable
    #* <b>cheminImg :</b> le chemin vers le fichier image représentant l'objet affichable dans l'IHM
    # 
@@ -32,15 +33,17 @@ class ReferencesGraphiques
      
    @biblioGraphique[intitule] = cheminImg
       AffichageDebug.Afficher("Ajout dans du couple clé:#{intitule}, type:#{cheminImg} dans #{self}")
-      return nil
+      return self
    end
 
 
    ##
-   # Permet d'ajouter une référence graphique à la bibliothèque
-   # == Parameters: 
+   #===Permet d'ajouter une référence graphique à la bibliothèque
+   #
+   #===Paramètres: 
    #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné à l'objet affichable
-   # == Returns: 
+   #
+   #=== Retourne: 
    #* <b>fichierImg :</b> le chemin vers le fichier image représentant l'objet affichable dans l'IHM
    # 
    def getRefGraphique(intitule)
@@ -49,10 +52,11 @@ class ReferencesGraphiques
 
 
    ##
-   # Permet de renvoyer une chaîne de caractères représentant la bibliothèque d'éléments graphiques
+   #===Permet de renvoyer une chaîne de caractères représentant la bibliothèque d'éléments graphiques
    # sous la forme d'une liste de lignes <intitutle> à pour image <fichier_image>
-   # == Returns: 
-   #* <b>s :</b> ne chaîne de caractères représentant la bibliothèque d'éléments graphiques
+   #
+   #===Retourne: 
+   #* <b>s :</b> une chaîne de caractères représentant la bibliothèque d'éléments graphiques
    # 
    def to_s
       s = "[==ReferencesGraphiques >>> | "
