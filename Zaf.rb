@@ -64,7 +64,7 @@ class Zaf < Gtk::Frame
   end
   
   def majZaf(joueur)
-    
+    @jauges
   end
 
   
