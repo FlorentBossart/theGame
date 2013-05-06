@@ -224,7 +224,7 @@ class Controller
         #
   def interactionAction()
     print "oO Bt interaction pressé!"
-    InteractionModal.new(@modele,@vue)
+    @vue.interactionModal.majInteractionModal()
   end
 
     
