@@ -31,7 +31,7 @@ class Carte
       end
       for i in 0..long-1
          for j in 0..larg-1
-            getCaseAt(i,j).initVoisines(self.getCaseAt(i,j-1),self.getCaseAt(i,j+1),self.getCaseAt(i-1,j),self.getCaseAt(i+1,j))
+            getCaseAt(i,j).initVoisines(self.getCaseAt(i-1,j),self.getCaseAt(i+1,j),self.getCaseAt(i,j+1),self.getCaseAt(i,j-1))
             #getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
             #-> par défaut plaine dans le constructeur de Case
          end
@@ -40,7 +40,7 @@ class Carte
    end
 
    def generationMapSemiAleatoire()
-      0.upto(@longueur+@largeur*2){
+      0.upto((@longueur+@largeur)*2){
          tt = BibliothequeTypeTerrain.getTypeTerrainAuHasard
          repartitionType(tt,tt.probaRepartition,rand(@longueur),rand(@largeur))
       }
