@@ -21,8 +21,8 @@
 
 	<difficulte>
 	    <intitule>difficulteDeTest</intitule>
-	    <longueurCarte>5</longueurCarte>
-	    <largeurCarte>5</largeurCarte>
+	    <longueurCarte>11</longueurCarte>
+	    <largeurCarte>23</largeurCarte>
 	    <energieDepart>1000</energieDepart>
 	    <nbRepos>3</nbRepos>
 	    <pnjAmisDepart>10</pnjAmisDepart>

@@ -98,8 +98,6 @@ class Modele
       @pseudoPartie=pseudo
    end
      
-   
-   
    def initialiseToi()
      
       @compteurTour = 0
@@ -189,8 +187,9 @@ class Modele
         # Ajout de l'item dans la case aleatoire       
         caseAleatoire.ajouterElement(element)
       end
-      
-     changerStadePartie(EnumStadePartie.ETAPE_FINIE)
+     
+     #PAS D'ACTUALISATION CAR MODELE SE CREER AVANT LA VUE  
+     #changerStadePartie(EnumStadePartie.ETAPE_FINIE)
    end
 
    def changerStadePartie(nouveauStade)
@@ -400,11 +399,14 @@ class Modele
      AffichageDebug.Afficher("Fin de 'choixLibre'")
    end
    
+=begin
    def lancerPartie()
      while(@joueur.toujoursEnVie?())
        debutTour()
      end
    end
+=end
+#si lancé dans le modele, la vue n'aura pas la main donc ça devra être lançé dans controleur
    
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques

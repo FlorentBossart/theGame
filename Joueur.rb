@@ -149,6 +149,10 @@ class Joueur < Personnage
          if(!toujoursEnVie?())
             @causeMort= "Vous êtes mort de fatigue !!"
          end
+         #JUSTE POUR TEST
+         @modele.tourPasse()
+         @modele.changerStadePartie(EnumStadePartie.ETAPE_FINIE)
+         #JUSTE POUR TEST
       end
       return nil
    end

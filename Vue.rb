@@ -29,7 +29,6 @@ class Vue
   
   def initialize()
     #Gtk.init();
-  
     #@carteVue = Modele.carte;
     #initInterface();
     #Gtk.main();
@@ -39,10 +38,14 @@ class Vue
   def defM(modele)
     @modele = modele
   end
+  
   def defC(controller)
     @controller=controller
   end
+  
   def initInterface()
+    Gtk.init();
+    
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
     
@@ -80,8 +83,10 @@ class Vue
     window.add(vbox)
     
     window.set_title("THE GAME")
+    
     window.show_all()
  
+    Gtk.main();
   end
   
   def initCarte(debutX,debutY)
@@ -91,7 +96,7 @@ class Vue
        end
      end
      
-      afficheCarte(debutX,debutY)
+     afficheCarte(debutX,debutY)
    end
   
   
@@ -102,7 +107,13 @@ class Vue
 
      0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
-         @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).typeTerrain().intitule.downcase)))
+        if(@carte.getCaseAt(x+debutX,y+debutY).joueur!=nil)
+          @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).joueur().getIntitule().downcase)))           
+        elsif(!@carte.getCaseAt(x+debutX,y+debutY).listeEnnemis.empty?())
+          @vue[x][y].file=((@referencesGraphiques.getRefGraphique("mechant")))          
+        else
+          @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).getIntitule().downcase)))           
+        end
       end   
     end
   end
@@ -111,7 +122,9 @@ class Vue
   def getZaf()
     return @zaf
   end
+  
   def actualiser
+    afficheCarte(0,0)
   end
   
 end

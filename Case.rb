@@ -48,6 +48,9 @@ class Case
     return @listeElements.length != 0
   end
   
+  def getIntitule()
+    return @typeTerrain.intitule()
+  end
 
   def Case.nouvelle(x,y)
     return new(x,y)

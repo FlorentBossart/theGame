@@ -45,12 +45,12 @@
 </reference>
 
 <reference>
-   <intitule_objet>rocher</intitule_objet>
+   <intitule_objet>montagne</intitule_objet>
    <img_ihm>./img/rocher.png</img_ihm>
 </reference>
 
 <reference>
-   <intitule_objet>sable</intitule_objet>
+   <intitule_objet>desert</intitule_objet>
    <img_ihm>./img/sable.png</img_ihm>
 </reference>
 
@@ -65,6 +65,11 @@
 </reference>
 
 <reference>
+   <intitule_objet>foret</intitule_objet>
+   <img_ihm>./img/foret.png</img_ihm>
+</reference>
+
+<reference>
    <intitule_objet>bourse</intitule_objet>
    <img_ihm>./img/bourse.png</img_ihm>
 </reference>
@@ -72,6 +77,16 @@
 <reference>
    <intitule_objet>repos</intitule_objet>
    <img_ihm>./img/repos.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>joueur</intitule_objet>
+   <img_ihm>./img/smiley.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>mechant</intitule_objet>
+   <img_ihm>./img/badsmiley.png</img_ihm>
 </reference>
 
 </ref_graphiques>
