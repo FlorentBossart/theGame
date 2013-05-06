@@ -150,9 +150,9 @@ class Joueur < Personnage
             @causeMort= "Vous êtes mort de fatigue !!"
          end
          #JUSTE POUR TEST
-         @modele.tourPasse()
-         @modele.changerStadePartie(EnumStadePartie.ETAPE_FINIE)
-         puts "Joueur à la case #{@casePosition.coordonneeX}:#{@casePosition.coordonneeY}"
+         #@modele.tourPasse()
+         #@modele.changerStadePartie(EnumStadePartie.ETAPE_FINIE)
+         #puts "Joueur à la case #{@casePosition.coordonneeX}:#{@casePosition.coordonneeY}"
          #JUSTE POUR TEST
       end
       return nil
