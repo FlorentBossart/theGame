@@ -13,6 +13,9 @@ require './ZoneCtrl.rb'
 require './Carte.rb'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
+require './InteractionModal.rb'
+require './CombatModal.rb'
+require './PopUp.rb'
 
 class Vue
 
@@ -28,6 +31,9 @@ class Vue
   @controller
   @x; #coordonné actuel
   @y; #coordonné actuel
+  @combatModal
+  @interactionModal
+  @popUp
 
   attr_accessor :x ,:y;
   def initialize()
@@ -59,6 +65,9 @@ class Vue
     @zaf = Zaf.new()
     @zoneCtrl = ZoneCtrl.creer(@vue,@controller)
     @carte = @modele.carte
+    @popUp=PopUp.creer(self)
+    @interactionModal=InteractionModal.creer(@modele,@vue)
+    @combatModal=CombatModal.creer(@vue,@modele)
 
     window = Gtk::Window.new()
     window.signal_connect('destroy') {
