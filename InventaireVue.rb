@@ -43,10 +43,6 @@ class InventaireVue
         case mode
             when EnumStadePartie.INVENTAIRE_PLEIN then
             @boutonInteraction = @@boutonJeter
-            when EnumStadePartie.EQUIPEMENT_ARME then
-            @boutonInteraction = @@boutonEquiper
-            when EnumStadePartie.EQUIPEMENT_ARMURE then
-            @boutonInteraction = @@boutonEquiper
             when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction = @@boutonAcheter
             when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
