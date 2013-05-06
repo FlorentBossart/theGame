@@ -17,27 +17,40 @@ class BibliothequeTypeMangeable
     
    
    ##
-   # Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #===Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type mangeable à ajouter
+   #* <b>type :</b> le type du type mangeable à ajouter
    #
    def BibliothequeTypeMangeable.ajouter(cle,type)
      AffichageDebug.Afficher("Ajout dans BibliothequeTypeMangeable-> clé:#{cle}, type:#{type}")
      @@tabletype[cle] = type
-     return nil
+     return self
    end
    
    
    ##
-   # Retirer un type de la bibliothèque.
+   #===Retirer un type de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type mangeable à retirer
    #
    def BibliothequeTypeMangeable.retirer(cle)
      AffichageDebug.Afficher("Suppression dans BibliothequeTypeMangeable-> clé:#{cle}")
      @@tabletype.delete(cle)
-     return nil
+     return self
    end
    
    
    ##
-   # 
+   #===Permet de recuperer un type mangeable de la bibliothèque.
+   #
+   #===Paramètres:
+   #* <b>cle :</b> la clé du type mangeable souhaité
+   #
+   #===Retourne:
+   #* <b>TypeMangeable :</b> le type mangeable souhaité
    #
    def BibliothequeTypeMangeable.getTypeMangeable(cle)
       return @@tabletype[cle]
@@ -45,7 +58,10 @@ class BibliothequeTypeMangeable
    
    
    ##
-   # 
+   #===Permet de recuperer un type mangeable de la bibliothèque au hasard. 
+   #
+   #===Retourne:
+   #* <b>TypeMangeable :</b> un type mangeable au hasard
    #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasard()
       valeurs=@@tabletype.values()
