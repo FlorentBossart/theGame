@@ -292,7 +292,7 @@ class MenuJeu
 			end
 		}
 		
-		@controleur.boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new("Retour au menu")
 		
 		@contenu.add(boutRetour)
 		
