@@ -8,6 +8,7 @@
 # Cette classe représente le Controlleur du jeu
 #
 
+require 'Vue.rb'
 
 
 class Controller
@@ -24,7 +25,7 @@ class Controller
    #
    def initialize(modele, vue)
       @modele = modele
-      @vue    = vue
+      @vue    = vue;
    end
    
    def Controller.creer(modele,vue)
@@ -223,7 +224,7 @@ class Controller
         #
   def interactionAction()
     print "oO Bt interaction pressé!"
-    @vue.interactionModal.new(@modele,@vue)
+    InteractionModal.new(@modele,@vue)
   end
 
     
@@ -268,40 +269,19 @@ class Controller
     joueur.utiliser(elem)
     print "oO Bt interaction "+elem.intitule+" pressé!"
   end
-      
   
-  def achatMarchandCreer(btInteraction)
-      btInteraction.signal_connect('clicked'){
-        achatMarchandAction()
+  
+  
+  ## AFR
+  # Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+  #
+  def selectionnerItem(btItem,indiceItem)
+      btItem.signal_connect('button_press_event'){
+        #equiperItemAction(joueur,elem)
+        puts "(S) Sélection de l'item "+indiceItem.to_s+"."
+        #InventaireVue.
      }
   end
-      
-      
-      ##
-      # Action(s) à effectuer lors du clic sur le bouton inventaire
-      #
-  def achatMarchandAction()
-    #a definir
-    print "oO Bt interaction "+elem.intitule+" pressé!"
-  end
-  
-  def vendreMarchandCreer(btInteraction)
-      btInteraction.signal_connect('clicked'){
-        vendreMarchandAction()
-     }
-  end
-      
-      
-      ##
-      # Action(s) à effectuer lors du clic sur le bouton inventaire
-      #
-  def vendreMarchandAction()
-    #a definir
-    print "oO Bt interaction "+elem.intitule+" pressé!"
-  end
-      
-  
-
       
 end
 
