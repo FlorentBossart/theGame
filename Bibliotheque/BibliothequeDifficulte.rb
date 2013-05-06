@@ -15,11 +15,12 @@ class BibliothequeDifficulte
 
    @@tableDifficulte = Hash.new()
 
-   
    private_class_method :new
+
+      
    ##
    # Ajouter une difficulté dans la bibliothèque (écrase si déjà présente).
-   #
+   # 
    def BibliothequeDifficulte.ajouter(cle,difficulte)
       AffichageDebug.Afficher("Ajout dans BibliothequeDifficulte-> clé:#{cle}, Difficulte:#{difficulte}")
       @@tableDifficulte[cle] = difficulte
@@ -29,6 +30,7 @@ class BibliothequeDifficulte
    
    ##
    # Retirer une difficulté de la bibliothèque.
+   #* <b>cle :</b> la clé de la difficulté à retirer
    #
    def BibliothequeDifficulte.retirer(cle)
       AffichageDebug.Afficher("Suppression dans BibliothequeDifficulte-> clé:#{cle}")
