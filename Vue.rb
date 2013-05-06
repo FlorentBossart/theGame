@@ -78,7 +78,7 @@ class Vue
 
     #initialisation de la carte
 
-    initCarte(0,0)
+    initCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
     vbox.add(@carteVue)
     vbox.add(tabBot)
 
@@ -124,7 +124,7 @@ class Vue
   end
 
   def actualiser
-    afficheCarte(0,0)
+    afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
   end
 
 end
