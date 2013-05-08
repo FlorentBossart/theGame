@@ -239,7 +239,7 @@ class Controller
       #
   def interactionElementCreer(btInteraction,elem,joueur)
       btInteraction.signal_connect('clicked'){
-        elem.interaction(joueur)
+
         interactionElementAction(elem)
      }
   end
@@ -250,6 +250,7 @@ class Controller
       #
   def interactionElementAction(elem)
     print "oO Bt interaction "+elem.intitule+" pressÃ©!"
+    elem.interaction(joueur)
   end
       
   ##
@@ -290,7 +291,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btNewPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur NouvellePartie
+   # btNewPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur NouvellePartie
    #
    def nouvellePartieCreer(btNewPartie)
       btNewPartie.signal_connect('clicked'){
@@ -300,7 +301,7 @@ class Controller
      
           
 	##
-	# Action(s) à effectuer lors du clic sur le bouton NouvellePartie
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton NouvellePartie
 	#
 	def nouvellePartieAction
 		puts "Clique sur nouvelle partie"
@@ -314,7 +315,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btChargerPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur ChargerPartie
+   # btChargerPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur ChargerPartie
    #
    def chargerPartieCreer(btChargerPartie)
       btChargerPartie.signal_connect('clicked'){
@@ -323,7 +324,7 @@ class Controller
    end  
           
 	##
-	# Action(s) à effectuer lors du clic sur le bouton ChargerPartie
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton ChargerPartie
 	#
 	def chargerPartieAction
 		puts "Clique sur charger partie"
@@ -337,7 +338,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btSauvegarderPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur SauvegarderPartie
+   # btSauvegarderPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur SauvegarderPartie
    #
    def sauvegarderPartieCreer(btSauvegarderPartie)
       btSauvegarderPartie.signal_connect('clicked'){
@@ -347,7 +348,7 @@ class Controller
  
           
 	##
-	# Action(s) à effectuer lors du clic sur le bouton SauvegarderPartie
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton SauvegarderPartie
 	#
 	def sauvegarderPartieAction
 		puts "Clique sur sauvegarder partie"
@@ -362,7 +363,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btClassement : le gtkButton qu'il faudra lier à l'action d'un clic sur Classement
+   # btClassement : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Classement
    #
    def classementCreer(btClassement)
       btClassement.signal_connect('clicked'){
@@ -372,7 +373,7 @@ class Controller
    
           
 	##
-	# Action(s) à effectuer lors du clic sur le bouton Classement
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton Classement
 	#
 	def classementAction
 		puts "Clique sur classement"
@@ -386,7 +387,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btOptions : le gtkButton qu'il faudra lier à l'action d'un clic sur Options
+   # btOptions : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Options
    #
    def optionsCreer(btOptions)
       btOptions.signal_connect('clicked'){
@@ -396,7 +397,7 @@ class Controller
  
   
 	##
-	# Action(s) à effectuer lors du clic sur le bouton Options
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton Options
 	#
 	def optionsAction
 		puts "Clique sur options"
@@ -409,7 +410,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btAide : le gtkButton qu'il faudra lier à l'action d'un clic sur Aide
+   # btAide : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Aide
    #
    def aideCreer(btAide)
       btAide.signal_connect('clicked'){
@@ -419,7 +420,7 @@ class Controller
     
           
 	##
-	# Action(s) à effectuer lors du clic sur le bouton Aide
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton Aide
 	#
 	def aideAction
 		puts "Clique sur aide"
@@ -433,7 +434,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btRetour : le gtkButton qu'il faudra lier à l'action d'un clic sur Retour
+   # btRetour : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Retour
    #
    def retourCreer(btRetour)
       btRetour.signal_connect('clicked'){
@@ -443,7 +444,7 @@ class Controller
  
  
 	##
-	# Action(s) à effectuer lors du clic sur le bouton Retour
+	# Action(s) ï¿½ effectuer lors du clic sur le bouton Retour
 	#
 	def retourAction
 		puts "Clique sur Retour"

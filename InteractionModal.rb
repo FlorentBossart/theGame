@@ -35,7 +35,7 @@ class InteractionModal
       
       listeElements=@modele.joueur.casePosition.listeElements()
       # Creation du popup
-      dialog = Gtk::Dialog.new("Interaction", @vue,
+      dialog = Gtk::Dialog.new("Interaction", $main_application_window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
 
       # Ensure that the dialog box is destroyed when the user responds.
@@ -59,7 +59,7 @@ class InteractionModal
       
     else
                 # Create the dialog
-          dialog = Gtk::Dialog.new("Interaction", @vue,
+          dialog = Gtk::Dialog.new("Interaction", $main_application_window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
                          [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
 
