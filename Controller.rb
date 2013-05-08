@@ -252,6 +252,43 @@ class Controller
     print "oO Bt interaction "+elem.intitule+" pressé!"
     elem.interaction(joueur)
   end
+  
+  ##
+  # Constructeur privé : crée une nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton Interaction
+  #
+  # == Parameters:
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  #
+  def achatMarchandCreer(btInteraction,elem,joueur)
+  btInteraction.signal_connect('clicked'){
+
+    achatMarchandAction(elem)
+  }
+  end
+  
+  
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
+  def achatMarchandAction(elem)
+    print "oO Bt achatMarchandAction  pressé!"
+  end
+  
+  def vendreMarchandCreer(btInteraction,elem,joueur)
+  btInteraction.signal_connect('clicked'){
+
+    vendreMarchandAction(elem)
+  }
+  end
+  
+  
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
+  def vendreMarchandAction(elem)
+    print "oO Bt achatMarchandAction  pressé!"
+  end
+      
       
   ##
   # equipe un item lors de l'appuie sur le bouton correspondant
