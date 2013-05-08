@@ -31,7 +31,7 @@ class InteractionModal
   def majInteractionModal()
     tooltips = Gtk::Tooltips.new
     
-    if(@modele.joueur.casePosition.presenceAides())
+    if(@modele.joueur.casePosition.presenceAides?())
       
       listeElements=@modele.joueur.casePosition.listeElements()
       # Creation du popup
