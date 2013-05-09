@@ -8,7 +8,7 @@
 
 <textesJeu>
 
-	<texte id="boutonInvnetaire">
+	<texte id="boutonInventaire">
 	    <contenu>INVENTAIRE</contenu>
 	</texte>
 </textesJeu>
