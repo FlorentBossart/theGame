@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE classements_joueur [
+<!ELEMENT classements_joueur (joueur+)>
+<!ELEMENT joueur (nom, nb_ennemis_tues, distance, or, temps, difficulte)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT nb_ennemis_tues (#PCDATA)>
+<!ELEMENT distance (#PCDATA)>
+<!ELEMENT or (#PCDATA)>
+<!ELEMENT temps (#PCDATA)>
+<!ELEMENT difficulte (#PCDATA)>
+]>
+
+<classements_joueur><joueur><nom>BestOfTheBest</nom><nb_ennemis_tues>32</nb_ennemis_tues><distance>3200</distance><or>33333</or><temps>9999</temps><difficulte>Expert</difficulte></joueur><joueur><nom>lopp</nom><nb_ennemis_tues>0</nb_ennemis_tues><distance>0</distance><or>0</or><temps>123</temps><difficulte>Novice</difficulte></joueur><joueur><nom>lopp</nom><nb_ennemis_tues>0</nb_ennemis_tues><distance>0</distance><or>0</or><temps>123</temps><difficulte>Novice</difficulte></joueur></classements_joueur>

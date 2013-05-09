@@ -73,27 +73,32 @@ class XmlClassements
       joueur = Element.new("joueur")
       
       nom = Element.new("nom")
-      nom.text = "BestOfTheBest" # modele.joueur.pseudo # gérer par la classe Joueur 
+      #nom.text = "BestOfTheBest" # modele.joueur.pseudo # gérer par la classe Joueur 
+      nom.text = modele.joueur.pseudo
       joueur.add_element(nom)
       
       nbEnnemisTues = Element.new("nb_ennemis_tues")
-      nbEnnemisTues.text = 32 # modele.joueur.nbEnnemiTues # gérer par la classe Joueur
+     # nbEnnemisTues.text = 32 # modele.joueur.nbEnnemiTues # gérer par la classe Joueur
+      nbEnnemisTues.text = modele.joueur.nbEnnemiTues
       joueur.add_element(nbEnnemisTues)
       
       dist = Element.new("distance")
-      dist.text = 3200 # modele.joueur.distanceParcourue # gérer par la classe Joueur
+     # dist.text = 3200 # modele.joueur.distanceParcourue # gérer par la classe Joueur
+      dist.text = modele.joueur.distanceParcourue # gérer par la classe Joueur
       joueur.add_element(dist)
       
       argent = Element.new("or")
-      argent.text = 33333 # modele.joueur.inventaire.capital # gérer par la classe Inventaire
+      #argent.text = 33333 # modele.joueur.inventaire.capital # gérer par la classe Inventaire
+      argent.text = modele.joueur.inventaire.capital # gérer par la classe Inventaire
       joueur.add_element(argent)
       
       tps = Element.new("temps")
-      tps.text = 9999 # ??? joueur.temps # gérer par la classe Modele
+      tps.text = 123 # ??? modele.joueur.temps # gérer par la classe Modele
       joueur.add_element(tps)
       
       diff = Element.new("difficulte")
-      diff.text = "Expert" # modele.difficulte.intitule # gérer par la classe Modele
+      #diff.text = "Expert" # modele.difficulte.intitule # gérer par la classe Modele
+      diff.text = modele.difficulte.intitule # gérer par la classe Modele
       joueur.add_element(diff)
       
       doc.root.add_element(joueur)
@@ -113,4 +118,6 @@ class XmlClassements
 	
 end
 
+#Test
+#XmlClassements.ecrireXml(nil)
 
