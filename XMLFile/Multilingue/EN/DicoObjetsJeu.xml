@@ -1,0 +1,139 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE objetsJeu [
+<!ELEMENT objetsJeu (objet+)>
+<!ELEMENT objet (nom, determiant)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT determinant (#PCDATA)>
+]>
+
+<objetsJeu>
+
+	<objet id="difficulteDeTest">
+	    <nom>test difficulty</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Novice">
+	    <nom>Novice</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Moyen">
+	    <nom>Medium</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Expert">
+	    <nom>Expert</nom>
+	    <determinant></determinant>
+	</objet>
+	
+	
+	
+	<objet id="chauve-souris">
+	    <nom>bat</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="loup">
+	    <nom>wolf</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="brigand">
+	    <nom>brigand</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="soldat">
+	    <nom>soldier</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="ogre">
+	    <nom>ogre</nom>
+	    <determinant>an </determinant>
+	</objet>
+	
+	
+	
+	<objet id="bottes en cuir">
+	    <nom>leather boots</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="bottes en fer">
+	    <nom>iron boots</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="bottes en acier">
+	    <nom>steel boots</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="armure en cuir">
+	    <nom>leather armor</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="armure en fer">
+	    <nom>iron armor</nom>
+	    <determinant>an </determinant>
+	</objet>
+	<objet id="armure en acier">
+	    <nom>steel armor</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="epee en bois">
+	    <nom>wooden</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="epee en fer">
+	    <nom>iron sword</nom>
+	    <determinant>an </determinant>
+	</objet>
+	<objet id="epee en acier">
+	    <nom>steel sword</nom>
+	    <determinant>a </determinant>
+	</objet>
+	
+	
+	
+	<objet id="bout de pain">
+	    <nom>piece of bread</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="brocolie vapeur">
+	    <nom>steamed broccoli</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="steack de dinde">
+	    <nom>turkey steack</nom>
+	    <determinant>a </determinant>
+	</objet>
+	<objet id="pavé d'émeu">
+	    <nom>emu block</nom>
+	    <determinant>an </determinant>
+	</objet>
+	<objet id="poulet rôti">
+	    <nom>rosted chicken</nom>
+	    <determinant>a </determinant>
+	</objet>
+	
+	
+	
+	<objet id="eau">
+	    <nom>water</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="plaine">
+	    <nom>lowland</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="foret">
+	    <nom>forest</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="desert">
+	    <nom>desert</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="montagne">
+	    <nom>mountain</nom>
+	    <determinant></determinant>
+	</objet>
+	
+</objetsJeu>
+
+

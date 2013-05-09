@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE textesJeu [
+<!ELEMENT textesJeu (texte+)>
+<!ELEMENT texte (contenu)>
+<!ELEMENT contenu (#PCDATA)>
+]>
+
+<textesJeu>
+
+	<texte id="boutonInvnetaire">
+	    <contenu>INVENTORY</contenu>
+	</texte>
+</textesJeu>
+
+

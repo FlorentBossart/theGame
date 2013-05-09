@@ -1,0 +1,139 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE objetsJeu [
+<!ELEMENT objetsJeu (objet+)>
+<!ELEMENT objet (nom, determiant)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT determinant (#PCDATA)>
+]>
+
+<objetsJeu>
+
+	<objet id="difficulteDeTest">
+	    <nom>difficulté de test</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Novice">
+	    <nom>Novice</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Moyen">
+	    <nom>Moyen</nom>
+	    <determinant></determinant>
+	</objet>
+	<objet id="Expert">
+	    <nom>Expert</nom>
+	    <determinant></determinant>
+	</objet>
+	
+	
+	
+	<objet id="chauve-souris">
+	    <nom>chauve souris</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="loup">
+	    <nom>loup</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="brigand">
+	    <nom>brigand</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="soldat">
+	    <nom>soldat</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="ogre">
+	    <nom>ogre</nom>
+	    <determinant>un </determinant>
+	</objet>
+	
+	
+	
+	<objet id="bottes en cuir">
+	    <nom>bottes en cuir</nom>
+	    <determinant>des </determinant>
+	</objet>
+	<objet id="bottes en fer">
+	    <nom>bottes en fer</nom>
+	    <determinant>des </determinant>
+	</objet>
+	<objet id="bottes en acier">
+	    <nom>bottes en acier</nom>
+	    <determinant>des </determinant>
+	</objet>
+	<objet id="armure en cuir">
+	    <nom>armure en cuir</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="armure en fer">
+	    <nom>armure en fer</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="armure en acier">
+	    <nom>armure en acier</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="epee en bois">
+	    <nom>epee en bois</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="epee en fer">
+	    <nom>epee en fer</nom>
+	    <determinant>une </determinant>
+	</objet>
+	<objet id="epee en acier">
+	    <nom>epee en acier</nom>
+	    <determinant>une </determinant>
+	</objet>
+	
+	
+	
+	<objet id="bout de pain">
+	    <nom>bout de pain</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="brocolie vapeur">
+	    <nom>brocolie vapeur</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="steack de dinde">
+	    <nom>steack de dinde</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="pavé d'émeu">
+	    <nom>pavé d'émeu</nom>
+	    <determinant>un </determinant>
+	</objet>
+	<objet id="poulet rôti">
+	    <nom>poulet rôti</nom>
+	    <determinant>un </determinant>
+	</objet>
+	
+	
+	
+	<objet id="eau">
+	    <nom>eau</nom>
+	    <determinant>l'</determinant>
+	</objet>
+	<objet id="plaine">
+	    <nom>plaine</nom>
+	    <determinant>la </determinant>
+	</objet>
+	<objet id="foret">
+	    <nom>forêt</nom>
+	    <determinant>la </determinant>
+	</objet>
+	<objet id="desert">
+	    <nom>desert</nom>
+	    <determinant>le </determinant>
+	</objet>
+	<objet id="montagne">
+	    <nom>montagne</nom>
+	    <determinant>la </determinant>
+	</objet>
+	
+</objetsJeu>
+
+
