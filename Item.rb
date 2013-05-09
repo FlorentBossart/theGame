@@ -9,9 +9,9 @@
 # == Une caractéristique
 #
 
-require './Element.rb'
+require './Elem.rb'
 
-class Item < Element
+class Item < Elem
 
    @caracteristique
    @selected

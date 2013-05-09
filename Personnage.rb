@@ -10,9 +10,9 @@
 # C'est une classe abtraite.
 #
 
-require './Element.rb'
+require './Elem.rb'
 
-class Personnage < Element
+class Personnage < Elem
   def Personnage.creer(casePosition)
     new(casePosition)
   end

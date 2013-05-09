@@ -26,7 +26,7 @@
 #
 
 require "./Enum/EnumDirection.rb"
-require "./Element.rb"
+require "./Elem.rb"
 require "./Personnage.rb"
 require "./Interface/Deplacable.rb"
 require "./Interface/Commercant.rb"
