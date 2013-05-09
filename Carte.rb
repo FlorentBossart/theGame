@@ -81,9 +81,9 @@ class Carte
      s+= "Largeur: #{@largeur} | "
      s+= "Joueur: #{@joueur} | "
      s+= "Cases: "
-     for c in @cases
-      s+= "#{c} ,"
-     end
+    # for c in @cases
+    #  s+= "#{c} ,"
+    # end
      s+="| "
      s+= "<<< Carte==]"
      return s

@@ -24,7 +24,7 @@ class XmlClassements
    def XmlClassements.lireXml(listeStatsJoueurs)
       #Ouvre le fichier XML contenant les statistiques de chaque joueur
       begin
-         file = File.new("classements.xml")
+         file = File.new("XMLFile/classements.xml")
          doc = Document.new(file)
       rescue
          raise "Impossible d'ouvrir le fichier XML des classements des joueurs."
@@ -45,9 +45,9 @@ class XmlClassements
    #
    def XmlClassements.ecrireXml(modele) # Prendre un Modele en paramètre ?
    	   	
-      if(File.exist?("classements.xml") == false)# Création du fichier s'il n'existe pas
+      if(File.exist?("XMLFile/classements.xml") == false)# Création du fichier s'il n'existe pas
       	begin
-	         file = File.open("classements.xml", "w")
+	         file = File.open("XMLFile/classements.xml", "w")
 	         file.syswrite("<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n\n")
 		      file.syswrite("<!DOCTYPE classements_joueur [\n" +
 									"<!ELEMENT classements_joueur (joueur+)>\n" +
@@ -64,11 +64,11 @@ class XmlClassements
 		      file.write(doc)
 		      file.close
 		   rescue
-		   	raise "Impossible d'ouvrir le fichier classements.xml"
+		   	raise "Impossible d'ouvrir le fichier XMLFile/classements.xml"
 		   end
       end
       
-      doc = Document.new(File.open("classements.xml"))
+      doc = Document.new(File.open("XMLFile/classements.xml"))
       
       joueur = Element.new("joueur")
       
@@ -101,10 +101,10 @@ class XmlClassements
       # MAJ du fichier xml du classement des joueurs
 		begin
 	      # w : Write-only, truncates existing file to zero length or creates a new file for writing.
-	      file = File.open("classements.xml", "w")
+	      file = File.open("XMLFile/classements.xml", "w")
 	      file.write(doc)
 		rescue
-			raise "Impossible d'ouvrir le fichier classements.xml"
+			raise "Impossible d'ouvrir le fichier XMLFile/classements.xml"
 		ensure
 			file.close
 		end

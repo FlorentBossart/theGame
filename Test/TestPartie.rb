@@ -22,11 +22,11 @@ begin
   if(choixDifficulte == "T")
     difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
   elsif(choixDifficulte == "N")
-    difficulte = BibliothequeDifficulte.getDifficulte("novice")
+    difficulte = BibliothequeDifficulte.getDifficulte("Novice")
   elsif(choixDifficulte == "M")
-    difficulte = BibliothequeDifficulte.getDifficulte("moyen")
+    difficulte = BibliothequeDifficulte.getDifficulte("Moyen")
   elsif(choixDifficulte == "E")
-      difficulte = BibliothequeDifficulte.getDifficulte("expert")
+      difficulte = BibliothequeDifficulte.getDifficulte("Expert")
   end
 end while(choixDifficulte!="T" && choixDifficulte!="N" && choixDifficulte!="M" && choixDifficulte!="E" )
 

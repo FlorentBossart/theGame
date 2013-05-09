@@ -14,9 +14,9 @@
 require 'gtk2'
 
 require 'Classements.rb'
-require 'XmlClassements.rb'
+require './XMLReader/XmlClassements.rb'
 
-require 'BibliothequeSlot.rb'
+require './Bibliotheque/BibliothequeSlot.rb'
 require 'YamlSlot.rb'
 require 'Slot.rb'
 
@@ -31,6 +31,7 @@ class MenuJeu
 	@isInGame
 	@contenu
 	@controleur
+	@modele
 	
 	attr_accessor :fenetreMenu
 	
@@ -38,11 +39,12 @@ class MenuJeu
 	
 	private_class_method :new
 	
-	def initialize(isEnJeu, controleur)
+	def initialize(isEnJeu, modele, controleur)
 		#Gtk.init()
 		
 		@isInGame 		= isEnJeu
 		@controleur 	= controleur
+		@modele 			= modele
 		@fenetreMenu 	= Window.new()
 		@fenetreMenu.set_default_size(300,300)
 		
@@ -58,8 +60,8 @@ class MenuJeu
    # == Parameters:
    # isEnJeu : un booléen indiquant si le joueur est en jeu ou non
    #
-	def MenuJeu.creer(isEnJeu, controleur)
-		return new(isEnJeu, controleur)
+	def MenuJeu.creer(isEnJeu, modele, controleur)
+		return new(isEnJeu, modele, controleur)
 	end
 	
 	
@@ -253,7 +255,7 @@ class MenuJeu
 			frame = Frame.new("Emplacement " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
-			if(File.exist?(nomFicYaml)) # Si le fichier yaml correspondant au slot existe
+			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
 				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
@@ -265,7 +267,7 @@ class MenuJeu
 				date = "..."
 			end
 			
-			lab = Label.new("Nom : " + nom  + " | Difficulte : " + diff + " | Date : " + date)
+			lab = Label.new("Nom : " + nom + " | Difficulte : " + diff + " | Date : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
 			
@@ -328,12 +330,13 @@ class MenuJeu
 			frame = Frame.new("Emplacement " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
-			if(File.exist?(nomFicYaml)) # Si le fichier yaml correspondant au slot existe
+			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
 				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
 				date = slot.date
+				puts slot.to_s
 			else # Pour l'affichage des slots
 				nom = "..."
 				diff = "..."
@@ -363,7 +366,7 @@ class MenuJeu
 			
 			eb.signal_connect('button_press_event') { 
 				puts "\tSauvegarde sur le slot" + (index+1).to_s 
-				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", nil)
+				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
 				# MAJ de l'affichage des slots de sauvegarde
 				viderFenetre(@contenu)
@@ -575,7 +578,7 @@ class MenuJeu
 		listeJoueur = Array.new
 		c = Classements.new()
 		
-		if(File.exist?("classements.xml")) # Si le fichier xml correspondant aux classements des joueurs existe
+		if(File.exist?("XMLFile/classements.xml")) # Si le fichier xml correspondant aux classements des joueurs existe
 			XmlClassements.lireXml(c)
 			listeJoueur = c.getListeJoueur(difficulte)
 		end

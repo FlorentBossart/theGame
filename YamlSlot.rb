@@ -12,7 +12,7 @@
 # Pour enregistrer la date du jour dans les informations de sauvegarde
 require 'date'
 
-require 'BibliothequeSlot.rb'
+require './Bibliotheque/BibliothequeSlot.rb'
 require 'Slot.rb'
 
 require 'yaml.rb'
@@ -26,9 +26,9 @@ class YamlSlot
    def YamlSlot.lireYaml(nomFicSlotYaml)
       #Ouvre le fichier YAML contenant les infos du slot "nomFicXml"
       begin
-         file = File.open(nomFicSlotYaml)
+         file = File.open("YAMLSlot/" + nomFicSlotYaml)
       rescue
-         raise "Impossible d'ouvrir le fichier " + nomFicSlotYaml
+         raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
       end
 
 		tabElement = Array.new
@@ -53,17 +53,26 @@ class YamlSlot
 	def YamlSlot.ecrireYaml(nomFicSlotYaml, modele)
     
       begin
-	      file = File.open(nomFicSlotYaml, "w")
-	      file.syswrite("testNom".to_yaml()) #modele.joueur.pseudo
-	      file.syswrite("Expert".to_yaml()) #modele.difficulte.intitule # gérer par la classe Joueur 
+	      file = File.open("YAMLSlot/" + nomFicSlotYaml, "w")
+	      #file.syswrite("testNom".to_yaml()) #modele.joueur.pseudo
+	      #file.syswrite("Expert".to_yaml()) #modele.difficulte.intitule # gérer par la classe Joueur 
       							# /!\ Avoir un reader sur le modele dans joueur 
       							# ou passer en parametre de la méthode la difficulté ou le modele)
+      	puts "pseudo : "
+      	p modele.joueur.pseudo
+      	file.syswrite(modele.joueur.pseudo.to_yaml())
+      	puts "diff : " + modele.difficulte.intitule
+      	file.syswrite(modele.difficulte.intitule.to_yaml())
 	      d = Date.today
 	      date = d.mday.to_s + "/" + d.mon.to_s + "/" + d.year.to_s
+	      puts "date : " + date
 	      file.syswrite(date.to_yaml())
-	      file.syswrite(modele.to_yaml())
+	      puts "carte : "
+	      p modele.carte
+	      #file.syswrite(modele.carte.to_yaml())
+	    #  file.syswrite(modele.to_yaml()) # Marche pas pour l'instant, car peut etre que tous les champs ne sont pas bien remplis encore
 	   rescue
-			raise "Impossible d'ouvrir le fichier " + nomFicSlotYaml + ".yaml"
+			raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
 		ensure
 			file.close
 		end

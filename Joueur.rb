@@ -34,6 +34,7 @@ require "./Carte.rb"
 
 class Joueur < Personnage
    include Deplacable, Commercant
+   private_class_method :new
    @intitule
    @nombreRepos
    @niveau

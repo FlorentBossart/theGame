@@ -34,7 +34,7 @@
 	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
-	    <intitule>novice</intitule>
+	    <intitule>Novice</intitule>
 	    <longueurCarte>500</longueurCarte>
 	    <largeurCarte>500</largeurCarte>
 	    <energieDepart>1000</energieDepart>
@@ -48,7 +48,7 @@
 	    <pourcentageTerrain>0.8</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
-	    <intitule>moyen</intitule>
+	    <intitule>Moyen</intitule>
 	    <longueurCarte>1000</longueurCarte>
 	    <largeurCarte>1000</largeurCarte>
 	    <energieDepart>750</energieDepart>
@@ -62,7 +62,7 @@
 	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
-	    <intitule>expert</intitule>
+	    <intitule>Expert</intitule>
 	    <longueurCarte>2000</longueurCarte>
 	    <largeurCarte>2000</largeurCarte>
 	    <energieDepart>500</energieDepart>
