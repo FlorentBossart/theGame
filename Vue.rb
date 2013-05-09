@@ -148,10 +148,10 @@ class Vue
       
         #ETAPE CHOIX LIBRE
         when EnumStadePartie.CHOIX_LIBRE
-        
+          @zoneCtrl.majBoutons(@modele)
         #ETAPE PARTIE PERDUE 
         when EnumStadePartie.PERDU
-        
+          XmlClassements.ecrireXml(@modele)
         #ETAPE EQUIPEMENT ARMURE   
         when EnumStadePartie.EQUIPEMENT_ARMURE
        

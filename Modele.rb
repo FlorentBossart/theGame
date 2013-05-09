@@ -205,6 +205,9 @@ class Modele
        @notifications.push(notification)
    end
 
+   def lireNotification()
+     return @notifications.shift
+   end
 
    ##
    # Permet d'ajouter des ennemis au jeu.

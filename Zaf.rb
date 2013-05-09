@@ -62,7 +62,10 @@ class Zaf < Gtk::Frame
   end
 
   def majZaf(joueur)
-    @jauges
+    @jauges.majJauge(joueur)
+    while(!joueur.modele.notifications.empty?)
+      @console.afficherTexte(joueur.modele.lireNotification())
+    end
   end
 
 end
