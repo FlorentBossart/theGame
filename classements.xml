@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE classements_joueur [
+<!ELEMENT classements_joueur (joueur+)>
+<!ELEMENT joueur (nom, nb_ennemis_tues, distance, or, temps, difficulte)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT nb_ennemis_tues (#PCDATA)>
+<!ELEMENT distance (#PCDATA)>
+<!ELEMENT or (#PCDATA)>
+<!ELEMENT temps (#PCDATA)>
+<!ELEMENT difficulte (#PCDATA)>
+]>
+
+<classements_joueur/>
