@@ -161,7 +161,9 @@ class Controller
    # Action(s) à effectuer lors du clic sur le bouton repos
    #
   def reposAction
-    print "ZZzzzZZZzzzz Bt repos pressé!"
+    print "ZZzzzZZZzzzz Bt repos pressé!\n"
+    @modele.joueur.utiliserRepos() 
+    @modele.debutTour()
   end
 
     
@@ -228,6 +230,7 @@ class Controller
   #
   def interactionAction()
     print "oO Bt interaction pressé!"
+    @vue.zoneCtrl.bloquerBoutons()
     @vue.interactionModal.majInteractionModal()
   end
 

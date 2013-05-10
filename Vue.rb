@@ -38,7 +38,7 @@ class Vue
   @popUp
 
   
-  attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller
+  attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl
   
   def initialize()
     #Gtk.init();

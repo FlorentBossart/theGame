@@ -24,7 +24,7 @@
 	    <longueurCarte>5</longueurCarte>
 	    <largeurCarte>10</largeurCarte>
 	    <energieDepart>1000</energieDepart>
-	    <nbRepos>0</nbRepos>
+	    <nbRepos>3</nbRepos>
 	    <pnjAmisDepart>2</pnjAmisDepart>
 	    <pnjEnnemisDepart>2</pnjEnnemisDepart>
 	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
