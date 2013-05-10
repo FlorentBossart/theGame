@@ -70,7 +70,7 @@
 </reference>
 
 <reference>
-   <intitule_objet>bourse</intitule_objet>
+   <intitule_objet>icone bourse</intitule_objet>
    <img_ihm>./img/bourse.png</img_ihm>
 </reference>
 
@@ -81,12 +81,122 @@
 
 <reference>
    <intitule_objet>joueur</intitule_objet>
-   <img_ihm>./img/smiley.png</img_ihm>
+   <img_ihm>./img/joueur.png</img_ihm>
 </reference>
 
 <reference>
-   <intitule_objet>mechant</intitule_objet>
-   <img_ihm>./img/badsmiley.png</img_ihm>
+   <intitule_objet>chauve-souris</intitule_objet>
+   <img_ihm>./img/chauve_souris.png</img_ihm>
 </reference>
+
+<reference>
+   <intitule_objet>loup</intitule_objet>
+   <img_ihm>./img/loup.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>brigand</intitule_objet>
+   <img_ihm>./img/brigand.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>soldat</intitule_objet>
+   <img_ihm>./img/soldat.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>ogre</intitule_objet>
+   <img_ihm>./img/ogre.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>bottes en cuir</intitule_objet>
+   <img_ihm>./img/bottes_cuir.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>bottes en fer</intitule_objet>
+   <img_ihm>./img/bottes_fer.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>bottes en acier</intitule_objet>
+   <img_ihm>./img/bottes_acier.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>armure en cuir</intitule_objet>
+   <img_ihm>./img/armure_cuir.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>armure en fer</intitule_objet>
+   <img_ihm>./img/armure_fer.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>armure en acier</intitule_objet>
+   <img_ihm>./img/armure_acier.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>epee en bois</intitule_objet>
+   <img_ihm>./img/epee_bois.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>epee en fer</intitule_objet>
+   <img_ihm>./img/epee_fer.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>epee en acier</intitule_objet>
+   <img_ihm>./img/epee_acier.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>bout de pain</intitule_objet>
+   <img_ihm>./img/pain.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>brocolie vapeur</intitule_objet>
+   <img_ihm>./img/brocoli.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>steack de dinde</intitule_objet>
+   <img_ihm>./img/steack_dinde.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>pavé d'émeu</intitule_objet>
+   <img_ihm>./img/pave_emeu.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>poulet rôti</intitule_objet>
+   <img_ihm>./img/poulet.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>marchand</intitule_objet>
+   <img_ihm>./img/marchand.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>guerisseur</intitule_objet>
+   <img_ihm>./img/guerisseur.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>bourse</intitule_objet>
+   <img_ihm>./img/sac_or.png</img_ihm>
+</reference>
+	
+	
+	
+	
+	
 
 </ref_graphiques>

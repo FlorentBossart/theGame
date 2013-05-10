@@ -48,7 +48,7 @@ class Zaf < Gtk::Frame
     hbox2.add(Gtk::Label.new(@jauges.getJaugeNbRepos().to_s()));
     hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("repos")));
     hbox2.add(Gtk::Label.new(@jauges.getJaugeOr().to_s()));
-    hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("bourse")));
+    hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("icone bourse")));
     vbox.add(@jauges.getJaugeEnergie());
     vbox.add(@jauges.getJaugeExperience());
     vbox.add(Gtk::Label.new("Niveau : "+Gtk::Label.new(@jauges.getNiveau().to_s()).text));
