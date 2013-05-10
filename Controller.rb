@@ -242,9 +242,10 @@ class Controller
   # elem : element avec lequel on souhaite interagir
   # joueur : afin d'effectuer l'action de l'element sur le joueur
   #
-  def interactionElementCreer(btInteraction,elem,joueur)
+  def interactionElementCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
-        interactionElementAction(elem)
+        interactionElementAction(elem,joueur)
+        dialog.destroy
      }
   end
       
@@ -255,8 +256,8 @@ class Controller
   # == Parameters:
   # elem : element avec lequel on souhaite interagir
   #
-  def interactionElementAction(elem)
-    print "oO Bt interaction "+elem.intitule+" pressé!"
+  def interactionElementAction(elem,joueur)
+    print "oO Bt interaction "+elem.getIntitule+" pressé!"
     elem.interaction(joueur)
   end
   
