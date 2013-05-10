@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby 
 
 ## 
-# Fichier           : CombatModal.rb 
+# Fichier           : InteractionModal.rb 
 # Auteur           : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe représente un CombatModal. Un CombatModal est défini par : 
+# Cette classe représente une InteractionModal. Un InteractionModal est défini par : 
 # * Une vue auquel il est lié
 # * Des references Graphiques representant la base de donnée image
 # * Un modele sur lequel l'objet ira chercher les informations
@@ -21,13 +21,19 @@ require './Controller.rb'
 # Classe qui instancie un popup permettant de faire un choix sur les interactions possibles
 # Depend de la vue
 #
-
-
 class InteractionModal
   private_class_method :new
   @vue
   @modele
   @referencesGraphiques
+  
+  ## 
+  # Crée une nouvelle InteractionModal à partir des informations passées en paramètre. 
+  # 
+  # == Parameters: 
+  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachée
+  # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
+  # 
   def initialize(modele,vue)
     @vue=vue
     @modele=modele
@@ -36,12 +42,22 @@ class InteractionModal
   end
   
   
-  
+  ## 
+  # Instancie une InterfaceModal
+  # 
+  # == Parameters: 
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
+  # 
   def InteractionModal.creer(modele,vue)
     new(modele,vue)
   end
   
   
+  ## 
+  # Cree un PopUp affichant les choix disponibles sur la case actuelle du joueur
+  # affiche qu'il n'y a rien a faire s'il n'y a rien sur la case
+  # 
   def majInteractionModal()
     tooltips = Gtk::Tooltips.new
     
@@ -51,11 +67,7 @@ class InteractionModal
       # Creation du popup
       dialog = Gtk::Dialog.new("Interaction", $main_application_window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
-
-      # Ensure that the dialog box is destroyed when the user responds.
       dialog.signal_connect('response') { dialog.destroy }
-
-      # Add the message in a label, and show everything we've added to the dialog.
       dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
       listeElements.each{ |element| 
 
@@ -63,30 +75,30 @@ class InteractionModal
         tooltips.set_tip( button, element.to_s, nil )
         
         #version juste textuelle
-       # button=Gtk::Button.new(element.intitule())
+        # button=Gtk::Button.new(element.intitule())
         #tooltips.set_tip( button, element.to_s, nil )
 
-        @vue.controller.interactionElementCreer(button,elem,@modele.joueur);
+        @vue.controller.interactionElementCreer(button,elem,@modele.joueur)
         dialog.vbox.add(button)
        }
       dialog.show_all
       
     else
-                # Create the dialog
-          dialog = Gtk::Dialog.new("Interaction", $main_application_window,
+       dialog = Gtk::Dialog.new("Interaction", $main_application_window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
                          [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-
-      # Ensure that the dialog box is destroyed when the user responds.
       dialog.signal_connect('response') { dialog.destroy }
-
-      # Add the message in a label, and show everything we've added to the dialog.
       dialog.vbox.add(Gtk::Label.new("Il n'y a rien a faire sur cette emplacement !"))
       dialog.show_all
     end
-
-    
   end
-
+  
+  
+  ## 
+  # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
+  # 
+  def to_s
+    return "Je suis une InterfaceModal"
+  end
   
 end
