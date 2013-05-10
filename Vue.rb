@@ -150,9 +150,6 @@ def afficheCase(image,caseAffiche)
   
   #aides+ennemis
   aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeEnnemis
-  if aidesEnnemis.length!=0
-    puts aidesEnnemis.length
-  end
   for e in aidesEnnemis
     if(positions.empty?)
       return nil
@@ -160,9 +157,6 @@ def afficheCase(image,caseAffiche)
     position=positions.shift()
     x=position[0]
     y=position[1]
-    #puts e.class
-    puts @referencesGraphiques.getRefGraphique(e.getIntitule().downcase)
-    #puts e.getIntitule()
     pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase))
     pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
     pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)

@@ -24,11 +24,11 @@
 	    <longueurCarte>5</longueurCarte>
 	    <largeurCarte>10</largeurCarte>
 	    <energieDepart>1000</energieDepart>
-	    <nbRepos>3</nbRepos>
-	    <pnjAmisDepart>10</pnjAmisDepart>
-	    <pnjEnnemisDepart>30</pnjEnnemisDepart>
+	    <nbRepos>0</nbRepos>
+	    <pnjAmisDepart>2</pnjAmisDepart>
+	    <pnjEnnemisDepart>2</pnjEnnemisDepart>
 	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
-	    <objetsDepart>10</objetsDepart>
+	    <objetsDepart>4</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
 	    <nbToursInterGenerations>15</nbToursInterGenerations>
 	    <pourcentageTerrain>1</pourcentageTerrain>
