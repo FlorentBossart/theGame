@@ -149,7 +149,7 @@ def afficheCase(image,caseAffiche)
   end
   
   #aides+ennemis
-  aidesEnnemis=caseAffiche.listeEnnemis
+  aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeEnnemis
   if aidesEnnemis.length!=0
     puts aidesEnnemis.length
   end
