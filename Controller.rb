@@ -53,12 +53,12 @@ class Controller
   # Action(s) à effectuer lors du clic sur le bouton de deplacement haut
   #
   def deplacementHautAction
-    print "/\ Bt déplacement haut pressé!"
+    print "/\ Bt déplacement haut pressé!\n"
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
     @modele.joueur.deplacement(EnumDirection.NORD)
-
+    @modele.debutTour()
   end
 
     
@@ -80,11 +80,12 @@ class Controller
    # Action(s) à effectuer lors du clic sur le bouton deplacement bas
    #
   def deplacementBasAction
-    print "\/ Bt déplacement bas pressé!"
+    print "\/ Bt déplacement bas pressé!\n"
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
     @modele.joueur.deplacement(EnumDirection.SUD)
+    @modele.debutTour()
   end
  
     
@@ -104,11 +105,12 @@ class Controller
    # Action(s) à effectuer lors du clic sur le bouton de deplacement gauche
    #
   def deplacementGaucheAction
-    print "<< Bt déplacement gauche pressé!"
+    print "<< Bt déplacement gauche pressé!\n"
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
     @modele.joueur.deplacement(EnumDirection.OUEST)
+    @modele.debutTour()
   end
         
 
@@ -133,11 +135,12 @@ class Controller
   # Action(s) à effectuer lors du clic sur le bouton de deplacement droit
   #
   def deplacementDroiteAction
-    print ">> Bt déplacement droite pressé!"
+    print ">> Bt déplacement droite pressé!\n"
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
     @modele.joueur.deplacement(EnumDirection.EST)
+    @modele.debutTour()
   end
         
 

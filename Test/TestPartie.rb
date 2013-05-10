@@ -8,9 +8,7 @@ require './Vue.rb'
 
 #AffichageDebug.On()
 
-# Choix pseudo
-puts "\nChoix pseudo:"
-pseudo = gets.chomp
+pseudo = "pseudoADefinirALaFin"
 
 # Remplissage des bibliothèque
 Modele.initialisationBibliotheques()

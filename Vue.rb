@@ -171,9 +171,10 @@ end
   end
 
   def actualiser
+    puts "debut actualiser"
+    #maj Carte Et Zaf
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
     @zaf.majZaf(@modele.joueur)
-    
     case @modele.stadePartie
       
         #ETAPE CHOIX LIBRE
@@ -204,9 +205,7 @@ end
         when EnumStadePartie.INTERACTION_GUERISSEUR    
         
         end #fin case
-        
-        afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-        @zaf.majZaf(@modele.joueur)
+        puts "fin actualiser"
   end
 
 end

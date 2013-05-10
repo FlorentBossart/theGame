@@ -298,6 +298,7 @@ class Modele
    # il faut attaquer les ennemis deja present si il y en a
    #
    def debutTour()
+     puts "debut debutTour"
      if(!@joueur.toujoursEnVie?())
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
@@ -310,6 +311,7 @@ class Modele
             choixLibre()
         end
      end
+     puts "fin debutTour"
    end
   
   ##
