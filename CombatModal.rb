@@ -78,14 +78,16 @@ class CombatModal
       end
     end
     
-    dialog = Gtk::Dialog.new("Combat", controller.vue,
+    dialog = Gtk::Dialog.new("Combat", $main_application_window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous enfiler une armure?"))
       
     listeArmure.each{ |item|
-        button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+        image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
+        button=Gtk::Button.new()
+        button.image = image
         tooltips.set_tip( button, element.to_s, nil )
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
        # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
@@ -111,14 +113,16 @@ class CombatModal
      end
     end
     
-    dialog = Gtk::Dialog.new("Combat", controller.vue,
+    dialog = Gtk::Dialog.new("Combat", $main_application_window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous utiliser une arme?"))
       
     listeArmure.each{ |item|
-      button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+      image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
+      button=Gtk::Button.new()
+      button.image = image
       tooltips.set_tip( button, element.to_s, nil )
       
       #version juste textuelle, peut etre y ajouter les stats de l'item en question

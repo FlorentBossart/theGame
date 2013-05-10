@@ -64,21 +64,20 @@ class InteractionModal
     if(@modele.joueur.casePosition.presenceAides?())
       
       listeElements=@modele.joueur.casePosition.listeElements()
+
       # Creation du popup
       dialog = Gtk::Dialog.new("Interaction", $main_application_window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
       dialog.signal_connect('response') { dialog.destroy }
       dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
+
       listeElements.each{ |element| 
-
-        button=Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.intitule)))
+        image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.getIntitule()))
+        button=Gtk::Button.new()
+        button.image = image
         tooltips.set_tip( button, element.to_s, nil )
-        
-        #version juste textuelle
-        # button=Gtk::Button.new(element.intitule())
-        #tooltips.set_tip( button, element.to_s, nil )
 
-        @vue.controller.interactionElementCreer(button,elem,@modele.joueur)
+        @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
         dialog.vbox.add(button)
        }
       dialog.show_all
