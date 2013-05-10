@@ -22,7 +22,7 @@ class PopUp
   @vue
   attr_reader :vue, :referencesGraphiques, :message
   ## 
-  # Crée un nouveau PopUp à partir des informations passées en paramètre. 
+  # Crée un nouveau PopUp. 
   # 
   # == Parameters: 
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
@@ -52,7 +52,7 @@ class PopUp
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
   #
   def affichePopUp(message)
-    dialog = Gtk::Dialog.new("Ceci est un message important !", @vue,
+    dialog = Gtk::Dialog.new("Ceci est un message important !", $main_application_window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -66,7 +66,7 @@ class PopUp
   #
   def afficheChoixMarchand()
 
-    dialog = Gtk::Dialog.new("Combat", controller.vue,
+    dialog = Gtk::Dialog.new("Commerce", $main_application_window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -79,6 +79,38 @@ class PopUp
     dialog.vbox.add(buttonVendre)
 
    dialog.show_all
+  end
+    
+  
+  ## 
+  # Affiche le PopUp contenant un choix entre les différentes options de soins
+  #
+  def afficheChoixGuerisseur(joueur,guerisseur)
+  
+    dialog = Gtk::Dialog.new("Soigneur", $main_application_window,
+             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+    dialog.signal_connect('response') { dialog.destroy }
+    dialog.vbox.add(Gtk::Label.new("Voulez vous regagner de l'energie ?"))
+    buttonSoinMini=Gtk::Button.new("25% energie pour 30 or")
+    buttonSoinMoyen=Gtk::Button.new("50% energie pour 50 or")
+    buttonSoinMax=Gtk::Button.new("75% energie pour 70 or")
+    @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur)
+    dialog.vbox.add(buttonSoinMini)
+    @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur)
+    dialog.vbox.add(buttonSoinMoyen)
+    @vue.controller.soinCreer(buttonSoinMax,joueur,2,guerisseur)
+    dialog.vbox.add(buttonSoinMax)
+  
+   dialog.show_all
+  end
+
+
+  ## 
+  # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
+  # 
+  def to_s
+    return "Je suis un popup"
   end
   
 end

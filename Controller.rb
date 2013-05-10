@@ -289,6 +289,21 @@ class Controller
     print "oO Bt achatMarchandAction  pressé!"
   end
       
+  
+  def soinCreer(btInteraction,joueur, choix, guerisseur)
+  btInteraction.signal_connect('clicked'){
+
+    soinAction(joueur,choix,guerisseur)
+  }
+  end
+  
+  
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
+  def soinAction(joueur,choix,guerisseur)
+    guerisseur.guerir(joueur,choix)
+  end
       
   ##
   # equipe un item lors de l'appuie sur le bouton correspondant
