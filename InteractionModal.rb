@@ -1,3 +1,17 @@
+#!/usr/bin/env ruby 
+
+## 
+# Fichier           : CombatModal.rb 
+# Auteur           : L3SPI - Groupe de projet B 
+# Fait partie de : TheGame 
+# 
+# Cette classe représente un CombatModal. Un CombatModal est défini par : 
+# * Une vue auquel il est lié
+# * Des references Graphiques representant la base de donnée image
+# * Un modele sur lequel l'objet ira chercher les informations
+# 
+
+
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'

@@ -131,10 +131,10 @@ class CombatModal
 
   end
   
+  
   ## 
   # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
   # 
-  
   def to_s
     return "Je suis un CombatModal"
   end
