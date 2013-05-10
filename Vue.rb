@@ -133,7 +133,7 @@ class Vue
 def afficheCase(image,caseAffiche)
   tailleCase=100
   tailleCase_f=tailleCase.to_f
-  positions=Array.new([[0.1,0.1],[tailleCase_f/3,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[tailleCase_f/3,2*tailleCase_f/3]])
+  positions=Array.new([[0.1,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[2*tailleCase_f/3,2*tailleCase_f/3],[tailleCase_f/3,0.1]])
     
   #terrain
   pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
@@ -142,7 +142,7 @@ def afficheCase(image,caseAffiche)
   #joueur
   if(caseAffiche.joueur!=nil)
     pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
-    pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+    pixbufElement=pixbufElement.scale(tailleCase_f/2, tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
     x=tailleCase_f/3
     y=tailleCase_f/3
     pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)

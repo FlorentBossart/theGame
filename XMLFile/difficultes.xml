@@ -26,7 +26,7 @@
 	    <energieDepart>1000</energieDepart>
 	    <nbRepos>3</nbRepos>
 	    <pnjAmisDepart>10</pnjAmisDepart>
-	    <pnjEnnemisDepart>5</pnjEnnemisDepart>
+	    <pnjEnnemisDepart>30</pnjEnnemisDepart>
 	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
 	    <objetsDepart>10</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
