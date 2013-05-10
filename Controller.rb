@@ -25,7 +25,7 @@ class Controller
    #
    def initialize(modele, vue)
       @modele = modele
-      @vue    = vue;
+      @vue    = vue
    end
    
    def Controller.creer(modele,vue)
@@ -35,23 +35,23 @@ class Controller
     
     
      
-      ##
-      # Constructeur privé : crée un nouveau DeplacementHaut : classe interne pour gérer l'action d'un clic sur le bouton DeplacementHaut
-      #
-      # == Parameters:
-      # btDeplacementHaut : le gtkButton qu'il faudra lier à l'action d'un déplacement vers le haut
-      #
+  ##
+  #  Fait le lien entre un bouton et l'action liée au deplacement haut
+  #
+  # == Parameters:
+  # btDeplacementHaut : le gtkButton qu'il faudra lier à l'action d'un déplacement vers le haut
+  #
   def deplacementHautCreer(btDeplacementHaut)
       btDeplacementHaut.signal_connect('button_press_event'){
-        deplacementHautAction();
+        deplacementHautAction()
       }
   end
       
 
              
-       ##
-       # Action(s) à effectuer lors du clic sur le bouton DeplacementHaut
-       #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton de deplacement haut
+  #
   def deplacementHautAction
     print "/\ Bt déplacement haut pressé!"
     if(@modele.tourDejaPasse == false)
@@ -64,21 +64,21 @@ class Controller
     
     
   ##
-  # Constructeur privé : crée un nouveau DeplacementBas : classe interne pour gérer l'action d'un clic sur le bouton DeplacementBas
+  # Fait le lien entre un bouton et l'action liée au deplacement bas
   #
   # == Parameters:
   # btDeplacementBas : le gtkButton qu'il faudra lier à l'action d'un déplacement vers le bas
   #
   def deplacementBasCreer(btDeplacementBas)
       btDeplacementBas.signal_connect('button_press_event'){
-        deplacementBasAction();
+        deplacementBasAction()
       }
   end
         
 
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton DeplacementHaut
-        #
+   ##
+   # Action(s) à effectuer lors du clic sur le bouton deplacement bas
+   #
   def deplacementBasAction
     print "\/ Bt déplacement bas pressé!"
     if(@modele.tourDejaPasse == false)
@@ -88,21 +88,21 @@ class Controller
   end
  
     
-        ##
-        # Constructeur privé : crée un nouveau DeplacementGauche : classe interne pour gérer l'action d'un clic sur le bouton DeplacementGauche
-        #
-        # == Parameters:
-        # btDeplacementGauche : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la gauche
-        #
+   ##
+   # Fait le lien entre un bouton et l'action liée au deplacement gauche
+   #
+   # == Parameters:
+   # btDeplacementGauche : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la gauche
+   #
   def deplacementGaucheCreer(btDeplacementGauche)
      btDeplacementGauche.signal_connect('button_press_event'){
-       deplacementGaucheAction();
+       deplacementGaucheAction()
      }
   end
         
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton DeplacementGauche
-        #
+   ##
+   # Action(s) à effectuer lors du clic sur le bouton de deplacement gauche
+   #
   def deplacementGaucheAction
     print "<< Bt déplacement gauche pressé!"
     if(@modele.tourDejaPasse == false)
@@ -115,23 +115,23 @@ class Controller
     
   
         
-        ##
-        # Constructeur privé : crée un nouveau DeplacementDroite : classe interne pour gérer l'action d'un clic sur le bouton DeplacementDroite
-        #
-        # == Parameters:
-        # btDeplacementDroite : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la droite
-        #
+   ##
+   # Fait le lien entre un bouton et l'action liée au deplacement droit
+   #
+   # == Parameters:
+   # btDeplacementDroite : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la droite
+   #
   def deplacementDroiteCreer(btDeplacementDroite)
       btDeplacementDroite.signal_connect('button_press_event'){
-          deplacementDroiteAction();
+          deplacementDroiteAction()
         }
     end
         
   
         
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton DeplacementDroite
-        #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton de deplacement droit
+  #
   def deplacementDroiteAction
     print ">> Bt déplacement droite pressé!"
     if(@modele.tourDejaPasse == false)
@@ -142,87 +142,87 @@ class Controller
         
 
         
-        ##
-        # Constructeur privé : crée un nouveau Repos : classe interne pour gérer l'action d'un clic sur le bouton repos
-        #
-        # == Parameters:
-        # btRepos : le gtkButton qu'il faudra lier à l'action d'un repos
-        #
+   ##
+   # Fait le lien entre un bouton et l'action liée au repos
+   #
+   # == Parameters:
+   # btRepos : le gtkButton qu'il faudra lier à l'action d'un repos
+   #
   def reposCreer(btRepos)
       btRepos.signal_connect('clicked'){
-          reposAction();
+          reposAction()
         }
     end
         
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton repos
-        #
+   ##
+   # Action(s) à effectuer lors du clic sur le bouton repos
+   #
   def reposAction
     print "ZZzzzZZZzzzz Bt repos pressé!"
   end
 
     
         
-        ##
-        # Constructeur privé : crée un nouvel Inventaire : classe interne pour gérer l'action d'un clic sur le bouton inventaire
-        #
-        # == Parameters:
-        # btInventaire : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
-        #
+   ##
+   #  Fait le lien entre un bouton et l'action liée à l'affichage de l'inventaire
+   #
+   # == Parameters:
+   # btInventaire : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
+   #
   def inventaireCreer(btInventaire)
      btInventaire.signal_connect('clicked'){
-        inventaireAction();
+        inventaireAction()
       }
   end
         
 
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton inventaire
-        #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
   def inventaireAction
     print "oO Bt inventaire pressé!"
   end
 
 
-        ##
-        # Constructeur privé : crée un nouveau Menu : classe interne pour gérer l'affichage du menu
-        #
-        # == Parameters:
-        # btMenu : le gtkButton qu'il faudra lier aux actions d'affichage du menu
-        #
+   ##
+   # Fait le lien entre un bouton et l'action liée à l'affichage du menu
+   #
+   # == Parameters:
+   # btMenu : le gtkButton qu'il faudra lier aux actions d'affichage du menu
+   #
   def menuCreer(btMenu)
       btMenu.signal_connect('clicked'){
-        menuAction();
+        menuAction()
       }
   end
         
         
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton inventaire
-        #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton menu
+  #
   def menuAction
     puts "<--> Affichage du menu"
     @vue.menu.afficherMenu()
   end
 
     
-        ##
-        # Constructeur privé : crée une nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton Interaction
-        #
-        # == Parameters:
-        # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
-        # vue : reference a la vue a passer aux instances d'InteractionModal
+  ##
+  # Fait le lien entre un bouton et l'action liée au menu d'interactions
+  #
+  # == Parameters:
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  #
   def interactionCreer(btInteraction)
       btInteraction.signal_connect('clicked'){
-        interactionAction();
+        interactionAction()
       }
   end
         
    
         
-        ##
-        # Action(s) à effectuer lors du clic sur le bouton inventaire
-        #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
   def interactionAction()
     print "oO Bt interaction pressé!"
     @vue.interactionModal.majInteractionModal()
@@ -231,65 +231,86 @@ class Controller
     
 
       
-      ##
-      # Constructeur privé : crée une nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton Interaction
-      #
-      # == Parameters:
-      # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
-      #
+  ##
+  # Fait le lien entre un bouton et l'action liée a un element
+  #
+  # == Parameters:
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # elem : element avec lequel on souhaite interagir
+  # joueur : afin d'effectuer l'action de l'element sur le joueur
+  #
   def interactionElementCreer(btInteraction,elem,joueur)
       btInteraction.signal_connect('clicked'){
-
         interactionElementAction(elem)
      }
   end
       
       
-      ##
-      # Action(s) à effectuer lors du clic sur le bouton inventaire
-      #
+  ##
+  # Action(s) à effectuer lors du clic sur un bouton <element>
+  #
+  # == Parameters:
+  # elem : element avec lequel on souhaite interagir
+  #
   def interactionElementAction(elem)
     print "oO Bt interaction "+elem.intitule+" pressé!"
     elem.interaction(joueur)
   end
   
+  
   ##
-  # Constructeur privé : crée une nouvel Interaction : classe interne pour gérer l'action d'un clic sur le bouton Interaction
+  # Fait le lien entre un bouton et l'action liée a un menu d'achat
   #
   # == Parameters:
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   #
-  def achatMarchandCreer(btInteraction,elem,joueur)
+  def achatMarchandCreer(btInteraction)
   btInteraction.signal_connect('clicked'){
 
-    achatMarchandAction(elem)
+    achatMarchandAction()
   }
   end
   
   
   ##
-  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  # Action(s) à effectuer lors du clic sur le bouton d'achat
   #
-  def achatMarchandAction(elem)
+  def achatMarchandAction()
     print "oO Bt achatMarchandAction  pressé!"
   end
   
-  def vendreMarchandCreer(btInteraction,elem,joueur)
+  
+  ##
+  # Fait le lien entre un bouton et l'action liée a un menu de vente
+  #
+  # == Parameters:
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  #
+  def vendreMarchandCreer(btInteraction)
   btInteraction.signal_connect('clicked'){
 
-    vendreMarchandAction(elem)
+    vendreMarchandAction()
   }
   end
   
   
   ##
-  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  # Action(s) à effectuer lors du clic sur le bouton de vente
   #
-  def vendreMarchandAction(elem)
-    print "oO Bt achatMarchandAction  pressé!"
+  def vendreMarchandAction()
+    print "oO Bt venndreMarchandAction  pressé!"
   end
       
   
+  ##
+  # Fait le lien entre un bouton et l'action liée au soin
+  #
+  # == Parameters:
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # joueur : le joueur qui doit recevoir le soin
+  # choix : integer correspondant au soin choisi
+  # guerisseur : le guerisseur repondant a la demande de soin
+  #
   def soinCreer(btInteraction,joueur, choix, guerisseur)
   btInteraction.signal_connect('clicked'){
 
@@ -301,14 +322,23 @@ class Controller
   ##
   # Action(s) à effectuer lors du clic sur le bouton inventaire
   #
+  # == Parameters:
+  # joueur : le joueur qui doit recevoir le soin
+  # choix : integer correspondant au soin choisi
+  # guerisseur : le guerisseur repondant a la demande de soin
+  #
   def soinAction(joueur,choix,guerisseur)
     guerisseur.guerir(joueur,choix)
   end
       
+  
   ##
   # equipe un item lors de l'appuie sur le bouton correspondant
   #
-  
+  # == Parameters:
+  # joueur : le joueur qui doit equiper l'item
+  # elem : element a equiper
+  #
   def equiperItemCreer(btInteraction,elem,joueur)
       btInteraction.signal_connect('clicked'){
         equiperItemAction(joueur,elem)
@@ -316,9 +346,13 @@ class Controller
   end
       
       
-      ##
-      # Action(s) à effectuer lors du clic sur le bouton inventaire
-      #
+  ##
+  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  #
+  # == Parameters:
+  # joueur : le joueur qui doit equiper l'item
+  # elem : element a equiper
+  #
   def equiperItemAction(joueur,elem)
     joueur.utiliser(elem)
     print "oO Bt interaction "+elem.intitule+" pressé!"
