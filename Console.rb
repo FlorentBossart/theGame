@@ -37,10 +37,17 @@ class Console < Gtk::ScrolledWindow
   
   
   def afficherTexte(texte)
+     nomMarque="finTxt"
      #on recupere le buffer du textview
-     buffer=@console.buffer();
+     buffer=@console.buffer()
+     if(buffer.get_mark(nomMarque)!=nil)
+         buffer.delete_mark(nomMarque)
+     end
      #on ajoute le texte au buffer
-     buffer.set_text(buffer.get_text+"\n"+texte); 
+     buffer.set_text(buffer.get_text+"\n"+texte)
+     iter_fin=buffer.end_iter()
+     mark_fin=buffer.create_mark(nomMarque, iter_fin, true)
+     @console.scroll_mark_onscreen(mark_fin)
   end
   
   
