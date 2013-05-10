@@ -62,8 +62,8 @@ class Vue
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
-    @hauteurAfficheCarte = 11
-    @largeurAfficheCarte = 23
+    @hauteurAfficheCarte = 5
+    @largeurAfficheCarte = 10
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
@@ -125,16 +125,47 @@ class Vue
 
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
-        if(@carte.getCaseAt(x+debutX,y+debutY).joueur!=nil)
-          @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).joueur().getIntitule().downcase)))
-        elsif(!@carte.getCaseAt(x+debutX,y+debutY).listeEnnemis.empty?())
-          @vue[x][y].file=((@referencesGraphiques.getRefGraphique("mechant")))
-        else
-          @vue[x][y].file=((@referencesGraphiques.getRefGraphique(@carte.getCaseAt(x+debutX,y+debutY).getIntitule().downcase)))
-        end
+        afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
       end
     end
   end
+  
+def afficheCase(image,caseAffiche)
+  tailleCase=100
+  tailleCase_f=tailleCase.to_f
+  positions=Array.new([[0.1,0.1],[tailleCase_f/3,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[tailleCase_f/3,2*tailleCase_f/3]])
+    
+  #terrain
+  pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+  pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR) 
+     
+  #joueur
+  if(caseAffiche.joueur!=nil)
+    pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
+    pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+    x=tailleCase_f/3
+    y=tailleCase_f/3
+    pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+  end
+  
+  #aides+ennemis
+  aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeElements
+  for e in aidesEnnemis
+    if(positions.empty?)
+      return nil
+    end
+    position=positions.shift()
+    x=position[0]
+    y=position[1]
+    pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("joueur"))
+    #        e.getIntitule().downcase))
+    pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+    pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+        
+   image.set_pixbuf(pixbufTerrain)
+   return nil
+end  
 
   def getZaf()
     return @zaf
