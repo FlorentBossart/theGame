@@ -319,6 +319,7 @@ class Controller
   btInteraction.signal_connect('clicked'){
 
     soinAction(joueur,choix,guerisseur)
+    dialog.destroy
   }
   end
   
@@ -346,6 +347,7 @@ class Controller
   def equiperItemCreer(btInteraction,elem,joueur)
       btInteraction.signal_connect('clicked'){
         equiperItemAction(joueur,elem)
+        dialog.destroy
      }
   end
       
