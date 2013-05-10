@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.dltk.ruby.core.nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>img/bottes_acier.png</name>
-			<type>1</type>
-			<location>/home/jack/Images/bottes_acier.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
