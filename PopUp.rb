@@ -52,7 +52,7 @@ class PopUp
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
   #
   def affichePopUp(message)
-    dialog = Gtk::Dialog.new("Ceci est un message important !", $main_application_window,
+    dialog = Gtk::Dialog.new("Ceci est un message important !", @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -66,7 +66,7 @@ class PopUp
   #
   def afficheChoixMarchand()
 
-    dialog = Gtk::Dialog.new("Commerce", $main_application_window,
+    dialog = Gtk::Dialog.new("Commerce", @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -87,7 +87,7 @@ class PopUp
   #
   def afficheChoixGuerisseur(joueur,guerisseur)
   
-    dialog = Gtk::Dialog.new("Soigneur", $main_application_window,
+    dialog = Gtk::Dialog.new("Soigneur", @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }

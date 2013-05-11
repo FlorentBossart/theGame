@@ -78,7 +78,7 @@ class CombatModal
       end
     end
     
-    dialog = Gtk::Dialog.new("Combat", $main_application_window,
+    dialog = Gtk::Dialog.new("Combat", @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -113,7 +113,7 @@ class CombatModal
      end
     end
     
-    dialog = Gtk::Dialog.new("Combat", $main_application_window,
+    dialog = Gtk::Dialog.new("Combat", @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
