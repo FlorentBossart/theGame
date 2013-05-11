@@ -108,7 +108,7 @@ class Vue
 
     initCarte();
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
-    valign = Alignment.new(0.5,0.5,0,0);
+    valign = Alignment.new(0.5,1,0,0);
     valign.add(@carteVue);
 
     vbox.add(valign)
