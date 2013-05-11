@@ -60,28 +60,18 @@ class InteractionModal
   # 
   def majInteractionModal()
     tooltips = Gtk::Tooltips.new
-    
     if(@modele.joueur.casePosition.presenceAides?())
       
       listeElements=@modele.joueur.casePosition.listeElements()
 
       # Creation du popup
-      dialog = Gtk::Dialog.new("Interaction", $main_application_window,
+      dialog = Gtk::Dialog.new("Interaction", @vue.window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
       dialog.signal_connect('response') { dialog.destroy }
       dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
-      compt=0
       listeElements.each{ |element| 
-        compt+=1
-        #image = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase),80,80)
-          #      image=image.scale(80.0, 80.0,Gdk::Pixbuf::INTERP_BILINEAR) 
-        #taille=Gtk::IconSize.register("interaction"+compt.to_s, 80, 80)
-       # image.icon_size=taille
+        
         button=Gtk::Button.new()
-        #button.set_size_request(100, 100)
-        
-        
-        
         image= Gtk::Image.new()
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
         pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)

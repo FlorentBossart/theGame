@@ -31,13 +31,14 @@ class Vue
   @largeurAfficheCarte; #largeurVisible
   @modele
   @controller
-  @x; #coordonné actuel
-  @y; #coordonné actuel
+  @x #coordonné actuel
+  @y #coordonné actuel
   @combatModal
   @interactionModal
   @popUp
-
-  attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl
+  @window
+  
+  attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
     #Gtk.init();
     #@carteVue = Modele.carte;
@@ -72,16 +73,16 @@ class Vue
     @interactionModal=InteractionModal.creer(@modele,self)
     @combatModal=CombatModal.creer(self,@modele)
 
-    window = Gtk::Window.new()
-    window.signal_connect('destroy') {
+    @window = Gtk::Window.new()
+    @window.signal_connect('destroy') {
       Gtk.main_quit()
     }
-    window.signal_connect('size_request'){
+    @window.signal_connect('size_request'){
 
       #puts window.size()[0]; #x
       #puts window.size()[1]; #y
-      x = (window.size()[0]/100);
-      y = (window.size()[1]-150)/100;
+      x = (@window.size()[0]/100);
+      y = (@window.size()[1]-150)/100;
 
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
         if(@carteVue != nil)then
@@ -117,11 +118,11 @@ class Vue
     vbox.add(valignBot);
 
     #window.set_resizable(false)
-    window.add(vbox)
+    @window.add(vbox)
 
-    window.set_title("THE GAME")
+    @window.set_title("THE GAME")
 
-    window.show_all()
+    @window.show_all()
 
     #lancé ici car on a pas encore de bouton debut partie
     @modele.debutTour()
