@@ -9,7 +9,7 @@
 #* Une liste représentant les statistiques des joueurs novices
 #* Une liste représentant les statistiques des joueurs moyens
 #* Une liste représentant les statistiques des joueurs experts
-# Chaque joueur a un nom, un nombre d'ennmis tués, une distance total parcourue, un total d'or, un temps total de jeu et un niveau de difficulté
+# Chaque joueur a un nom, un nombre d'ennmis tués, une distance total parcourue, un total d'or, un temps total de jeu, un score et un niveau de difficulté
 #
 
 class Classements
@@ -35,17 +35,18 @@ class Classements
    #* <b>nbEnnemisTues :</b> un entier correspondant au nombre d'ennemis tués par le joueur
    #* <b>distance :</b> un entier correspondant à la distance totale parcourue par le joueur
    #* <b>orTotal :</b> un entier correspondant à l'or total accumulé par le joueur
-   #* <b>temps :</b> un entier correspondant au temps de jeu total du joueur
+   #* <b>temps :</b> un entier correspondant au temps de jeu total du joueur en secondes
+   #* <b>score :</b> un entier correspondant au score obtenu par le joueur au cours de sa partie
    #* <b>difficulte :</b> une chaine de caractères correspondant à la difficulté du joueur qui permet de choisir la liste à laquelle il faut ajouter les statistiques
    # 
-   def addJoueur(nom, nbEnnemisTues, distance, orTotal, temps, difficulte)
+   def addJoueur(nom, nbEnnemisTues, distance, orTotal, temps, score, difficulte)
    	
    	if(difficulte == "Novice")
-			@listeStatsNovice.push([nom, nbEnnemisTues, distance, orTotal, temps])
+			@listeStatsNovice.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
 		elsif(difficulte == "Moyen")
-			@listeStatsMoyen.push([nom, nbEnnemisTues, distance, orTotal, temps])
+			@listeStatsMoyen.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
 		elsif(difficulte == "Expert")
-			@listeStatsExpert.push([nom, nbEnnemisTues, distance, orTotal, temps])
+			@listeStatsExpert.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
 		end
 		
    end
