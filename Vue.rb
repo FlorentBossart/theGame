@@ -85,8 +85,8 @@ class Vue
 
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
         if(@carteVue != nil)then
-          @largeurAfficheCarte = x;
-          @hauteurAfficheCarte = y;
+          #@largeurAfficheCarte = x;
+          #@hauteurAfficheCarte = y;
         end
 
       end
