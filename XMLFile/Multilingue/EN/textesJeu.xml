@@ -105,7 +105,7 @@
 		<contenu> INTITULE    Protection: PROTEC   Price: PRICE </contenu>
 	</texte>
 	<texte id="descTypeMangeable">
-		<contenu> INTITULE    Energy when used: PROTEC   Price: PRICE </contenu>
+		<contenu> INTITULE    Energy when used: ENERGIE  Price: PRICE </contenu>
 	</texte>
 	
 </textesJeu>
