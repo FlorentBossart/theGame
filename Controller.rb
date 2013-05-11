@@ -9,6 +9,7 @@
 #h
 
 require 'Vue.rb'
+require 'Audio.rb'
 
 
 class Controller
@@ -26,6 +27,8 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
+      Audio.load()
+      Audio.playSoundLoop("mario")
    end
    
    def Controller.creer(modele,vue)
@@ -54,6 +57,7 @@ class Controller
   #
   def deplacementHautAction
     print "/\ Bt déplacement haut pressé!\n"
+     Audio.playSound("deplacement")
      @modele.joueur.deplacement(EnumDirection.NORD)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
@@ -81,6 +85,7 @@ class Controller
    #
   def deplacementBasAction
     print "\/ Bt déplacement bas pressé!\n"
+     Audio.playSound("deplacement")
      @modele.joueur.deplacement(EnumDirection.SUD)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
@@ -106,6 +111,7 @@ class Controller
    #
   def deplacementGaucheAction
     print "<< Bt déplacement gauche pressé!\n"
+     Audio.playSound("deplacement")
     @modele.joueur.deplacement(EnumDirection.OUEST)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
@@ -136,6 +142,7 @@ class Controller
   #
   def deplacementDroiteAction
     print ">> Bt déplacement droite pressé!\n"
+     Audio.playSound("deplacement")
     @modele.joueur.deplacement(EnumDirection.EST)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
