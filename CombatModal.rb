@@ -62,7 +62,8 @@ class CombatModal
   # * <b>ennemi :</b> reference de l'ennemi dont on veut afficher les informations.
   # 
   def majCombatModal(ennemi)
-    popUp=PopUp.creer("Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
+    @vue.popUp.affichePopUp("Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
+    puts "test"
   end
   
   

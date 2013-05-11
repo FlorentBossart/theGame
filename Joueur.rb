@@ -173,6 +173,10 @@ class Joueur < Personnage
    # Si l'energie de l'ennemi est Ã©gale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remportÃ©, on signal au modele la mort du joueur, retourne un tableau vide
    # Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
    def combattreEnnemi(ennemi)
+     #deb test
+     @modele.vue.combatModal.majCombatModal(ennemi)
+     #fin test
+
      @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une Ã©nergie de #{ennemi.energie}.")
      protection=0;
       if(self.armureEquip?())
@@ -364,7 +368,7 @@ class Joueur < Personnage
    
    
    ##
-   # Calcule le temps de jeu total du joueur, en prenant en compte le temps passé sur une session de jeu précédente (sauvegarde)
+   # Calcule le temps de jeu total du joueur, en prenant en compte le temps passï¿½ sur une session de jeu prï¿½cï¿½dente (sauvegarde)
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)

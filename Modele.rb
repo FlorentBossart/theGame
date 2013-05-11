@@ -60,7 +60,7 @@ class Modele
 
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue
    attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications
    
    

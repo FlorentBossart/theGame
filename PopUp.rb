@@ -29,6 +29,7 @@ class PopUp
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   # 
   def initialize(vue)
+    @vue=vue
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
     @message=message
