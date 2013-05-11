@@ -3,12 +3,7 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# TODO :
-# -test de la classe
 #
-# Remarques:
-# 
-# 
 #
 #
 # Cette classe represente un inventaire. Un inventaire est defini par :
@@ -28,6 +23,7 @@ class Inventaire
   attr_reader :items, :taille, :nbItem
   attr_accessor :capital
   
+  
   ##
   # Cree un nouvel inventaire a  partir des informations passees en parametre.
   #
@@ -38,6 +34,13 @@ class Inventaire
     new(taille)
   end
   
+  
+  ##
+  # Initialise un nouvel inventaire a  partir des informations passees en parametre.
+  #
+  # == Parameters:
+  # taille: represente la taille de l'inventaire
+  #
   def initialize(taille)
     @capital=0
     @items=Array.new()
@@ -45,9 +48,12 @@ class Inventaire
     @nbItem=0
   end
   
+  
   ##
   # Ajoute un item a l'inventaire
   #
+  # == Parameters:
+  # item: Item a ajouter a l'inventaire
   #
   def ajouter(item)
     if(!self.estPlein?())
@@ -58,9 +64,12 @@ class Inventaire
     end
   end
   
+  
   ##
   # Retire un item a l'inventaire
   #
+  # == Parameters:
+  # item: Item a retirer de l'inventaire
   #
   def retirer(item)
     @items.delete(item)
@@ -69,17 +78,24 @@ class Inventaire
     return nil
   end
   
+  
   ##
   # Test si l'inventaire est plein
   #
+  # == Returns:
+  # boolean: true si @bnItem>=@taille
   #
   def estPlein?()
     return @nbItem >= @taille
   end
   
+  
   ##
   # Retourne une chaine de caracteres reprenant les différentes caracteristiques
   # de l'objet Inventaire sur lequel il a été appelé
+  #
+  # == Returns:
+  # string: chaine representant l'inventaire
   #
   def to_s
     s= "[==Inventaire  >>> | "

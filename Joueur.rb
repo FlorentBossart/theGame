@@ -3,9 +3,6 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# -test de la classe
-#
-# Remarques:
 #
 #
 # Cette classe represente un joueur. Un joueur est defini par :
@@ -23,6 +20,12 @@
 # == Un pseudo, correspondant au pseudo du joueur
 # == Un nombre d'ennemis tué, pour les statistiques
 # == Une distance parcourue, correspondant au nombre de déplacements, pour les statistiques
+# == Un string representant la cause de l mort
+# == Un boolean si le joueur peut s'equiper
+# == Une date de debut de jeu
+# == Une date de fin de jeu
+# == Une durée de jeu totale
+#
 #
 
 require "./Enum/EnumDirection.rb"
@@ -82,6 +85,19 @@ class Joueur < Personnage
    end
 
    
+  ##
+  # Initialise un nouveau Joueur a  partir des informations passees en parametre.
+  #
+  # == Parameters:
+  # intitule : Un intitule (permet a la vue de reconnaitre l'objet)
+  # nbRepos : integer representant le nombre de repos restant au joueur
+  # energieMax : float representant le seuil d'energie maximum du joueur
+  # experienceSeuil : float representant le seuil d'experience maximum du joueur
+  # inventaire : inventaire du joueur
+  # modele : permet au joueur de communiquer avec le modele
+  # casePosition : case ou se situe le joueur
+  # pseudo : pseudo du joueur
+  #
    def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
       super(casePosition)
       @intitule="Joueur"
@@ -108,6 +124,8 @@ class Joueur < Personnage
    
    ##
    # Retourne une chaine de caractere representant la cle de l'image
+   # == Returns:
+   #  @intitule : String
    #
    def getIntitule()
       return @intitule
@@ -119,8 +137,11 @@ class Joueur < Personnage
    #
    # Definit la methode _deplacement_.
    # Elle permet le deplacement sur une cible donnée
-   # Elle prend en parametre une Direction _cible_.
    # appel DebutTour chez son modele une fois fini
+   #
+   # == Parameters:
+   # cible : la case ou le joueur doit se deplacer
+   #
    def deplacement(cible)
 
       #if(@modele.tourDejaPasse == false)
@@ -172,6 +193,10 @@ class Joueur < Personnage
    # Demande au modele de supprimer l'ennemi mort si le combat est gagné, incremente nbEnnemiTues, fait gagner de l'experience renvoi une liste d'item
    # Si l'energie de l'ennemi est égale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remporté, on signal au modele la mort du joueur, retourne un tableau vide
    # Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
+   #
+   # == Parameters:
+   # ennemi : l'ennemi a combattre
+   #
    def combattreEnnemi(ennemi)
 
      @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
@@ -212,18 +237,24 @@ class Joueur < Personnage
 
    ##
    # Verifie si le joueur a equipé une armure
+   #
    def armureEquip?()
       return @armure!=nil
    end
 
    ##
    # Verifie si le joueur a equipé une arme
+   #
    def armeEquip?()
       return @arme!=nil
    end
 
    ##
    # Demande a l'item de s'utiliser sur le joueur
+   #
+   # == Parameters:
+   # item : l'Item a utiliser
+   #
    def utiliserItem(item)
       item.utiliseToi(self)
       #@modele.tourPasse()
@@ -232,12 +263,14 @@ class Joueur < Personnage
 
    # Definit la methode _deplacementIntelligent_.
    # non utilisée pour le joueur
+   #
    def deplacementIntelligent()
      return nil
    end
 
    ##
    # Fait passer un niveau au joueur
+   #
    def passeNiveau()
       @niveau += 1
       @experienceSeuil *= 1.2
@@ -254,6 +287,10 @@ class Joueur < Personnage
    ##
    # Fait gagner de l'experience au joueur, si le Seuil d'experience est depassé, fait gagner un niveau
    # a voir le calcul du seuil d'experience
+   #
+   # == Parameters:
+   # xp : float representant l'experience a ajouter
+   #
    def gainExperience(xp)
       @experience=@experience+xp
       @modele.notifier("+ #{xp}XP")
@@ -271,6 +308,11 @@ class Joueur < Personnage
    ##
    # Transfert un item du vendeur vers le joueur
    # Perte d'argent du joueur
+   #
+   # == Parameters:
+   # vendeur: PNJ a qui on achete l'item
+   # item: Item acheté
+   #
    def acheter(vendeur,item)
       vendeur.retirerDuStock(item)
       vendeur.encaisser(itemAchete.prix())
@@ -284,6 +326,10 @@ class Joueur < Personnage
    # Transfert un item du vendeur vers le joueur
    # Gain d'argent du joueur
    #
+   # == Parameters:
+   # acheteur: PNJ a qui on vend l'item
+   # item: Item vendu
+   #
    def vendre(acheteur,item)
       retirerDuStock(item)
       encaisser(itemAchete.prix())
@@ -295,12 +341,20 @@ class Joueur < Personnage
 
    ##
    # Ajoute un item dans l'inventaire
+   #
+   # == Parameters:
+   # item: Item a ajouter au stock
+   #
    def ajouterAuStock(item)
       @inventaire.ajouter(item)
    end
 
    ##
    # Retire un item de l'inventaire
+   #
+   # == Parameters
+   # item: Item a retirer de l'inventaie
+   #
    def retirerDuStock(item)
       @inventaire.retirer(item)
    end
@@ -308,6 +362,10 @@ class Joueur < Personnage
    ##
    # Encaisse une somme d'argent
    # methode d'ajout de revenue
+   #
+   # == Parameters:
+   # revenue: int a encaisser
+   #
    def encaisser(revenue)
       @inventaire.capital+=revenue
       @modele.notifier("Vous avez empochez #{revenue}.")
@@ -315,17 +373,27 @@ class Joueur < Personnage
 
    ##
    # Debourse une somme d'argent
+   #
+   # == Parameters:
+   # revenue: somme a debourser
+   #
    def debourser(revenue)
       @inventaire.capital-=revenue
       @modele.notifier("Vous déboursez #{revenue}.")
    end
-
+   ##
+   # Verifie si le joueur est toujours en vie
+   #
+   # == Returns:
+   # boolean: true si @energie>0
+   #
    def toujoursEnVie?()
       return @energie > 0
    end
 
    ##
    # Consomme un repos
+   #
    def utiliserRepos()
      @peutSEquiper=true
      @nombreRepos=@nombreRepos-1
@@ -351,6 +419,10 @@ class Joueur < Personnage
 
    ##
    # Ramasse un item
+   #
+   # == Parameters
+   # item: Item a ramasser
+   #
    def ramasserItem(item)
      @itemAttenteAjout=item
      if(@inventaire.estPlein?())
@@ -376,6 +448,10 @@ class Joueur < Personnage
    ##
    # Retourne une chaine de caracteres reprenant les différentes caracteristiques
    # de l'objet Joueur sur lequel il a été appelé
+   #
+   # == Returns:
+   # string : chaine de caractère representant le joueur
+   #
    def to_s
       s= "[==Joueur >>> | "
       s+= super()
