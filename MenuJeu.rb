@@ -5,10 +5,10 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de crï¿½er le menu du jeu et contient :
-#* Une fenï¿½tre reprï¿½sentant la fenetre du menu 
-#* Un boolï¿½en indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en consï¿½quence
-#* Un contenu reprï¿½sentï¿½ par une box et qui contient les ï¿½lï¿½ments de chaque "sous-menu" (nouvelle partie, classement, ...)
+# Cette classe permet de créer le menu du jeu et contient :
+#* Une fenêtre représentant la fenetre du menu 
+#* Un booléen indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en conséquence
+#* Un contenu représenté par une box et qui contient les éléments de chaque "sous-menu" (nouvelle partie, classement, ...)
 # 
 
 require 'gtk2'
@@ -20,9 +20,7 @@ require './Bibliotheque/BibliothequeSlot.rb'
 require 'YamlSlot.rb'
 require 'Slot.rb'
 
-require 'Audio.rb'
-
-# On inclu le module Gtk, cela ï¿½vite de prï¿½fixer les classes par Gtk::
+# On inclu le module Gtk, cela évite de préfixer les classes par Gtk::
 include Gtk
 
 class MenuJeu
@@ -40,7 +38,6 @@ class MenuJeu
 	private_class_method :new
 	
 	def initialize(isEnJeu, modele, controleur)
-		#Gtk.init()
 		
 		@isInGame 		= isEnJeu
 		@controleur 	= controleur
@@ -48,17 +45,14 @@ class MenuJeu
 		@fenetreMenu 	= Window.new()
 		@fenetreMenu.set_default_size(300,300)
 		
-		#afficherMenu()
-		
-		#Gtk.main()
 	end
 	
 	
 	##
-   # Crï¿½e un nouveau Menu
+   # Crée un nouveau Menu
    #
    # == Parameters:
-   # isEnJeu : un boolï¿½en indiquant si le joueur est en jeu ou non
+   # isEnJeu : un booléen indiquant si le joueur est en jeu ou non
    #
 	def MenuJeu.creer(isEnJeu, modele, controleur)
 		return new(isEnJeu, modele, controleur)
@@ -66,10 +60,10 @@ class MenuJeu
 	
 	
 	##
-   # Vide la fenï¿½tre de tous ses composants.
+   # Vide la fenêtre de tous ses composants.
    #
    # == Parameters:
-   # box : une boite ï¿½ supprimer de la fenetre
+   # box : une boite à supprimer de la fenetre
    #
 	def viderFenetre(box)
 		@fenetreMenu.remove(box)
@@ -77,7 +71,7 @@ class MenuJeu
 	
 	
 	##
-   # Initialise la fenï¿½tre du menu avec les boutons nï¿½cessaires
+   # Initialise la fenêtre du menu avec les boutons nécessaires
    #
 	def afficherMenu()
 		@fenetreMenu.set_title("Menu")
@@ -87,7 +81,7 @@ class MenuJeu
 		
 		@contenu = VBox.new(false, 0)
 		
-		# Crï¿½ation des boutons
+		# Création des boutons
 		if(@isInGame == false)
 			boutNewPartie 		= Button.new("Nouvelle partie")
 			boutChargerPartie = Button.new("Charger partie")
@@ -128,8 +122,9 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 		
-		# Pas sur de mettre ï¿½a ici, plutot dans le controleur non ?
-		@fenetreMenu.signal_connect('destroy') {onDestroy}
+		# Pas sur de mettre ça ici, plutot dans le controleur non ?
+		#@fenetreMenu.signal_connect('destroy') {onDestroy}
+		@fenetreMenu.signal_connect('delete_event') {onDestroy}
 
 		@controleur.nouvellePartieCreer(boutNewPartie)
 		@controleur.chargerPartieCreer(boutChargerPartie)
@@ -142,10 +137,10 @@ class MenuJeu
 	
 	##
    # Lorsque le joueur clique sur nouvelle partie, affiche un champ pour le nom du joueur, 
-   # des boutons radio pour le choix de difficultï¿½ et un bouton lancer partie
+   # des boutons radio pour le choix de difficulté et un bouton lancer partie
    #
 	def afficherNouvellePartie()
-		# Remarque : c'est le controleur qui rï¿½cupï¿½re les donnï¿½es (nom, difficultï¿½)
+		# Remarque : c'est le controleur qui récupère les données (nom, difficulté)
 		
 		####### Pour tester #######
 		@modele.joueur.dateFinJeu = Time.now
@@ -204,14 +199,14 @@ class MenuJeu
 		@fenetreMenu.set_title("Charger Partie")
 		
 		@contenu = VBox.new(false, 20)
-		# Tableau contenant des EventBox pouvant ï¿½tre cliquï¿½es pour charger une partie
+		# Tableau contenant des EventBox pouvant être cliquées pour charger une partie
 		tabEventBox = Array.new
 		
 		# Tableau contenant les slots de sauvegarde
 		tabSlot = Array.new
 		
-		# Remplissage des frames contenant les diffï¿½rentes EventBox
-		# Ces EventBox contiennent elles-mï¿½mes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Remplissage des frames contenant les différentes EventBox
+		# Ces EventBox contiennent elles-mêmes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
 			frame = Frame.new("Emplacement " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
@@ -243,10 +238,10 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		
-		# C'est une fois que les eventBox sont crï¿½es et ajoutï¿½es ï¿½ la fenetre qu'elles sont associï¿½es ï¿½ une Gdk::Window (et non Gtk::Window)
-		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante ï¿½ cette eventBox
+		# C'est une fois que les eventBox sont crées et ajoutées à la fenetre qu'elles sont associées à une Gdk::Window (et non Gtk::Window)
+		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante à cette eventBox
 		tabEventBox.each_with_index{|eb, index|
-			eb.realize # Crï¿½er la fenetre GDK (Gdk::Window) associï¿½es au widget
+			eb.realize # Créer la fenetre GDK (Gdk::Window) associées au widget
 			if(tabSlot[index] != nil)	# Si le slot contient de "vraies" infos
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
@@ -276,14 +271,14 @@ class MenuJeu
 		@fenetreMenu.set_title("Sauvegarder Partie")
 		
 		@contenu = VBox.new(false, 20)
-		# Tableau contenant des EventBox pouvant ï¿½tre cliquï¿½es pour sauvegarder une partie
+		# Tableau contenant des EventBox pouvant être cliquées pour sauvegarder une partie
 		tabEventBox = Array.new
 		
 		# Tableau contenant les slots de sauvegarde
 		tabSlot = Array.new
 		
-		# Remplissage des frames contenant les diffï¿½rentes EventBox
-		# Ces EventBox contiennent elles-mï¿½mes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Remplissage des frames contenant les différentes EventBox
+		# Ces EventBox contiennent elles-mêmes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
 			frame = Frame.new("Emplacement " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
@@ -316,10 +311,10 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 				
-		# C'est une fois que les eventBox sont crï¿½es et ajoutï¿½es ï¿½ la fenetre qu'elles sont associï¿½es ï¿½ une Gdk::Window (et non Gtk::Window)
-		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante ï¿½ cette eventBox
+		# C'est une fois que les eventBox sont crées et ajoutées à la fenetre qu'elles sont associées à une Gdk::Window (et non Gtk::Window)
+		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante à cette eventBox
 		tabEventBox.each_with_index{|eb, index|
-			eb.realize # Crï¿½er la fenetre GDK (Gdk::Window) associï¿½es au widget
+			eb.realize # Créer la fenetre GDK (Gdk::Window) associées au widget
 			eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND2) # Change le curseur en forme de main
 			
 			eb.signal_connect('button_press_event') { 
@@ -346,7 +341,7 @@ class MenuJeu
 	
 	##
    # Lorsque le joueur clique sur classement, affiche le classement des meilleurs joueurs
-   # en rï¿½cupï¿½rant les donnï¿½es du fichier XML
+   # en récupérant les données du fichier XML
    #
 	def afficherClassement()	
 		@fenetreMenu.set_title("Classement")
@@ -368,22 +363,22 @@ class MenuJeu
 		XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
 		
 		0.upto(2) do |i|
-			# Rempli une liste de joueur suivant leur niveau de difficultï¿½
+			# Rempli une liste de joueur suivant leur niveau de difficulté
 			listeJoueur = remplirListeJoueur(tabLabel[i].text)
 			
-			# Crï¿½ation des treeView
+			# Création des treeView
 			treeview = TreeView.new
 			
-			# Ajout des paramï¿½tres de rendu aux treeViews
+			# Ajout des paramètres de rendu aux treeViews
 			setup_tree_view(treeview)
 			
-			# Crï¿½ation et remplissage des ListStore
+			# Création et remplissage des ListStore
 			store = remplirListStore(listeJoueur)
 			
 			# Ajoute chacun des tree model au tree view correspondant
 			treeview.model = store
 			
-			# Crï¿½ation et ajout des treeviews dans des scrolledWindows
+			# Création et ajout des treeviews dans des scrolledWindows
 			scrolled_win = ScrolledWindow.new.add(treeview)
 			# Affichage ou non des scrollBars
 			scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
@@ -408,25 +403,25 @@ class MenuJeu
 	
 	
 	##
-	# Rempli une ListStore par l'intermï¿½diaire de la liste de joueur passï¿½e en paramï¿½tre.
+	# Rempli une ListStore par l'intermédiaire de la liste de joueur passée en paramètre.
 	# == Parameters: 
    #* <b>listeJoueur :</b> un tableau de joueur
 	#
 	def remplirListStore(listeJoueur)
-		# Crï¿½er un nouveau tree model comprenant 6 colonnes
+		# Créer un nouveau tree model comprenant 6 colonnes
 		store = ListStore.new(String, Integer, Integer, Integer, String, Integer)
 		
-		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" ï¿½ la ListStore
+		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" à la ListStore
 		listeJoueur.each_with_index do |e, i|
 			colonne = store.append
 			
 			colonne[0] = listeJoueur[i][0]	# Correspond au nom du joueur
-			colonne[1] = listeJoueur[i][1]	# Correspond au nombre d'ennemis tuï¿½s pas le joueur
-			colonne[2] = listeJoueur[i][2]	# Correspond ï¿½ la distance totale parcourue par le joueur
-			colonne[3] = listeJoueur[i][3]	# Correspond ï¿½ l'or total accumulï¿½ par le joueur
+			colonne[1] = listeJoueur[i][1]	# Correspond au nombre d'ennemis tués pas le joueur
+			colonne[2] = listeJoueur[i][2]	# Correspond à la distance totale parcourue par le joueur
+			colonne[3] = listeJoueur[i][3]	# Correspond à l'or total accumulé par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
 			dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
-																				# et 0 aprï¿½s => pour trier les strings correctement
+																				# et 0 après => pour trier les strings correctement
 			dureeHeures = dureeTotale / 3600
 			colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
@@ -439,14 +434,14 @@ class MenuJeu
 	##
 	# Ajoute 6 colonnes au treeview
 	# == Parameters: 
-   #* <b>treeview :</b> le treeview ï¿½ configurer
+   #* <b>treeview :</b> le treeview à configurer
 	#
 	def setup_tree_view(treeview)
 	  # Create a new GtkCellRendererText, add it to the tree
 	  # view column and append the column to the tree view.
 	  renderer = CellRendererText.new
 	
-	  # Les propriï¿½tï¿½s affectent la colonne entiï¿½re
+	  # Les propriétés affectent la colonne entière
 	  # On utilise Pango pour obtenir le gras
      renderer.weight = Pango::FontDescription::WEIGHT_BOLD
 	  column   = TreeViewColumn.new("Pseudo", renderer,  :text => 0)
@@ -525,9 +520,9 @@ class MenuJeu
 	
 	
 	##
-	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficultï¿½
+	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficulté
 	# == Parameters: 
-   #* <b>difficulte :</b> une chaine de caractï¿½res permettant de choisir la liste de joueur ï¿½ retourner en fonction de cette difficultï¿½
+   #* <b>difficulte :</b> une chaine de caractères permettant de choisir la liste de joueur à retourner en fonction de cette difficulté
    #
 	def remplirListeJoueur(difficulte)
 		listeJoueur = Array.new
@@ -580,11 +575,6 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		boutValider.signal_connect('clicked') {
-         if(oui.active?)
-            Audio.activeSound()
-         else
-            Audio.mute()
-         end
 			viderFenetre(@contenu)
 			afficherMenu()
 		}
@@ -637,8 +627,8 @@ class MenuJeu
 
 	
 	def onDestroy
-		puts "Fin de l'application"
-		Gtk.main_quit
+		puts "Fermeture du menu"
+		
 	end
 	
 end
@@ -646,4 +636,3 @@ end
 #Test
 #m = MenuJeu.creer(false);
 #m2 = MenuJeu.creer(true);
-
