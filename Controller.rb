@@ -54,10 +54,10 @@ class Controller
   #
   def deplacementHautAction
     print "/\ Bt déplacement haut pressé!\n"
+     @modele.joueur.deplacement(EnumDirection.NORD)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
-    @modele.joueur.deplacement(EnumDirection.NORD)
     @modele.debutTour()
   end
 
@@ -81,10 +81,10 @@ class Controller
    #
   def deplacementBasAction
     print "\/ Bt déplacement bas pressé!\n"
+     @modele.joueur.deplacement(EnumDirection.SUD)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
-    @modele.joueur.deplacement(EnumDirection.SUD)
     @modele.debutTour()
   end
  
@@ -106,10 +106,10 @@ class Controller
    #
   def deplacementGaucheAction
     print "<< Bt déplacement gauche pressé!\n"
+    @modele.joueur.deplacement(EnumDirection.OUEST)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
-    @modele.joueur.deplacement(EnumDirection.OUEST)
     @modele.debutTour()
   end
         
@@ -136,10 +136,10 @@ class Controller
   #
   def deplacementDroiteAction
     print ">> Bt déplacement droite pressé!\n"
+    @modele.joueur.deplacement(EnumDirection.EST)
     if(@modele.tourDejaPasse == false)
       @modele.tourPasse()
     end
-    @modele.joueur.deplacement(EnumDirection.EST)
     @modele.debutTour()
   end
         

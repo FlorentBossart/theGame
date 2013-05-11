@@ -22,10 +22,9 @@
 #
 
 class Difficulte
-    
+
    private_class_method :new
-    
-    
+
    @intitule
    @longueurCarte
    @largeurCarte
@@ -39,14 +38,13 @@ class Difficulte
    @nbToursInterGenerations
    @pourcentageTerrain
 
-
    attr_reader :intitule, :longueurCarte, :largeurCarte, :energieDepart,
-               :nbRepos, :pnjAmisDepart, :pnjEnnemisDepart, :pnjEnnemisParGeneration,
-               :objetsDepart, :objetsParGeneration, :nbToursInterGenerations, :pourcentageTerrain
-
-
+   :nbRepos, :pnjAmisDepart, :pnjEnnemisDepart, :pnjEnnemisParGeneration,
+   :objetsDepart, :objetsParGeneration, :nbToursInterGenerations, :pourcentageTerrain
+   
+   
    ##
-   # Construit une nouvelle Difficulté à partir des informations passées en paramètre.
+   #===Construit une nouvelle Difficulté à partir des informations passées en paramètre.
    #
    def initialize(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
       @intitule=intitule
@@ -62,15 +60,17 @@ class Difficulte
       @nbToursInterGenerations = nbToursInterGenerations
       @pourcentageTerrain = pourcentageTerrain
    end
-    
-    # Appel de la méthode initialize.
-    def Difficulte.creer(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
-        return new(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
-    end
-               
 
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
+   #===Appel de la méthode initialize.
+   #
+   def Difficulte.creer(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
+      return new(intitule, longueurCarte, largeurCarte, energieDepart, nbRepos, pnjAmisDepart, pnjEnnemisDepart, pnjEnnemisParGeneration, objetsDepart, objetsParGeneration, nbToursInterGenerations, pourcentageTerrain)
+   end
+
+   
+   ##
+   #===Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet Difficulte sur lequel la méthode est appellée.
    #
    def to_s
