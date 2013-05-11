@@ -304,8 +304,10 @@ class Modele
        changerStadePartie(EnumStadePartie.PERDU)
      else
         if(@joueur.casePosition.presenceEnnemis?() && @joueur.peutSEquiper)
+             @vue.combatModal.majCombatModal(@joueur.casePosition.listeEnnemis[0])
             choixEquipementAvantCombat()
         elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
+            @vue.combatModal.majCombatModal(@joueur.casePosition.listeEnnemis[0])
             declencherCombat()
         else
             choixLibre()

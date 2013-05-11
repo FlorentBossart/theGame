@@ -60,6 +60,12 @@ class PopUp
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new(message))
     dialog.show_all
+    dialog.run do |response|
+      case response
+        when Gtk::Dialog::RESPONSE_ACCEPT
+        else
+      end
+    end
   end
 
   
@@ -80,7 +86,13 @@ class PopUp
     @vue.controller.vendreMarchandCreer(buttonVendre)
     dialog.vbox.add(buttonVendre)
 
-   dialog.show_all
+    dialog.show_all
+    dialog.run do |response|
+      case response
+        when Gtk::Dialog::RESPONSE_ACCEPT
+        else
+      end
+    end
   end
     
   
@@ -105,6 +117,12 @@ class PopUp
     dialog.vbox.add(buttonSoinMax)
   
    dialog.show_all
+   dialog.run do |response|
+     case response
+       when Gtk::Dialog::RESPONSE_ACCEPT
+       else
+     end
+   end
   end
 
 

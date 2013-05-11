@@ -87,6 +87,13 @@ class InteractionModal
         dialog.vbox.add(button)
        }
       dialog.show_all
+      dialog.run do |response|
+        case response
+          when Gtk::Dialog::RESPONSE_ACCEPT
+          else
+        end
+      end
+
       
     else
        dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
