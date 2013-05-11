@@ -1,0 +1,8 @@
+﻿<big><u><b>I - But du jeu</b></u></big>
+
+Le but pour le joueur est de se déplacer le plus longtemps possible dans l'environnement de jeu. Pour cela, il peut combattre des monstres et ainsi récupérer leurs objets, armes et armures et s'en équiper directement ou bien les revendre et acheter des équipements de meilleurs qualités auprès de marchands. Le jeu se termine quand le joueur meurt, c'est à dire quand il n'a plus d'énergie. Le score du joueur est alors calculé suivant différentes caractéristiques (nombre d'ennemis tués, or gagné, niveau, ...), le but étant d'obtenir le meilleur score possible.
+
+Déplacement
+
+Le déplacement s'effectue par un clic sur les touches directionnelles. Le joueur peut se déplacer dans toutes les directions (haut, gauche, bas, droite), sauf s'il veut franchir de l'eau, ce qui est impossible.
+
