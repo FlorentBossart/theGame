@@ -206,10 +206,10 @@ class Vue
       XmlClassements.ecrireXml(@modele)
       #ETAPE EQUIPEMENT ARMURE
     when EnumStadePartie.EQUIPEMENT_ARMURE
-
+      @combatModal.majEquipementDefensif()
       #ETAPE EQUIPEMENT ARME
     when EnumStadePartie.EQUIPEMENT_ARME
-
+      @combatModal.majEquipementOffensif()
       #ETAPE INVENTAIRE PLEIN
     when EnumStadePartie.INVENTAIRE_PLEIN
 

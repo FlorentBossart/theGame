@@ -354,8 +354,9 @@ class Controller
   # == Parameters:
   # joueur : le joueur qui doit equiper l'item
   # elem : element a equiper
+  # dialog: popup
   #
-  def equiperItemCreer(btInteraction,elem,joueur)
+  def equiperItemCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
         equiperItemAction(joueur,elem)
         dialog.destroy
@@ -371,8 +372,8 @@ class Controller
   # elem : element a equiper
   #
   def equiperItemAction(joueur,elem)
-    joueur.utiliser(elem)
-    print "oO Bt interaction "+elem.intitule+" pressé!"
+    joueur.utiliserItem(elem)
+    print "oO Bt interaction "+elem.getIntitule()+" pressé!"
   end
   
   

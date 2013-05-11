@@ -330,7 +330,8 @@ class Modele
       
        AffichageDebug.Afficher("compteurArmures=#{compteurArmures}")
        if(compteurArmures!=0)
-          changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)            
+          changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)  
+          @vue.actualiser()          
        end
      end
      suiteEquipementChoixArme()
@@ -354,6 +355,7 @@ class Modele
       AffichageDebug.Afficher("compteurArmes=#{compteurArmes}")
       if(compteurArmes != 0)
           changerStadePartie(EnumStadePartie.EQUIPEMENT_ARME)      
+          @vue.actualiser
       end
     end
     declencherCombat()

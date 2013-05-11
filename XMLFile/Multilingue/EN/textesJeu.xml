@@ -54,7 +54,7 @@
 		<contenu>I'm a CombatModal</contenu>
 	</texte>
 	<texte id="popupCombatEnnemi">
-		<contenu>You've encountered an #{ennemi.getIntitule()} which level is #{ennemi.niveau} with  #{ennemi.energie} energy.</contenu>
+		<contenu>New oppenent appeared!  INTITULE which level is NIVEAU with  ENERGIE energy.</contenu>
 	</texte>
 	<texte id="popupAttention">
 		<contenu>Warning !</contenu>

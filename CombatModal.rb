@@ -62,8 +62,11 @@ class CombatModal
   # * <b>ennemi :</b> reference de l'ennemi dont on veut afficher les informations.
   # 
   def majCombatModal(ennemi)
-    @vue.popUp.affichePopUp("Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
-    puts "test"
+
+    str=XmlMultilingueReader.lireTexte("popupCombatEnnemi")
+    str.gsub!("INTITULE",ennemi.getIntitule()).gsub!("NIVEAU",ennemi.niveau().to_s).gsub!("ENERGIE",ennemi.energie().to_s)
+    puts str
+    @vue.popUp.affichePopUp(str)
   end
   
   
@@ -87,14 +90,17 @@ class CombatModal
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
       
     listeArmure.each{ |item|
-        image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
         button=Gtk::Button.new()
+        image= Gtk::Image.new()
+        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+        image.set_pixbuf(pixbufElement)
         button.image = image
-        tooltips.set_tip( button, element.to_s, nil )
+        tooltips.set_tip( button, item.to_s, nil )
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
        # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
-        @vue.controller.equiperItemCreer(button,item,@modele.joueur)
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
         dialog.vbox.add(button)
        }
    dialog.show_all
@@ -111,7 +117,7 @@ class CombatModal
     
     for i in @modele.joueur.inventaire.items
      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
-       listeArmure.push(i)
+       listeArme.push(i)
      end
     end
     
@@ -121,16 +127,19 @@ class CombatModal
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
       
-    listeArmure.each{ |item|
-      image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
+    listeArme.each{ |item|
       button=Gtk::Button.new()
+      image= Gtk::Image.new()
+      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+      pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+      image.set_pixbuf(pixbufElement)
       button.image = image
-      tooltips.set_tip( button, element.to_s, nil )
+      tooltips.set_tip( button, item.to_s, nil )
       
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
       #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
-      @vue.controller.equiperItemCreer(button,item,@modele.joueur)
+      @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
       dialog.vbox.add(button)
     }
     dialog.show_all
