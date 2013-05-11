@@ -127,6 +127,9 @@ class Marchand < Ami
     joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_MARCHAND)
   end
    
+  def description
+    s=XmlMultilingueReader.lireTexte("descMarchand")
+  end
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet Marchand sur lequel la méthode est appellée.

@@ -67,10 +67,12 @@ class Equipable < Caracteristique
    # de l'objet Equipable sur lequel la méthode est appellée.
    #
    def to_s
-      s= "[==Equipable >>> | "
-      s+= "Type #{@typeEquipable}  | "
-      s+= "Reste #{@nbUtilisationsRestantes} utilisation  | "
-      s+= "<<< Equipable==]"
+     s=XmlMultilingueReader.lireTexte("to_sEquipable")
+     s.gsub!("TYPEEQUIP",@typeEquipable.to_s).gsub!("NBUTIL",@nbUtilisationsRestantes.to_s)
+      #s= "[==Equipable >>> | "
+      #s+= "Type #{@typeEquipable}  | "
+      #s+= "Reste #{@nbUtilisationsRestantes} utilisation  | "
+      #s+= "<<< Equipable==]"
       return s
    end
 

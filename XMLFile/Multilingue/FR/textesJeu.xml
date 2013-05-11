@@ -91,6 +91,18 @@
 	<texte id="popUp">
 		<contenu>Je suis un PopUp</contenu>
 	</texte>
+	<texte id="to_sEquipable">
+		<contenu> TYPEEQUIP nombre d'utilisation restantes: NBUTIL</contenu>
+	</texte>
+	<texte id="to_sEncaissable">
+		<contenu> INTITULE montant: OR or</contenu>
+	</texte>
+	<texte id="descGuerisseur">
+		<contenu> Je peux vous soigner !</contenu>
+	</texte>
+	<texte id="descMarchand">
+		<contenu> Besoin de quelquechose ? Ou bien souhaitez vous valoriser des objets qui vous encombrent ?</contenu>
+	</texte>
 </textesJeu>
 
 

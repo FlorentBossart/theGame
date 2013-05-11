@@ -81,7 +81,7 @@ class InteractionModal
         
         
         
-        tooltips.set_tip( button, element.to_s, nil )
+        tooltips.set_tip( button, element.description(), nil )
 
         @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
         dialog.vbox.add(button)

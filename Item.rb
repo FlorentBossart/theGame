@@ -53,7 +53,9 @@ class Item < Elem
         selected = true
    end
    
-   
+   def description
+     return "#{@caracteristique.to_s}"
+   end
    ##
    # Represente l'interaction avec un element present sur une case (dans ce cas ramasser un item)
    #

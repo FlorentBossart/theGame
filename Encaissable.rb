@@ -55,10 +55,12 @@ class Encaissable < Caracteristique
    # de l'objet Encaissable sur lequel la méthode est appellée.
    #
    def to_s
-      s= "[==Encaissable >>> | "
-      s+= "Intitulé: #{@intitule} | "
-      s+= "Montant: #{@montant} | "
-      s+= "<<< Encaissable==]"
+      #s= "[==Encaissable >>> | "
+      #s+= "Intitulé: #{@intitule} | "
+      #s+= "Montant: #{@montant} | "
+      #s+= "<<< Encaissable==]"
+     s=XmlMultilingueReader.lireTexte("to_sEncaissable")
+     s.gsub!("INTITULE",@intitule).gsub!("OR",@montant.to_s)
       return s
    end
 

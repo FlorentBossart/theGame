@@ -89,6 +89,18 @@
 	<texte id="popUp">
 		<contenu>I'm a PopUp</contenu>
 	</texte>
+	<texte id="to_sEquipable">
+		<contenu> TYPEEQUIP Can still be used: NBUTIL</contenu>
+	</texte>
+	<texte id="to_sEncaissable">
+		<contenu> INTITULE Value: OR gold</contenu>
+	</texte>
+	<texte id="descGuerisseur">
+		<contenu> I can heal you !</contenu>
+	</texte>
+	<texte id="descMarchand">
+		<contenu> Need something ? Or maybe you want to sell something ?</contenu>
+	</texte>
 	
 </textesJeu>
 

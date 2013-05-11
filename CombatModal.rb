@@ -65,7 +65,6 @@ class CombatModal
 
     str=XmlMultilingueReader.lireTexte("popupCombatEnnemi")
     str.gsub!("INTITULE",ennemi.getIntitule()).gsub!("NIVEAU",ennemi.niveau().to_s).gsub!("ENERGIE",ennemi.energie().to_s)
-    puts str
     @vue.popUp.affichePopUp(str)
   end
   

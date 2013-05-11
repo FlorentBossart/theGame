@@ -82,6 +82,9 @@ class Guerisseur < Ami
     joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_GUERISSEUR)
   end
    
+  def description
+    return      XmlMultilingueReader.lireTexte("descGuerisseur")
+  end
    
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques

@@ -50,6 +50,11 @@ class Elem
     def getIntitule()
     end
     
+  ##
+  # (Abstraite) Renvoi une chaine de caractères pour les infobulles
+  #
+  def description()
+  end
     
     ##
     # Retourne une chaîne de caractères reprenant les différentes caractéristiques
