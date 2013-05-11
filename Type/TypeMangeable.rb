@@ -40,7 +40,10 @@ class TypeMangeable
       return new(intitule, energieRendue, prix)
    end
    
-
+   def description
+     s=XmlMultilingueReader.lireTexte("descTypeMangeable")
+     s.gsub!("INTITULE",@intitule).gsub!("ENERGIE",@energieRendue.to_s).gsub!("PRICE",@prix.to_s)
+   end
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet TypeMangeable sur lequel la méthode est appellée.

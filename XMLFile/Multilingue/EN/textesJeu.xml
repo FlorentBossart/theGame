@@ -101,6 +101,12 @@
 	<texte id="descMarchand">
 		<contenu> Need something ? Or maybe you want to sell something ?</contenu>
 	</texte>
+	<texte id="descTypeEquipable">
+		<contenu> INTITULE    Protection: PROTEC   Price: PRICE </contenu>
+	</texte>
+	<texte id="descTypeMangeable">
+		<contenu> INTITULE    Energy when used: PROTEC   Price: PRICE </contenu>
+	</texte>
 	
 </textesJeu>
 

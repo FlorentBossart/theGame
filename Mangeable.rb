@@ -57,9 +57,10 @@ class Mangeable < Caracteristique
     # de l'objet Mangeable sur lequel la méthode est appellée.
     #
     def to_s
-        s= "[==Mangeable >>> | "
-        s+= "Type=: #{@typeMangeable} | "
-        s+= "<<< Mangeable==]"
+      return @typeMangeable.description
+        #s= "[==Mangeable >>> | "
+        #s+= "Type=: #{@typeMangeable} | "
+        #s+= "<<< Mangeable==]"
   end
     
 end

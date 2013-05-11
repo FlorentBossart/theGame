@@ -103,6 +103,12 @@
 	<texte id="descMarchand">
 		<contenu> Besoin de quelquechose ? Ou bien souhaitez vous valoriser des objets qui vous encombrent ?</contenu>
 	</texte>
+	<texte id="descTypeEquipable">
+		<contenu> INTITULE    Protection: PROTEC   Prix: PRICE </contenu>
+	</texte>
+	<texte id="descTypeMangeable">
+		<contenu> INTITULE    Energie rendu: PROTEC   Price: PRICE </contenu>
+	</texte>
 </textesJeu>
 
 

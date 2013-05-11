@@ -95,7 +95,7 @@ class CombatModal
         pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
         image.set_pixbuf(pixbufElement)
         button.image = image
-        tooltips.set_tip( button, item.to_s, nil )
+        tooltips.set_tip( button, item.description, nil )
         #version juste textuelle, peut etre y ajouter les stats de l'item en question
        # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
@@ -138,7 +138,7 @@ class CombatModal
       pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
       image.set_pixbuf(pixbufElement)
       button.image = image
-      tooltips.set_tip( button, item.to_s, nil )
+      tooltips.set_tip( button, item.description, nil )
       
       #version juste textuelle, peut etre y ajouter les stats de l'item en question
       #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")

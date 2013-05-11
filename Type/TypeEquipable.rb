@@ -46,7 +46,14 @@ class TypeEquipable
       return new(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
    end
 
-   
+   def description
+     s=XmlMultilingueReader.lireTexte("descTypeEquipable")
+     s.gsub!("INTITULE",@intitule).gsub!("PROTEC",(@pourcentageProtection*100).to_s).gsub!("PRICE",@prix.to_s)
+    # s= " #{@intitule} | "
+     #s+= "Protection: #{@pourcentageProtection*100}% | "
+     #s+= "Prix: #{@prix} | "
+     return s
+   end
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet TypeEquipable sur lequel la méthode est appellée.
