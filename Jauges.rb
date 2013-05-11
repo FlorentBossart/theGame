@@ -11,17 +11,15 @@
 require 'gtk2'
 require './XMLReader/XmlMultilingueReader.rb'
 
-
-
 class Jauges
   @or #l'or du joueur
   @nbRepos #nombre de repos du joueur
   @niveau #niveau actuel du joueur
   def initialize()
     #Gtk.init();
-    @or = 0;
-    @nbRepos = 0;
-    @niveau = 0;
+    @or = Gtk::Label.new("0");
+    @nbRepos = Gtk::Label.new("0");
+    @niveau = Gtk::Label.new("0");
     initInterface();
 
     #Gtk.main();
@@ -47,12 +45,12 @@ class Jauges
 
   #mise a jour de l'or
   def majJaugeOr(quantite)
-    @or = quantite;
+    @or.set_text(quantite.to_s());
   end
 
   #mise a jour du nomdre de repos
   def majJaugeNbRepos(nbRepos)
-    @nbRepos = nbRepos;
+    @nbRepos.set_text(nbRepos.to_s());
   end
 
   #mise a jour  de l'energie
@@ -68,7 +66,7 @@ class Jauges
   end
 
   def majNiveau(niveau)
-    @niveau = niveau;
+    @niveau.set_text(niveau.to_s());
   end
 
   def getNiveau()

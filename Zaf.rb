@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby 
+#!/usr/bin/env ruby
 
 ##
 # Fichier            : Zaf.rb
@@ -42,18 +42,25 @@ class Zaf < Gtk::Frame
     #ajout console
     hbox.add(@console);
     hbox2 = Gtk::HBox.new(true, 4);
+    tabNiveau = Gtk::Table.new(1,6,true)
+    
+   
+
     vbox = Gtk::VBox.new(true,4);
     vbox.add(hbox2);
 
     #ajout jauges
-    hbox2.add(Gtk::Label.new(@jauges.getJaugeNbRepos().to_s()));
+    hbox2.add(@jauges.getJaugeNbRepos());
     hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("repos")));
-    hbox2.add(Gtk::Label.new(@jauges.getJaugeOr().to_s()));
+    hbox2.add(@jauges.getJaugeOr());
     hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("icone bourse")));
     vbox.add(@jauges.getJaugeEnergie());
     vbox.add(@jauges.getJaugeExperience());
-    vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau")+ " : " +Gtk::Label.new(@jauges.getNiveau().to_s()).text));
-
+    tabNiveau.attach(Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau") + " : "),2,3,0,1)
+    tabNiveau.attach(@jauges.getNiveau(),3,4,0,1)
+    vbox.add(tabNiveau);
+    
+    
     hbox.add(vbox);
 
     add(hbox);
