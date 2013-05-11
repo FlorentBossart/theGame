@@ -68,7 +68,7 @@ class Equipable < Caracteristique
    #
    def to_s
      s=XmlMultilingueReader.lireTexte("to_sEquipable")
-     s.gsub!("TYPEEQUIP",@typeEquipable.to_s).gsub!("NBUTIL",@nbUtilisationsRestantes.to_s)
+     s.gsub("TYPEEQUIP",@typeEquipable.to_s).gsub("NBUTIL",@nbUtilisationsRestantes.to_s)
       #s= "[==Equipable >>> | "
       #s+= "Type #{@typeEquipable}  | "
       #s+= "Reste #{@nbUtilisationsRestantes} utilisation  | "
