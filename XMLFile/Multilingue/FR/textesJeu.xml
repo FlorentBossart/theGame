@@ -109,6 +109,9 @@
 	<texte id="descTypeMangeable">
 		<contenu> INTITULE    Energie rendu: ENERGIE   Price: PRICE </contenu>
 	</texte>
+	<texte id="sansLeSous">
+		<contenu> Vous n'avez pas assez d'argent ! revenez avec au moins 30 pieces d'or </contenu>
+	</texte>
 </textesJeu>
 
 

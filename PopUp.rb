@@ -106,16 +106,24 @@ class PopUp
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("soinChoix")))
-    buttonSoinMini=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix0"))
-    buttonSoinMoyen=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix1"))
-    buttonSoinMax=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix2"))
-    @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur,dialog)
-    dialog.vbox.add(buttonSoinMini)
-    @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur,dialog)
-    dialog.vbox.add(buttonSoinMoyen)
-    @vue.controller.soinCreer(buttonSoinMax,joueur,2,guerisseur,dialog)
-    dialog.vbox.add(buttonSoinMax)
-  
+
+    if(joueur.inventaire.capital>=30)
+      buttonSoinMini=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix0"))
+      @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur,dialog)
+      dialog.vbox.add(buttonSoinMini)
+    else
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("sansLeSous")))
+    end
+    if(joueur.inventaire.capital>=50)
+      buttonSoinMoyen=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix1"))
+      @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur,dialog)
+      dialog.vbox.add(buttonSoinMoyen)
+    end
+    if(joueur.inventaire.capital>=70)
+      buttonSoinMax=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix2"))
+      @vue.controller.soinCreer(buttonSoinMax,joueur,2,guerisseur,dialog)
+      dialog.vbox.add(buttonSoinMax)
+    end
    dialog.show_all
    dialog.run do |response|
      case response

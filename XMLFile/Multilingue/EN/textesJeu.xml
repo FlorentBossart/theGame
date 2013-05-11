@@ -107,6 +107,9 @@
 	<texte id="descTypeMangeable">
 		<contenu> INTITULE    Energy when used: ENERGIE  Price: PRICE </contenu>
 	</texte>
+	<texte id="sansLeSous">
+		<contenu> You don't have enough money ! come back with at least 30 gold </contenu>
+	</texte>
 	
 </textesJeu>
 
