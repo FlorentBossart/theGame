@@ -268,6 +268,7 @@ class Controller
   #
   def interactionElementAction(elem,joueur)
     print "oO Bt interaction "+elem.getIntitule+" pressé!"
+     Audio.playSound("coin")
     elem.interaction(joueur)
   end
   
