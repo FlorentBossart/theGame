@@ -55,7 +55,7 @@
 	<texte id="combatModal">
 		<contenu>Je suis un combat modale</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi"
+	<texte id="popupCombatEnnemi">
 		<contenu>Vous allez combattre INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
 	</texte>
 	<texte id="popupAttention">
