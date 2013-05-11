@@ -53,6 +53,42 @@
 	<texte id="combatModal">
 		<contenu>I'm a CombatModal</contenu>
 	</texte>
+	<texte id="popupCombatEnnemi">
+		<contenu>You've encountered an #{ennemi.getIntitule()} which level is #{ennemi.niveau} with  #{ennemi.energie} energy.</contenu>
+	</texte>
+	<texte id="popupAttention">
+		<contenu>Warning !</contenu>
+	</texte>
+	<texte id="popupCommerce">
+		<contenu>Shopkeeper</contenu>
+	</texte>
+	<texte id="commerceChoix">
+		<contenu>What can i do for you ? ?</contenu>
+	</texte>
+	<texte id="achat">
+		<contenu>Buy</contenu>
+	</texte>
+	<texte id="vendre">
+		<contenu>Sell</contenu>
+	</texte>
+	<texte id="popupSoigneur">
+		<contenu>Healer</contenu>
+	</texte>
+	<texte id="soinChoix">
+		<contenu>Which heal do you want ?</contenu>
+	</texte>
+	<texte id="soinChoix0">
+		<contenu>25% energy for 30 gold</contenu>
+	</texte>
+	<texte id="soinChoix1">
+		<contenu>50% energy for 50 gold</contenu>
+	</texte>
+	<texte id="soinChoix2">
+		<contenu>75% energy for 70 gold</contenu>
+	</texte>
+	<texte id="popUp">
+		<contenu>I'm a PopUp</contenu>
+	</texte>
 	
 </textesJeu>
 
