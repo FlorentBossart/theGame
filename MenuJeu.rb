@@ -20,8 +20,6 @@ require './Bibliotheque/BibliothequeSlot.rb'
 require 'YamlSlot.rb'
 require 'Slot.rb'
 
-#require "./Joueur.rb"
-
 # On inclu le module Gtk, cela évite de préfixer les classes par Gtk::
 include Gtk
 
@@ -121,13 +119,6 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 
-=begin
-			boutSauvegarderPartie.signal_connect('clicked') {
-				puts "Clique sur sauvegarder partie"
-				viderFenetre(@contenu)
-				afficherSauvegarderPartie()
-			}
-=end
 			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie)
 		end
 		
@@ -137,45 +128,11 @@ class MenuJeu
 		
 		# Pas sur de mettre ça ici, plutot dans le controleur non ?
 		@fenetreMenu.signal_connect('destroy') {onDestroy}
-=begin		
-		boutNewPartie.signal_connect('clicked') {
-			puts "Clique sur nouvelle partie"
-			viderFenetre(@contenu)
-			afficherNouvellePartie()
-		}
-=end
+
 		@controleur.nouvellePartieCreer(boutNewPartie)
-=begin		
-		boutChargerPartie.signal_connect('clicked') {
-			puts "Clique sur charger partie"
-			viderFenetre(@contenu)
-			afficherChargerPartie()
-		}
-=end		
 		@controleur.chargerPartieCreer(boutChargerPartie)
-=begin	
-		boutClassement.signal_connect('clicked') {
-			puts "Clique sur classement"
-			viderFenetre(@contenu)
-			afficherClassement()
-		}
-=end		
 		@controleur.classementCreer(boutClassement)
-=begin		
-		boutOptions.signal_connect('clicked') {
-			puts "Clique sur options"
-			viderFenetre(@contenu)
-			afficherOptions()
-		}
-=end		
 		@controleur.optionsCreer(boutOptions)
-=begin
-		boutAide.signal_connect('clicked') {
-			puts "Clique sur aide"
-			viderFenetre(@contenu)
-			afficherAide()
-		}
-=end	
 		@controleur.aideCreer(boutAide)
 		
 	end
@@ -187,6 +144,13 @@ class MenuJeu
    #
 	def afficherNouvellePartie()
 		# Remarque : c'est le controleur qui récupère les données (nom, difficulté)
+		
+		####### Pour tester #######
+		@modele.joueur.dateFinJeu = Time.now
+		puts "date fin : " + @modele.joueur.dateFinJeu.to_s
+		puts "diff a ajouter : " + (@modele.joueur.dateFinJeu-@modele.joueur.dateDebutJeu).to_s
+		@modele.joueur.calculerTempsTotal
+		####### Fin Test ########
 		
 		@fenetreMenu.set_title("Nouvelle Partie")
 		@fenetreMenu.resize(100,100)
@@ -225,12 +189,7 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
-=begin
-		boutRetour.signal_connect('clicked') {
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
-=end
+
 		@controleur.retourCreer(boutRetour)
 		
 	end
@@ -256,7 +215,7 @@ class MenuJeu
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml)
+				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
@@ -290,6 +249,8 @@ class MenuJeu
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
 					puts " Chargement du slot" + (index+1).to_s 
+					@modele.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
+					puts "temps de jeu session d'avant : " + @modele.joueur.tempsTotal.to_s
 				}
 			end
 		}
@@ -301,12 +262,7 @@ class MenuJeu
 		@contenu.set_border_width(20)
 		
 		@fenetreMenu.show_all
-=begin
-		boutRetour.signal_connect('clicked') {
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
-=end
+
 		@controleur.retourCreer(boutRetour)
 	end
 	
@@ -314,7 +270,7 @@ class MenuJeu
 	##
    # Lorsque le joueur clique sur sauvegarder partie, affiche les slots de sauvegarde d'une partie
    #
-	def afficherSauvegarderPartie()
+	def afficherSauvegarderPartie()		
 		@fenetreMenu.set_title("Sauvegarder Partie")
 		
 		@contenu = VBox.new(false, 20)
@@ -325,13 +281,13 @@ class MenuJeu
 		tabSlot = Array.new
 		
 		# Remplissage des frames contenant les différentes EventBox
-		# Ces EventBox contiennent elles-mêmes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Ces EventBox contiennent elles-mêmes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
 			frame = Frame.new("Emplacement " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml)
+				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
@@ -381,12 +337,7 @@ class MenuJeu
 		@contenu.set_border_width(20)
 		
 		@fenetreMenu.show_all
-=begin
-		boutRetour.signal_connect('clicked') {
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
-=end
+
 		@controleur.retourCreer(boutRetour)
 	end
 	
@@ -449,12 +400,7 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
-=begin
-		boutRetour.signal_connect('clicked') {
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
-=end
+
 		@controleur.retourCreer(boutRetour)
 	end
 	
@@ -466,7 +412,7 @@ class MenuJeu
 	#
 	def remplirListStore(listeJoueur)
 		# Créer un nouveau tree model comprenant 6 colonnes
-		store = ListStore.new(String, Integer, Integer, Integer, Integer, Integer)
+		store = ListStore.new(String, Integer, Integer, Integer, String, Integer)
 		
 		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" à la ListStore
 		listeJoueur.each_with_index do |e, i|
@@ -476,7 +422,12 @@ class MenuJeu
 			colonne[1] = listeJoueur[i][1]	# Correspond au nombre d'ennemis tués pas le joueur
 			colonne[2] = listeJoueur[i][2]	# Correspond à la distance totale parcourue par le joueur
 			colonne[3] = listeJoueur[i][3]	# Correspond à l'or total accumulé par le joueur
-			colonne[4] = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur
+			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
+			dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
+																				# et 0 après => pour trier les strings correctement
+			dureeHeures = dureeTotale / 3600
+			colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
+			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
 		end
 		
 		return store
@@ -545,7 +496,7 @@ class MenuJeu
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Temps de jeu (min)", renderer, :text => 4)
+	  column   = TreeViewColumn.new("Temps de jeu", renderer, :text => 4)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 4
@@ -673,12 +624,7 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
-=begin
-		boutRetour.signal_connect('clicked') {
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
-=end
+
 		@controleur.retourCreer(boutRetour)
 	end
 
