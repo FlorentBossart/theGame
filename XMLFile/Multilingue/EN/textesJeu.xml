@@ -19,7 +19,17 @@
 	</texte>
 	<texte id="boutonInteraction">
 	    <contenu>INTERACTION</contenu>
-	</texte>	
+	</texte>
+	<texte id="energie">
+		<contenu>Energy</contenu>
+	</texte>
+	<texte id="experience">
+		<contenu>Experience</contenu>
+	</texte>
+	<texte id="niveau">
+		<contenu>Level</contenu>
+	</texte>
+	
 	
 </textesJeu>
 
