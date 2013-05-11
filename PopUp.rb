@@ -5,9 +5,9 @@
 # Auteur           : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe représente un PopUp. Un PopUp est défini par : 
-# * Une vue auquel il est lié
-# * Des references Graphiques representant la base de donnée image
+# Cette classe reprÃ©sente un PopUp. Un PopUp est dÃ©fini par : 
+# * Une vue auquel il est liÃ©
+# * Des references Graphiques representant la base de donnÃ©e image
 # 
 
 require 'gtk2'
@@ -23,10 +23,10 @@ class PopUp
   @vue
   attr_reader :vue, :referencesGraphiques, :message
   ## 
-  # Crée un nouveau PopUp. 
+  # CrÃ©e un nouveau PopUp. 
   # 
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   # 
   def initialize(vue)
     @referencesGraphiques = ReferencesGraphiques.new()
@@ -39,7 +39,7 @@ class PopUp
   # Instancie un PopUp
   # 
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   #
   def PopUp.creer(vue)
     new(vue)
@@ -50,10 +50,10 @@ class PopUp
   # Affiche le PopUp contenant le message
   #
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   #
   def affichePopUp(message)
-    dialog = Gtk::Dialog.new("Ceci est un message important !", @vue.window,
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
     dialog.signal_connect('response') { dialog.destroy }
@@ -67,13 +67,13 @@ class PopUp
   #
   def afficheChoixMarchand()
 
-    dialog = Gtk::Dialog.new("Commerce", @vue.window,
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCommerce"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new("Veuillez choisir une opération a effectuer avec ce marchand"))
-    buttonAchat=Gtk::Button.new("Achat")
-    buttonVendre=Gtk::Button.new("Vendre")
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("commerceChoix")))
+    buttonAchat=Gtk::Button.new(XmlMultilingueReader.lireTexte("achat"))
+    buttonVendre=Gtk::Button.new(XmlMultilingueReader.lireTexte("vendre"))
     @vue.controller.achatMarchandCreer(buttonAchat)
     dialog.vbox.add(buttonAchat)
     @vue.controller.vendreMarchandCreer(buttonVendre)
@@ -84,18 +84,18 @@ class PopUp
     
   
   ## 
-  # Affiche le PopUp contenant un choix entre les différentes options de soins
+  # Affiche le PopUp contenant un choix entre les diffÃ©rentes options de soins
   #
   def afficheChoixGuerisseur(joueur,guerisseur)
   
-    dialog = Gtk::Dialog.new("Soigneur", @vue.window,
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupSoigneur"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new("Voulez vous regagner de l'energie ?"))
-    buttonSoinMini=Gtk::Button.new("25% energie pour 30 or")
-    buttonSoinMoyen=Gtk::Button.new("50% energie pour 50 or")
-    buttonSoinMax=Gtk::Button.new("75% energie pour 70 or")
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("soinChoix")))
+    buttonSoinMini=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix0"))
+    buttonSoinMoyen=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix1"))
+    buttonSoinMax=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix2"))
     @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur)
     dialog.vbox.add(buttonSoinMini)
     @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur)
@@ -108,10 +108,10 @@ class PopUp
 
 
   ## 
-  # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
+  # Retourne une chaÃ®ne de caractÃ¨res  permettant l'identification de l'objet. 
   # 
   def to_s
-    return "Je suis un popup"
+    return XmlMultilingueReader.lireTexte("popUp")
   end
   
 end

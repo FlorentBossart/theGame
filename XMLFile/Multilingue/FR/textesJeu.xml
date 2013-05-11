@@ -55,6 +55,42 @@
 	<texte id="combatModal">
 		<contenu>Je suis un combat modale</contenu>
 	</texte>
+	<texte id="popupCombatEnnemi">
+		<contenu>Vous allez combattre un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.</contenu>
+	</texte>
+	<texte id="popupAttention">
+		<contenu>Attention !</contenu>
+	</texte>
+	<texte id="popupCommerce">
+		<contenu>Marchand</contenu>
+	</texte>
+	<texte id="commerceChoix">
+		<contenu>Que puis-je faire pour vous ?</contenu>
+	</texte>
+	<texte id="achat">
+		<contenu>Achat</contenu>
+	</texte>
+	<texte id="vendre">
+		<contenu>Vendre</contenu>
+	</texte>
+	<texte id="popupSoigneur">
+		<contenu>Soigneur</contenu>
+	</texte>
+	<texte id="soinChoix">
+		<contenu>Quel soin voulez-vous ?</contenu>
+	</texte>
+	<texte id="soinChoix0">
+		<contenu>25% energie pour 30 or</contenu>
+	</texte>
+	<texte id="soinChoix1">
+		<contenu>50% energie pour 50 or</contenu>
+	</texte>
+	<texte id="soinChoix2">
+		<contenu>75% energie pour 70 or</contenu>
+	</texte>
+	<texte id="popUp">
+		<contenu>Je suis un PopUp</contenu>
+	</texte>
 </textesJeu>
 
 
