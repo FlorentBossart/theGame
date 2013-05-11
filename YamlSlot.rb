@@ -21,9 +21,9 @@ class YamlSlot
    
    
    # Méthode statique permettant de récupérer les informations d'un slot de sauvegarde
-   # et de les ajouter à la liste des infos d'un slot de sauvegarde (classe Sauvegarde).
+   # et de les ajouter à la liste des infos d'un slot de sauvegarde (classe Slot).
    #
-   def YamlSlot.lireYaml(nomFicSlotYaml)
+   def YamlSlot.lireYaml(nomFicSlotYaml, joueur)
       #Ouvre le fichier YAML contenant les infos du slot "nomFicXml"
       begin
          file = File.open("YAMLSlot/" + nomFicSlotYaml)
@@ -38,9 +38,15 @@ class YamlSlot
 			tabElement.push(obj)
 		end
 		
+		pseudo 	= tabElement[0]
+		nomDiff 	= tabElement[1]
+		date 		= tabElement[2]
+		temps 	= tabElement[3]
+		
+		
 		# Ajoute le pseudo du joueur, la difficulté et la date aux informations du slot
       BibliothequeSlot.ajouter(nomFicSlotYaml, 
-      							Slot.creer(nomFicSlotYaml, tabElement[0], tabElement[1], tabElement[2], tabElement[3]))
+      							Slot.creer(nomFicSlotYaml, pseudo, nomDiff, date, temps))
  
    end
    
@@ -61,14 +67,20 @@ class YamlSlot
       	puts "pseudo : "
       	p modele.joueur.pseudo
       	file.syswrite(modele.joueur.pseudo.to_yaml())
+      	
       	puts "diff : " + modele.difficulte.intitule
       	file.syswrite(modele.difficulte.intitule.to_yaml())
+      	
 	      d = Date.today
 	      date = d.mday.to_s + "/" + d.mon.to_s + "/" + d.year.to_s
 	      puts "date : " + date
 	      file.syswrite(date.to_yaml())
-	      puts "carte : "
-	      p modele.carte
+	      
+	      puts "temps jeu : " + modele.joueur.tempsTotal.to_s
+	      file.syswrite(modele.joueur.tempsTotal.to_yaml())
+	      
+	      #puts "carte : "
+	      #p modele.carte
 	      #file.syswrite(modele.carte.to_yaml())
 	    #  file.syswrite(modele.to_yaml()) # Marche pas pour l'instant, car peut etre que tous les champs ne sont pas bien remplis encore
 	   rescue
