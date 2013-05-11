@@ -43,7 +43,18 @@
 	<texte id="interactionModal">
 		<contenu>Je suis une interaction modale</contenu>
 	</texte>
-
+	<texte id="popupCombat">
+		<contenu>Combat</contenu>
+	</texte>
+	<texte id="equipArmure">
+		<contenu>Un ennemi approche, voulez-vous enfiler une armure?</contenu>
+	</texte>
+	<texte id="equipArme">
+		<contenu>Un ennemi approche, voulez-vous utiliser une arme?</contenu>
+	</texte>
+	<texte id="combatModal">
+		<contenu>Je suis un combat modale</contenu>
+	</texte>
 </textesJeu>
 
 

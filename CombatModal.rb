@@ -79,11 +79,11 @@ class CombatModal
       end
     end
     
-    dialog = Gtk::Dialog.new("Combat", @vue.window,
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous enfiler une armure?"))
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
       
     listeArmure.each{ |item|
         image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
@@ -114,11 +114,11 @@ class CombatModal
      end
     end
     
-    dialog = Gtk::Dialog.new("Combat", @vue.window,
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
     dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new("Un ennemi approche, voulez-vous utiliser une arme?"))
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
       
     listeArmure.each{ |item|
       image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(item.getIntitule()))
@@ -141,7 +141,7 @@ class CombatModal
   # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
   # 
   def to_s
-    return "Je suis un CombatModal"
+    return XmlMultilingueReader.lireTexte("popupCombatModal")
   end
 
   
