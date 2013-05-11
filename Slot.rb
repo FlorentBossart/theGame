@@ -9,6 +9,7 @@
 # == Le pseudo du joueur
 # == Une difficultÈ
 # == Une date
+# == Un temps de jeu
 # == Le modËle pour stocker l'Ètat de la partie en cours et pouvoir charger la partie au mÍme Ètat
 #
 
@@ -23,26 +24,26 @@ class Slot
    @pseudo
    @intituleDifficulte
    @date
-   @modele
+   @temps
 
 
-   attr_reader :intitule, :pseudo, :intituleDifficulte, :date, :modele
+   attr_reader :intitule, :pseudo, :intituleDifficulte, :date, :temps
 
 
    ##
    # Construit un nouveau slot de sauvegarde ‡ partir des informations pass√©es en param√®tre.
    #
-   def initialize(intitule, pseudo, intituleDifficulte, date, modele)
+   def initialize(intitule, pseudo, intituleDifficulte, date, temps)
       @intitule	= intitule
       @pseudo		= pseudo
 	   @intituleDifficulte = intituleDifficulte
 	   @date			= date
-	   @modele		= modele
+	   @temps		= temps
    end
     
     # Appel de la m√©thode initialize.
-    def Slot.creer(intitule, pseudo, intituleDifficulte, date, modele)
-        return new(intitule, pseudo, intituleDifficulte, date, modele)
+    def Slot.creer(intitule, pseudo, intituleDifficulte, date, temps)
+        return new(intitule, pseudo, intituleDifficulte, date, temps)
     end
                
 
@@ -51,7 +52,7 @@ class Slot
    # de l'objet Slot sur lequel la m√©thode est appell√©e.
    #
    def to_s
-      return "[Intitule #{@intitule} | Pseudo joueur #{@pseudo} | Difficulte #{@intituleDifficulte} | Date #{@date} | Modele #{@modele}]"
+      return "[Intitule #{@intitule} | Pseudo joueur #{@pseudo} | Difficulte #{@intituleDifficulte} | Date #{@date} | Temps #{@Temps}]"
    end
 
 end
