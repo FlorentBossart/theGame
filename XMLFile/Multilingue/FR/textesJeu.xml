@@ -8,7 +8,7 @@
 
 <textesJeu>
 
-<textesJeu>
+
 
 	<texte id="boutonRepos">
 	    <contenu>REPOS</contenu>
@@ -31,8 +31,19 @@
 	<texte id="niveau">
 		<contenu>Niveau</contenu>
 	</texte>
-	
-</textesJeu>
+	<texte id="popupInteraction">
+		<contenu>Interaction</contenu>
+	</texte>
+	<texte id="choixInteraction">
+		<contenu>Veuillez choisir une interaction</contenu>
+	</texte>
+	<texte id="nothingToDoInteraction">
+		<contenu>Il n'y a rien a faire ici !</contenu>
+	</texte>
+	<texte id="interactionModal">
+		<contenu>Je suis une interaction modale</contenu>
+	</texte>
+
 </textesJeu>
 
 

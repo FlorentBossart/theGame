@@ -13,6 +13,7 @@
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 
 
 

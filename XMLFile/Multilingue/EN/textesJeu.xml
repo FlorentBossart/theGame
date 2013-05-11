@@ -29,6 +29,18 @@
 	<texte id="niveau">
 		<contenu>Level</contenu>
 	</texte>
+	<texte id="popupInteraction">
+		<contenu>Interaction</contenu>
+	</texte>
+	<texte id="choixInteraction">
+		<contenu>What do you want to do ?</contenu>
+	</texte>
+	<texte id="nothingToDoInteraction">
+		<contenu>There's nothing to do here !</contenu>
+	</texte>
+	<texte id="interactionModal">
+		<contenu>I'm an modale interaction</contenu>
+	</texte>
 	
 	
 </textesJeu>

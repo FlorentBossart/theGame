@@ -15,6 +15,7 @@
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
 
 ##
@@ -37,8 +38,8 @@ class InteractionModal
   def initialize(modele,vue)
     @vue=vue
     @modele=modele
-    @referencesGraphiques = ReferencesGraphiques.new();
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
+    @referencesGraphiques = ReferencesGraphiques.new()
+    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
   end
   
   
@@ -65,10 +66,10 @@ class InteractionModal
       listeElements=@modele.joueur.casePosition.listeElements()
 
       # Creation du popup
-      dialog = Gtk::Dialog.new("Interaction", @vue.window,
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
       dialog.signal_connect('response') { dialog.destroy }
-      dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInteraction")))
       listeElements.each{ |element| 
         
         button=Gtk::Button.new()
@@ -88,11 +89,11 @@ class InteractionModal
       dialog.show_all
       
     else
-       dialog = Gtk::Dialog.new("Interaction", $main_application_window,
+       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
                          [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
       dialog.signal_connect('response') { dialog.destroy }
-      dialog.vbox.add(Gtk::Label.new("Il n'y a rien a faire sur cette emplacement !"))
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("nothingToDoInteraction")))
       dialog.show_all
     end
   end
@@ -102,7 +103,7 @@ class InteractionModal
   # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
   # 
   def to_s
-    return "Je suis une InterfaceModal"
+    return XmlMultilingueReader.lireTexte("interactionModal")
   end
   
 end
