@@ -4,7 +4,10 @@ require './Modele.rb'
 require './AffichageDebug.rb'
 require './Controller.rb'
 require './Vue.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 
+XmlMultilingueReader.setLangue("EN")
+#XmlMultilingueReader.setLangue("FR")
 
 #AffichageDebug.On()
 

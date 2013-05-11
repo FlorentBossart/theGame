@@ -8,9 +8,22 @@
 
 <textesJeu>
 
+<textesJeu>
+
+	<texte id="boutonRepos">
+	    <contenu>REPOS</contenu>
+	</texte>
 	<texte id="boutonInventaire">
 	    <contenu>INVENTAIRE</contenu>
 	</texte>
+	<texte id="boutonMenu">
+	    <contenu>MENU</contenu>
+	</texte>
+	<texte id="boutonInteraction">
+	    <contenu>INTERACTION</contenu>
+	</texte>	
+	
+</textesJeu>
 </textesJeu>
 
 

@@ -10,6 +10,7 @@
 require 'gtk2'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
 
 class ZoneCtrl <  Gtk::Frame
@@ -54,10 +55,10 @@ class ZoneCtrl <  Gtk::Frame
     @controller.deplacementHautCreer(@haut)
     @controller.deplacementBasCreer(@bas)
     #creation bouton
-    @repos = Gtk::Button.new("REPOS")
-    @inventaire = Gtk::Button.new("INVENTAIRE")
-    @menu = Gtk::Button.new("MENU")
-    @interaction = Gtk::Button.new("INTERACTON")
+    @repos = Gtk::Button.new(XmlMultilingueReader.lireTexte("boutonRepos"))
+    @inventaire = Gtk::Button.new(XmlMultilingueReader.lireTexte("boutonInventaire"))
+    @menu = Gtk::Button.new(XmlMultilingueReader.lireTexte("boutonMenu"))
+    @interaction = Gtk::Button.new(XmlMultilingueReader.lireTexte("boutonInteraction"))
     #association au controler
     @controller.reposCreer(@repos)
     @controller.inventaireCreer(@inventaire)
