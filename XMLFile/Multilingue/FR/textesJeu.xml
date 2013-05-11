@@ -55,8 +55,8 @@
 	<texte id="combatModal">
 		<contenu>Je suis un combat modale</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi">
-		<contenu>Vous allez combattre INTITULE de niveau NIVEAU ayant une énergie de ENERGIE.</contenu>
+	<texte id="popupCombatEnnemi"
+		<contenu>Vous allez combattre INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
 	</texte>
 	<texte id="popupAttention">
 		<contenu>Attention !</contenu>
@@ -101,7 +101,7 @@
 		<contenu> Je peux vous soigner !</contenu>
 	</texte>
 	<texte id="descMarchand">
-		<contenu> Besoin de quelquechose ? Ou bien souhaitez vous valoriser des objets qui vous encombrent ?</contenu>
+		<contenu> Besoin de quelquechose ? Ou bien souhaitez vendre des objets qui vous encombrent ?</contenu>
 	</texte>
 	<texte id="descTypeEquipable">
 		<contenu> INTITULE    Protection: PROTEC   Prix: PRICE </contenu>
