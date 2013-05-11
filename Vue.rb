@@ -1,12 +1,12 @@
-#!/usr/bin/env ruby 
+#!/usr/bin/env ruby
 
-## 
-# Fichier            : Vue.rb 
-# Auteur            : L3SPI - Groupe de projet B 
-# Fait partie de : TheGame 
-# 
-# Cette classe représente l'affichage du jeu dan sa totalité 
-# 
+##
+# Fichier            : Vue.rb
+# Auteur            : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+#
+# Cette classe représente l'affichage du jeu dan sa totalité
+#
 require 'gtk2'
 require './Zaf.rb'
 require './MenuJeu.rb'
@@ -37,9 +37,7 @@ class Vue
   @interactionModal
   @popUp
 
-  
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl
-  
   def initialize()
     #Gtk.init();
     #@carteVue = Modele.carte;
@@ -78,7 +76,21 @@ class Vue
     window.signal_connect('destroy') {
       Gtk.main_quit()
     }
+    window.signal_connect('size_request'){
 
+      #puts window.size()[0]; #x
+      #puts window.size()[1]; #y
+      x = (window.size()[0]/100);
+      y = (window.size()[1]-150)/100;
+
+      if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
+        if(@carteVue != nil)then
+          @largeurAfficheCarte = x;
+          @hauteurAfficheCarte = y;
+        end
+
+      end
+    }
     #tableau pour le bas de la fenêtre
     tabBot = Gtk::Table.new(1,3,true)
 
@@ -92,31 +104,39 @@ class Vue
 
     #initialisation de la carte
 
-    initCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-    vbox.add(@carteVue)
-    vbox.add(tabBot)
+    #initialisation de la carte
 
-    window.set_resizable(false)
+    initCarte();
+    afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
+    valign = Alignment.new(0.5,0.5,0,0);
+    valign.add(@carteVue);
+
+    vbox.add(valign)
+    valignBot = Alignment.new(0.5,1,1,0);
+    valignBot.add(tabBot);
+    vbox.add(valignBot);
+
+    #window.set_resizable(false)
     window.add(vbox)
 
     window.set_title("THE GAME")
 
     window.show_all()
-    
+
     #lancé ici car on a pas encore de bouton debut partie
     @modele.debutTour()
 
     Gtk.main();
   end
 
-  def initCarte(debutX,debutY)
+  def initCarte()
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
         @carteVue.attach(@vue[x][y],y,y+1,x,x+1)
       end
     end
 
-    afficheCarte(debutX,debutY)
+
   end
 
   def afficheCarte(debutX,debutY)
@@ -129,42 +149,42 @@ class Vue
       end
     end
   end
-  
-def afficheCase(image,caseAffiche)
-  tailleCase=100
-  tailleCase_f=tailleCase.to_f
-  positions=Array.new([[0.1,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[2*tailleCase_f/3,2*tailleCase_f/3],[tailleCase_f/3,0.1]])
-    
-  #terrain
-  pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
-  pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR) 
-     
-  #joueur
-  if(caseAffiche.joueur!=nil)
-    pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
-    pixbufElement=pixbufElement.scale(tailleCase_f/2, tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
-    x=tailleCase_f/3
-    y=tailleCase_f/3
-    pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-  end
-  
-  #aides+ennemis
-  aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeEnnemis
-  for e in aidesEnnemis
-    if(positions.empty?)
-      return nil
+
+  def afficheCase(image,caseAffiche)
+    tailleCase=100
+    tailleCase_f=tailleCase.to_f
+    positions=Array.new([[0.1,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[2*tailleCase_f/3,2*tailleCase_f/3],[tailleCase_f/3,0.1]])
+
+    #terrain
+    pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+    pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+
+    #joueur
+    if(caseAffiche.joueur!=nil)
+      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
+      pixbufElement=pixbufElement.scale(tailleCase_f/2, tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
+      x=tailleCase_f/3
+      y=tailleCase_f/3
+      pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    position=positions.shift()
-    x=position[0]
-    y=position[1]
-    pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase))
-    pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-    pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-   end
-        
-   image.set_pixbuf(pixbufTerrain)
-   return nil
-end  
+
+    #aides+ennemis
+    aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeEnnemis
+    for e in aidesEnnemis
+      if(positions.empty?)
+        return nil
+      end
+      position=positions.shift()
+      x=position[0]
+      y=position[1]
+      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase))
+      pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    end
+
+    image.set_pixbuf(pixbufTerrain)
+    return nil
+  end
 
   def getZaf()
     return @zaf
@@ -176,36 +196,36 @@ end
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
     @zaf.majZaf(@modele.joueur)
     case @modele.stadePartie
-      
-        #ETAPE CHOIX LIBRE
-        when EnumStadePartie.CHOIX_LIBRE
-          @zoneCtrl.majBoutons(@modele)
-        #ETAPE PARTIE PERDUE 
-        when EnumStadePartie.PERDU
-          XmlClassements.ecrireXml(@modele)
-        #ETAPE EQUIPEMENT ARMURE   
-        when EnumStadePartie.EQUIPEMENT_ARMURE
-       
-        #ETAPE EQUIPEMENT ARME           
-        when EnumStadePartie.EQUIPEMENT_ARME
-        
-        #ETAPE INVENTAIRE PLEIN   
-        when EnumStadePartie.INVENTAIRE_PLEIN
-        
-        #ETAPE INTERACTION MARCHAND      
-        when EnumStadePartie.INTERACTION_MARCHAND  
-          
-        #ETAPE INTERACTION MARCHAND ACHAT      
-        when EnumStadePartie.INTERACTION_MARCHAND_ACHAT
-          
-        #ETAPE INTERACTION MARCHAND VENTE    
-        when EnumStadePartie.INTERACTION_MARCHAND_VENTE
-         
-        #ETAPE INTERACTOIN GUERISSEUR      
-        when EnumStadePartie.INTERACTION_GUERISSEUR    
-        
-        end #fin case
-        puts "fin actualiser"
+
+    #ETAPE CHOIX LIBRE
+    when EnumStadePartie.CHOIX_LIBRE
+      @zoneCtrl.majBoutons(@modele)
+      #ETAPE PARTIE PERDUE
+    when EnumStadePartie.PERDU
+      XmlClassements.ecrireXml(@modele)
+      #ETAPE EQUIPEMENT ARMURE
+    when EnumStadePartie.EQUIPEMENT_ARMURE
+
+      #ETAPE EQUIPEMENT ARME
+    when EnumStadePartie.EQUIPEMENT_ARME
+
+      #ETAPE INVENTAIRE PLEIN
+    when EnumStadePartie.INVENTAIRE_PLEIN
+
+      #ETAPE INTERACTION MARCHAND
+    when EnumStadePartie.INTERACTION_MARCHAND
+
+      #ETAPE INTERACTION MARCHAND ACHAT
+    when EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+
+      #ETAPE INTERACTION MARCHAND VENTE
+    when EnumStadePartie.INTERACTION_MARCHAND_VENTE
+
+      #ETAPE INTERACTOIN GUERISSEUR
+    when EnumStadePartie.INTERACTION_GUERISSEUR
+
+    end #fin case
+    puts "fin actualiser"
   end
 
 end
