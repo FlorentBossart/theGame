@@ -60,7 +60,7 @@ class Encaissable < Caracteristique
       #s+= "Montant: #{@montant} | "
       #s+= "<<< Encaissable==]"
      s=XmlMultilingueReader.lireTexte("to_sEncaissable")
-     s.gsub!("INTITULE",@intitule).gsub!("OR",@montant.to_s)
+     s=s.gsub("INTITULE",@intitule).gsub("OR",@montant.to_s)
       return s
    end
 

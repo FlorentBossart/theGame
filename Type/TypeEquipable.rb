@@ -48,7 +48,7 @@ class TypeEquipable
 
    def description
      s=XmlMultilingueReader.lireTexte("descTypeEquipable")
-     s.gsub!("INTITULE",@intitule).gsub!("PROTEC",(@pourcentageProtection*100).to_s).gsub!("PRICE",@prix.to_s)
+     s=s.gsub("INTITULE",@intitule).gsub("PROTEC",(@pourcentageProtection*100).to_s).gsub("PRICE",@prix.to_s)
     # s= " #{@intitule} | "
      #s+= "Protection: #{@pourcentageProtection*100}% | "
      #s+= "Prix: #{@prix} | "

@@ -42,7 +42,7 @@ class TypeMangeable
    
    def description
      s=XmlMultilingueReader.lireTexte("descTypeMangeable")
-     s.gsub!("INTITULE",@intitule).gsub!("ENERGIE",@energieRendue.to_s).gsub!("PRICE",@prix.to_s)
+     s=s.gsub("INTITULE",@intitule).gsub("ENERGIE",@energieRendue.to_s).gsub("PRICE",@prix.to_s)
    end
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques

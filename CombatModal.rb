@@ -64,7 +64,7 @@ class CombatModal
   def majCombatModal(ennemi)
 
     str=XmlMultilingueReader.lireTexte("popupCombatEnnemi")
-    str.gsub!("INTITULE",ennemi.getIntitule()).gsub!("NIVEAU",ennemi.niveau().to_s).gsub!("ENERGIE",ennemi.energie().to_s)
+    str=str.gsub("INTITULE",ennemi.getIntitule()).gsub("NIVEAU",ennemi.niveau().to_s).gsub("ENERGIE",ennemi.energie().to_s)
     @vue.popUp.affichePopUp(str)
   end
   

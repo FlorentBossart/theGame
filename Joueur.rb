@@ -248,6 +248,16 @@ class Joueur < Personnage
    def armeEquip?()
       return @arme!=nil
    end
+   
+   ##
+   # Verifie si le joueur peut débourser le prix
+   # 
+   # == Parameters:
+   # prix : le prix à débourser
+   #     
+   def peutSePermettreAchat?(prix)
+     return @inventaire.capital>prix
+   end
 
    ##
    # Demande a l'item de s'utiliser sur le joueur
