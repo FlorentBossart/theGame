@@ -33,8 +33,10 @@ class XmlClassements
       #Pour chaque joueur du fichier XML...
       doc.elements.each('classements_joueur/joueur') do |j|
          #... on ajoute les stats à la liste des stats de chaque joueur
-         listeStatsJoueurs.addJoueur(j.elements['nom'].text, j.elements['nb_ennemis_tues'].text.to_i, j.elements['distance'].text.to_i, 
-         								j.elements['or'].text.to_i, j.elements['temps'].text.to_i, j.elements['difficulte'].text)
+         listeStatsJoueurs.addJoueur(j.elements['nom'].text, j.elements['nb_ennemis_tues'].text.to_i,
+         										j.elements['distance'].text.to_i, j.elements['or'].text.to_i,
+         										j.elements['temps'].text.to_i, j.elements['score'].text.to_i,
+         										j.elements['difficulte'].text)
       end
 
    end
@@ -51,12 +53,13 @@ class XmlClassements
 	         file.syswrite("<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n\n")
 		      file.syswrite("<!DOCTYPE classements_joueur [\n" +
 									"<!ELEMENT classements_joueur (joueur+)>\n" +
-									"<!ELEMENT joueur (nom, nb_ennemis_tues, distance, or, temps, difficulte)>\n" +
+									"<!ELEMENT joueur (nom, nb_ennemis_tues, distance, or, temps, score, difficulte)>\n" +
 									"<!ELEMENT nom (#PCDATA)>\n" +
 									"<!ELEMENT nb_ennemis_tues (#PCDATA)>\n" +
 									"<!ELEMENT distance (#PCDATA)>\n" +
 									"<!ELEMENT or (#PCDATA)>\n" +
 									"<!ELEMENT temps (#PCDATA)>\n" +
+									"<!ELEMENT score (#PCDATA)>\n" +
 									"<!ELEMENT difficulte (#PCDATA)>\n" +
 									"]>\n\n")
 				doc = Document.new()
@@ -93,8 +96,17 @@ class XmlClassements
       joueur.add_element(argent)
       
       tps = Element.new("temps")
-      tps.text = 123 # ??? modele.joueur.temps # gérer par la classe Modele
+      #tps.text = 36005 # ??? modele.joueur.tempsTotal # gérer par la classe Modele
+      tps.text = modele.joueur.tempsTotal
       joueur.add_element(tps)
+      
+      score = Element.new("score")
+      #score.text = 9865 # Mettre ici la formule de calcul du score
+      if(modele.compteurTour == 0) # A supprimer quand le jeu sera finalisé
+      	modele.compteurTour = 1 # A supprimer quand le jeu sera finalisé
+      end
+      score.text = (modele.joueur.distanceParcourue*1000 / modele.compteurTour) + modele.joueur.inventaire.capital
+      joueur.add_element(score)
       
       diff = Element.new("difficulte")
       #diff.text = "Expert" # modele.difficulte.intitule # gérer par la classe Modele
