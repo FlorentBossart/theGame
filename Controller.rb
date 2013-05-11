@@ -230,7 +230,7 @@ class Controller
   #
   def interactionAction()
     print "oO Bt interaction pressé!"
-    @vue.zoneCtrl.bloquerBoutons()
+    #@vue.zoneCtrl.bloquerBoutons(@modele)
     @vue.interactionModal.majInteractionModal()
   end
 

@@ -72,7 +72,7 @@ class InteractionModal
       dialog.vbox.add(Gtk::Label.new("Veuillez choisir une interaction"))
 
       listeElements.each{ |element| 
-        image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.getIntitule()))
+        image = Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
         button=Gtk::Button.new()
         button.image = image
         tooltips.set_tip( button, element.to_s, nil )
