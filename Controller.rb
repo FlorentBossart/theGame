@@ -233,7 +233,7 @@ class Controller
    
         
   ##
-  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  # Action(s) à effectuer lors du clic sur le bouton interaction
   #
   def interactionAction()
     print "oO Bt interaction pressé!"
@@ -251,6 +251,7 @@ class Controller
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   # elem : element avec lequel on souhaite interagir
   # joueur : afin d'effectuer l'action de l'element sur le joueur
+  # dialog: popup lié au bouton
   #
   def interactionElementCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
@@ -265,6 +266,7 @@ class Controller
   #
   # == Parameters:
   # elem : element avec lequel on souhaite interagir
+  # joueur : afin d'effectuer l'action de l'element sur le joueur
   #
   def interactionElementAction(elem,joueur)
     print "oO Bt interaction "+elem.getIntitule+" pressé!"
@@ -278,6 +280,7 @@ class Controller
   #
   # == Parameters:
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # dialog: popup lié au bouton
   #
   def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
@@ -301,6 +304,7 @@ class Controller
   #
   # == Parameters:
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # dialog: popup lié au bouton
   #
   def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
@@ -327,6 +331,7 @@ class Controller
   # joueur : le joueur qui doit recevoir le soin
   # choix : integer correspondant au soin choisi
   # guerisseur : le guerisseur repondant a la demande de soin
+  # dialog: popup lié au bouton
   #
   def soinCreer(btInteraction,joueur, choix, guerisseur,dialog)
   btInteraction.signal_connect('clicked'){
@@ -338,7 +343,7 @@ class Controller
   
   
   ##
-  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  # Action(s) à effectuer lors du clic sur le bouton de soins
   #
   # == Parameters:
   # joueur : le joueur qui doit recevoir le soin
@@ -356,7 +361,7 @@ class Controller
   # == Parameters:
   # joueur : le joueur qui doit equiper l'item
   # elem : element a equiper
-  # dialog: popup
+  # dialog: popup lié au bouton
   #
   def equiperItemCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
@@ -367,7 +372,7 @@ class Controller
       
       
   ##
-  # Action(s) à effectuer lors du clic sur le bouton inventaire
+  # Action(s) à effectuer lors du clic sur le bouton d'equipement d'element
   #
   # == Parameters:
   # joueur : le joueur qui doit equiper l'item
