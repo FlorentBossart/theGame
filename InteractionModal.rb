@@ -79,9 +79,17 @@ class InteractionModal
        # image.icon_size=taille
         button=Gtk::Button.new()
         #button.set_size_request(100, 100)
-        image= Gtk::Image.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
+        
+        
+        
+        image= Gtk::Image.new()
+        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
+        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+        image.set_pixbuf(pixbufElement)
         button.image = image
-
+        
+        
+        
         tooltips.set_tip( button, element.to_s, nil )
 
         @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
