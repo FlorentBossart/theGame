@@ -5,8 +5,8 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de créer une liste contenant les infos d'un slot de sauvegarde. Elle contient donc :
-#* Une liste représentant une sauvegarde avec le nom du joueur, sa difficulté ainsi que sa date de dernière modification
+# Cette classe permet de créer un tableau de hashage contenant les infos des slots de sauvegarde. Elle contient donc :
+#* Un tableau de hashage représentant chaque sauvegarde avec en clé le nom du fichier du slot de sauvegarde et en valeur, le slot en lui même.
 #
 
 
@@ -33,7 +33,7 @@ class BibliothequeSlot
    
    
    ##
-   # Retourne la valeur de la clé fournie en paramètre
+   # Retourne la valeur de la clé (nom fichier slotX.yaml) fournie en paramètre
    #
    def BibliothequeSlot.getSlot(cle)
       return @@tableSlots[cle]
