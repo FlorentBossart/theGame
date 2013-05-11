@@ -13,6 +13,7 @@ require './Console.rb'
 require './Jauges.rb'
 require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 
 #affiche console + jauges
 
@@ -51,7 +52,7 @@ class Zaf < Gtk::Frame
     hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("icone bourse")));
     vbox.add(@jauges.getJaugeEnergie());
     vbox.add(@jauges.getJaugeExperience());
-    vbox.add(Gtk::Label.new("Niveau : "+Gtk::Label.new(@jauges.getNiveau().to_s()).text));
+    vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau")+ " : " +Gtk::Label.new(@jauges.getNiveau().to_s()).text));
 
     hbox.add(vbox);
 
