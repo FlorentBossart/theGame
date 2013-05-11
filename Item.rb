@@ -40,6 +40,10 @@ class Item < Elem
    def estEquipable?()
        return @caracteristique.estEquipable?()
    end
+   
+  def estMangeable?()
+      return @caracteristique.estMangeable?()
+  end
     
    def selectionner()
        selected = true
@@ -49,11 +53,17 @@ class Item < Elem
         selected = true
    end
    
+   
    ##
    # Represente l'interaction avec un element present sur une case (dans ce cas ramasser un item)
    #
    def interaction(joueur)
-     joueur.ramasserItem(self)
+     if(estEquipable?() || estMangeable?())
+       joueur.ramasserItem(self)
+     else
+       @caracteristique.utiliseToi(joueur)
+       joueur.casePosition.retirerElement(self)
+     end
      @casePosition=nil
      return nil
    end

@@ -81,9 +81,9 @@ class PopUp
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("commerceChoix")))
     buttonAchat=Gtk::Button.new(XmlMultilingueReader.lireTexte("achat"))
     buttonVendre=Gtk::Button.new(XmlMultilingueReader.lireTexte("vendre"))
-    @vue.controller.achatMarchandCreer(buttonAchat)
+    @vue.controller.achatMarchandCreer(buttonAchat,dialog)
     dialog.vbox.add(buttonAchat)
-    @vue.controller.vendreMarchandCreer(buttonVendre)
+    @vue.controller.vendreMarchandCreer(buttonVendre,dialog)
     dialog.vbox.add(buttonVendre)
 
     dialog.show_all
@@ -109,11 +109,11 @@ class PopUp
     buttonSoinMini=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix0"))
     buttonSoinMoyen=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix1"))
     buttonSoinMax=Gtk::Button.new(XmlMultilingueReader.lireTexte("soinChoix2"))
-    @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur)
+    @vue.controller.soinCreer(buttonSoinMini,joueur,0,guerisseur,dialog)
     dialog.vbox.add(buttonSoinMini)
-    @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur)
+    @vue.controller.soinCreer(buttonSoinMoyen,joueur,1,guerisseur,dialog)
     dialog.vbox.add(buttonSoinMoyen)
-    @vue.controller.soinCreer(buttonSoinMax,joueur,2,guerisseur)
+    @vue.controller.soinCreer(buttonSoinMax,joueur,2,guerisseur,dialog)
     dialog.vbox.add(buttonSoinMax)
   
    dialog.show_all

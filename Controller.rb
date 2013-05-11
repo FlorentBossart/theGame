@@ -279,10 +279,11 @@ class Controller
   # == Parameters:
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   #
-  def achatMarchandCreer(btInteraction)
+  def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
 
     achatMarchandAction()
+    dialog.destroy
   }
   end
   
@@ -301,10 +302,11 @@ class Controller
   # == Parameters:
   # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   #
-  def vendreMarchandCreer(btInteraction)
+  def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
 
     vendreMarchandAction()
+    dialog.destroy
   }
   end
   
@@ -326,7 +328,7 @@ class Controller
   # choix : integer correspondant au soin choisi
   # guerisseur : le guerisseur repondant a la demande de soin
   #
-  def soinCreer(btInteraction,joueur, choix, guerisseur)
+  def soinCreer(btInteraction,joueur, choix, guerisseur,dialog)
   btInteraction.signal_connect('clicked'){
 
     soinAction(joueur,choix,guerisseur)
@@ -344,7 +346,7 @@ class Controller
   # guerisseur : le guerisseur repondant a la demande de soin
   #
   def soinAction(joueur,choix,guerisseur)
-    guerisseur.guerir(joueur,choix)
+    guerisseur.guerrir(joueur,choix)
   end
       
   

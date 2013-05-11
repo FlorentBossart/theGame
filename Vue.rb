@@ -215,7 +215,7 @@ class Vue
 
       #ETAPE INTERACTION MARCHAND
     when EnumStadePartie.INTERACTION_MARCHAND
-
+      @popUp.afficheChoixMarchand()
       #ETAPE INTERACTION MARCHAND ACHAT
     when EnumStadePartie.INTERACTION_MARCHAND_ACHAT
 
@@ -224,7 +224,7 @@ class Vue
 
       #ETAPE INTERACTOIN GUERISSEUR
     when EnumStadePartie.INTERACTION_GUERISSEUR
-
+      @popUp.afficheChoixGuerisseur(@modele.joueur, @modele.pnjAideEnInteraction)
     end #fin case
     puts "fin actualiser"
   end
