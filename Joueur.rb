@@ -53,11 +53,15 @@ class Joueur < Personnage
    @distanceParcourue
    @causeMort
    @peutSEquiper
+   @dateDebutJeu # VI de type Time
+   @dateFinJeu # VI de type Time
+   @tempsTotal # Temps de jeu total en secondes
 
    attr_reader :nombreRepos, :niveau, :experience,
                :experienceSeuil, :inventaire, :casePosition, :nbEnnemiTues, :distanceParcourue,
                :causeMort, :modele
-   attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax, :peutSEquiper
+   attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax, :peutSEquiper,
+   				:dateDebutJeu, :dateFinJeu, :tempsTotal
    
    
    ##
@@ -97,6 +101,8 @@ class Joueur < Personnage
       @nbEnnemiTues=0
       @distanceParcourue=0
       @peutSEquiper=true
+      @dateDebutJeu = Time.now
+      @tempsTotal = 0
    end
 
    
@@ -354,6 +360,15 @@ class Joueur < Personnage
      end
      @casePosition.retirerElement(item)
      #@modele.tourPasse()
+   end
+   
+   
+   ##
+   # Calcule le temps de jeu total du joueur, en prenant en compte le temps passé sur une session de jeu précédente (sauvegarde)
+   #
+   def calculerTempsTotal
+   	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
+   	puts "!!!!!!!! Temps total apres ajout du temps de la save : #{@tempsTotal}"
    end
    
 
