@@ -133,7 +133,24 @@
 	<texte id="sansLeSous">
 		<contenu> You don't have enough money ! come back with at least 30 gold </contenu>
 	</texte>
-	
+	<texte id="deplacementJoueur">
+		<contenu>You move to (CASEPOS ;CASECOORD) which require COUTDEP energy. </contenu>
+	</texte>
+	<texte id="enfilerBottes">
+		<contenu>You used BOTTES with a protection of PROTEC % </contenu>
+	</texte>
+	<texte id="perteEnergie">
+		<contenu>You lose ENERGIE energy points</contenu>
+	</texte>
+	<texte id="perteBotte">
+		<contenu>Your boots are broken !</contenu>
+	</texte>
+	<texte id="utilBotte">
+		<contenu>You can still use your boots NB times.</contenu>
+	</texte>
+	<texte id="MortFatigue">
+		<contenu>You died from exhaustion !.</contenu>
+	</texte>
 </textesJeu>
 
 

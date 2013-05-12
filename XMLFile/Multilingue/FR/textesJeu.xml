@@ -133,6 +133,24 @@
 	<texte id="sansLeSous">
 		<contenu> Vous n'avez pas assez d'argent ! revenez avec au moins 30 pieces d'or </contenu>
 	</texte>
+	<texte id="deplacementJoueur">
+		<contenu>Vous vous êtes déplacé à la case (CASEPOS ;CASECOORD) demandant COUTDEP points d'énergie. </contenu>
+	</texte>
+	<texte id="enfilerBottes">
+		<contenu>Vous avez utilisé vos BOTTES ayant une protection de PROTEC %</contenu>
+	</texte>
+	<texte id="perteEnergie">
+		<contenu>Vous perdez ENERGIE points d'énergie</contenu>
+	</texte>
+	<texte id="perteBotte">
+		<contenu>Vous perdez vos bottes!</contenu>
+	</texte>
+	<texte id="utilBotte">
+		<contenu>Vos bottes peuvent êtres utilisées encore NB fois.</contenu>
+	</texte>
+	<texte id="MortFatigue">
+		<contenu>Vous etes mortde fatigue !.</contenu>
+	</texte>
 </textesJeu>
 
 

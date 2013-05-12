@@ -158,28 +158,38 @@ class Joueur < Personnage
             dest.joueur = self
             @casePosition.joueur = nil
             @casePosition = dest
-            @modele.notifier("Vous vous êtes déplacé à la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) demandant #{@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain} points d'énergie.")
+             str=XmlMultilingueReader.lireTexte("deplacementJoueur")
+             str=str.gsub("CASEDEP",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
+            @modele.notifier(str)
             if(@bottes!=nil)
-              @modele.notifier("Vous avez utilisé vos #{@bottes.getIntitule()} ayant une protection de #{@bottes.typeEquipable.pourcentageProtection()*100}%")
+              str=XmlMultilingueReader.lireTexte("enfilerBottes")
+              str=str.gsub("BOTTES",@bottes.getIntitule()).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
+              @modele.notifier(str)
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
-              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")              
+              str=XmlMultilingueReader.lireTexte("perteEnergie")
+              str=str.gsub("ENERGIE",energiePerdue.to_s)
+              @modele.notifier(str)              
               @energie -= energiePerdue
               @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
               if(@bottes.nbUtilisationsRestantes==0)
                  @bottes=nil
-                 @modele.notifier("Vous perdez vos bottes.")
+                 @modele.notifier(XmlMultilingueReader.lireTexte("perteBottes"))
               else
-                 @modele.notifier("Vos bottes peuvent êtres utilisées encore #{@bottes.nbUtilisationsRestantes} fois.")
+                 str=XmlMultilingueReader.lireTexte("utilBottes")
+                 str=str.gsub("BOTTES",@bottes.nbUtilisationsRestantes.to_s)
+                 @modele.notifier(str)
               end
             else
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
               @energie -= energiePerdue
-              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")
+              str=XmlMultilingueReader.lireTexte("perteEnergie")
+              str=str.gsub("ENERGIE",energiePerdue.to_s)
+              @modele.notifier(str)     
             end
             @distanceParcourue += 1
          end
-         if(!toujoursEnVie?())
-            @causeMort= "Vous êtes mort de fatigue !!"
+         if(!toujoursEnVie?()) 
+            @causeMort= XmlMultilingueReader.lireTexte("MortFatigue")
          end
       end
       return nil
