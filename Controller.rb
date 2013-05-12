@@ -600,6 +600,7 @@ end
 
 require 'Vue.rb'
 require 'Audio.rb'
+require 'XMLReader/XmlMultilingueReader.rb'
 
 
 class Controller
@@ -644,6 +645,22 @@ class Controller
           when "Left"
             if @vue.ecouteLeft
               deplacementGaucheAction()
+            end
+          when XmlMultilingueReader.lireTexte("clavierRepos")
+            if @vue.ecouteToucheRepos
+              reposAction()
+            end
+          when XmlMultilingueReader.lireTexte("clavierInventaire")
+            if @vue.ecouteToucheInventaire
+              inventaireAction()
+            end
+          when XmlMultilingueReader.lireTexte("clavierInteraction")
+            if @vue.ecouteToucheInteraction
+              interactionAction()
+            end
+          when XmlMultilingueReader.lireTexte("clavierMenu")
+            if @vue.ecouteToucheMenu
+              menuAction()
             end
        end
      end

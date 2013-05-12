@@ -9,16 +9,27 @@
 <textesJeu>
 
 	<texte id="boutonRepos">
-	    <contenu>REST</contenu>
+	    <contenu>REST(r)</contenu>
+	</texte>
+	<texte id="clavierRepos">
+	    <contenu>r</contenu>
 	</texte>
 	<texte id="boutonInventaire">
-	    <contenu>INVENTORY</contenu>
+	    <contenu>INVENTORY(i)</contenu>
 	</texte>
-	<texte id="boutonMenu">
-	    <contenu>MENU</contenu>
+	<texte id="clavierInventaire">
+	    <contenu>i</contenu>
+	</texte><texte id="boutonMenu">
+	    <contenu>MENU(m)</contenu>
+	</texte>
+	<texte id="clavierMenu">
+	    <contenu>m</contenu>
 	</texte>
 	<texte id="boutonInteraction">
-	    <contenu>INTERACTION</contenu>
+	    <contenu>INTERACTION(a)</contenu>
+	</texte>
+	<texte id="clavierInteraction">
+	    <contenu>a</contenu>
 	</texte>
 	<texte id="energie">
 		<contenu>Energy</contenu>
