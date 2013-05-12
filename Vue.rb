@@ -198,7 +198,7 @@ class Vue
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase2, tailleCase2,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,225)
     end
     #terrain
