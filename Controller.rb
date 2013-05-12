@@ -36,7 +36,20 @@ class Controller
    end
 
     
-    
+   def ecouteClavierCreer(window)
+     window.signal_connect("key-press-event") do |w, e|
+       case Gdk::Keyval.to_name(e.keyval)
+          when "Up"
+            deplacementHautAction()
+          when "Down"
+            deplacementBastAction()
+          when "Right"
+            deplacementGaucheAction()
+          when "Left"
+            deplacementDroiteAction()
+       end
+     end
+   end 
      
   ##
   #  Fait le lien entre un bouton et l'action liée au deplacement haut

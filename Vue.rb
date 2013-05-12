@@ -92,6 +92,7 @@ class Vue
 
       end
     }
+    @controller.ecouteClavierCreer(@window)
     #tableau pour le bas de la fenêtre
     tabBot = Gtk::Table.new(1,3,true)
 
