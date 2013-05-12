@@ -150,37 +150,82 @@ class Vue
       end
     end
   end
+  
+  
+  def getNumTerrain(intitule)
+    if(intitule=="montagne")
+      return 4
+    elsif(intitule=="eau")
+      return 3
+    elsif(intitule=="sable")
+      return 2
+    else
+      return 1
+    end
+  end
+  
 
   def afficheCase(image,caseAffiche)
     tailleCase=100
     tailleCase_f=tailleCase.to_f
     positions=Array.new([[0.1,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[2*tailleCase_f/3,2*tailleCase_f/3],[tailleCase_f/3,0.1]])
 
-    #terrain
-    pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.id_terrainParDefaut.downcase))
+    #test Bordures
+    pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
     pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-
-    if(caseAffiche.getIntitule().downcase=="eau")#a fr pour tous si ça marche
-      voisin_differents=Array.new(['0','0','0','0'])
-      if caseAffiche.caseNord.getIntitule()!=caseAffiche.getIntitule()
-        voisin_differents[0]='1'
-      end
-      if caseAffiche.caseEst.getIntitule()!=caseAffiche.getIntitule()
-        voisin_differents[1]='1'
-      end
-      if caseAffiche.caseSud.getIntitule()!=caseAffiche.getIntitule()
-        voisin_differents[2]='1'
-      end
-      if caseAffiche.caseOuest.getIntitule()!=caseAffiche.getIntitule()
-        voisin_differents[3]='1'
-      end
-      idImage=caseAffiche.getIntitule().downcase()+voisin_differents[0]+voisin_differents[1]+voisin_differents[2]+voisin_differents[3]
+    
+    if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
+      idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-   else
-      pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
-   end
-   pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-   pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      pixbufTerrainSurcouche=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    end
+    
+    if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)))
+      idImage="bordure"+(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)).to_s()+"2"
+      pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+      pixbufTerrainSurcouche=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    end
+    
+    if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)))
+      idImage="bordure"+(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)).to_s()+"3"
+      pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+      pixbufTerrainSurcouche=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    end
+    
+    if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
+      idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
+      pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+      pixbufTerrainSurcouche=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    end
+    #terrain
+    #pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.id_terrainParDefaut.downcase))
+    #pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+
+    #if(caseAffiche.getIntitule().downcase=="eau")#a fr pour tous si ça marche
+     # voisin_differents=Array.new(['0','0','0','0'])
+      #if caseAffiche.caseNord.getIntitule()!=caseAffiche.getIntitule()
+      #  voisin_differents[0]='1'
+     # end
+     # if caseAffiche.caseEst.getIntitule()!=caseAffiche.getIntitule()
+      #  voisin_differents[1]='1'
+     # end
+     # if caseAffiche.caseSud.getIntitule()!=caseAffiche.getIntitule()
+      #  voisin_differents[2]='1'
+      #end
+     # if caseAffiche.caseOuest.getIntitule()!=caseAffiche.getIntitule()
+     #   voisin_differents[3]='1'
+     # end
+     # idImage=caseAffiche.getIntitule().downcase()+voisin_differents[0]+voisin_differents[1]+voisin_differents[2]+voisin_differents[3]
+      #pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+   #else
+     # pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+  # end
+   #pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+   #pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
        
     #joueur
     if(caseAffiche.joueur!=nil)

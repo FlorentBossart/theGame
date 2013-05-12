@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+﻿<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!DOCTYPE ref_graphiques [
 <!ELEMENT ref_graphiques (reference+)>
@@ -53,8 +53,74 @@
    <intitule_objet>desert</intitule_objet>
    <img_ihm>./img/sable.png</img_ihm>
 </reference>
-
-
+<reference>
+   <intitule_objet>bordure11</intitule_objet>
+   <img_ihm>./img/bordure11.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure12</intitule_objet>
+   <img_ihm>./img/bordure12.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure13</intitule_objet>
+   <img_ihm>./img/bordure13.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure14</intitule_objet>
+   <img_ihm>./img/bordure14.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure41</intitule_objet>
+   <img_ihm>./img/bordure41.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure42</intitule_objet>
+   <img_ihm>./img/bordure42.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure43</intitule_objet>
+   <img_ihm>./img/bordure43.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure44</intitule_objet>
+   <img_ihm>./img/bordure44.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure21</intitule_objet>
+   <img_ihm>./img/bordure21.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure22</intitule_objet>
+   <img_ihm>./img/bordure22.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure23</intitule_objet>
+   <img_ihm>./img/bordure23.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure24</intitule_objet>
+   <img_ihm>./img/bordure24.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure31</intitule_objet>
+   <img_ihm>./img/bordure31.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure32</intitule_objet>
+   <img_ihm>./img/bordure32.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure33</intitule_objet>
+   <img_ihm>./img/bordure33.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>bordure34</intitule_objet>
+   <img_ihm>./img/bordure34.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>eau</intitule_objet>
+   <img_ihm>./img/eau.png</img_ihm>
+</reference>
 <reference>
    <intitule_objet>eau0000</intitule_objet>
    <img_ihm>./img/eau0000.png</img_ihm>
