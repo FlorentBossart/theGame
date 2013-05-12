@@ -628,7 +628,7 @@ class MenuJeu
 	
 	def onDestroy
 		puts "Fermeture du menu"
-		
+		@fenetreMenu.destroy
 	end
 	
 end

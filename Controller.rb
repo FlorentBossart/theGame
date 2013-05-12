@@ -27,7 +27,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      #Audio.load()
+      Audio.load()
       #Audio.playSoundLoop("mario")
    end
    
@@ -201,7 +201,9 @@ class Controller
   # Action(s) à effectuer lors du clic sur le bouton menu
   #
   def menuAction
-    puts "<--> Affichage du menu"
+    puts "<--> Creation du menu"
+    @vue.menu = MenuJeu.creer(true, @modele, self)
+    puts "Affichage du menu"
     @vue.menu.afficherMenu()
   end
 
