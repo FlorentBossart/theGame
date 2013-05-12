@@ -630,13 +630,21 @@ class Controller
      window.signal_connect("key-press-event") do |w, e|
        case Gdk::Keyval.to_name(e.keyval)
           when "Up"
-            deplacementHautAction()
+            if @vue.ecouteUp
+              deplacementHautAction()
+            end
           when "Down"
-            deplacementBasAction()
+            if @vue.ecouteDown
+              deplacementBasAction()
+            end
           when "Right"
-            deplacementDroiteAction()
+            if @vue.ecouteRight
+              deplacementDroiteAction()
+            end
           when "Left"
-            deplacementGaucheAction()
+            if @vue.ecouteLeft
+              deplacementGaucheAction()
+            end
        end
      end
    end 

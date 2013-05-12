@@ -38,6 +38,13 @@ class Vue
   @popUp
   @window
   
+  #touches ecoutees
+  @ecouteUp
+  @ecouteDown
+  @ecouteLeft
+  @ecouteRight
+  
+  attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
     #Gtk.init();
@@ -92,6 +99,11 @@ class Vue
 
       end
     }
+
+    @ecouteUp=false
+    @ecouteDown=false
+    @ecouteLeft=false
+    @ecouteRight=false
     @controller.ecouteClavierCreer(@window)
     #tableau pour le bas de la fenêtre
     tabBot = Gtk::Table.new(1,3,true)
@@ -269,6 +281,7 @@ class Vue
     #ETAPE CHOIX LIBRE
     when EnumStadePartie.CHOIX_LIBRE
       @zoneCtrl.majBoutons(@modele)
+      majEcouteClavier()
       #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
       XmlClassements.ecrireXml(@modele)
@@ -297,4 +310,11 @@ class Vue
     puts "fin actualiser"
   end
 
+  
+  def majEcouteClavier()
+    @ecouteUp=@modele.joueur.casePosition.caseNord.estAccessible?()
+    @ecouteDown=@modele.joueur.casePosition.caseSud.estAccessible?()
+    @ecouteLeft=@modele.joueur.casePosition.caseOuest.estAccessible?()
+    @ecouteRight=@modele.joueur.casePosition.caseEst.estAccessible?()
+  end
 end
