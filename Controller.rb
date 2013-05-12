@@ -205,6 +205,7 @@ class Controller
     @vue.menu = MenuJeu.creer(true, @modele, self)
     puts "-- Affichage du menu"
     @vue.menu.afficherMenu()
+    @vue.window.set_sensitive(false)
   end
 
     
@@ -413,6 +414,30 @@ class Controller
 		@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherNouvellePartie()
+	end
+	
+	
+	##
+   # Liaison de l'action sur le bouton
+   #
+   # == Parameters:
+   # btContinuerPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur Continuer partie
+   #
+   def continuerPartieCreer(btContinuerPartie)
+      btContinuerPartie.signal_connect('clicked'){
+          continuerPartieAction()
+      }
+   end
+   
+          
+	##
+	# Action(s) � effectuer lors du clic sur le bouton ContinuerPartie
+	#
+	def continuerPartieAction
+		puts "Clique sur continuer partie"
+		@vue.menu.fenetreMenu.destroy
+		puts "Destruction du menu"
+		@vue.window.set_sensitive(true)
 	end
 
       
