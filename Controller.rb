@@ -27,7 +27,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      Audio.load()
+      #Audio.load()
       #Audio.playSoundLoop("mario")
    end
    
