@@ -632,11 +632,11 @@ class Controller
           when "Up"
             deplacementHautAction()
           when "Down"
-            deplacementBastAction()
+            deplacementBasAction()
           when "Right"
-            deplacementGaucheAction()
-          when "Left"
             deplacementDroiteAction()
+          when "Left"
+            deplacementGaucheAction()
        end
      end
    end 
