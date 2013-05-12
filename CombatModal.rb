@@ -18,7 +18,8 @@ require './Bibliotheque/ReferencesGraphiques.rb'
 require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
-
+require "./Enum/EnumMomentCombat.rb"
+require 'Audio.rb'
 
 
 class CombatModal
@@ -56,15 +57,30 @@ class CombatModal
   
   
   ## 
-  # Cree un PopUp avec les informations sur l'ennemi
+  # Cree un PopUp avec les informations sur les ennemis a combattre
   # 
   # == Parameters: 
-  # * <b>ennemi :</b> reference de l'ennemi dont on veut afficher les informations.
+  # * <b>momentCombat :</b> le moment où intervient le combat
   # 
-  def majCombatModal(ennemi)
-
-    str=XmlMultilingueReader.lireTexte("popupCombatEnnemi")
-    str=str.gsub("INTITULE",ennemi.getIntitule()).gsub("NIVEAU",ennemi.niveau().to_s).gsub("ENERGIE",ennemi.energie().to_s)
+  def majCombatModal(momentCombat)
+    ennemis=@modele.joueur.casePosition.listeEnnemis
+    str=XmlMultilingueReader.lireTexte("popupCombatEnnemi_avertissement")
+    case momentCombat
+      when EnumMomentCombat.APRES_ACTION()
+        id="momentApresAction"
+      when EnumMomentCombat.APRES_DEPLACEMENT()
+        id="momentApresDepl"
+      when EnumMomentCombat.AVANT_DEPLACEMENT()
+        id="momentAvantDepl"
+    end 
+    str=str+" ["+XmlMultilingueReader.lireTexte(id)+"]"
+    for e in ennemis
+      str=str+"\n   * "
+      str_ennemis=XmlMultilingueReader.lireTexte("popupCombatEnnemi_ennemi")
+      str_ennemis=str_ennemis.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(e)).gsub("NIVEAU",e.niveau().to_s).gsub("ENERGIE",e.energie().to_s)
+      str=str+str_ennemis
+    end
+    Audio.playSound("preCombat")
     @vue.popUp.affichePopUp(str)
   end
   

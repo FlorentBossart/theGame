@@ -16,6 +16,7 @@
 
 require './AffichageDebug.rb'
 require './Enum/EnumStadePartie.rb'
+require "./Enum/EnumMomentCombat.rb"
 require './Joueur.rb'
 require './Inventaire.rb'
 require './Guerisseur.rb'
@@ -57,10 +58,11 @@ class Modele
    @itemAttenteAjout
    @pnjAideEnInteraction
    @tourDejaPasse
+   @id_terrainParDefaut
 
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
    attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications
    
    
@@ -107,7 +109,8 @@ class Modele
       @notifications.push("Debut de partie")
       
       # Creation de la carte
-      @carte = Carte.nouvelle(@difficulte.longueurCarte, @difficulte.largeurCarte)
+      @id_terrainParDefaut="plaine" #et plus tard "Plaine0000"
+      @carte = Carte.nouvelle(@difficulte.longueurCarte, @difficulte.largeurCarte, @id_terrainParDefaut)
 
       # Initialisation de la case du joueur
       pasTrouver = true
@@ -303,19 +306,30 @@ class Modele
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
      else
-        if(@joueur.casePosition.presenceEnnemis?() && @joueur.peutSEquiper)
-             @vue.combatModal.majCombatModal(@joueur.casePosition.listeEnnemis[0])
-            choixEquipementAvantCombat()
-        elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
-            @vue.combatModal.majCombatModal(@joueur.casePosition.listeEnnemis[0])
-            declencherCombat()
-        else
+        if(@joueur.casePosition.presenceEnnemis?())
+            if(@tourDejaPasse)
+              preparationHostilites(EnumMomentCombat.APRES_ACTION)
+            else
+              preparationHostilites(EnumMomentCombat.APRES_DEPLACEMENT)
+            end
+        end
+        if(@joueur.toujoursEnVie?())
             choixLibre()
         end
      end
      puts "fin debutTour"
    end
   
+   def preparationHostilites(momentCombat)
+     @vue.combatModal.majCombatModal(momentCombat)
+     if(@joueur.peutSEquiper)
+         choixEquipementAvantCombat()
+     elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
+         declencherCombat()
+     end
+   end
+   
+   
   ##
   # Permet au joueur de s'equiper
   #
@@ -395,7 +409,6 @@ class Modele
         end
       end
       @joueur.peutSEquiper=true
-      choixLibre()
     end
     
   end
@@ -407,15 +420,6 @@ class Modele
      changerStadePartie(EnumStadePartie.CHOIX_LIBRE)
      AffichageDebug.Afficher("Fin de 'choixLibre'")
    end
-   
-=begin
-   def lancerPartie()
-     while(@joueur.toujoursEnVie?())
-       debutTour()
-     end
-   end
-=end
-#si lancé dans le modele, la vue n'aura pas la main donc ça devra être lançé dans controleur
    
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques

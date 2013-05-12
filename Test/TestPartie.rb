@@ -5,16 +5,21 @@ require './AffichageDebug.rb'
 require './Controller.rb'
 require './Vue.rb'
 require './XMLReader/XmlMultilingueReader.rb'
+require 'Audio.rb'
+
+#AffichageDebug.On()
 
 XmlMultilingueReader.setLangue("EN")
 #XmlMultilingueReader.setLangue("FR")
 
-#AffichageDebug.On()
+# Remplissage des bibliothèque
+Modele.initialisationBibliotheques()
+
+Audio.load()
 
 pseudo = "pseudoADefinirALaFin"
 
-# Remplissage des bibliothèque
-Modele.initialisationBibliotheques()
+
 
 # Choix difficulté
 begin

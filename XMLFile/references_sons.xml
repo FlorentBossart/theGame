@@ -24,4 +24,13 @@
 	   <son>./Sons/coin.wav</son>
 	</reference>
 	
+	<reference>
+	   <intitule_objet>preCombat</intitule_objet>
+	   <son>./Sons/preCombat.wav</son>
+	</reference>
+	<reference>
+	   <intitule_objet>combat</intitule_objet>
+	   <son>./Sons/combat.wav</son>
+	</reference>
+	
 </ref_sons>

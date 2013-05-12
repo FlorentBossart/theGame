@@ -9,6 +9,7 @@ class Carte
    @largeur
    @cases
    @joueur
+   @id_terrainParDefaut
 
    private_class_method :new
    
@@ -19,11 +20,11 @@ class Carte
    #==Parameters
    #longueur
    #largeur
-   def initialize(long,larg)
+   def initialize(long,larg,id_terrainDef)
       @longueur = long
       @largeur = larg
       @cases = Array.new()
-
+      @id_terrainParDefaut=id_terrainDef
       for i in 0..long-1
          for j in 0..larg-1
             @cases.push(Case.nouvelle(i,j))
@@ -32,8 +33,7 @@ class Carte
       for i in 0..long-1
          for j in 0..larg-1
             getCaseAt(i,j).initVoisines(self.getCaseAt(i-1,j),self.getCaseAt(i+1,j),self.getCaseAt(i,j+1),self.getCaseAt(i,j-1))
-            #getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("Plaine")
-            #-> par défaut plaine dans le constructeur de Case
+            getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain(@id_terrainParDefaut)
          end
       end
       generationMapSemiAleatoire()
@@ -71,8 +71,8 @@ class Carte
       return @cases[y%@largeur+(x%@longueur)*@largeur]
    end
 
-   def Carte.nouvelle(long,larg)
-      return new(long,larg)
+   def Carte.nouvelle(long,larg,id_terrainDef)
+      return new(long,larg,id_terrainDef)
    end
    
    def to_s()

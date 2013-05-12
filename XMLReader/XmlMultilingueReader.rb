@@ -47,7 +47,9 @@ class XmlMultilingueReader
   end
   
   def XmlMultilingueReader.lireDeterminant_Nom(objet)
-       return @@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/determinant"].text+@@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/nom"]
+       determinant=@@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/determinant"].text
+       nom=@@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/nom"].text
+       return determinant+nom
   end
   
   def XmlMultilingueReader.lireTexte(id)

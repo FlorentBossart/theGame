@@ -55,8 +55,20 @@
 	<texte id="combatModal">
 		<contenu>Je suis un combat modale</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi">
-		<contenu>Vous allez combattre INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
+	<texte id="popupCombatEnnemi_avertissement">
+		<contenu>Preparez vous a guerroyer !!!</contenu>
+	</texte>
+	<texte id="popupCombatEnnemi_ennemi">
+		<contenu>INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
+	</texte>
+	<texte id="momentAvantDepl">
+		<contenu>avant votre deplacement vers la nouvelle case</contenu>
+	</texte>
+	<texte id="momentApresDepl">
+		<contenu>apres votre deplacement vers la nouvelle case</contenu>
+	</texte>
+	<texte id="momentApresAction">
+		<contenu>apres votre action sur cette case</contenu>
 	</texte>
 	<texte id="popupAttention">
 		<contenu>Attention !</contenu>

@@ -27,7 +27,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      Audio.load()
+      #Audio.load()
       #Audio.playSoundLoop("mario")
    end
    
@@ -56,13 +56,10 @@ class Controller
   # Action(s) à effectuer lors du clic sur le bouton de deplacement haut
   #
   def deplacementHautAction
-    print "/\ Bt déplacement haut pressé!\n"
+    #print "/\ Bt déplacement haut pressé!\n"
      Audio.playSound("deplacement")
      @modele.joueur.deplacement(EnumDirection.NORD)
-    if(@modele.tourDejaPasse == false)
-      @modele.tourPasse()
-    end
-    @modele.debutTour()
+     @modele.debutTour()
   end
 
     
@@ -84,13 +81,10 @@ class Controller
    # Action(s) à effectuer lors du clic sur le bouton deplacement bas
    #
   def deplacementBasAction
-    print "\/ Bt déplacement bas pressé!\n"
+    #print "\/ Bt déplacement bas pressé!\n"
      Audio.playSound("deplacement")
      @modele.joueur.deplacement(EnumDirection.SUD)
-    if(@modele.tourDejaPasse == false)
-      @modele.tourPasse()
-    end
-    @modele.debutTour()
+     @modele.debutTour()
   end
  
     
@@ -110,12 +104,9 @@ class Controller
    # Action(s) à effectuer lors du clic sur le bouton de deplacement gauche
    #
   def deplacementGaucheAction
-    print "<< Bt déplacement gauche pressé!\n"
+    #print "<< Bt déplacement gauche pressé!\n"
      Audio.playSound("deplacement")
     @modele.joueur.deplacement(EnumDirection.OUEST)
-    if(@modele.tourDejaPasse == false)
-      @modele.tourPasse()
-    end
     @modele.debutTour()
   end
         
@@ -141,12 +132,9 @@ class Controller
   # Action(s) à effectuer lors du clic sur le bouton de deplacement droit
   #
   def deplacementDroiteAction
-    print ">> Bt déplacement droite pressé!\n"
+    #print ">> Bt déplacement droite pressé!\n"
      Audio.playSound("deplacement")
     @modele.joueur.deplacement(EnumDirection.EST)
-    if(@modele.tourDejaPasse == false)
-      @modele.tourPasse()
-    end
     @modele.debutTour()
   end
         
@@ -272,6 +260,7 @@ class Controller
     print "oO Bt interaction "+elem.getIntitule+" pressé!"
      Audio.playSound("coin")
     elem.interaction(joueur)
+    @modele.debutTour()
   end
   
   
@@ -296,6 +285,7 @@ class Controller
   #
   def achatMarchandAction()
     print "oO Bt achatMarchandAction  pressé!"
+    @modele.debutTour()
   end
   
   
@@ -320,6 +310,7 @@ class Controller
   #
   def vendreMarchandAction()
     print "oO Bt venndreMarchandAction  pressé!"
+    @modele.debutTour()
   end
       
   
@@ -352,6 +343,7 @@ class Controller
   #
   def soinAction(joueur,choix,guerisseur)
     guerisseur.guerrir(joueur,choix)
+    @modele.debutTour()
   end
       
   

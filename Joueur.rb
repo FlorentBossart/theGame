@@ -29,6 +29,7 @@
 #
 
 require "./Enum/EnumDirection.rb"
+require "./Enum/EnumMomentCombat.rb"
 require "./Elem.rb"
 require "./Personnage.rb"
 require "./Interface/Deplacable.rb"
@@ -144,9 +145,12 @@ class Joueur < Personnage
    #
    def deplacement(cible)
 
-      #if(@modele.tourDejaPasse == false)
-      #   @modele.tourPasse()
-      #end
+      if(@modele.tourDejaPasse == false)
+         @modele.tourPasse()
+      end
+      if(casePosition.presenceEnnemis?())
+         @modele.preparationHostilites(EnumMomentCombat.AVANT_DEPLACEMENT())
+      end
       if(self.toujoursEnVie?())
          @modele.tourDejaPasse = false;
          dest = @casePosition.getDestination(cible)
@@ -177,11 +181,6 @@ class Joueur < Personnage
          if(!toujoursEnVie?())
             @causeMort= "Vous êtes mort de fatigue !!"
          end
-         #JUSTE POUR TEST
-         #@modele.tourPasse()
-         #@modele.changerStadePartie(EnumStadePartie.ETAPE_FINIE)
-         #puts "Joueur à la case #{@casePosition.coordonneeX}:#{@casePosition.coordonneeY}"
-         #JUSTE POUR TEST
       end
       return nil
    end
@@ -267,7 +266,7 @@ class Joueur < Personnage
    #
    def utiliserItem(item)
       item.utiliseToi(self)
-      #@modele.tourPasse()
+      @modele.tourPasse()
       return nil
    end
 
@@ -329,7 +328,7 @@ class Joueur < Personnage
       ajouterAuStock(item)
       debourser(itemAchete.prix())
       @modele.notifier("Vous avez acheté #{item.getIntitule}.")
-      #@modele.tourPasse()
+      @modele.tourPasse()
    end
 
    ##
@@ -346,7 +345,7 @@ class Joueur < Personnage
       acheteur.ajouterAuStock(item)
       acheteur.debourser(itemAchete.prix())
       @modele.notifier("Vous avez vendu #{item.getIntitule}.")
-      #@modele.tourPasse()
+      @modele.tourPasse()
    end
 
    ##
@@ -442,7 +441,7 @@ class Joueur < Personnage
         @modele.notifier("Vous avez ramassé #{item.getIntitule}.")
      end
      @casePosition.retirerElement(item)
-     #@modele.tourPasse()
+     @modele.tourPasse()
    end
    
    

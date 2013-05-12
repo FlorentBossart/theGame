@@ -53,9 +53,21 @@
 	<texte id="combatModal">
 		<contenu>I'm a CombatModal</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi">
-		<contenu>New oppenent appeared!  INTITULE level  NIVEAU with  ENERGIE energy.</contenu>
+	<texte id="popupCombatEnnemi_avertissement">
+		<contenu>Brace yourself, fight is coming !!!</contenu>
 	</texte>
+	<texte id="popupCombatEnnemi_ennemi">
+		<contenu>INTITULE level  NIVEAU with  ENERGIE energy.</contenu>
+	</texte>
+	<texte id="momentAvantDepl">
+		<contenu>before your new movement</contenu>
+	</texte>
+	<texte id="momentApresDepl">
+		<contenu>after your new movement</contenu>
+	</texte>
+	<texte id="momentApresAction">
+		<contenu>after your action on your position</contenu>
+	</texte>			
 	<texte id="popupAttention">
 		<contenu>Warning !</contenu>
 	</texte>
