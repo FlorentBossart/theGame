@@ -43,8 +43,13 @@ class Vue
   @ecouteDown
   @ecouteLeft
   @ecouteRight
+  @ecouteToucheRepos
+  @ecouteToucheInventaire
+  @ecouteToucheMenu
+  @ecouteToucheInteraction
   
-  attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight
+  
+  attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
     #Gtk.init();
@@ -100,10 +105,7 @@ class Vue
       end
     }
 
-    @ecouteUp=false
-    @ecouteDown=false
-    @ecouteLeft=false
-    @ecouteRight=false
+    bloquerEcouteClavier()
     @controller.ecouteClavierCreer(@window)
     #tableau pour le bas de la fenêtre
     tabBot = Gtk::Table.new(1,3,true)
@@ -316,5 +318,20 @@ class Vue
     @ecouteDown=@modele.joueur.casePosition.caseSud.estAccessible?()
     @ecouteLeft=@modele.joueur.casePosition.caseOuest.estAccessible?()
     @ecouteRight=@modele.joueur.casePosition.caseEst.estAccessible?()
+    @ecouteToucheRepos=@modele.joueur.nombreRepos!=0
+    @ecouteToucheInventaire=!@modele.joueur.inventaire.items.empty?()
+    @ecouteToucheMenu=true
+    @ecouteToucheInteraction=@modele.joueur.casePosition.presenceAides?()
+  end
+  
+  def bloquerEcouteClavier()
+    @ecouteUp=false
+    @ecouteDown=false
+    @ecouteLeft=false
+    @ecouteRight=false
+    @ecouteToucheRepos=false
+    @ecouteToucheInventaire=false
+    @ecouteToucheMenu=false
+    @ecouteToucheInteraction=false
   end
 end
