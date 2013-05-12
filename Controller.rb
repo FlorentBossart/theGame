@@ -203,7 +203,7 @@ class Controller
   def menuAction
     puts "<--> Creation du menu"
     @vue.menu = MenuJeu.creer(true, @modele, self)
-    puts "--- Affichage du menu"
+    puts "-- Affichage du menu"
     @vue.menu.afficherMenu()
   end
 
