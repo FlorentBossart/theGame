@@ -15,6 +15,7 @@ require 'gtk2'
 
 require 'Classements.rb'
 require './XMLReader/XmlClassements.rb'
+require './XMLReader/XmlMultilingueReader.rb'
 
 require './Bibliotheque/BibliothequeSlot.rb'
 require 'YamlSlot.rb'
@@ -88,7 +89,7 @@ class MenuJeu
 			boutClassement 	= Button.new("Classement")
 			boutOptions 		= Button.new("Options (a discuter)")
 			boutAide 			= Button.new("Aide")
-			boutQuitter 		= Button.new(Stock::QUIT)
+			boutQuitter 		= Button.new("Quitter le jeu")
 			
 			@contenu.add(boutNewPartie)
 			@contenu.add(boutChargerPartie)
@@ -97,16 +98,16 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 		else
-			boutContinuer 				= Button.new("Continuer")
+			boutContinuerPartie		= Button.new("Continuer partie")
 			boutNewPartie 				= Button.new("Nouvelle partie")
 			boutChargerPartie 		= Button.new("Charger partie")
 			boutSauvegarderPartie 	= Button.new("Sauvegarder partie")
 			boutClassement 			= Button.new("Classement")
-			boutOptions 				= Button.new("Options (a dicuter)") # Uniquement le son et pas la langue
+			boutOptions 				= Button.new("Options (a discuter)")
 			boutAide 					= Button.new("Aide")
-			boutQuitter 				= Button.new(Stock::QUIT)
+			boutQuitter 				= Button.new("Quitter le jeu")
 				
-			@contenu.add(boutContinuer)
+			@contenu.add(boutContinuerPartie)
 			@contenu.add(boutNewPartie)
 			@contenu.add(boutChargerPartie)
 			@contenu.add(boutSauvegarderPartie)
@@ -114,7 +115,8 @@ class MenuJeu
 			@contenu.add(boutOptions)
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
-
+			
+			@controleur.continuerPartieCreer(boutContinuerPartie)
 			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie)
 		end
 		
@@ -575,6 +577,23 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		boutValider.signal_connect('clicked') {
+=begin		if(#son = oui
+				)
+				Audio.activeSound()
+			else
+				Audio.mute()
+			end
+=end
+			
+=begin	#Bug apres avoir choisi la langue		if(listeLangue.active == 0)
+				XmlMultilingueReader.setLangue("FR")
+				puts "Langue FR"
+			elsif
+				XmlMultilingueReader.setLangue("EN")
+				puts "Langue EN"
+			end
+=end
+			
 			viderFenetre(@contenu)
 			afficherMenu()
 		}
@@ -628,7 +647,7 @@ class MenuJeu
 	
 	def onDestroy
 		puts "Fermeture du menu"
-		@fenetreMenu.destroy
+		#@fenetreMenu.destroy
 	end
 	
 end
