@@ -173,10 +173,10 @@ class Joueur < Personnage
               @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
               if(@bottes.nbUtilisationsRestantes==0)
                  @bottes=nil
-                 @modele.notifier(XmlMultilingueReader.lireTexte("perteBottes"))
+                 @modele.notifier(XmlMultilingueReader.lireTexte("perteBotte"))
               else
-                 str=XmlMultilingueReader.lireTexte("utilBottes")
-                 str=str.gsub("BOTTES",@bottes.nbUtilisationsRestantes.to_s)
+                 str=XmlMultilingueReader.lireTexte("utilBotte")
+                 str=str.gsub("NB",@bottes.nbUtilisationsRestantes.to_s)
                  @modele.notifier(str)
               end
             else
@@ -487,7 +487,7 @@ class Joueur < Personnage
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
-   	puts XmlMultilingueReader.lireTexte("ramasserItem")+"#{@tempsTotal}"
+   	puts XmlMultilingueReader.lireTexte("tempsTotal")+"#{@tempsTotal}"
    end
    
 
