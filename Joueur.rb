@@ -221,7 +221,7 @@ class Joueur < Personnage
       if(self.armeEquip?())
         protection=protection+@arme.typeEquipable.pourcentageProtection()
         str=XmlMultilingueReader.lireTexte("utiliserProtec")
-        str=str.gsub("INTITULE",@arme.getIntitule()).gsub("PROTEC",(@armure.typeEquipable.pourcentageProtection()*100).to_s)
+        str=str.gsub("INTITULE",@arme.getIntitule()).gsub("PROTEC",(@arme.typeEquipable.pourcentageProtection()*100).to_s)
         @modele.notifier(str)
         @arme=nil
       end
