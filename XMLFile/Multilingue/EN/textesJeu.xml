@@ -19,7 +19,8 @@
 	</texte>
 	<texte id="clavierInventaire">
 	    <contenu>i</contenu>
-	</texte><texte id="boutonMenu">
+	</texte>
+	<texte id="boutonMenu">
 	    <contenu>MENU(m)</contenu>
 	</texte>
 	<texte id="clavierMenu">
@@ -148,7 +149,7 @@
 	<texte id="utilBotte">
 		<contenu>You can still use your boots NB times.</contenu>
 	</texte>
-	<texte id="MortFatigue">
+	<texte id="mortFatigue">
 		<contenu>You died from exhaustion !.</contenu>
 	</texte>
 	<texte id="combatEnCours">
@@ -178,7 +179,7 @@
 	<texte id="vendu">
 		<contenu>You sold INTITULE.</contenu>
 	</texte>
-	<texte id="enpocher">
+	<texte id="empocher">
 		<contenu>You pocket REVENUE.</contenu>
 	</texte>
 	<texte id="debourser">

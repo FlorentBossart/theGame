@@ -189,7 +189,7 @@ class Joueur < Personnage
             @distanceParcourue += 1
          end
          if(!toujoursEnVie?()) 
-            @causeMort= XmlMultilingueReader.lireTexte("MortFatigue")
+            @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")
          end
       end
       return nil
