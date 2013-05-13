@@ -37,7 +37,10 @@ class Vue
   @interactionModal
   @popUp
   @window
-  
+  @valign
+  @tailleCase #taille d'une case
+  @finInit
+
   #touches ecoutees
   @ecouteUp
   @ecouteDown
@@ -47,8 +50,7 @@ class Vue
   @ecouteToucheInventaire
   @ecouteToucheMenu
   @ecouteToucheInteraction
-  
-  
+
   attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
@@ -73,6 +75,7 @@ class Vue
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
+    @tailleCase= 100;
     @hauteurAfficheCarte = 5
     @largeurAfficheCarte = 10
     #matrice de stockage
@@ -91,17 +94,25 @@ class Vue
     }
     @window.signal_connect('size_request'){
 
-      #puts window.size()[0]; #x
-      #puts window.size()[1]; #y
-      x = (@window.size()[0]/100);
-      y = (@window.size()[1]-150)/100;
+      x = (@window.size()[0]-1)/@tailleCase;
+      y = (@window.size()[1]-169)/@tailleCase; #169 = taille de la zaf
 
+      #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
-        if(@carteVue != nil)then
-          #@largeurAfficheCarte = x;
-          #@hauteurAfficheCarte = y;
-        end
+        if((x>=10 && y >=6))then
+          if(@carteVue != nil && @finInit)then
+            @largeurAfficheCarte = x;
+            @hauteurAfficheCarte = y;
+            @valign.remove(@carteVue);
+            @vue = Array.new(@hauteurAfficheCarte){Array.new(@largeurAfficheCarte ){Gtk::Image.new()}}
+            @carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
+            initCarte();
+            @valign.add(@carteVue);
+            afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
+            @window.show_all()
 
+          end
+        end
       end
     }
 
@@ -152,7 +163,6 @@ class Vue
       end
     end
 
-
   end
 
   def afficheCarte(debutX,debutY)
@@ -165,8 +175,7 @@ class Vue
       end
     end
   end
-  
-  
+
   def getNumTerrain(intitule)
     if(intitule=="montagne")
       return 4
@@ -178,7 +187,6 @@ class Vue
       return 1
     end
   end
-  
 
   def afficheCase(image,caseAffiche)
     tailleCase=100
@@ -188,28 +196,28 @@ class Vue
     #test Bordures
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
     pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-    
+
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    
+
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)).to_s()+"2"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    
+
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)).to_s()+"3"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    
+
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
@@ -221,27 +229,27 @@ class Vue
     #pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
 
     #if(caseAffiche.getIntitule().downcase=="eau")#a fr pour tous si ça marche
-     # voisin_differents=Array.new(['0','0','0','0'])
-      #if caseAffiche.caseNord.getIntitule()!=caseAffiche.getIntitule()
-      #  voisin_differents[0]='1'
-     # end
-     # if caseAffiche.caseEst.getIntitule()!=caseAffiche.getIntitule()
-      #  voisin_differents[1]='1'
-     # end
-     # if caseAffiche.caseSud.getIntitule()!=caseAffiche.getIntitule()
-      #  voisin_differents[2]='1'
-      #end
-     # if caseAffiche.caseOuest.getIntitule()!=caseAffiche.getIntitule()
-     #   voisin_differents[3]='1'
-     # end
-     # idImage=caseAffiche.getIntitule().downcase()+voisin_differents[0]+voisin_differents[1]+voisin_differents[2]+voisin_differents[3]
-      #pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-   #else
-     # pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
-  # end
-   #pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-   #pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-       
+    # voisin_differents=Array.new(['0','0','0','0'])
+    #if caseAffiche.caseNord.getIntitule()!=caseAffiche.getIntitule()
+    #  voisin_differents[0]='1'
+    # end
+    # if caseAffiche.caseEst.getIntitule()!=caseAffiche.getIntitule()
+    #  voisin_differents[1]='1'
+    # end
+    # if caseAffiche.caseSud.getIntitule()!=caseAffiche.getIntitule()
+    #  voisin_differents[2]='1'
+    #end
+    # if caseAffiche.caseOuest.getIntitule()!=caseAffiche.getIntitule()
+    #   voisin_differents[3]='1'
+    # end
+    # idImage=caseAffiche.getIntitule().downcase()+voisin_differents[0]+voisin_differents[1]+voisin_differents[2]+voisin_differents[3]
+    #pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+    #else
+    # pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+    # end
+    #pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+    #pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+
     #joueur
     if(caseAffiche.joueur!=nil)
       pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
@@ -312,7 +320,6 @@ class Vue
     puts "fin actualiser"
   end
 
-  
   def majEcouteClavier()
     @ecouteUp=@modele.joueur.casePosition.caseNord.estAccessible?()
     @ecouteDown=@modele.joueur.casePosition.caseSud.estAccessible?()
@@ -323,7 +330,7 @@ class Vue
     @ecouteToucheMenu=true
     @ecouteToucheInteraction=@modele.joueur.casePosition.presenceAides?()
   end
-  
+
   def bloquerEcouteClavier()
     @ecouteUp=false
     @ecouteDown=false
