@@ -71,7 +71,7 @@ class Vue
 
   def initInterface()
     Gtk.init();
-
+    @finInit = false;
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
@@ -135,10 +135,10 @@ class Vue
 
     initCarte();
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
-    valign = Alignment.new(0.5,1,0,0);
-    valign.add(@carteVue);
+    @valign = Alignment.new(0.5,1,0,0);
+    @valign.add(@carteVue);
 
-    vbox.add(valign)
+    vbox.add(@valign)
     valignBot = Alignment.new(0.5,1,1,0);
     valignBot.add(tabBot);
     vbox.add(valignBot);
@@ -152,7 +152,7 @@ class Vue
 
     #lancé ici car on a pas encore de bouton debut partie
     @modele.debutTour()
-
+    @finInit = true;
     Gtk.main();
   end
 
