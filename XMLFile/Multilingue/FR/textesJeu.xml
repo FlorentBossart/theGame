@@ -134,10 +134,10 @@
 		<contenu> Vous n'avez pas assez d'argent ! revenez avec au moins 30 pieces d'or </contenu>
 	</texte>
 	<texte id="deplacementJoueur">
-		<contenu>Vous vous êtes déplacé à la case (CASEPOS ;CASECOORD) demandant COUTDEP points d'énergie. </contenu>
+		<contenu>Vous vous etes deplace a la case (CASEPOS ;CASECOORD) demandant COUTDEP points d'energie. </contenu>
 	</texte>
 	<texte id="enfilerBottes">
-		<contenu>Vous avez utilisé vos BOTTES ayant une protection de PROTEC %</contenu>
+		<contenu>Vous avez utilise vos BOTTES ayant une protection de PROTEC %</contenu>
 	</texte>
 	<texte id="perteEnergie">
 		<contenu>Vous perdez ENERGIE points d'énergie</contenu>
@@ -146,10 +146,58 @@
 		<contenu>Vous perdez vos bottes!</contenu>
 	</texte>
 	<texte id="utilBotte">
-		<contenu>Vos bottes peuvent êtres utilisées encore NB fois.</contenu>
+		<contenu>Vos bottes peuvent etres utilisees encore NB fois.</contenu>
 	</texte>
 	<texte id="MortFatigue">
-		<contenu>Vous etes mortde fatigue !.</contenu>
+		<contenu>Vous etes mort de fatigue !.</contenu>
+	</texte>
+	<texte id="combatEnCours">
+		<contenu>Vous avez combattu un INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
+	</texte>
+	<texte id="utiliserProtec">
+		<contenu>Vous avez utilise votre INTITULE ayant une protection de PROTEC %.</contenu>
+	</texte>
+	<texte id="protectTotale">
+		<contenu>Votre équipement vous apporte une protection totale !</contenu>
+	</texte>
+	<texte id="entretue">
+		<contenu>Suite a un enchainement de coups fulgurants, vous avez mis fin à votre ennemi, mais ce dernier vous a emporte avec lui!!</contenu>
+	</texte>
+	<texte id="mortCombat">
+		<contenu>Vous etes mort au combat !!</contenu>
+	</texte>
+	<texte id="passageNiveau">
+		<contenu>Passage au niveau  NIVEAU!! Votre énergie est réstitué et est plus grande désormais.</contenu>
+	</texte>
+	<texte id="gainRepos">
+		<contenu>Vous gagnez un repos supplémentaire.</contenu>
+	</texte>
+	<texte id="achete">
+		<contenu>Vous avez achete INTITULE.</contenu>
+	</texte>
+	<texte id="vendu">
+		<contenu>Vous avez vendu INTITULE.</contenu>
+	</texte>
+	<texte id="enpocher">
+		<contenu>Vous empochez REVENUE.</contenu>
+	</texte>
+	<texte id="debourser">
+		<contenu>Vous deboursez REVENUE.</contenu>
+	</texte>
+	<texte id="utiliserRepos">
+		<contenu>Vous utilisez un repos.</contenu>
+	</texte>
+	<texte id="attackRepos">
+		<contenu>Vous etes attaqué pendant votre sommeil, seul TOURS tours sur 10 sont passes.</contenu>
+	</texte>
+	<texte id="reposOK">
+		<contenu>Votre repos a ete ininterompue, vous recouvrez toutes votre energie.</contenu>
+	</texte>
+	<texte id="ramasserItem">
+		<contenu>Vous avez ramassé </contenu>
+	</texte>
+	<texte id="tempsTotal">
+		<contenu>!!!!!!!! Temps total apres ajout du temps de la save :  </contenu>
 	</texte>
 </textesJeu>
 

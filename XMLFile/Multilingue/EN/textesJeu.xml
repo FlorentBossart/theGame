@@ -151,6 +151,54 @@
 	<texte id="MortFatigue">
 		<contenu>You died from exhaustion !.</contenu>
 	</texte>
+	<texte id="combatEnCours">
+		<contenu>You fought with INTITULE, level NIVEAU with ENERGIE energy.</contenu>
+	</texte>
+	<texte id="utiliserProtec">
+		<contenu>You equipped you INTITULE which shield you for PROTEC %.</contenu>
+	</texte>
+	<texte id="protectTotale">
+		<contenu>Your gear offfers you a full protection !</contenu>
+	</texte>
+	<texte id="entretue">
+		<contenu>After a long fight, your ennemi lies at your feet, but you are dead too !!</contenu>
+	</texte>
+	<texte id="mortCombat">
+		<contenu>You died fighting !!</contenu>
+	</texte>
+	<texte id="passageNiveau">
+		<contenu>Level up  NIVEAU!! Your energy returns and rises</contenu>
+	</texte>
+	<texte id="gainRepos">
+		<contenu>You get one more rest.</contenu>
+	</texte>
+	<texte id="achete">
+		<contenu>You bought INTITULE.</contenu>
+	</texte>
+	<texte id="vendu">
+		<contenu>You sold INTITULE.</contenu>
+	</texte>
+	<texte id="enpocher">
+		<contenu>You pocket REVENUE.</contenu>
+	</texte>
+	<texte id="debourser">
+		<contenu>You pay out REVENUE.</contenu>
+	</texte>
+	<texte id="utiliserRepos">
+		<contenu>You use one rest.</contenu>
+	</texte>
+	<texte id="attackRepos">
+		<contenu>You've been attacked in your sleep, only TOURS turn on 10 passed.</contenu>
+	</texte>
+	<texte id="reposOK">
+		<contenu>Your sleep hasn't been stopped, you recover your energy.</contenu>
+	</texte>
+	<texte id="ramasserItem">
+		<contenu>You've picked up  </contenu>
+	</texte>
+	<texte id="tempsTotal">
+		<contenu>!!!!!!!! Total time after adding save time :  </contenu>
+	</texte>
 </textesJeu>
 
 
