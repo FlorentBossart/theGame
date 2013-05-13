@@ -158,28 +158,38 @@ class Joueur < Personnage
             dest.joueur = self
             @casePosition.joueur = nil
             @casePosition = dest
-            @modele.notifier("Vous vous êtes déplacé à la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) demandant #{@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain} points d'énergie.")
+             str=XmlMultilingueReader.lireTexte("deplacementJoueur")
+             str=str.gsub("CASEPOS",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
+            @modele.notifier(str)
             if(@bottes!=nil)
-              @modele.notifier("Vous avez utilisé vos #{@bottes.getIntitule()} ayant une protection de #{@bottes.typeEquipable.pourcentageProtection()*100}%")
+              str=XmlMultilingueReader.lireTexte("enfilerBottes")
+              str=str.gsub("BOTTES",@bottes.getIntitule()).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
+              @modele.notifier(str)
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
-              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")              
+              str=XmlMultilingueReader.lireTexte("perteEnergie")
+              str=str.gsub("ENERGIE",energiePerdue.to_s)
+              @modele.notifier(str)              
               @energie -= energiePerdue
               @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
               if(@bottes.nbUtilisationsRestantes==0)
                  @bottes=nil
-                 @modele.notifier("Vous perdez vos bottes.")
+                 @modele.notifier(XmlMultilingueReader.lireTexte("perteBotte"))
               else
-                 @modele.notifier("Vos bottes peuvent êtres utilisées encore #{@bottes.nbUtilisationsRestantes} fois.")
+                 str=XmlMultilingueReader.lireTexte("utilBotte")
+                 str=str.gsub("NB",@bottes.nbUtilisationsRestantes.to_s)
+                 @modele.notifier(str)
               end
             else
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
               @energie -= energiePerdue
-              @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")
+              str=XmlMultilingueReader.lireTexte("perteEnergie")
+              str=str.gsub("ENERGIE",energiePerdue.to_s)
+              @modele.notifier(str)     
             end
             @distanceParcourue += 1
          end
-         if(!toujoursEnVie?())
-            @causeMort= "Vous êtes mort de fatigue !!"
+         if(!toujoursEnVie?()) 
+            @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")
          end
       end
       return nil
@@ -197,26 +207,33 @@ class Joueur < Personnage
    # ennemi : l'ennemi a combattre
    #
    def combattreEnnemi(ennemi)
-
-     @modele.notifier("Vous avez combattu un #{ennemi.getIntitule()} de niveau #{ennemi.niveau} ayant une énergie de #{ennemi.energie}.")
-     protection=0;
+     str=XmlMultilingueReader.lireTexte("combatEnCours")
+     str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(ennemi)).gsub("NIVEAU",ennemi.niveau().to_s).gsub("ENERGIE",ennemi.energie().to_s)
+     @modele.notifier(str)
+     protection=0
       if(self.armureEquip?())
         protection=protection+@armure.typeEquipable.pourcentageProtection()
-        @modele.notifier("Vous avez utilisé votre #{@armure.getIntitule()} ayant une protection de #{@armure.typeEquipable.pourcentageProtection()*100}%")
+        str=XmlMultilingueReader.lireTexte("utiliserProtec")
+        str=str.gsub("INTITULE",@armure.getIntitule()).gsub("PROTEC",(@armure.typeEquipable.pourcentageProtection()*100).to_s)
+        @modele.notifier(str)
         @armure=nil
       end
       if(self.armeEquip?())
         protection=protection+@arme.typeEquipable.pourcentageProtection()
-        @modele.notifier("Vous avez utilisé votre #{@arme.getIntitule()} ayant une protection de #{@arme.typeEquipable.pourcentageProtection()*100}%")
+        str=XmlMultilingueReader.lireTexte("utiliserProtec")
+        str=str.gsub("INTITULE",@arme.getIntitule()).gsub("PROTEC",(@arme.typeEquipable.pourcentageProtection()*100).to_s)
+        @modele.notifier(str)
         @arme=nil
       end
       if(protection>1)
         protection=1
-        @modele.notifier("Votre équipement vous apporte une protection totale !")
+        @modele.notifier(XmlMultilingueReader.lireTexte("protectTotale"))
       end
       energiePerdue=ennemi.energie*(1-protection)
       @energie -= energiePerdue
-      @modele.notifier("Vous perdez #{energiePerdue} points d'énergie")
+      str=XmlMultilingueReader.lireTexte("perteEnergie")
+      str=str.gsub("ENERGIE",energiePerdue.to_s)
+      @modele.notifier(str)     
       if(@energie > 0)
          @modele.eliminerEnnemi(ennemi)
          gainExperience(ennemi.energie)
@@ -226,9 +243,9 @@ class Joueur < Personnage
          @modele.eliminerEnnemi(ennemi)
          gainExperience(ennemi.energie)
          @nbEnnemiTues += 1
-         @causeMort= "Suite à un enchainement de coups fulgurants, vous avez mis fin à votre ennemi, mais ce dernier vous à emporté avec lui!! "
+         @causeMort= XmlMultilingueReader.lireTexte("entretue")
       else
-         @causeMort ="Vous êtes mort au combat !!"
+         @causeMort =XmlMultilingueReader.lireTexte("mortCombat")
       end
       
       return Array.new()
@@ -237,12 +254,18 @@ class Joueur < Personnage
    ##
    # Verifie si le joueur a equipé une armure
    #
+   # == Returns:
+   # boolean : true si une armure est equipée
+   #
    def armureEquip?()
       return @armure!=nil
    end
 
    ##
    # Verifie si le joueur a equipé une arme
+   #
+   # == Returns:
+   # boolean : true si une arme est equipée
    #
    def armeEquip?()
       return @arme!=nil
@@ -252,8 +275,10 @@ class Joueur < Personnage
    # Verifie si le joueur peut débourser le prix
    # 
    # == Parameters:
-   # prix : le prix à débourser
-   #     
+   # prix : le prix à débourser  
+   # == Returns:
+   # boolean : true si le joueur a un capital supérieur a prix
+   # 
    def peutSePermettreAchat?(prix)
      return @inventaire.capital>prix
    end
@@ -285,10 +310,12 @@ class Joueur < Personnage
       @experienceSeuil *= 1.2
       @energieMax*=1.2
       @energie=energieMax
-      @modele.notifier("LVL UP #{@niveau}!! Votre énergie est réstitué et est plus grande désormais.")
+      str=XmlMultilingueReader.lireTexte("passageNiveau")
+      str=str.gsub("NIVEAU",@niveau.to_s())
+      @modele.notifier(str)
       if(@niveau%5 == 0)
          @nombreRepos += 1
-         @modele.notifier("Vous gagnez un repos supplémentaire.")
+         @modele.notifier(XmlMultilingueReader.lireTexte("gainRepos"))
       end
       return nil
    end
@@ -327,7 +354,9 @@ class Joueur < Personnage
       vendeur.encaisser(itemAchete.prix())
       ajouterAuStock(item)
       debourser(itemAchete.prix())
-      @modele.notifier("Vous avez acheté #{item.getIntitule}.")
+      str=XmlMultilingueReader.lireTexte("achete")
+      str=str.gsub("INTITULE",item.getIntitule())
+      @modele.notifier(str)
       @modele.tourPasse()
    end
 
@@ -344,7 +373,9 @@ class Joueur < Personnage
       encaisser(itemAchete.prix())
       acheteur.ajouterAuStock(item)
       acheteur.debourser(itemAchete.prix())
-      @modele.notifier("Vous avez vendu #{item.getIntitule}.")
+      str=XmlMultilingueReader.lireTexte("vendu")
+      str=str.gsub("INTITULE",item.getIntitule())
+      @modele.notifier(str)
       @modele.tourPasse()
    end
 
@@ -377,7 +408,9 @@ class Joueur < Personnage
    #
    def encaisser(revenue)
       @inventaire.capital+=revenue
-      @modele.notifier("Vous avez empochez #{revenue}.")
+      str=XmlMultilingueReader.lireTexte("empocher")
+      str=str.gsub("REVENUE",revenue.to_s)
+      @modele.notifier(str)
    end
 
    ##
@@ -388,7 +421,9 @@ class Joueur < Personnage
    #
    def debourser(revenue)
       @inventaire.capital-=revenue
-      @modele.notifier("Vous déboursez #{revenue}.")
+      str=XmlMultilingueReader.lireTexte("debourser")
+      str=str.gsub("REVENUE",revenue.to_s)
+      @modele.notifier(str)
    end
    ##
    # Verifie si le joueur est toujours en vie
@@ -406,7 +441,7 @@ class Joueur < Personnage
    def utiliserRepos()
      @peutSEquiper=true
      @nombreRepos=@nombreRepos-1
-     @modele.notifier("Vous utilisez un repos.")
+     @modele.notifier(XmlMultilingueReader.lireTexte("utiliserRepos"))
       i=10
       begin
          @energie=@energie+@energieMax*0.1
@@ -416,13 +451,15 @@ class Joueur < Personnage
          i=i-1
          @modele.tourPasse()
          if(@casePosition.presenceEnnemis?())
-           @modele.notifier("Vous êtes attaqué pendant votre sommeil, seul #{10-i} tours sur 10 sont passé.")
+           str=XmlMultilingueReader.lireTexte("attackRepos")
+           str=str.gsub("TOURS",(10-i).to_s)
+           @modele.notifier(str)
            @peutSEquiper=false
            break
          end
       end while(i>0)
       if(i==10)
-        @modele.notifier("Votre repos a été ininterompue, vous recouvrez toutes votre santé.")
+        @modele.notifier(XmlMultilingueReader.lireTexte("reposOK"))
       end
    end
 
@@ -438,7 +475,7 @@ class Joueur < Personnage
         @modele.changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
      else
         @inventaire.ajouter(item)
-        @modele.notifier("Vous avez ramassé #{item.getIntitule}.")
+        @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{item.getIntitule}.")
      end
      @casePosition.retirerElement(item)
      @modele.tourPasse()
@@ -450,7 +487,7 @@ class Joueur < Personnage
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
-   	puts "!!!!!!!! Temps total apres ajout du temps de la save : #{@tempsTotal}"
+   	puts XmlMultilingueReader.lireTexte("tempsTotal")+"#{@tempsTotal}"
    end
    
 

@@ -6,7 +6,7 @@
 # Fait partie de : TheGame
 #
 # Cette classe représente le Controlleur du jeu
-#
+# 
 
 require 'Vue.rb'
 require 'Audio.rb'
@@ -597,5 +597,3 @@ class Controller
 	end
       
 end
-
-
