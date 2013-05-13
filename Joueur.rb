@@ -159,7 +159,7 @@ class Joueur < Personnage
             @casePosition.joueur = nil
             @casePosition = dest
              str=XmlMultilingueReader.lireTexte("deplacementJoueur")
-             str=str.gsub("CASEDEP",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
+             str=str.gsub("CASEPOS",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
             @modele.notifier(str)
             if(@bottes!=nil)
               str=XmlMultilingueReader.lireTexte("enfilerBottes")
