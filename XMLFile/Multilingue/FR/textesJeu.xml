@@ -251,6 +251,14 @@
 		<id>tempsTotal</id>
 		<contenu>!!!!!!!! Temps total apres ajout du temps de la save :  </contenu>
 	</texte>
+		<texte>
+		<id>tourPasse</id>
+		<contenu>Un tour de jeu passe.</contenu>
+	</texte>
+	<texte>
+		<id></id>
+		<contenu>Vous avez récupérez ITEM lors du dernier combat!</contenu>
+	</texte>
 </textesJeu>
 
 

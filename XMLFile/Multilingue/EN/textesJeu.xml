@@ -264,6 +264,14 @@
 		<id>tempsTotal</id>
 		<contenu>!!!!!!!! Total time after adding save time :  </contenu>
 	</texte>
+	<texte>
+		<id>tourPasse</id>
+		<contenu>A turn pass.</contenu>
+	</texte>
+	<texte>
+		<id></id>
+		<contenu>You got ITEM during your last fight!</contenu>
+	</texte>
 </textesJeu>
 
 

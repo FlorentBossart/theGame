@@ -282,7 +282,7 @@ class Modele
    # Permet de faire passer un tour. 
    # 
    def tourPasse()
-     notifier("Un tour passe")
+     notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
       # Deplacement des ennemis
@@ -406,7 +406,9 @@ class Modele
           changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
         else
           @joueur.inventaire.ajouter(i) 
-          notifier("Vous avez récupérez #{i.getIntitule} lors du dernier combat")
+          str=XmlMultilingueReader.lireTexte("recupCombat")
+          str=str.gsub("ITEM",XmlMultilingueReader.lireDeterminant_Nom(i.getIntitule()))
+          notifier(str)
         end
       end
       @joueur.peutSEquiper=true
