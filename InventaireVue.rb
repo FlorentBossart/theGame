@@ -25,7 +25,15 @@ class InventaireVue
     @@boutonEquiper = Gtk::Button.new("Equiper")
     @@boutonAcheter = Gtk::Button.new("Acheter")
     @@boutonJeter = Gtk::Button.new("Jeter")
+    
+    
+    
+#AFR    
+@@vue=Vue.new()
+@@modele=Modele.creer(@@vue,'T',"Lecarpla")
+@@controller=Controller.creer(@@modele,@@vue)
 
+    
     attr_reader :vbox
     
     private_class_method :new
@@ -87,18 +95,19 @@ class InventaireVue
 	return @vbox
     end
 
-    def InventaireVue.afficherInventaire(joueur, inventaire)
+    def InventaireVue.afficherInventaire(joueur, mode)
         window = Gtk::Window.new();
         window.signal_connect('destroy') {
            Gtk.main_quit();
         }
+        iv = InventaireVue.creer(mode)
         #iv.obtenirVueInventaire(nil)
-        window.add(inventaire.vbox)
+        window.add(iv.vbox)
         window.show_all
     end
     
 end
 
 Gtk.init()
-InventaireVue.afficherInventaire(nil,InventaireVue.creer(EnumStadePartie.INTERACTION_MARCHAND_VENTE))
+InventaireVue.afficherInventaire(nil,EnumStadePartie.INTERACTION_MARCHAND_VENTE)
 Gtk.main()
