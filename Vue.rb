@@ -87,6 +87,7 @@ class Vue
     @popUp=PopUp.creer(self)
     @interactionModal=InteractionModal.creer(@modele,self)
     @combatModal=CombatModal.creer(self,@modele)
+	@inventairePlein = InventaireVue.creer(EnumStadePartie.INVENTAIRE_PLEIN);
 
     @window = Gtk::Window.new()
     @window.signal_connect('destroy') {
