@@ -2,202 +2,266 @@
 
 <!DOCTYPE textesJeu [
 <!ELEMENT textesJeu (texte+)>
-<!ELEMENT texte (contenu)>
+<!ELEMENT texte (id,contenu)>
 <!ELEMENT contenu (#PCDATA)>
 ]>
 
 <textesJeu>
 
-	<texte id="boutonRepos">
+	<texte>
+		<id>boutonRepos</id>
 	    <contenu>REST(r)</contenu>
 	</texte>
-	<texte id="clavierRepos">
+	<texte>
+		<id>clavierRepos</id>
 	    <contenu>r</contenu>
 	</texte>
-	<texte id="boutonInventaire">
-	  <contenu>INVENTORY(i)</contenu>
+	<texte>
+		<id>boutonInventaire</id>
+	  	<contenu>INVENTORY(i)</contenu>
 	</texte>
-	<texte id="clavierInventaire">
+	<texte>
+		<id>clavierInventaire</id>
 	    <contenu>i</contenu>
 	</texte>
-	<texte id="boutonMenu">
+	<texte>
+		<id>boutonMenu</id>
 	    <contenu>MENU(m)</contenu>
 	</texte>
-	<texte id="clavierMenu">
+	<texte>
+		<id>clavierMenu</id>
 	    <contenu>m</contenu>
 	</texte>
-	<texte id="boutonInteraction">
+	<texte>
+		<id>boutonInteraction</id>
 	    <contenu>INTERACTION(a)</contenu>
 	</texte>
-	<texte id="clavierInteraction">
+	<texte>
+		<id>clavierInteraction</id>
 	    <contenu>a</contenu>
 	</texte>
-	<texte id="energie">
+	<texte>
+		<id>energie</id>
 		<contenu>Energy</contenu>
 	</texte>
-	<texte id="experience">
+	<texte>
+		<id>experience</id>
 		<contenu>Experience</contenu>
 	</texte>
-	<texte id="niveau">
+	<texte>
+		<id>niveau</id>
 		<contenu>Level</contenu>
 	</texte>
-	<texte id="popupInteraction">
+	<texte>
+		<id>popupInteraction</id>
 		<contenu>Interaction</contenu>
 	</texte>
-	<texte id="choixInteraction">
+	<texte>
+		<id>choixInteraction</id>
 		<contenu>What do you want to do ?</contenu>
 	</texte>
-	<texte id="nothingToDoInteraction">
+	<texte>
+		<id>nothingToDoInteraction</id>
 		<contenu>There's nothing to do here !</contenu>
 	</texte>
-	<texte id="interactionModal">
+	<texte>
+		<id>interactionModal</id>
 		<contenu>I'm an modale interaction</contenu>
 	</texte>
-	<texte id="popupCombat">
+	<texte>
+		<id>popupCombat</id>
 		<contenu>Fight</contenu>
 	</texte>
-	<texte id="equipArmure">
+	<texte>
+		<id>equipArmure</id>
 		<contenu>You've encountered an ennemi, do you want to equip your defensive gear ?</contenu>
 	</texte>
-	<texte id="equipArme">
+	<texte>
+		<id>equipArme</id>
 		<contenu>You've encountered an ennemi, do you want to equip a weapon ?</contenu>
 	</texte>
-	<texte id="combatModal">
+	<texte>
+		<id>combatModal</id>
 		<contenu>I'm a CombatModal</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi_avertissement">
+	<texte>
+		<id>popupCombatEnnemi_avertissement</id>
 		<contenu>Brace yourself, fight is coming !!!</contenu>
 	</texte>
-	<texte id="popupCombatEnnemi_ennemi">
+	<texte>
+		<id>popupCombatEnnemi_ennemi</id>
 		<contenu>INTITULE level  NIVEAU with  ENERGIE energy.</contenu>
 	</texte>
-	<texte id="momentAvantDepl">
+	<texte>
+		<id>momentAvantDepl</id>
 		<contenu>before your new movement</contenu>
 	</texte>
-	<texte id="momentApresDepl">
+	<texte>
+		<id>momentApresDepl</id>
 		<contenu>after your new movement</contenu>
 	</texte>
-	<texte id="momentApresAction">
+	<texte>
+		<id>momentApresAction</id>
 		<contenu>after your action on your position</contenu>
 	</texte>			
-	<texte id="popupAttention">
+	<texte>
+		<id>popupAttention</id>
 		<contenu>Warning !</contenu>
 	</texte>
-	<texte id="popupCommerce">
+	<texte>
+		<id>popupCommerce</id>
 		<contenu>Shopkeeper</contenu>
 	</texte>
-	<texte id="commerceChoix">
+	<texte>
+		<id>commerceChoix</id>
 		<contenu>What can i do for you ? ?</contenu>
 	</texte>
-	<texte id="achat">
+	<texte>
+		<id>achat</id>
 		<contenu>Buy</contenu>
 	</texte>
-	<texte id="vendre">
+	<texte>
+		<id>vendre</id>
 		<contenu>Sell</contenu>
 	</texte>
-	<texte id="popupSoigneur">
+	<texte>
+		<id>popupSoigneur</id>
 		<contenu>Healer</contenu>
 	</texte>
-	<texte id="soinChoix">
+	<texte>
+		<id>soinChoix</id>
 		<contenu>Which heal do you want ?</contenu>
 	</texte>
-	<texte id="soinChoix0">
+	<texte>
+		<id>soinChoix0</id>
 		<contenu>25% energy for 30 gold</contenu>
 	</texte>
-	<texte id="soinChoix1">
+	<texte>
+		<id>soinChoix1</id>
 		<contenu>50% energy for 50 gold</contenu>
 	</texte>
-	<texte id="soinChoix2">
+	<texte>
+		<id>soinChoix2</id>
 		<contenu>75% energy for 70 gold</contenu>
 	</texte>
-	<texte id="popUp">
+	<texte>
+		<id>popUp</id>
 		<contenu>I'm a PopUp</contenu>
 	</texte>
-	<texte id="to_sEquipable">
+	<texte>
+		<id>to_sEquipable</id>
 		<contenu> TYPEEQUIP Can still be used: NBUTIL</contenu>
 	</texte>
-	<texte id="to_sEncaissable">
+	<texte>
+		<id>to_sEncaissable</id>
 		<contenu> INTITULE Value: OR gold</contenu>
 	</texte>
-	<texte id="descGuerisseur">
+	<texte>
+		<id>descGuerisseur</id>
 		<contenu> I can heal you !</contenu>
 	</texte>
-	<texte id="descMarchand">
+	<texte>
+		<id>descMarchand</id>
 		<contenu> Need something ? Or maybe you want to sell something ?</contenu>
 	</texte>
-	<texte id="descTypeEquipable">
+	<texte>
+		<id>descTypeEquipable</id>
 		<contenu> INTITULE    Protection: PROTEC   Price: PRICE </contenu>
 	</texte>
-	<texte id="descTypeMangeable">
+	<texte>
+		<id>descTypeMangeable</id>
 		<contenu> INTITULE    Energy when used: ENERGIE  Price: PRICE </contenu>
 	</texte>
-	<texte id="sansLeSous">
+	<texte>
+		<id>sansLeSous</id>
 		<contenu> You don't have enough money ! come back with at least 30 gold </contenu>
 	</texte>
-	<texte id="deplacementJoueur">
+	<texte>
+		<id>deplacementJoueur</id>
 		<contenu>You move to (CASEPOS ;CASECOORD) which require COUTDEP energy. </contenu>
 	</texte>
-	<texte id="enfilerBottes">
+	<texte>
+		<id>enfilerBottes</id>
 		<contenu>You used BOTTES with a protection of PROTEC % </contenu>
 	</texte>
-	<texte id="perteEnergie">
+	<texte>
+		<id>perteEnergie</id>
 		<contenu>You lose ENERGIE energy points</contenu>
 	</texte>
-	<texte id="perteBotte">
+	<texte>
+		<id>perteBotte</id>
 		<contenu>Your boots are broken !</contenu>
 	</texte>
-	<texte id="utilBotte">
+	<texte>
+		<id>utilBotte</id>
 		<contenu>You can still use your boots NB times.</contenu>
 	</texte>
-	<texte id="mortFatigue">
+	<texte>
+		<id>mortFatigue</id>
 		<contenu>You died from exhaustion !.</contenu>
 	</texte>
-	<texte id="combatEnCours">
+	<texte>
+		<id>combatEnCours</id>
 		<contenu>You fought with INTITULE, level NIVEAU with ENERGIE energy.</contenu>
 	</texte>
-	<texte id="utiliserProtec">
+	<texte>
+		<id>utiliserProtec</id>
 		<contenu>You equipped you INTITULE which shield you for PROTEC %.</contenu>
 	</texte>
-	<texte id="protectTotale">
+	<texte>
+		<id>protectTotale</id>
 		<contenu>Your gear offfers you a full protection !</contenu>
 	</texte>
-	<texte id="entretue">
+	<texte>
+		<id>entretue</id>
 		<contenu>After a long fight, your ennemi lies at your feet, but you are dead too !!</contenu>
 	</texte>
-	<texte id="mortCombat">
+	<texte>
+		<id>mortCombat</id>
 		<contenu>You died fighting !!</contenu>
 	</texte>
-	<texte id="passageNiveau">
+	<texte>
+		<id>passageNiveau</id>
 		<contenu>Level up  NIVEAU!! Your energy returns and rises</contenu>
 	</texte>
-	<texte id="gainRepos">
+	<texte>
+		<id>gainRepos</id>
 		<contenu>You get one more rest.</contenu>
 	</texte>
-	<texte id="achete">
+	<texte>
+		<id>achete</id>
 		<contenu>You bought INTITULE.</contenu>
 	</texte>
-	<texte id="vendu">
+	<texte>
+		<id>vendu</id>
 		<contenu>You sold INTITULE.</contenu>
 	</texte>
-	<texte id="empocher">
+	<texte>
+		<id>empocher</id>
 		<contenu>You pocket REVENUE.</contenu>
 	</texte>
-	<texte id="debourser">
+	<texte>
+		<id>debourser</id>
 		<contenu>You pay out REVENUE.</contenu>
 	</texte>
-	<texte id="utiliserRepos">
+	<texte>
+		<id>utiliserRepos</id>
 		<contenu>You use one rest.</contenu>
 	</texte>
-	<texte id="attackRepos">
+	<texte>
+		<id>attackRepos</id>
 		<contenu>You've been attacked in your sleep, only TOURS turn on 10 passed.</contenu>
 	</texte>
-	<texte id="reposOK">
+	<texte>
+		<id>reposOK</id>
 		<contenu>Your sleep hasn't been stopped, you recover your energy.</contenu>
 	</texte>
-	<texte id="ramasserItem">
+	<texte>
+		<id>ramasserItem</id>
 		<contenu>You've picked up  </contenu>
 	</texte>
-	<texte id="tempsTotal">
+	<texte>
+		<id>tempsTotal</id>
 		<contenu>!!!!!!!! Total time after adding save time :  </contenu>
 	</texte>
 </textesJeu>

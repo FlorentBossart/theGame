@@ -72,6 +72,7 @@ class Modele
      XmlEquipablesReader.lireXml()
      XmlMangeablesReader.lireXml()
      XmlTerrainsReader.lireXml() 
+     XmlMultilingueReader.lireXml()
    end
    
    

@@ -13,47 +13,116 @@ include REXML
 
 class XmlMultilingueReader
    
-   begin
-      @@rootObjets=(Document.new(File.new("XMLFile/Multilingue/FR/DicoObjetsJeu.xml"))).root
-      @@rootTextes=(Document.new(File.new("XMLFile/Multilingue/FR/textesJeu.xml"))).root
-      rescue
-      puts "Impossible d'acceder aux Xml multilingues"
-   end 
+  @@FR_dicoObjet = Hash.new()
+  @@FR_textesJeu = Hash.new()
+  @@EN_dicoObjet = Hash.new()
+  @@EN_textesJeu = Hash.new()
+  
+  @@dicoObjetCourant=@@FR_dicoObjet
+  @@textesJeuCourant=@@FR_textesJeu
+  
+  @@LANGUE="FR"
+  
+  
+  def XmlMultilingueReader.lireXmlLangueFR()
+        #Ouvre le fichier XML contenant les objets 
+        begin
+           file = File.new("XMLFile/Multilingue/FR/DicoObjetsJeu.xml")
+           doc = Document.new(file)
+        rescue
+           puts "Impossible d'ouvrir le fichier langue des objets XML FR."
+        end
+  
+        #Pour chaque référence du fichier XML...
+        doc.elements.each('objetsJeu/objet') do |s|
+           #... on ajoute à la table
+           @@FR_dicoObjet[s.elements['id'].text]=[s.elements['determinant'].text,s.elements['nom'].text]
+        end
+        
+        #Ouvre le fichier XML contenant les objets 
+        begin
+           file = File.new("XMLFile/Multilingue/FR/textesJeu.xml")
+           doc = Document.new(file)
+        rescue
+           puts "Impossible d'ouvrir le fichier langue des textes XML FR."
+        end
+  
+        #Pour chaque référence du fichier XML...
+        doc.elements.each('textesJeu/texte') do |s|
+           #... on ajoute à la table
+           @@FR_textesJeu[s.elements['id'].text]=s.elements['contenu'].text
+        end
+        return nil       
+  end
+
+  def XmlMultilingueReader.lireXmlLangueEN()
+        #Ouvre le fichier XML contenant les objets 
+        begin
+           file = File.new("XMLFile/Multilingue/EN/DicoObjetsJeu.xml")
+           doc = Document.new(file)
+        rescue
+           puts "Impossible d'ouvrir le fichier langue des objets XML EN."
+        end
+  
+        #Pour chaque référence du fichier XML...
+        doc.elements.each('objetsJeu/objet') do |s|
+           #... on ajoute à la table
+           @@EN_dicoObjet[s.elements['id'].text]=[s.elements['determinant'].text,s.elements['nom'].text]
+        end
+        
+        #Ouvre le fichier XML contenant les objets 
+        begin
+           file = File.new("XMLFile/Multilingue/EN/textesJeu.xml")
+           doc = Document.new(file)
+        rescue
+           puts "Impossible d'ouvrir le fichier langue des textes XML EN."
+        end
+  
+        #Pour chaque référence du fichier XML...
+        doc.elements.each('textesJeu/texte') do |s|
+           #... on ajoute à la table
+           @@EN_textesJeu[s.elements['id'].text]=s.elements['contenu'].text
+        end
+        return nil       
+  end
+
+   def XmlMultilingueReader.lireXml()
+     XmlMultilingueReader.lireXmlLangueFR()
+     XmlMultilingueReader.lireXmlLangueEN()
+   end
+   
+   
    
    def XmlMultilingueReader.setLangue(idLangue)
      case idLangue
        when "FR"
-          dossier="FR"
+         @@dicoObjetCourant=@@FR_dicoObjet
+         @@textesJeuCourant=@@FR_textesJeu
        when "EN"
-          dossier="EN"
+         @@dicoObjetCourant=@@EN_dicoObjet
+         @@textesJeuCourant=@@EN_textesJeu
        else
-          dossier="FR"
-     end
-     
-     begin
-        @@rootObjets=(Document.new(File.new("XMLFile/Multilingue/"+dossier+"/DicoObjetsJeu.xml"))).root
-        @@rootTextes=(Document.new(File.new("XMLFile/Multilingue/"+dossier+"/textesJeu.xml"))).root
-        rescue
-        puts "Impossible d'acceder aux Xml multilingues"
+         @@dicoObjetCourant=@@FR_dicoObjet
+         @@textesJeuCourant=@@FR_textesJeu
      end
    end
     
    def XmlMultilingueReader.lireNom(objet)
-       return @@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/nom"].text
+       return @@dicoObjetCourant[objet.getIntitule()][1]
    end
    
   def XmlMultilingueReader.lireDeterminant(objet)
-       return @@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/determinant"].text
+    return @@dicoObjetCourant[objet.getIntitule()][0]
   end
   
   def XmlMultilingueReader.lireDeterminant_Nom(objet)
-       determinant=@@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/determinant"].text
-       nom=@@rootObjets.elements["objet[@id='"+objet.getIntitule+"']/nom"].text
+       determinant=@@dicoObjetCourant[objet.getIntitule()][0]
+       nom=@@dicoObjetCourant[objet.getIntitule()][1]
        return determinant+nom
   end
   
   def XmlMultilingueReader.lireTexte(id)
-       return @@rootTextes.elements["texte[@id='"+id+"']/contenu"].text
+       return @@textesJeuCourant[id]
   end
     
 end
