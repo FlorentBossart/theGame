@@ -269,7 +269,7 @@
 		<contenu>A turn pass.</contenu>
 	</texte>
 	<texte>
-		<id></id>
+		<id>recupCombat</id>
 		<contenu>You got ITEM during your last fight!</contenu>
 	</texte>
 </textesJeu>

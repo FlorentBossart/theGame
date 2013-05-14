@@ -2,7 +2,7 @@
 
 <!DOCTYPE types_equipables [
 <!ELEMENT types_equipables (type+)>
-<!ELEMENT type (intitule, pourcentageProtection, nbTours, prix, sePorteSur)>
+<!ELEMENT type (intitule, pourcentageProtection, nbTours, prix, sePorteSur,rarete)>
 <!ELEMENT intitule (#PCDATA)>
 <!ELEMENT pourcentageProtection (#PCDATA)>
 <!ELEMENT nbTours (#PCDATA)>
@@ -18,6 +18,7 @@
 	   <nbTours>5</nbTours>
 	   <prix>10</prix>
 	   <sePorteSur>3</sePorteSur>
+	   <rarete>1</rarete>
 	</type>
 	<type>
 	   <intitule>bottes en fer</intitule>
@@ -25,6 +26,7 @@
 	   <nbTours>8</nbTours>
 	   <prix>30</prix>
 	   <sePorteSur>3</sePorteSur>
+	   <rarete>2</rarete>
 	</type>
 	<type>
 	   <intitule>bottes en acier</intitule>
@@ -32,6 +34,7 @@
 	   <nbTours>10</nbTours>
 	   <prix>50</prix>
 	   <sePorteSur>3</sePorteSur>
+	   <rarete>3</rarete>
 	</type>
 	<type>
 	   <intitule>armure en cuir</intitule>
@@ -39,6 +42,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>20</prix>
 	   <sePorteSur>1</sePorteSur>
+	   <rarete>1</rarete>
 	</type>
 	<type>
 	   <intitule>armure en fer</intitule>
@@ -46,6 +50,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>50</prix>
 	   <sePorteSur>1</sePorteSur>
+	   <rarete>2</rarete>
 	</type>
 	<type>
 	   <intitule>armure en acier</intitule>
@@ -53,6 +58,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>70</prix>
 	   <sePorteSur>1</sePorteSur>
+	   <rarete>3</rarete>
 	</type>
 	<type>
 	   <intitule>epee en bois</intitule>
@@ -60,6 +66,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>15</prix>
 	   <sePorteSur>2</sePorteSur>
+	   <rarete>1</rarete>
 	</type>
 	<type>
 	   <intitule>epee en fer</intitule>
@@ -67,6 +74,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>45</prix>
 	   <sePorteSur>2</sePorteSur>
+	   <rarete>2</rarete>
 	</type>
 	<type>
 	   <intitule>epee en acier</intitule>
@@ -74,6 +82,7 @@
 	   <nbTours>1</nbTours>
 	   <prix>65</prix>
 	   <sePorteSur>2</sePorteSur>
+	   <rarete>3</rarete>
 	</type>
 	
 

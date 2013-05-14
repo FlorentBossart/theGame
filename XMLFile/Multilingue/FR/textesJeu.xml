@@ -256,7 +256,7 @@
 		<contenu>Un tour de jeu passe.</contenu>
 	</texte>
 	<texte>
-		<id></id>
+		<id>recupCombat</id>
 		<contenu>Vous avez récupérez ITEM lors du dernier combat!</contenu>
 	</texte>
 </textesJeu>

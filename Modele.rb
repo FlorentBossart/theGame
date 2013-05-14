@@ -407,7 +407,7 @@ class Modele
         else
           @joueur.inventaire.ajouter(i) 
           str=XmlMultilingueReader.lireTexte("recupCombat")
-          str=str.gsub("ITEM",XmlMultilingueReader.lireDeterminant_Nom(i.getIntitule()))
+          str=str.gsub("ITEM",XmlMultilingueReader.lireDeterminant_Nom(i))
           notifier(str)
         end
       end
