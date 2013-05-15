@@ -60,10 +60,12 @@ class Modele
    @pnjAideEnInteraction
    @tourDejaPasse
    @id_terrainParDefaut
+   @nbMaxPisteur
+   @nbPisteur
 
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut, :nbPisteur
    attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications
    
    
@@ -104,6 +106,8 @@ class Modele
      
    def initialiseToi()
      
+      @nbPisteur=0 
+      @nbMaxPisteur=10
       @compteurTour = 0
       @tourDejaPasse=false
      
@@ -187,13 +191,18 @@ class Modele
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
          end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
-         # Choix du type de PNJ Ennemi
-         choix = rand(10) #Nb aleatoire -1 ou 0
-         if(choix >=0 && choix<9)
-            ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
-         else
-            ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(), @joueur)
-         end
+        if(@nbPisteur<@nbMaxPisteur)
+             # Choix du type de PNJ Ennemi
+             choix = rand(2)-1 #Nb aleatoire -1 ou 0
+             if(choix == 0)
+                ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
+             else
+                ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(), @joueur)
+                @nbPisteur=@nbPisteur+1
+             end
+        else
+             ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
+        end
 
          # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
          caseAleatoire.ajouterEnnemi(ennemi)
@@ -225,18 +234,6 @@ class Modele
          element = Item.creer(caseAleatoire, caracteristique)
          caseAleatoire.ajouterElement(element)
       end
-   end
-
-   
-   ##
-   # Permet d'eliminer un ennemi du jeu.
-   #
-   # == Parameters:
-   #* <b>ennemi :</b> l'ennemi à eliminer
-   #
-   def eliminerEnnemi(ennemi)
-      @listeEnnemis.delete(ennemi)
-      ennemi.casePosition.retirerEnnemi(ennemi)
    end
 
      

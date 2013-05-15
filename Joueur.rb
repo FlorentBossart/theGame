@@ -236,12 +236,12 @@ class Joueur < Personnage
       str=str.gsub("ENERGIE",energiePerdue.to_s)
       @modele.notifier(str)     
       if(@energie > 0)
-         @modele.eliminerEnnemi(ennemi)
+         ennemi.meurt()
          gainExperience(ennemi.energie)
          @nbEnnemiTues += 1
          return ennemi.listeItem
       elsif(@energie == 0)
-         @modele.eliminerEnnemi(ennemi)
+         ennemi.meurt()
          gainExperience(ennemi.energie)
          @nbEnnemiTues += 1
          @causeMort= XmlMultilingueReader.lireTexte("entretue")

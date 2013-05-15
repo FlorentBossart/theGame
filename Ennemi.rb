@@ -112,6 +112,8 @@ class Ennemi < PNJ
    end
   
    def mourir()
+     @modele.listeEnnemis.delete(self)
+     @casePosition.retirerEnnemi(self)
    end
 
    ##
@@ -141,9 +143,6 @@ class Ennemi < PNJ
    # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
    #
    def deplacementIntelligent()
-     if(self.class == Ennemi)
-         raise "Subclass responsability"
-     end
    end
   
    

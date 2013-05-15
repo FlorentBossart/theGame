@@ -75,7 +75,7 @@ class Pisteur < Ennemi
 
             for c in list_case[indice]
 
-               if(!existe?(c.caseNord, list_case, indice) && estAccessible?(c.caseNord))
+               if(!existe?(c.caseNord, list_case, indice) && !c.caseNord.isFull?() && c.caseNord.typeTerrain.isAccessible)
                   ajoutList.push(c.caseNord)
                   if(estCible?(c.caseNord))
                      find = true
@@ -83,7 +83,7 @@ class Pisteur < Ennemi
                   end
                end
 
-               if(!existe?(c.caseSud, list_case, indice) && estAccessible?(c.caseSud))
+               if(!existe?(c.caseSud, list_case, indice) && !c.caseSud.isFull?() && c.caseSud.typeTerrain.isAccessible)
                   ajoutList.push(c.caseSud)
                   if(estCible?(c.caseSud))
                      find = true
@@ -91,7 +91,7 @@ class Pisteur < Ennemi
                   end
                end
 
-               if(!existe?(c.caseEst, list_case, indice) && estAccessible?(c.caseEst))
+               if(!existe?(c.caseEst, list_case, indice) && !c.caseEst.isFull?() && c.caseEst.typeTerrain.isAccessible)
                   ajoutList.push(c.caseEst)
                   if(estCible?(c.caseEst))
                      find = true
@@ -99,7 +99,7 @@ class Pisteur < Ennemi
                   end
                end
 
-               if(!existe?(c.caseOuest, list_case, indice) && estAccessible?(c.caseOuest))
+               if(!existe?(c.caseOuest, list_case, indice) && !c.caseOuest.isFull?() && c.caseOuest.typeTerrain.isAccessible)
                   ajoutList.push(c.caseOuest)
                   if(estCible?(c.caseOuest))
                      find = true
@@ -185,24 +185,14 @@ class Pisteur < Ennemi
       end
 
       return false
-   end
+  end
 
-   
-   ##
-   # Permet de savoir si une case est accessible
-   #
-   # == Parameters:
-   #* <b>uneCase :</b> la case à vérifier
-   #
-   def estAccessible?(uneCase)
-      if(uneCase.isFull?() || !uneCase.typeTerrain.isAccessible)
-         return false
-      end
-
-      return true
-   end
-
-   
+  def mourir()
+     @modele.nbPisteur=@modele.nbPisteur-1
+     super()
+   end 
+  
+  
    ##
    # Permet de savoir si une case est la cible
    #
