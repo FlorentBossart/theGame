@@ -35,45 +35,45 @@
 	</difficulte>
 	<difficulte>
 	    <intitule>Novice</intitule>
-	    <longueurCarte>500</longueurCarte>
-	    <largeurCarte>500</largeurCarte>
+	    <longueurCarte>40</longueurCarte>
+	    <largeurCarte>40</largeurCarte>
 	    <energieDepart>1000</energieDepart>
 	    <nbRepos>15</nbRepos>
-	    <pnjAmisDepart>50</pnjAmisDepart>
-	    <pnjEnnemisDepart>50</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
-	    <objetsDepart>100</objetsDepart>
-	    <objetsParGeneration>10</objetsParGeneration>
-	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>0.8</pourcentageTerrain>
-	</difficulte>
-	<difficulte>
-	    <intitule>Moyen</intitule>
-	    <longueurCarte>1000</longueurCarte>
-	    <largeurCarte>1000</largeurCarte>
-	    <energieDepart>750</energieDepart>
-	    <nbRepos>10</nbRepos>
-	    <pnjAmisDepart>25</pnjAmisDepart>
-	    <pnjEnnemisDepart>100</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>10</pnjEnnemisParGeneration>
-	    <objetsDepart>75</objetsDepart>
-	    <objetsParGeneration>7</objetsParGeneration>
+	    <pnjAmisDepart>105</pnjAmisDepart>
+	    <pnjEnnemisDepart>105</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>2</pnjEnnemisParGeneration>
+	    <objetsDepart>50</objetsDepart>
+	    <objetsParGeneration>1</objetsParGeneration>
 	    <nbToursInterGenerations>10</nbToursInterGenerations>
 	    <pourcentageTerrain>1</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
+	    <intitule>Moyen</intitule>
+	    <longueurCarte>60</longueurCarte>
+	    <largeurCarte>60</largeurCarte>
+	    <energieDepart>750</energieDepart>
+	    <nbRepos>10</nbRepos>
+	    <pnjAmisDepart>150</pnjAmisDepart>
+	    <pnjEnnemisDepart>300</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>5</pnjEnnemisParGeneration>
+	    <objetsDepart>100</objetsDepart>
+	    <objetsParGeneration>2</objetsParGeneration>
+	    <nbToursInterGenerations>10</nbToursInterGenerations>
+	    <pourcentageTerrain>1.5</pourcentageTerrain>
+	</difficulte>
+	<difficulte>
 	    <intitule>Expert</intitule>
-	    <longueurCarte>2000</longueurCarte>
-	    <largeurCarte>2000</largeurCarte>
+	    <longueurCarte>100</longueurCarte>
+	    <largeurCarte>100</largeurCarte>
 	    <energieDepart>500</energieDepart>
 	    <nbRepos>5</nbRepos>
-	    <pnjAmisDepart>25</pnjAmisDepart>
-	    <pnjEnnemisDepart>200</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>20</pnjEnnemisParGeneration>
-	    <objetsDepart>50</objetsDepart>
-	    <objetsParGeneration>5</objetsParGeneration>
-	    <nbToursInterGenerations>5</nbToursInterGenerations>
-	    <pourcentageTerrain>1.2</pourcentageTerrain>
+	    <pnjAmisDepart>300</pnjAmisDepart>
+	    <pnjEnnemisDepart>600</pnjEnnemisDepart>
+	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
+	    <objetsDepart>200</objetsDepart>
+	    <objetsParGeneration>1</objetsParGeneration>
+	    <nbToursInterGenerations>3</nbToursInterGenerations>
+	    <pourcentageTerrain>2</pourcentageTerrain>
 	</difficulte>
 
 </difficultes>
