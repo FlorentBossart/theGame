@@ -118,7 +118,7 @@ class Ennemi < PNJ
    #* <b>cible :</b> la cible de destination
    #
    def deplacement(cible)
-      
+     Thread.new do
      caseCible= @casePosition.getDestination(cible)
       
       if(!caseCible.isFull?() && caseCible.typeTerrain.isAccessible)
@@ -130,6 +130,7 @@ class Ennemi < PNJ
      AffichageDebug.Afficher("#{self}\n pas déplacé")
       end
       return nil
+      end
    end
   
 
@@ -137,6 +138,7 @@ class Ennemi < PNJ
    # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
    #
    def deplacementIntelligent()
+	Thread.new do
       cible = rand(3)
     
       case cible
@@ -167,6 +169,7 @@ class Ennemi < PNJ
                deplacement(cible)
             end
       end 
+      end
    end
   
    
