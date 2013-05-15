@@ -193,7 +193,8 @@ class Controller
    # Action(s) Ã  effectuer lors du clic sur le bouton repos
    #
   def reposAction
-    print "ZZzzzZZZzzzz Bt repos pressÃ©!\n"
+    #print "ZZzzzZZZzzzz Bt repos pressÃ©!\n"
+    Audio.playSound("ronfle")
     @modele.joueur.utiliserRepos() 
     @modele.debutTour()
   end
@@ -676,7 +677,7 @@ class Controller
    # Liaison de l'action sur le bouton
    #
    # == Parameters:
-   # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
+   # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
    #
    def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue)
       btValiderOptions.signal_connect('clicked'){
@@ -686,7 +687,7 @@ class Controller
  
  
 	##
-	# Action(s) � effectuer lors du clic sur le bouton Valider (dans options)
+	# Action(s) � effectuer lors du clic sur le bouton Valider (dans options)
 	#
 	def validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
 		puts "Clique sur Valider (dans options)"
