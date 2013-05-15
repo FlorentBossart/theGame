@@ -40,11 +40,11 @@ class Caracteristique
     def utiliseToi(joueur)
     end
     
-    def estEquipable?()
-        return false
+    def estStockable?()
+        return true
     end
     
-    def estMangeable?()
+    def estEquipable?()
       return false
     end
     

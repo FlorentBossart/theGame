@@ -40,6 +40,10 @@ class Equipable < Caracteristique
       new(typeEquipable)
    end
 
+  def estEquipable?()
+        return true
+      end
+   
    def getIntitule()
       return @typeEquipable.intitule
    end
@@ -56,11 +60,6 @@ class Equipable < Caracteristique
      str=XmlMultilingueReader.lireTexte("equipement")
      str=str.gsub("EQUIPEMENT",XmlMultilingueReader.lireDeterminant_Nom(self))
      joueur.modele.notifier(str)
-   end
-
-   
-   def estEquipable?()
-      return true
    end
 
    

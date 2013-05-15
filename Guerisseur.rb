@@ -70,8 +70,9 @@ class Guerisseur < Ami
       else
          joueur.energie = energieG
       end
-    
+     joueur.modele.tourPasse()
       return nil
+      
    end
   
   ##

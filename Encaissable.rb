@@ -42,6 +42,9 @@ class Encaissable < Caracteristique
       return @intitule
    end
 
+  def estStockable?()
+    return false
+  end
    
    def utiliseToi(joueur)
       joueur.inventaire.capital=joueur.inventaire.capital+@montant
