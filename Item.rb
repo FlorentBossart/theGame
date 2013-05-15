@@ -40,6 +40,10 @@ class Item < Elem
    def estStockable?()
        return @caracteristique.estStockable?()
    end
+   
+  def estEquipable?()
+         return @caracteristique.estEquipable?()
+  end
     
    def selectionner()
        selected = true
@@ -61,7 +65,7 @@ class Item < Elem
      else
        @caracteristique.utiliseToi(joueur)
        joueur.casePosition.retirerElement(self)
-       joueur.tourPasse()
+       joueur.modele.tourPasse()
      end
      @casePosition=nil
      return nil
