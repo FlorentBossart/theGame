@@ -50,17 +50,17 @@ class Ennemi < PNJ
       @energie = @type.energieBase * 1.2**(@niveau-1)
       case @niveau
         when 1..5
-          remplirListeItems(1,5,EnumRarete.GROSSIER(),EnumRarete.GROSSIER())
+          remplirListeItems(0,2,EnumRarete.GROSSIER(),EnumRarete.GROSSIER())
         when 6..10
-          remplirListeItems(1,5,EnumRarete.GROSSIER(),EnumRarete.INTERMEDIAIRE())
+          remplirListeItems(0,2,EnumRarete.GROSSIER(),EnumRarete.INTERMEDIAIRE())
         when 11..15   
-          remplirListeItems(1,5,EnumRarete.INTERMEDIAIRE(),EnumRarete.INTERMEDIAIRE())  
+          remplirListeItems(0,2,EnumRarete.INTERMEDIAIRE(),EnumRarete.INTERMEDIAIRE())  
         when 16..20   
-          remplirListeItems(1,5,EnumRarete.INTERMEDIAIRE(),EnumRarete.RAFFINE())
+          remplirListeItems(0,2,EnumRarete.INTERMEDIAIRE(),EnumRarete.RAFFINE())
         when 21..25
-          remplirListeItems(1,5,EnumRarete.RAFFINE(),EnumRarete.RAFFINE()) 
+          remplirListeItems(0,2,EnumRarete.RAFFINE(),EnumRarete.RAFFINE()) 
         else
-          remplirListeItems(1,5,EnumRarete.MAITRE(),EnumRarete.MAITRE())     
+          remplirListeItems(0,2,EnumRarete.MAITRE(),EnumRarete.MAITRE())     
       end
       
    end
@@ -73,15 +73,18 @@ class Ennemi < PNJ
     
       for i in 1..nbItems
          # Choix du type
-         type = rand(2)
+         type = rand(8)+1
       
          case type
-            when 0 # TypeEquipable
+            when 1..2 # TypeEquipable
                type = BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(rareteMin,rareteMax)
                caract = Equipable.creer(type)
-            else # TypeMangeable
+            when 3..4# TypeMangeable
                type = BibliothequeTypeMangeable.getTypeMangeableAuHasardRarete(rareteMin,rareteMax)
                caract = Mangeable.creer(type)
+            else
+               quantiteOr=(rand(10)+1)*@niveau
+               caract=Encaissable.creer(quantiteOr)
          end # Fin case type
       
          @listeItem.push(Item.creer(nil, caract))
