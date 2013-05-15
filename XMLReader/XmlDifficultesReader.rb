@@ -44,7 +44,7 @@ class XmlDifficultesReader
                                     s.elements['objetsDepart'].text.to_i,
                                     s.elements['objetsParGeneration'].text.to_i, 
                                     s.elements['nbToursInterGenerations'].text.to_i, 
-                                    s.elements['pourcentageTerrain'].text.to_i
+                                    s.elements['pourcentageTerrain'].text.to_f
                                   ))
       end
      return nil
