@@ -51,7 +51,7 @@
 	    <intitule>Moyen</intitule>
 	    <longueurCarte>60</longueurCarte>
 	    <largeurCarte>60</largeurCarte>
-	    <energieDepart>750</energieDepart>
+	    <energieDepart>1000</energieDepart>
 	    <nbRepos>10</nbRepos>
 	    <pnjAmisDepart>150</pnjAmisDepart>
 	    <pnjEnnemisDepart>300</pnjEnnemisDepart>
@@ -65,7 +65,7 @@
 	    <intitule>Expert</intitule>
 	    <longueurCarte>100</longueurCarte>
 	    <largeurCarte>100</largeurCarte>
-	    <energieDepart>500</energieDepart>
+	    <energieDepart>1000</energieDepart>
 	    <nbRepos>5</nbRepos>
 	    <pnjAmisDepart>300</pnjAmisDepart>
 	    <pnjEnnemisDepart>600</pnjEnnemisDepart>

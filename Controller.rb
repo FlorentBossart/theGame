@@ -241,6 +241,7 @@ class Controller
     puts "<--> Creation du menu"
     @vue.menu = MenuJeu.creer(true, @modele, self)
     puts "-- Affichage du menu"
+    @vue.window.modal = false;
     @vue.menu.afficherMenu()
     @vue.window.set_sensitive(false)
   end
@@ -594,6 +595,80 @@ class Controller
 		@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherAide()
+	end
+	
+	
+	##
+   # Liaison de l'action sur le bouton
+   #
+   # == Parameters:
+   # btCommencerNewPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur "C'est Parti" dans nouvelle partie
+   #
+   def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+      btCommencerNewPartie.signal_connect('clicked'){
+			entryPseudo.activate # Appel le signal_connect 'activate' sur l'entry du pseudo
+      }
+      entryPseudo.signal_connect('activate'){
+			commencerNewPartieAction(entryPseudo.text, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+		}
+   end
+ 
+ 
+	##
+	# Action(s) � effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
+	#
+	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+		puts "Clique sur C'est Parti"
+		puts "pseudo : |" + pseudo + "|"
+		if(boutRadioNovice.active?)
+			puts "Difficulte choisi : Novice"
+			difficulte = BibliothequeDifficulte.getDifficulte("Novice")
+		elsif(boutRadioMoyen.active?)
+			puts "Difficulte choisi : Moyen"
+			difficulte = BibliothequeDifficulte.getDifficulte("Moyen")
+		elsif(boutRadioExpert.active?)
+			puts "Difficulte choisi : Expert"
+			difficulte = BibliothequeDifficulte.getDifficulte("Expert")
+		end
+		
+		# A enlever apres test
+		difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
+		
+		
+		@vue.menu.fenetreMenu.destroy
+		puts "destroy menu"
+		@vue.window.destroy
+		puts "Destroy partie"
+		
+		quitterPartieAction()
+	
+		#XmlMultilingueReader.setLangue("EN")
+		#XmlMultilingueReader.setLangue("FR")
+		puts "langue"
+		
+		# Remplissage des bibliothèque
+		#Modele.initialisationBibliotheques()
+		puts "modele init biblio"
+
+		#Audio.load()
+
+	
+		# Creation de la vue
+		vue=Vue.new()
+		
+		# Creation du modele
+		modele = Modele.creer(vue,difficulte,pseudo)
+		puts "modele creer"
+		puts "difficulte : " + difficulte.to_s
+		controller=Controller.creer(modele,vue)
+		puts "controller creer"
+		vue.defM(modele)
+		vue.defC(controller)
+		puts "vue defc"
+		modele.initialiseToi()
+		puts "init modele"
+		vue.initInterface()
+		puts "init interface"
 	end
 
 
