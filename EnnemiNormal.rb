@@ -28,8 +28,8 @@ class EnnemiNormal < Ennemi
    #* <b>niveau :</b> le niveau de l'ennemi normal
    #* <b>type :</b> le type de l'ennemi normal
    #
-   def initialize(casePosition, niveau, type)
-      super(casePosition, niveau, type)
+   def initialize(casePosition, niveau, type,modele)
+      super(casePosition, niveau, type,modele)
    end
   
 
@@ -41,8 +41,8 @@ class EnnemiNormal < Ennemi
    #* <b>niveau :</b> le niveau de l'ennemi normal
    #* <b>type :</b> le type de l'ennemi normal
    #
-   def EnnemiNormal.creer(casePosition, niveau, type)
-      return new(casePosition, niveau, type)
+   def EnnemiNormal.creer(casePosition, niveau, type,modele)
+      return new(casePosition, niveau, type,modele)
    end
    
   ##

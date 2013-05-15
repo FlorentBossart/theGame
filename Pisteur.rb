@@ -34,8 +34,8 @@ class Pisteur < Ennemi
    #* <b>type :</b> le type de l'ennemi pisteur
    #* <b>joueur :</b> le joueur à pister
    #
-   def initialize(casePosition, niveau, type, joueur)
-      super(casePosition, niveau, type)
+   def initialize(casePosition, niveau, type,modele, joueur)
+      super(casePosition, niveau, type,modele)
       @joueur = joueur
       @distancePistage = 5
    end
@@ -50,8 +50,8 @@ class Pisteur < Ennemi
    #* <b>type :</b> le type de l'ennemi pisteur
    #* <b>joueur :</b> le joueur à pister
    #
-   def Pisteur.creer(casePosition, niveau, type, joueur)
-      return new(casePosition, niveau, type, joueur)
+   def Pisteur.creer(casePosition, niveau, type,modele, joueur)
+      return new(casePosition, niveau, type,modele, joueur)
    end
 
    
@@ -187,7 +187,7 @@ class Pisteur < Ennemi
       return false
   end
 
-  def mourir()
+  def meurt()
      @modele.nbPisteur=@modele.nbPisteur-1
      super()
    end 

@@ -86,5 +86,5 @@ end
 
 
 
-XmlEquipablesReader.lireXml()
-l=BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(1,1)
+#XmlEquipablesReader.lireXml()
+#l=BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(1,1)

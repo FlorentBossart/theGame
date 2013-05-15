@@ -65,8 +65,8 @@ class Modele
 
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut, :nbPisteur
-   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
+   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur
    
    
    def Modele.initialisationBibliotheques()
@@ -195,13 +195,13 @@ class Modele
              # Choix du type de PNJ Ennemi
              choix = rand(2)-1 #Nb aleatoire -1 ou 0
              if(choix == 0)
-                ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
+                ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(),self)
              else
-                ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(), @joueur)
+                ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(),self, @joueur)
                 @nbPisteur=@nbPisteur+1
              end
         else
-             ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
+             ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(),self)
         end
 
          # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis

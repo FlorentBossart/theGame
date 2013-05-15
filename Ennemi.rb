@@ -39,7 +39,8 @@ class Ennemi < PNJ
    #* <b>niveau :</b> le niveau du PNJ Ennemi
    #* <b>type :</b> le type de PNJ Ennemi
    #
-   def initialize(casePosition, niveau, type)
+   def initialize(casePosition, niveau, type,modele)
+     @modele=modele
      @listeItem = Array.new
       fourchette=3
       super(casePosition)
@@ -104,14 +105,14 @@ class Ennemi < PNJ
    #* <b>niveau :</b> le niveau du PNJ Ennemi
    #* <b>type :</b> le type de PNJ Ennemi
    #
-   def Ennemi.creer(casePosition, niveau, type)
+   def Ennemi.creer(casePosition, niveau, type,modele)
       if(self.class == Ennemi)
          raise "Subclass responsability"
       end
-      return new(casePosition, niveau, type)
+      return new(casePosition, niveau, type,modele)
    end
   
-   def mourir()
+   def meurt()
      @modele.listeEnnemis.delete(self)
      @casePosition.retirerEnnemi(self)
    end
