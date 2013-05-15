@@ -26,6 +26,7 @@ class Ennemi < PNJ
    @type
    @energie
    @niveau
+   @modele #un ennemi connait desormais le modele puisqu'on veut qu'il prennent en charge sa mort (afin de lim le nb de pisteur)
    
    attr_reader :energie, :type, :niveau
   
@@ -110,6 +111,8 @@ class Ennemi < PNJ
       return new(casePosition, niveau, type)
    end
   
+   def mourir()
+   end
 
    ##
    # Permet de deplacer l'Ennemi sur une cible donnée.
@@ -138,36 +141,9 @@ class Ennemi < PNJ
    # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
    #
    def deplacementIntelligent()
-      cible = rand(3)
-    
-      case cible
-         when 0
-            cible = EnumDirection.NORD
-            if(!@casePosition.caseNord.isFull?() && @casePosition.caseNord.typeTerrain.isAccessible)
-               deplacement(cible)
-            else
-              deplacement(EnumDirection.SUD)
-            end
-         when 1
-            cible = EnumDirection.SUD
-            if(!@casePosition.caseSud.isFull?() && @casePosition.caseSud.typeTerrain.isAccessible)
-               deplacement(cible)
-              else
-                deplacement(EnumDirection.EST)
-              end
-         when 2
-            cible = EnumDirection.EST
-            if(!@casePosition.caseEst.isFull?() && @casePosition.caseEst.typeTerrain.isAccessible)
-               deplacement(cible)
-              else
-                deplacement(EnumDirection.OUEST)
-              end
-         else
-            cible = EnumDirection.OUEST
-            if(!@casePosition.caseOuest.isFull?() && @casePosition.caseOuest.typeTerrain.isAccessible)
-               deplacement(cible)
-            end
-      end 
+     if(self.class == Ennemi)
+         raise "Subclass responsability"
+     end
    end
   
    
