@@ -69,10 +69,10 @@
 	    <nbRepos>5</nbRepos>
 	    <pnjAmisDepart>300</pnjAmisDepart>
 	    <pnjEnnemisDepart>600</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
+	    <pnjEnnemisParGeneration>15</pnjEnnemisParGeneration>
 	    <objetsDepart>200</objetsDepart>
-	    <objetsParGeneration>1</objetsParGeneration>
-	    <nbToursInterGenerations>3</nbToursInterGenerations>
+	    <objetsParGeneration>5</objetsParGeneration>
+	    <nbToursInterGenerations>15</nbToursInterGenerations>
 	    <pourcentageTerrain>2</pourcentageTerrain>
 	</difficulte>
 
