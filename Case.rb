@@ -9,14 +9,12 @@ class Case
   @coordonneeY
   @listeElements
   @listeEnnemis
-  @caseNord
-  @caseSud
-  @caseEst
-  @caseOuest
+  @carte
   @typeTerrain
   @joueur
 
-  attr_reader :caseNord, :caseSud, :caseEst, :caseOuest, :listeEnnemis, :listeElements, :coordonneeX, :coordonneeY
+
+  attr_reader :listeEnnemis, :listeElements, :coordonneeX, :coordonneeY
   attr_accessor :typeTerrain,:joueur
   
   private_class_method :new
@@ -27,12 +25,16 @@ class Case
   #==Parameters
   #La position en x
   #la position en y
-  def initialize(x,y)
+  def initialize(x,y,carte,typeDefaut)
+    @carte = carte
     @coordonneeX = x
     @coordonneeY = y
     @listeEnnemis = Array.new()
     @listeElements = Array.new()
-    @typeTerrain = BibliothequeTypeTerrain.getTypeTerrain("plaine")
+    @typeTerrain = BibliothequeTypeTerrain.getTypeTerrain(typeDefaut)
+	if @typeTerrain==nil 
+	puts 'Grosse erreur'
+	end
   end
   
   
@@ -52,8 +54,8 @@ class Case
     return @typeTerrain.intitule()
   end
 
-  def Case.nouvelle(x,y)
-    return new(x,y)
+  def Case.nouvelle(x,y,carte,typeDefaut)
+    return new(x,y,carte,typeDefaut)
   end
 
   ##
@@ -106,18 +108,33 @@ class Case
   def getDestination(direction)
     case direction
     when EnumDirection.NORD
-      return @caseNord
+      return @carte.getCaseAt(coordonneeX-1,coordonneeY)
     when EnumDirection.SUD
-      return @caseSud
+      return @carte.getCaseAt(coordonneeX+1,coordonneeY)
     when EnumDirection.EST
-      return @caseEst
+      return @carte.getCaseAt(coordonneeX,coordonneeY+1)
     when EnumDirection.OUEST
-      return @caseOuest
+      return @carte.getCaseAt(coordonneeX,coordonneeY-1)
     else
       raise 'Erreur, direction incohérente'
     end
   end
 
+  def caseNord
+     return @carte.getCaseAt(coordonneeX-1,coordonneeY)
+  end
+
+  def caseSud
+     return @carte.getCaseAt(coordonneeX+1,coordonneeY)
+  end
+
+  def caseEst
+     return @carte.getCaseAt(coordonneeX,coordonneeY+1)
+  end
+
+  def caseOuest
+     return @carte.getCaseAt(coordonneeX,coordonneeY-1)
+  end
   
   ##
   #Retourne un booleen indiquant si la case est pleine ou non
@@ -126,20 +143,6 @@ class Case
   def isFull?()
     return @@NombreMaxElementsEnnemis <= (@listeElements.length + @listeEnnemis.length)
   end
-
-  
-  ##
-  #Initialisation des cases voisines à la case instanciée
-  #==Parameters
-  #Les quatres cases a proximité
-  def initVoisines(nord,sud,est,ouest)
-    @caseNord = nord
-    @caseSud = sud
-    @caseEst = est
-    @caseOuest = ouest
-    return nil
-  end
-
   
   def to_s
     s= "[==Case >>> | "
