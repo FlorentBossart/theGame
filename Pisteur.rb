@@ -37,7 +37,7 @@ class Pisteur < Ennemi
    def initialize(casePosition, niveau, type, joueur)
       super(casePosition, niveau, type)
       @joueur = joueur
-      @distancePistage = 4
+      @distancePistage = 5
    end
 
    
@@ -113,7 +113,7 @@ class Pisteur < Ennemi
 
             indice += 1
             
-            if(indice >= 5) # Hors du champs de l'ennemi
+            if(indice >= @distancePistage) # Hors du champs de l'ennemi
                break
             end
 

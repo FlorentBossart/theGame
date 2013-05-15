@@ -188,8 +188,8 @@ class Modele
          end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
 
          # Choix du type de PNJ Ennemi
-         choix = rand(2)-1 #Nb aleatoire -1 ou 0
-         if(choix == 0)
+         choix = rand(10) #Nb aleatoire -1 ou 0
+         if(choix >=0 && choix<9)
             ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
          else
             ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(), @joueur)
