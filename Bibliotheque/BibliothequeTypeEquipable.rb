@@ -9,6 +9,8 @@
 #* Une table de hachage statique contenant les types d'item équipable (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
+
+
 class BibliothequeTypeEquipable
 
    @@tableType = Hash.new()
@@ -69,22 +71,19 @@ class BibliothequeTypeEquipable
    #
    def BibliothequeTypeEquipable.getTypeEquipableAuHasard()
       valeurs=@@tableType.values()
-      return valeurs[rand(valeurs.length-1)]
+      return valeurs[rand(valeurs.length)]
    end
    
    def BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(rareteMin,rareteMax)
       valeurs=@@tableType.values()
+      valeursPossible=Array.new()
       for v in valeurs
-        if(!(v.rarete<=rareteMax && v.rarete>=rareteMin))
-          valeurs.delete_at(valeurs.index(v))
+        if(v.rarete<=rareteMax && v.rarete>=rareteMin)
+          valeursPossible.push(v)
         end
       end
-      return valeurs[rand(valeurs.length-1)]
+      return valeursPossible[rand(valeursPossible.length)]
    end
 
 end
 
-
-
-#XmlEquipablesReader.lireXml()
-#l=BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(1,1)

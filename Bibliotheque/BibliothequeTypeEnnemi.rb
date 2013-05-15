@@ -65,7 +65,7 @@ class BibliothequeTypeEnnemi
    #
    def BibliothequeTypeEnnemi.getTypeEnnemiAuHasard()
       valeurs=@@tableType.values()
-      return valeurs[rand(valeurs.length-1)]
+      return valeurs[rand(valeurs.length)]
    end
 
 end

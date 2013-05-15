@@ -67,7 +67,7 @@ class BibliothequeTypeTerrain
       valeurs=@@tableType.values()
       val=rand(valeurs.length-1)
       while(valeurs[val]==BibliothequeTypeTerrain.getTypeTerrain("plaine")) do
-		val = rand(valeurs.length-1)
+        val = rand(valeurs.length)
       end
       valeurs[val]
    end

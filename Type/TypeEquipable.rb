@@ -64,6 +64,7 @@ class TypeEquipable
      s= "[==TypeEquipable >>> | "
      s+= "Intitulé: #{@intitule} | "
      s+= "Se porte sur: #{@sePorteSur} | "
+     s+= "Rarete: #{@rarete} | "
      s+= "Pourcentage de protection: #{@pourcentageProtection*100}% | "
      s+= "Valable pour #{@nbTours} tours | "
      s+= "Prix: #{@prix} | "

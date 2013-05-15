@@ -10,6 +10,9 @@
 
 require 'Bibliotheque/BibliothequeTypeEquipable.rb'
 require 'Type/TypeEquipable.rb'
+require './AffichageDebug.rb'
+require './Enum/EnumRarete.rb'
+
 require 'rexml/document'
 include REXML
 

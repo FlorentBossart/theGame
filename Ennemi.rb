@@ -125,18 +125,18 @@ class Ennemi < PNJ
    #
    def deplacement(cible)
      Thread.new do
-     caseCible= @casePosition.getDestination(cible)
-      
-      if(!caseCible.isFull?() && caseCible.typeTerrain.isAccessible)
-         @casePosition.retirerEnnemi(self)
-        caseCible.ajouterEnnemi(self)
-         @casePosition = caseCible
-         AffichageDebug.Afficher("#{self} \ndéplacé dans \n#{caseCible}")
-      else
-     AffichageDebug.Afficher("#{self}\n pas déplacé")
+       caseCible= @casePosition.getDestination(cible)
+        
+        if(!caseCible.isFull?() && caseCible.typeTerrain.isAccessible)
+           @casePosition.retirerEnnemi(self)
+          caseCible.ajouterEnnemi(self)
+           @casePosition = caseCible
+           AffichageDebug.Afficher("#{self} \ndéplacé dans \n#{caseCible}")
+        else
+       AffichageDebug.Afficher("#{self}\n pas déplacé")
+        end
       end
       return nil
-      end
    end
   
 

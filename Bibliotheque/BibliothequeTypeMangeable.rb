@@ -69,17 +69,20 @@ class BibliothequeTypeMangeable
    #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasard()
       valeurs=@@tableType.values()
-      return valeurs[rand(valeurs.length-1)]
+      return valeurs[rand(valeurs.length)]
    end
    
    def BibliothequeTypeMangeable.getTypeMangeableAuHasardRarete(rareteMin,rareteMax)
       valeurs=@@tableType.values()
+      valeursPossible=Array.new()
       for v in valeurs
-        if(!(v.rarete<=rareteMax && v.rarete>=rareteMin))
-          valeurs.delete_at(valeurs.index(v))
+        if(v.rarete<=rareteMax && v.rarete>=rareteMin)
+          valeursPossible.push(v)
         end
       end
-      return valeurs[rand(valeurs.length-1)]
+      return valeursPossible[rand(valeursPossible.length)]
    end
 
 end
+
+
