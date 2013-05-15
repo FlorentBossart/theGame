@@ -69,55 +69,57 @@ class Pisteur < Ennemi
          # Recherche de la case du joueur
          list_case[indice] = Array.new().push(@casePosition)
 
-         while(!find)
-            list_case[indice+1] = Array.new()
-            ajoutList = list_case[indice+1]
-
-            for c in list_case[indice]
-
-               if(!existe?(c.caseNord, list_case, indice) && !c.caseNord.isFull?() && c.caseNord.typeTerrain.isAccessible)
-                  ajoutList.push(c.caseNord)
-                  if(estCible?(c.caseNord))
-                     find = true
-                     break
-                  end
-               end
-
-               if(!existe?(c.caseSud, list_case, indice) && !c.caseSud.isFull?() && c.caseSud.typeTerrain.isAccessible)
-                  ajoutList.push(c.caseSud)
-                  if(estCible?(c.caseSud))
-                     find = true
-                     break
-                  end
-               end
-
-               if(!existe?(c.caseEst, list_case, indice) && !c.caseEst.isFull?() && c.caseEst.typeTerrain.isAccessible)
-                  ajoutList.push(c.caseEst)
-                  if(estCible?(c.caseEst))
-                     find = true
-                     break
-                  end
-               end
-
-               if(!existe?(c.caseOuest, list_case, indice) && !c.caseOuest.isFull?() && c.caseOuest.typeTerrain.isAccessible)
-                  ajoutList.push(c.caseOuest)
-                  if(estCible?(c.caseOuest))
-                     find = true
-                     break
-                  end
-               end
-
-            end # Fin for
-
-            ajoutList.uniq()  # Enleve les cases en doublons du tableau
-
-            indice += 1
-            
-            if(indice >= @distancePistage) # Hors du champs de l'ennemi
-               break
-            end
-
-         end # Fin while
+       if(cj.coordonneeX >=@casePosition.coordonneeX-@distancePistage && cj.coordonneeX <= @casePosition.coordonneeX+@distancePistage && cj.coordonneeY >= @casePosition.coordonneeY-@distancePistage && cj.coordonneeY <= @casePosition.coordonneeY+@distancePistage  )
+           while(!find)
+              list_case[indice+1] = Array.new()
+              ajoutList = list_case[indice+1]
+  
+              for c in list_case[indice]
+  
+                 if(!existe?(c.caseNord, list_case, indice) && !c.caseNord.isFull?() && c.caseNord.typeTerrain.isAccessible)
+                    ajoutList.push(c.caseNord)
+                    if(estCible?(c.caseNord))
+                       find = true
+                       break
+                    end
+                 end
+  
+                 if(!existe?(c.caseSud, list_case, indice) && !c.caseSud.isFull?() && c.caseSud.typeTerrain.isAccessible)
+                    ajoutList.push(c.caseSud)
+                    if(estCible?(c.caseSud))
+                       find = true
+                       break
+                    end
+                 end
+  
+                 if(!existe?(c.caseEst, list_case, indice) && !c.caseEst.isFull?() && c.caseEst.typeTerrain.isAccessible)
+                    ajoutList.push(c.caseEst)
+                    if(estCible?(c.caseEst))
+                       find = true
+                       break
+                    end
+                 end
+  
+                 if(!existe?(c.caseOuest, list_case, indice) && !c.caseOuest.isFull?() && c.caseOuest.typeTerrain.isAccessible)
+                    ajoutList.push(c.caseOuest)
+                    if(estCible?(c.caseOuest))
+                       find = true
+                       break
+                    end
+                 end
+  
+              end # Fin for
+  
+              ajoutList.uniq()  # Enleve les cases en doublons du tableau
+  
+              indice += 1
+              
+              if(indice >= @distancePistage) # Hors du champs de l'ennemi
+                 break
+              end
+  
+           end # Fin while
+        end
          # Fin Recherche de la case du joueur
 
          # Determination de la case de deplacement
