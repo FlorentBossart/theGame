@@ -53,7 +53,7 @@ class Vue
   
   @@threadAffichage = false 
 
-  attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
+  attr_reader :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
     #Gtk.init();
@@ -198,6 +198,7 @@ class Vue
     #test Bordures
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
     pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+    
 
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
@@ -290,12 +291,13 @@ class Vue
     
     if(@@threadAffichage == false)
 		@@threadAffichage = true
+		@modele.enverDuDecors
 		Thread.new do
 			while(true) do
-			#maj Carte Et Zaf
-			afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-			@zaf.majZaf(@modele.joueur)
-			sleep(0.01)		
+				#maj Carte Et Zaf
+				afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+				@zaf.majZaf(@modele.joueur)
+				sleep(0.01)		
 			end
 		end
 	end

@@ -238,7 +238,7 @@ class Modele
 
      
 #METHODE POUR GERER LES ACTION DU JOUEUR ETAPES APRES ETAPES
-   
+   @@pileExecution = Array.new()
    ##
    # Permet de faire passer un tour. 
    # 
@@ -248,8 +248,13 @@ class Modele
       @compteurTour += 1
       # Deplacement des ennemis
       for e in @listeEnnemis
+		if(e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
          e.deplacementIntelligent()
+        else
+				@@pileExecution.unshift(e)
+        end
       end
+      
       
       # Ajout d'ennemis
       if(@compteurTour % @difficulte.nbToursInterGenerations == 0)
@@ -257,6 +262,19 @@ class Modele
          ajoutItems(@difficulte.objetsParGeneration)
       end
    end
+   
+   def enverDuDecors
+		Thread.new do
+			while true
+				if !@@pileExecution.empty?
+					element=@@pileExecution.pop
+					element.deplacementIntelligent
+				else
+					sleep 0.01
+				end
+			end
+		end
+      end
 
    ##
    # Permet de lancer un tour: 
