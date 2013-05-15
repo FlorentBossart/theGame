@@ -292,6 +292,8 @@ class Vue
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
     @zaf.majZaf(@modele.joueur)
     end
+    
+    Thread.new do
     case @modele.stadePartie
 
     #ETAPE CHOIX LIBRE
@@ -326,6 +328,7 @@ class Vue
       @popUp.afficheChoixGuerisseur(@modele.joueur, @modele.pnjAideEnInteraction)
     end #fin case
     puts "fin actualiser"
+    end
   end
 
   def majEcouteClavier()
