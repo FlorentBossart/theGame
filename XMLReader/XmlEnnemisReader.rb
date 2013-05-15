@@ -34,7 +34,7 @@ class XmlEnnemisReader
             BibliothequeTypeEnnemi.ajouter(s.elements['intitule'].text,
                                            TypeEnnemi.creer(
                                                              s.elements['intitule'].text, 
-                                                             s.elements['energieBase'].text.to_i
+                                                             s.elements['energieBase'].text.to_f
                                                              ))
         end
       return nil

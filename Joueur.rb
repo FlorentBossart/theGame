@@ -166,7 +166,9 @@ class Joueur < Personnage
               str=XmlMultilingueReader.lireTexte("enfilerBottes")
               str=str.gsub("BOTTES",@bottes.getIntitule()).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
               @modele.notifier(str)
-              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
+              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain())#*(1-@bottes.typeEquipable.pourcentageProtection()))
+              puts "enPerdu"
+              puts energiePerdue
               str=XmlMultilingueReader.lireTexte("perteEnergie")
               str=str.gsub("ENERGIE",energiePerdue.to_s)
               @modele.notifier(str)              
@@ -182,6 +184,9 @@ class Joueur < Personnage
               end
             else
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
+              puts @modele.difficulte.pourcentageTerrain
+              puts "enPerdu"
+              puts energiePerdue
               @energie -= energiePerdue
               str=XmlMultilingueReader.lireTexte("perteEnergie")
               str=str.gsub("ENERGIE",energiePerdue.to_s)

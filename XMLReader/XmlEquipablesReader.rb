@@ -36,7 +36,7 @@ class XmlEquipablesReader
                                                             s.elements['intitule'].text, 
                                                                s.elements['pourcentageProtection'].text.to_f, 
                                                                s.elements['nbTours'].text.to_i, 
-                                                               s.elements['prix'].text.to_i, 
+                                                               s.elements['prix'].text.to_f, 
                                                                s.elements['sePorteSur'].text.to_i,
                                                                s.elements['rarete'].text.to_i 
                                                             
