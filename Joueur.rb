@@ -236,12 +236,12 @@ class Joueur < Personnage
       str=str.gsub("ENERGIE",energiePerdue.to_s)
       @modele.notifier(str)     
       if(@energie > 0)
-         @modele.eliminerEnnemi(ennemi)
+         ennemi.meurt()
          gainExperience(ennemi.energie)
          @nbEnnemiTues += 1
          return ennemi.listeItem
       elsif(@energie == 0)
-         @modele.eliminerEnnemi(ennemi)
+         ennemi.meurt()
          gainExperience(ennemi.energie)
          @nbEnnemiTues += 1
          @causeMort= XmlMultilingueReader.lireTexte("entretue")
@@ -350,8 +350,8 @@ class Joueur < Personnage
    # xp : float representant l'experience a ajouter
    #
    def gainExperience(xp)
-      @experience=@experience+xp
-      @modele.notifier("+ #{xp}XP")
+      @experience=@experience+(xp/2)
+      @modele.notifier("+ #{xp/2}XP")
      
      while(@experience>=@experienceSeuil) do
        @experience=@experience-@experienceSeuil  

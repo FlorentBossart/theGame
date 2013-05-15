@@ -121,70 +121,6 @@
    <intitule_objet>eau</intitule_objet>
    <img_ihm>./img/eau.png</img_ihm>
 </reference>
-<reference>
-   <intitule_objet>eau0000</intitule_objet>
-   <img_ihm>./img/eau0000.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0001</intitule_objet>
-   <img_ihm>./img/eau0001.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0010</intitule_objet>
-   <img_ihm>./img/eau0010.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0011</intitule_objet>
-   <img_ihm>./img/eau0011.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0100</intitule_objet>
-   <img_ihm>./img/eau0100.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0101</intitule_objet>
-   <img_ihm>./img/eau0101.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0110</intitule_objet>
-   <img_ihm>./img/eau0110.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau0111</intitule_objet>
-   <img_ihm>./img/eau0111.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1000</intitule_objet>
-   <img_ihm>./img/eau1000.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1001</intitule_objet>
-   <img_ihm>./img/eau1001.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1010</intitule_objet>
-   <img_ihm>./img/eau1010.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1011</intitule_objet>
-   <img_ihm>./img/eau1011.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1100</intitule_objet>
-   <img_ihm>./img/eau1100.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1101</intitule_objet>
-   <img_ihm>./img/eau1101.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1110</intitule_objet>
-   <img_ihm>./img/eau1110.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>eau1111</intitule_objet>
-   <img_ihm>./img/eau1111.png</img_ihm>
-</reference>
 
 
 <reference>
@@ -198,8 +134,8 @@
 </reference>
 
 <reference>
-   <intitule_objet>icone bourse</intitule_objet>
-   <img_ihm>./img/bourse.png</img_ihm>
+   <intitule_objet>icone or</intitule_objet>
+   <img_ihm>./img/or.png</img_ihm>
 </reference>
 
 <reference>

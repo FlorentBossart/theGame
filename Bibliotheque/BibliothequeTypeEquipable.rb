@@ -83,3 +83,8 @@ class BibliothequeTypeEquipable
    end
 
 end
+
+
+
+#XmlEquipablesReader.lireXml()
+#l=BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(1,1)
