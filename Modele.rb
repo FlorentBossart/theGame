@@ -246,11 +246,9 @@ class Modele
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
-      Thread.new do
       # Deplacement des ennemis
       for e in @listeEnnemis
          e.deplacementIntelligent()
-      end
       end
       
       # Ajout d'ennemis
