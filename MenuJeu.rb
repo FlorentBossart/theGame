@@ -87,7 +87,7 @@ class MenuJeu
 			boutNewPartie 		= Button.new("Nouvelle partie")
 			boutChargerPartie = Button.new("Charger partie")
 			boutClassement 	= Button.new("Classement")
-			boutOptions 		= Button.new("Options (a discuter)")
+			boutOptions 		= Button.new("Options")
 			boutAide 			= Button.new("Aide")
 			boutQuitter 		= Button.new("Quitter le jeu")
 			
@@ -103,7 +103,7 @@ class MenuJeu
 			boutChargerPartie 		= Button.new("Charger partie")
 			boutSauvegarderPartie 	= Button.new("Sauvegarder partie")
 			boutClassement 			= Button.new("Classement")
-			boutOptions 				= Button.new("Options (a discuter)")
+			boutOptions 				= Button.new("Options")
 			boutAide 					= Button.new("Aide")
 			boutQuitter 				= Button.new("Quitter le jeu")
 				
@@ -578,27 +578,11 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
-		boutValider.signal_connect('clicked') {
-			if(oui.active?)
-				Audio.activeSound()
-				puts "Son active"
-			else
-				Audio.mute()
-				puts "son desactive"
-			end
-	
-			if(listeLangue.active == 0)
-				XmlMultilingueReader.setLangue("FR")
-				puts "Langue FR"
-			elsif
-				XmlMultilingueReader.setLangue("EN")
-				puts "Langue EN"
-			end
-	
-			viderFenetre(@contenu)
-			afficherMenu()
-		}
+		
+		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue)
+		
 	end
+
 	
 	
 	##

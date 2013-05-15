@@ -672,6 +672,47 @@ class Controller
 	end
 
 
+	##
+   # Liaison de l'action sur le bouton
+   #
+   # == Parameters:
+   # btValiderOptions : le gtkButton qu'il faudra lier à l'action d'un clic sur Valider (dans options)
+   #
+   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue)
+      btValiderOptions.signal_connect('clicked'){
+          validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
+      }
+   end
+ 
+ 
+	##
+	# Action(s) à effectuer lors du clic sur le bouton Valider (dans options)
+	#
+	def validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
+		puts "Clique sur Valider (dans options)"
+		
+		if(radioButtonOui.active?)
+			Audio.activeSound()
+			puts "Son active"
+		elsif(radioButtonNon.active?)
+			Audio.mute()
+			puts "son desactive"
+		end
+
+		if(comboBoxListeLangue.active == 0)
+			XmlMultilingueReader.setLangue("FR")
+			puts "Langue FR"
+		elsif(comboBoxListeLangue.active == 1)
+			XmlMultilingueReader.setLangue("EN")
+			puts "Langue EN"
+		end
+	
+		@vue.menu.viderFenetre(@vue.menu.contenu)
+		puts "Vidage du contenu du menu principal"
+		@vue.menu.afficherMenu()
+	end
+
+
    ##
    # Liaison de l'action sur le bouton
    #
