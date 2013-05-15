@@ -350,8 +350,8 @@ class Joueur < Personnage
    # xp : float representant l'experience a ajouter
    #
    def gainExperience(xp)
-      @experience=@experience+xp
-      @modele.notifier("+ #{xp}XP")
+      @experience=@experience+(xp/2)
+      @modele.notifier("+ #{xp/2}XP")
      
      while(@experience>=@experienceSeuil) do
        @experience=@experience-@experienceSeuil  
