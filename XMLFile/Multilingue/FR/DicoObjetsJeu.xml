@@ -162,6 +162,11 @@
 	    <determinant>la </determinant>
 	</objet>
 	
+	<objet>
+		<id>Bourse</id>
+		<nom>bourse</nom>
+		<determinant>une </determinant>
+	</objet>
 </objetsJeu>
 
 

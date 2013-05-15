@@ -162,6 +162,12 @@
 	    <determinant></determinant>
 	</objet>
 	
+	<objet>
+		<id>Bourse</id>
+		<nom>bag of gold</nom>
+		<determinant>a </determinant>
+	</objet>
+	
 </objetsJeu>
 
 
