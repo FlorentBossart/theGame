@@ -77,7 +77,7 @@ class Vue
 
     @tailleCase= 100;
     @hauteurAfficheCarte = 5
-    @largeurAfficheCarte = 10
+    @largeurAfficheCarte = 11
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
@@ -100,7 +100,7 @@ class Vue
 
       #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
-        if((x>=10 && y >=5))then
+        if((x>=9 && y >=5))then
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
@@ -111,7 +111,7 @@ class Vue
             @valign.add(@carteVue);
             afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
             @window.show_all()
-
+        
           end
         end
       end
@@ -284,6 +284,7 @@ class Vue
 
   def actualiser
     @window.modal=true
+
     puts "debut actualiser"
     #maj Carte Et Zaf
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
