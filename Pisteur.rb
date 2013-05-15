@@ -59,7 +59,6 @@ class Pisteur < Ennemi
    # Permet de deplacer l'Ennemi sur une cible calculée suivant la position du joueur.
    #
    def deplacementIntelligent()
-   Thread.new do
       cj = @joueur.casePosition # CaseJoueur
       list_case = Array.new()   # Liste de listes de cases
       indice = 0                # Indice
@@ -167,7 +166,6 @@ class Pisteur < Ennemi
 
       end # Fin if(!(cj == self.casePosition))
        return nil
-     end
    end # Fin methode
 
    

@@ -138,7 +138,6 @@ class Ennemi < PNJ
    # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
    #
    def deplacementIntelligent()
-	Thread.new do
       cible = rand(3)
     
       case cible
@@ -169,7 +168,6 @@ class Ennemi < PNJ
                deplacement(cible)
             end
       end 
-      end
    end
   
    
