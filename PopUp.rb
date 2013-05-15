@@ -54,6 +54,7 @@ class PopUp
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   #
   def affichePopUp(message)
+    @vue.window.modal=false
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
@@ -73,7 +74,7 @@ class PopUp
   # Affiche le PopUp contenant un choix entre le menu d'achat ou le menu de vente d'un marchand
   #
   def afficheChoixMarchand()
-
+    @vue.window.modal=false
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCommerce"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
@@ -100,7 +101,7 @@ class PopUp
   # Affiche le PopUp contenant un choix entre les diffÃ©rentes options de soins
   #
   def afficheChoixGuerisseur(joueur,guerisseur)
-  
+    @vue.window.modal=false
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupSoigneur"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
