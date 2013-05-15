@@ -72,6 +72,7 @@ class Guerisseur < Ami
       end
     
       return nil
+      joueur.modele.tourPasse()
    end
   
   ##

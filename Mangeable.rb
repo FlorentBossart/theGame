@@ -30,10 +30,6 @@ class Mangeable < Caracteristique
         new(typeMangeable)
     end
     
-    def estMangeable?()
-      return true
-    end
-    
     ##
     # Renvoi la clé pour accèder à l'image dans la table  de RefGraphiques.
     #

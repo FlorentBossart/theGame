@@ -59,11 +59,6 @@ class Equipable < Caracteristique
    end
 
    
-   def estEquipable?()
-      return true
-   end
-
-   
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet Equipable sur lequel la méthode est appellée.
