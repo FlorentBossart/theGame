@@ -27,13 +27,7 @@ class Carte
       @id_terrainParDefaut=id_terrainDef
       for i in 0..long-1
          for j in 0..larg-1
-            @cases.push(Case.nouvelle(i,j))
-         end
-      end
-      for i in 0..long-1
-         for j in 0..larg-1
-            getCaseAt(i,j).initVoisines(self.getCaseAt(i-1,j),self.getCaseAt(i+1,j),self.getCaseAt(i,j+1),self.getCaseAt(i,j-1))
-            getCaseAt(i,j).typeTerrain = BibliothequeTypeTerrain.getTypeTerrain(@id_terrainParDefaut)
+            @cases.push(Case.nouvelle(i,j,self,@id_terrainParDefaut))
          end
       end
       generationMapSemiAleatoire()
@@ -41,13 +35,15 @@ class Carte
 
    def generationMapSemiAleatoire()
       0.upto((@longueur+@largeur)*2){
+	Thread.new do
          tt = BibliothequeTypeTerrain.getTypeTerrainAuHasard
-         repartitionType(tt,tt.probaRepartition,rand(@longueur),rand(@largeur))
-      }
+	repartitionType(tt,tt.probaRepartition,rand(@longueur),rand(@largeur))
+      	end
+	}
      return nil
    end
 
-   def repartitionType(type, proba, coordX, coordY)
+   def repartitionType(type, proba, coordX, coordY)  
       if(coordX >= @longueur || coordY >= @largeur || coordX < 0 || coordY < 0)
          return
       elsif(getCaseAt(coordX,coordY).typeTerrain == type)
