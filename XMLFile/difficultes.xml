@@ -59,7 +59,7 @@
 	    <objetsDepart>100</objetsDepart>
 	    <objetsParGeneration>2</objetsParGeneration>
 	    <nbToursInterGenerations>10</nbToursInterGenerations>
-	    <pourcentageTerrain>1.5</pourcentageTerrain>
+	    <pourcentageTerrain>1.2</pourcentageTerrain>
 	</difficulte>
 	<difficulte>
 	    <intitule>Expert</intitule>
@@ -73,7 +73,7 @@
 	    <objetsDepart>200</objetsDepart>
 	    <objetsParGeneration>5</objetsParGeneration>
 	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>2</pourcentageTerrain>
+	    <pourcentageTerrain>1.4</pourcentageTerrain>
 	</difficulte>
 
 </difficultes>
