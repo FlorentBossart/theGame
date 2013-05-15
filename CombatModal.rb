@@ -134,6 +134,7 @@ class CombatModal
   # Cree un PopUp contenant des boutons liés aux objets equipable offensifs
   #  
   def majEquipementOffensif()
+    @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
     listeArme=Array.new()
     
