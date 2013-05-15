@@ -92,6 +92,7 @@ class Vue
     @window.signal_connect('destroy') {
       Gtk.main_quit()
     }
+
     @window.signal_connect('size_request'){
 
       x = (@window.size()[0]-1)/@tailleCase;
@@ -282,6 +283,7 @@ class Vue
   end
 
   def actualiser
+    @window.modal=true
     puts "debut actualiser"
     #maj Carte Et Zaf
     afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)

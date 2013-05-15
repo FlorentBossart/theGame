@@ -60,6 +60,7 @@ class InteractionModal
   # affiche qu'il n'y a rien a faire s'il n'y a rien sur la case
   # 
   def majInteractionModal()
+    @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
     if(@modele.joueur.casePosition.presenceAides?())
       

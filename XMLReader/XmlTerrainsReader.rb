@@ -35,8 +35,8 @@ class XmlTerrainsReader
                                            TypeTerrain.creer(
                                                             s.elements['intitule'].text, 
                                                             eval(s.elements['isAccessible'].text),
-                                                            s.elements['coutDeplacement'].text.to_i,
-                                                            s.elements['proba'].text.to_i
+                                                            s.elements['coutDeplacement'].text.to_f,
+                                                            s.elements['proba'].text.to_f
                                                             ))
         end
       return nil
