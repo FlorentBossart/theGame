@@ -295,9 +295,7 @@ class Vue
 			#maj Carte Et Zaf
 			afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
 			@zaf.majZaf(@modele.joueur)
-			sleep(0.1)
-			afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-			
+			sleep(0.01)		
 			end
 		end
 	end
