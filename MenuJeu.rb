@@ -190,6 +190,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
+		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert)
 		@controleur.retourCreer(boutRetour)
 		
 	end
