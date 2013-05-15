@@ -50,6 +50,8 @@ class Vue
   @ecouteToucheInventaire
   @ecouteToucheMenu
   @ecouteToucheInteraction
+  
+  @@threadAffichage = false 
 
   attr_reader :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
@@ -171,9 +173,7 @@ class Vue
     @y=debutY
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
-        Thread.new do
         afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
-		end
       end
     end
   end
@@ -287,10 +287,20 @@ class Vue
     @window.modal=true
 
     puts "debut actualiser"
-    #maj Carte Et Zaf
-    afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-    @zaf.majZaf(@modele.joueur)
-
+    
+    if(@@threadAffichage == false)
+		@@threadAffichage = true
+		Thread.new do
+			while(true) do
+			#maj Carte Et Zaf
+			afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+			@zaf.majZaf(@modele.joueur)
+			sleep(0.1)
+			afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
+			
+			end
+		end
+	end
     case @modele.stadePartie
 
     #ETAPE CHOIX LIBRE
