@@ -63,6 +63,7 @@ class CombatModal
   # * <b>momentCombat :</b> le moment où intervient le combat
   # 
   def majCombatModal(momentCombat)
+    @vue.window.modal=false
     ennemis=@modele.joueur.casePosition.listeEnnemis
     str=XmlMultilingueReader.lireTexte("popupCombatEnnemi_avertissement")
     case momentCombat
@@ -89,6 +90,7 @@ class CombatModal
   # Cree un PopUp contenant des boutons liés aux objets equipable defensifs
   # 
   def majEquipementDefensif()
+    @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
     listeArmure=Array.new()
     

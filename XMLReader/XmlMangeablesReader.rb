@@ -34,8 +34,8 @@ class XmlMangeablesReader
             BibliothequeTypeMangeable.ajouter(s.elements['intitule'].text,
                                            TypeMangeable.creer(
                                                             s.elements['intitule'].text, 
-                                                            s.elements['energieRendue'].text.to_i,
-                                                            s.elements['prix'].text.to_i,
+                                                            s.elements['energieRendue'].text.to_f,
+                                                            s.elements['prix'].text.to_f,
                                                             s.elements['rarete'].text.to_i 
                                                             ))
         end

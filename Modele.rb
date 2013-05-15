@@ -358,7 +358,7 @@ class Modele
          itemsEnnemis += itemsUnEnnemi 
        else
          @messageDefaite=@joueur.causeMort+" "+"->lors du combat avec "+ennemi.getIntitule()
-         changerStadePartie(EnumStadePartie.PARTIE_PERDU) 
+         changerStadePartie(EnumStadePartie.PERDU) 
          break
        end
      end
