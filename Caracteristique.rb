@@ -44,6 +44,10 @@ class Caracteristique
         return true
     end
     
+    def estEquipable?()
+      return false
+    end
+    
     ##
     # (Abstraite) Retourne une chaîne de caractères reprenant les différentes caractéristiques
     # de l'objet Caracteristique sur lequel la méthode est appellée.

@@ -40,6 +40,10 @@ class Equipable < Caracteristique
       new(typeEquipable)
    end
 
+  def estEquipable?()
+        return true
+      end
+   
    def getIntitule()
       return @typeEquipable.intitule
    end
