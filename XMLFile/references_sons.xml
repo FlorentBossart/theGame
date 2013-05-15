@@ -28,9 +28,15 @@
 	   <intitule_objet>preCombat</intitule_objet>
 	   <son>./Sons/preCombat.wav</son>
 	</reference>
+	
 	<reference>
 	   <intitule_objet>combat</intitule_objet>
 	   <son>./Sons/combat.wav</son>
+	</reference>
+	
+	<reference>
+	   <intitule_objet>stable_boy</intitule_objet>
+	   <son>./Sons/stable_boy.wav</son>
 	</reference>
 	
 </ref_sons>
