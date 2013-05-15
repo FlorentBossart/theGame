@@ -100,7 +100,7 @@ class Vue
 
       #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
-        if((x>=10 || y >=6))then
+        if((x>=10 && y >=5))then
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
