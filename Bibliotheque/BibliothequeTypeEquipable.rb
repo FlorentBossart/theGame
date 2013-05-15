@@ -56,6 +56,10 @@ class BibliothequeTypeEquipable
       return @@tableType[cle]
    end
    
+   def BibliothequeTypeEquipable.getTypes()
+     return @@tableType.values()
+   end
+   
    
    ##
    #===Permet de recuperer un type equipable au hasard
@@ -65,6 +69,16 @@ class BibliothequeTypeEquipable
    #
    def BibliothequeTypeEquipable.getTypeEquipableAuHasard()
       valeurs=@@tableType.values()
+      return valeurs[rand(valeurs.length-1)]
+   end
+   
+   def BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(rareteMin,rareteMax)
+      valeurs=@@tableType.values()
+      for v in valeurs
+        if(!(v.rarete<=rareteMax && v.rarete>=rareteMin))
+          valeurs.delete_at(valeurs.index(v))
+        end
+      end
       return valeurs[rand(valeurs.length-1)]
    end
 

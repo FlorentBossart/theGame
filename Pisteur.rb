@@ -122,7 +122,9 @@ class Pisteur < Ennemi
 
          # Determination de la case de deplacement
          if(find)
-           @joueur.modele.notifier("Le #{getIntitule()} pisteur de la case (#{@casePosition.coordonneeX};#{@casePosition.coordonneeY}) vous traque !")
+          str=XmlMultilingueReader.lireTexte("pistage")
+          str=str.gsub("PISTEUR",XmlMultilingueReader.lireDeterminant_Nom(self)).gsub("CX",@casePosition.coordonneeX.to_s()).gsub("CY",@casePosition.coordonneeY.to_s())
+          @joueur.modele.notifier(str)
             # Remplacement de la liste de case du derniere indice par la case du joueur
             list_case[indice] = Array.new().push(cj)
 

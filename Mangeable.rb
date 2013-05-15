@@ -48,7 +48,9 @@ class Mangeable < Caracteristique
         else
             joueur.energie=joueur.energie+typeMangeable.energieRendue
         end
-      joueur.modele.notifier("Vous venez de manger #{getIntitule()}")
+      str=XmlMultilingueReader.lireTexte("repas")
+      str=str.gsub("REPAS",XmlMultilingueReader.lireDeterminant_Nom(self))
+      joueur.modele.notifier(str)
     end
     
     

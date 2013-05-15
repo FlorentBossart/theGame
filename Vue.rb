@@ -295,6 +295,8 @@ class Vue
       #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
       XmlClassements.ecrireXml(@modele)
+      @zoneCtrl.bloquerBoutons(@modele)
+      bloquerEcouteClavier()
       #ETAPE EQUIPEMENT ARMURE
     when EnumStadePartie.EQUIPEMENT_ARMURE
       @combatModal.majEquipementDefensif()
@@ -338,7 +340,7 @@ class Vue
     @ecouteRight=false
     @ecouteToucheRepos=false
     @ecouteToucheInventaire=false
-    @ecouteToucheMenu=false
+    #@ecouteToucheMenu=false
     @ecouteToucheInteraction=false
   end
 end

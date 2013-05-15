@@ -17,6 +17,7 @@
 require './PNJ.rb'
 require './Type/TypeEnnemi.rb'
 require './Enum/EnumDirection.rb'
+require './Enum/EnumRarete.rb'
 require './Interface/Deplacable.rb'
 
 class Ennemi < PNJ
@@ -38,6 +39,7 @@ class Ennemi < PNJ
    #* <b>type :</b> le type de PNJ Ennemi
    #
    def initialize(casePosition, niveau, type)
+     @listeItem = Array.new
       fourchette=3
       super(casePosition)
       @niveau = niveau-fourchette + rand(niveau-fourchette+1)
@@ -46,8 +48,48 @@ class Ennemi < PNJ
       end
       @type = type
       @energie = @type.energieBase * 1.2**(@niveau-1)
-      remplirListeItems(1,5)
+      case @niveau
+        when 1..5
+          remplirListeItems(1,5,EnumRarete.GROSSIER(),EnumRarete.GROSSIER())
+        when 6..10
+          remplirListeItems(1,5,EnumRarete.GROSSIER(),EnumRarete.INTERMEDIAIRE())
+        when 11..15   
+          remplirListeItems(1,5,EnumRarete.INTERMEDIAIRE(),EnumRarete.INTERMEDIAIRE())  
+        when 16..20   
+          remplirListeItems(1,5,EnumRarete.INTERMEDIAIRE(),EnumRarete.RAFFINE())
+        when 21..25
+          remplirListeItems(1,5,EnumRarete.RAFFINE(),EnumRarete.RAFFINE()) 
+        else
+          remplirListeItems(1,5,EnumRarete.MAITRE(),EnumRarete.MAITRE())     
+      end
+      
    end
+   
+  ##
+   # Permet de remplir aleatoirement la liste d'items.
+   #
+   def remplirListeItems(min,max,rareteMin,rareteMax)
+      nbItems = rand(max-min) + min
+    
+      for i in 1..nbItems
+         # Choix du type
+         type = rand(2)
+      
+         case type
+            when 0 # TypeEquipable
+               type = BibliothequeTypeEquipable.getTypeEquipableAuHasardRarete(rareteMin,rareteMax)
+               caract = Equipable.creer(type)
+            else # TypeMangeable
+               type = BibliothequeTypeMangeable.getTypeMangeableAuHasardRarete(rareteMin,rareteMax)
+               caract = Mangeable.creer(type)
+         end # Fin case type
+      
+         @listeItem.push(Item.creer(nil, caract))
+      end # Fin for
+    
+      return self
+   end
+
   
 
    ##

@@ -11,7 +11,7 @@
 
 class BibliothequeTypeMangeable
 
-   @@tabletype = Hash.new()
+   @@tableType = Hash.new()
 
    private_class_method :new
     
@@ -25,7 +25,7 @@ class BibliothequeTypeMangeable
    #
    def BibliothequeTypeMangeable.ajouter(cle,type)
      AffichageDebug.Afficher("Ajout dans BibliothequeTypeMangeable-> clé:#{cle}, type:#{type}")
-     @@tabletype[cle] = type
+     @@tableType[cle] = type
      return self
    end
    
@@ -38,7 +38,7 @@ class BibliothequeTypeMangeable
    #
    def BibliothequeTypeMangeable.retirer(cle)
      AffichageDebug.Afficher("Suppression dans BibliothequeTypeMangeable-> clé:#{cle}")
-     @@tabletype.delete(cle)
+     @@tableType.delete(cle)
      return self
    end
    
@@ -53,7 +53,11 @@ class BibliothequeTypeMangeable
    #* <b>TypeMangeable :</b> le type mangeable souhaité
    #
    def BibliothequeTypeMangeable.getTypeMangeable(cle)
-      return @@tabletype[cle]
+      return @@tableType[cle]
+   end
+   
+   def BibliothequeTypeMangeable.getTypes()
+     return @@tableType.values()
    end
    
    
@@ -64,7 +68,17 @@ class BibliothequeTypeMangeable
    #* <b>TypeMangeable :</b> un type mangeable au hasard
    #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasard()
-      valeurs=@@tabletype.values()
+      valeurs=@@tableType.values()
+      return valeurs[rand(valeurs.length-1)]
+   end
+   
+   def BibliothequeTypeMangeable.getTypeMangeableAuHasardRarete(rareteMin,rareteMax)
+      valeurs=@@tableType.values()
+      for v in valeurs
+        if(!(v.rarete<=rareteMax && v.rarete>=rareteMin))
+          valeurs.delete_at(valeurs.index(v))
+        end
+      end
       return valeurs[rand(valeurs.length-1)]
    end
 

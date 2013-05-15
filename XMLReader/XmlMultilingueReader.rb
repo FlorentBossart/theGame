@@ -117,7 +117,11 @@ class XmlMultilingueReader
   
   def XmlMultilingueReader.lireDeterminant_Nom(objet)
        determinant=@@dicoObjetCourant[objet.getIntitule()][0]
+       if(determinant==nil)
+         determinant=""
+       end
        nom=@@dicoObjetCourant[objet.getIntitule()][1]
+       puts objet.getIntitule()
        return determinant+nom
   end
   

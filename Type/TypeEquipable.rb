@@ -21,8 +21,9 @@ class TypeEquipable
    @nbTours
    @prix
    @sePorteSur
+   @rarete
 
-   attr_reader :intitule, :sePorteSur, :pourcentageProtection, :nbTours, :prix
+   attr_reader :intitule, :sePorteSur, :pourcentageProtection, :nbTours, :prix, :rarete
 
    ##
    # Crée un nouveau TypeEquipable à partir des informations passées en paramètre.
@@ -33,17 +34,18 @@ class TypeEquipable
    # nbTours : le nombre de tours durant lequel le personnage conservera l'équipement avant qu'il ne disparaisse
    # prix : le prix à l'achat ou à la revente de l'équipement
    #
-   def initialize(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
+   def initialize(intitule, pourcentageProtection, nbTours, prix, endroisDePort,rarete)
       @intitule              = intitule
       @sePorteSur            = endroisDePort
       @pourcentageProtection = pourcentageProtection
       @nbTours               = nbTours
       @prix                  = prix
+      @rarete                = rarete
    end
    
    
-   def TypeEquipable.creer(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
-      return new(intitule, pourcentageProtection, nbTours, prix, endroisDePort)
+   def TypeEquipable.creer(intitule, pourcentageProtection, nbTours, prix, endroisDePort,rarete)
+      return new(intitule, pourcentageProtection, nbTours, prix, endroisDePort,rarete)
    end
 
    def description

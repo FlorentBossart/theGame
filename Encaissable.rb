@@ -45,7 +45,9 @@ class Encaissable < Caracteristique
    
    def utiliseToi(joueur)
       joueur.inventaire.capital=joueur.inventaire.capital+@montant
-      joueur.modele.notifier("#{montant} pièces d'or ont été ajoutées à votre capital")
+      str=XmlMultilingueReader.lireTexte("encaissement")
+      str=str.gsub("MONTANT",@montant.to_s())
+      joueur.modele.notifier(str)
       return nil
    end
 

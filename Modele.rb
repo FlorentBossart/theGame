@@ -42,6 +42,7 @@ require './XMLReader/XmlEnnemisReader.rb'
 require './XMLReader/XmlEquipablesReader.rb'
 require './XMLReader/XmlMangeablesReader.rb'
 require './XMLReader/XmlTerrainsReader.rb'
+require './StockMarchand.rb'
 
 class Modele
 
@@ -129,6 +130,7 @@ class Modele
       caseJoueur.joueur = @joueur # Attribution du joueur à la case
            
       # Creation des PNJ Amis de depart
+      stockItemsJeu=StockMarchand.creer()
       for i in 0..@difficulte.pnjAmisDepart-1
          # Recuperation d'une case aleatoire
          begin
@@ -138,7 +140,7 @@ class Modele
          # Choix du type de PNJ Ami
          choix = rand(2)-1 # Nb aleatoire -1 ou 0
          if(choix == 0)
-            element = Marchand.creer(caseAleatoire)
+            element = Marchand.creer(caseAleatoire,stockItemsJeu)
          else
             element = Guerisseur.creer(caseAleatoire)
          end
@@ -147,50 +149,12 @@ class Modele
          caseAleatoire.ajouterElement(element)
       end
       
+       @listeEnnemis = Array.new()
       # Creation des PNJ ennemis de depart
-      @listeEnnemis = Array.new()
-      for i in 0 .. @difficulte.pnjEnnemisDepart-1
-         # Recuperation d'une case aleatoire
-         begin
-            caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
-
-         # Choix du type de PNJ Ennemi
-         choix = rand(2)-1 #Nb aleatoire -1 ou 0
-         if(choix == 0)
-            ennemi = EnnemiNormal.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard())
-         else
-            ennemi = Pisteur.creer(caseAleatoire, @joueur.niveau, BibliothequeTypeEnnemi.getTypeEnnemiAuHasard(), @joueur)
-         end
-
-         # Ajout du PNJ Ennemi dans la case aleatoire et dans la listeEnnemis
-         caseAleatoire.ajouterEnnemi(ennemi)
-         @listeEnnemis.push(ennemi)
-      end
+      ajoutEnnemis(@difficulte.pnjEnnemisDepart)
       
       # Creation des items disséminer sur la carte
-      for i in 0 .. @difficulte.objetsDepart-1
-         # Recuperation d'une case aleatoire
-         begin
-            caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1,rand(@carte.largeur)-1)
-         end while(!(caseAleatoire.typeTerrain.isAccessible && !caseAleatoire.isFull?()))
-
-         # Choix du type d'item
-         choix = rand(3)-1 #Nb aleatoire -1, 0 ou 1
-         if(choix == 0)
-            caracteristique = Mangeable.creer(BibliothequeTypeMangeable.getTypeMangeableAuHasard())
-         elsif(choix == 1)
-            caracteristique = Equipable.creer(BibliothequeTypeEquipable.getTypeEquipableAuHasard())
-         else
-            montant = rand(1000)+1
-            caracteristique = Encaissable.creer(montant)
-         end
-
-         element = Item.creer(caseAleatoire, caracteristique)
-         
-        # Ajout de l'item dans la case aleatoire       
-        caseAleatoire.ajouterElement(element)
-      end
+      ajoutItems(@difficulte.objetsDepart)
      
      #PAS D'ACTUALISATION CAR MODELE SE CREER AVANT LA VUE  
      #changerStadePartie(EnumStadePartie.ETAPE_FINIE)
@@ -216,8 +180,8 @@ class Modele
    ##
    # Permet d'ajouter des ennemis au jeu.
    #
-   def ajoutEnnemis()
-      for i in 0..@difficulte.pnjEnnemisParGeneration-1
+   def ajoutEnnemis(nombre)
+      for i in 0..nombre-1
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1, rand(@carte.largeur)-1)
@@ -241,8 +205,8 @@ class Modele
    ##
    # Permet d'ajouter des items au jeu.
    #
-   def ajoutItems()
-      for i in 0 .. @difficulte.objetsParGeneration-1
+   def ajoutItems(nombre)
+      for i in 0 .. nombre-1
          # Recuperation d'une case aleatoire
          begin
             caseAleatoire = @carte.getCaseAt(rand(@carte.longueur)-1,rand(@carte.largeur)-1)
@@ -292,7 +256,8 @@ class Modele
       
       # Ajout d'ennemis
       if(@compteurTour % @difficulte.nbToursInterGenerations == 0)
-         ajoutEnnemis()
+         ajoutEnnemis(@difficulte.pnjEnnemisParGeneration)
+         ajoutItems(@difficulte.objetsParGeneration)
       end
    end
 

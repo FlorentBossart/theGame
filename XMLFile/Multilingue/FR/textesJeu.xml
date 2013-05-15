@@ -259,6 +259,22 @@
 		<id>recupCombat</id>
 		<contenu>Vous avez récupérez ITEM lors du dernier combat!</contenu>
 	</texte>
+	<texte>
+		<id>equipement</id>
+		<contenu>Vous vous êtes équipé de EQUIPEMENT.</contenu>
+	</texte>
+	<texte>
+		<id>encaissement</id>
+		<contenu>"MONTANT pièces d'or ont été ajoutées à votre capital.</contenu>
+	</texte>
+	<texte>
+		<id>repas</id>
+		<contenu>Vous venez de manger REPAS.</contenu>
+	</texte>
+	<texte>
+		<id>pistage</id>
+		<contenu>PISTEUR de la case (CX-CY) vous traque !</contenu>
+	</texte>
 </textesJeu>
 
 

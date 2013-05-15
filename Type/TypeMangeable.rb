@@ -18,8 +18,9 @@ class TypeMangeable
    @intitule
    @energieRendue
    @prix
+   @rarete
 
-   attr_reader :intitule, :energieRendue, :prix
+   attr_reader :intitule, :energieRendue, :prix, :rarete
    
    ##
    # Crée un nouveau TypeTerrain à partir des informations passées en paramètre.
@@ -29,15 +30,16 @@ class TypeMangeable
    # energieRendue : l'énergie que regagnera le personnage en consommant le mangeale
    # prix : le prix à l'achat ou à la revente du mangeable
    #
-   def initialize(intitule, energieRendue, prix)
+   def initialize(intitule, energieRendue, prix, rarete)
       @intitule      = intitule
       @energieRendue = energieRendue
       @prix          = prix
+      @rarete        = rarete
    end
    
    
-   def TypeMangeable.creer(intitule, energieRendue, prix)
-      return new(intitule, energieRendue, prix)
+   def TypeMangeable.creer(intitule, energieRendue, prix,rarete)
+      return new(intitule, energieRendue, prix,rarete)
    end
    
    def description

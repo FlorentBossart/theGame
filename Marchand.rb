@@ -21,10 +21,12 @@ require './Mangeable.rb'
 require './Item.rb'
 require './Bibliotheque/BibliothequeTypeEquipable.rb'
 require './Bibliotheque/BibliothequeTypeMangeable.rb'
+require './StockMarchand.rb'
 
 class Marchand < Ami
    include Commercant
 
+   @pourcentageReprise
 
    ##
    # Crée un nouvel Ami Marchand à partir des informations passées en paramètre.
@@ -32,10 +34,11 @@ class Marchand < Ami
    # == Parameters:
    #* <b>casePosition :</b> la case où se trouvera l'ami marchand
    #
-   def initialize(casePosition)
+   def initialize(casePosition,stock)
       super(casePosition)
       @intitule = "Marchand"
-      remplirListeItems(40,50)
+      @listeItem=stock
+      @pourcentageReprise=0.8
    end
   
    
@@ -45,8 +48,8 @@ class Marchand < Ami
    # == Parameters:
    #* <b>casePosition :</b> la case où se trouvera l'ami marchand
    #
-   def Marchand.creer(casePosition)
-      return new(casePosition)
+   def Marchand.creer(casePosition,stock)
+      return new(casePosition,stock)
    end
   
    
@@ -59,9 +62,7 @@ class Marchand < Ami
    #
    def acheter(vendeur, item)
       vendeur.retirerDuStock(item)
-      ajouterAuStock(item)
-      debourser(item.caracteristique.type.prix)
-      vendeur.encaisser(item.caracteristique.type.prix)
+      vendeur.encaisser((item.caracteristique.type.prix*@pourcentageReprise).to_i)
       AffichageDebug.Afficher("#{item} \nacheté à \n#{vendeur}")
       return nil
    end
@@ -75,10 +76,8 @@ class Marchand < Ami
    #* <b>item :</b> l'item vendu
    #
    def vendre(acheteur, item)
-      retirerDuStock(item)
       acheteur.ajouterAuStock(item)
       acheteur.debourser(item.caracteristique.type.prix)
-      encaisser(item.caracteristique.type.prix)
       AffichageDebug.Afficher("#{item} \nvendu à \n#{acheteur}")
       return nil
    end
@@ -91,8 +90,6 @@ class Marchand < Ami
    #* <b>item :</b> l'item à ajouter au stock
    #
    def ajouterAuStock(item)
-      @listeItem.push(item)
-      AffichageDebug.Afficher("#{item} \najouté au stock de \n#{self}")
       return nil
    end
    
@@ -104,8 +101,6 @@ class Marchand < Ami
    #* <b>item :</b> l'item à retirer du stock
    #
    def retirerDuStock(item)
-      @listeItem.delete(item)
-      AffichageDebug.Afficher("#{item} \nretiré du stock de \n#{self}")
       return nil
    end
    
@@ -137,6 +132,14 @@ class Marchand < Ami
    def to_s
       s= "[==Marchand >>> |"
       s+= super()
+     s+= "Items: "
+     if(@listeItem.itemsStock.empty?)
+       s+= "aucun "
+     end
+     for i in @listeItem.itemsStock
+       s+= "#{i}, "
+     end
+     s+="| "
       s+= "<<< Marchand==]"
    end
   

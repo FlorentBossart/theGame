@@ -272,6 +272,22 @@
 		<id>recupCombat</id>
 		<contenu>You got ITEM during your last fight!</contenu>
 	</texte>
+	<texte>
+		<id>equipement</id>
+		<contenu>You are equiped with EQUIPEMENT.</contenu>
+	</texte>
+	<texte>
+		<id>encaissement</id>
+		<contenu>"MONTANT gold pieces were added to your founds.</contenu>
+	</texte>
+	<texte>
+		<id>repas</id>
+		<contenu>You ate REPAS.</contenu>
+	</texte>
+	<texte>
+		<id>pistage</id>
+		<contenu>PISTEUR of the (CX-CY) case is chasing you !</contenu>
+	</texte>
 </textesJeu>
 
 

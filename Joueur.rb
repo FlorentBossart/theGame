@@ -30,6 +30,7 @@
 
 require "./Enum/EnumDirection.rb"
 require "./Enum/EnumMomentCombat.rb"
+require "./Enum/EnumRarete.rb"
 require "./Elem.rb"
 require "./Personnage.rb"
 require "./Interface/Deplacable.rb"
@@ -272,16 +273,37 @@ class Joueur < Personnage
    end
    
    ##
-   # Verifie si le joueur peut débourser le prix
+   # Verifie si le joueur peut acheter l'item
    # 
    # == Parameters:
-   # prix : le prix à débourser  
+   # item : l'item à acheter  
    # == Returns:
-   # boolean : true si le joueur a un capital supérieur a prix
+   # boolean : true si le joueur a un capital supérieur au prix de l'item
    # 
-   def peutSePermettreAchat?(prix)
-     return @inventaire.capital>prix
+   def peutSePermettreAchat?(item)
+     return @inventaire.capital>item.prix
    end
+   
+  ##
+     # Verifie si le joueur peut debloquer l'item
+     # 
+     # == Parameters:
+     # item : l'item à debloquer  
+     # == Returns:
+     # boolean : true si le joueur a un niveau suffisant par rapport à la rarete de l'item
+     # 
+     def peutDebloquer?(item)
+    case item.rarete
+      when EnumRarete.GROSSIER()
+        return @niveau>=5
+      when EnumRarete.INTERMEDIAIRE()
+        return @niveau>=10
+      when EnumRarete.INTERMEDIAIRE()
+        return @niveau>=15
+      when EnumRarete.MAITRE() 
+        return @niveau>=20
+    end
+  end
 
    ##
    # Demande a l'item de s'utiliser sur le joueur

@@ -53,7 +53,9 @@ class Equipable < Caracteristique
       elsif(@typeEquipable.sePorteSur == EnumEmplacementEquipement.BOTTES)
          joueur.bottes=self
       end
-      joueur.modele.notifier("Vous vous êtes équipé de #{getIntitule()}")
+     str=XmlMultilingueReader.lireTexte("equipement")
+     str=str.gsub("EQUIPEMENT",XmlMultilingueReader.lireDeterminant_Nom(self))
+     joueur.modele.notifier(str)
    end
 
    

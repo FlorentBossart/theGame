@@ -20,6 +20,9 @@ class Inventaire
   @taille
   @nbItem
   
+
+  private_class_method :new
+  
   attr_reader :items, :taille, :nbItem
   attr_accessor :capital
   
