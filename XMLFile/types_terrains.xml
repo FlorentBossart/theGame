@@ -21,25 +21,25 @@
 	   <intitule>plaine</intitule>
 	   <isAccessible>true</isAccessible>
 	   <coutDeplacement>10</coutDeplacement>
-	   <proba>70</proba>
+	   <proba>0</proba>
 	</type>
 	<type>
 	   <intitule>foret</intitule>
 	   <isAccessible>true</isAccessible>
 	   <coutDeplacement>20</coutDeplacement>
-	   <proba>50</proba>
+	   <proba>80</proba>
 	</type>
 	<type>
 	   <intitule>desert</intitule>
 	   <isAccessible>true</isAccessible>
 	   <coutDeplacement>30</coutDeplacement>
-	   <proba>30</proba>
+	   <proba>75</proba>
 	</type>
 	<type>
 	   <intitule>montagne</intitule>
 	   <isAccessible>true</isAccessible>
 	   <coutDeplacement>50</coutDeplacement>
-	   <proba>20</proba>
+	   <proba>70</proba>
 	</type>
 	
 

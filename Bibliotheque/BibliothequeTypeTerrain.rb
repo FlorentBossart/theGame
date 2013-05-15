@@ -65,7 +65,11 @@ class BibliothequeTypeTerrain
    #
    def BibliothequeTypeTerrain.getTypeTerrainAuHasard()
       valeurs=@@tableType.values()
-      return valeurs[rand(valeurs.length-1)]
+      val=rand(valeurs.length-1)
+      while(valeurs[val]==BibliothequeTypeTerrain.getTypeTerrain("plaine")) do
+		val = rand(valeurs.length-1)
+      end
+      valeurs[val]
    end
 
 end
