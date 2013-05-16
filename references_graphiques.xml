@@ -257,6 +257,11 @@
    <intitule_objet>bourse</intitule_objet>
    <img_ihm>./img/sac_or.png</img_ihm>
 </reference>
+
+<reference>
+   <intitule_objet>blanc</intitule_objet>
+   <img_ihm>./img/blanc.png</img_ihm>
+</reference>
 	
 	
 	

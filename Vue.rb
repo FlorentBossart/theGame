@@ -21,7 +21,7 @@ require './InventaireModal.rb'
 
 class Vue
 
-  @vue; #affichage carte
+  @vue #affichage carte
   @zaf
   @menu
   @zoneCtrl
@@ -30,7 +30,9 @@ class Vue
   
   @carteVue #image pour affichager la carte
   @pixbufCarteVue #son pixbuf attitré
-  
+  @tailleCase
+  @tailleCase_f
+      
   @hauteurAfficheCarte #hauteurVisible
   @largeurAfficheCarte #largeurVisible
   @modele
@@ -78,7 +80,10 @@ class Vue
   def initInterface()
     Gtk.init();
     
-    @inventaireModal=InventaireModal.creer(EnumStadePartie.INVENTAIRE_PLEIN,@controller)
+    @inventaireModal=InventaireModal.creer(EnumStadePartie.INVENTAIRE_PLEIN,self)
+    
+    @tailleCase=100
+    @tailleCase_f=@tailleCase.to_f
     
     @finInit = false;
     @referencesGraphiques = ReferencesGraphiques.new()
@@ -115,7 +120,8 @@ class Vue
             @hauteurAfficheCarte = y;
             @valign.remove(@carteVue);
             @vue = Array.new(@hauteurAfficheCarte){Array.new(@largeurAfficheCarte ){Gtk::Image.new()}}
-            @carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
+            #@carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
+            @carteVue = Gtk::Image.new()
             initCarte();
             @valign.add(@carteVue);
             afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
@@ -134,9 +140,9 @@ class Vue
     tabBot.attach(@zaf,0,2,0,1)
     tabBot.attach(@zoneCtrl,2,3,0,1)
 
-    #tableau pour afficher la carte
-    @carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
-
+    #image pour afficher la carte
+    #@carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
+    @carteVue = Gtk::Image.new()
     vbox = Gtk::VBox.new()
 
     #initialisation de la carte
@@ -144,7 +150,10 @@ class Vue
     #initialisation de la carte
 
     initCarte();
-    afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2);
+    @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
+    @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
+    afficheCarte()
+    
     @valign = Alignment.new(0.5,1,0,0);
     @valign.add(@carteVue);
 
@@ -167,22 +176,30 @@ class Vue
   end
 
   def initCarte()
+    
+=begin
+
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
         @carteVue.attach(@vue[x][y],y,y+1,x,x+1)
       end
     end
+    
+=end
 
   end
 
-  def afficheCarte(debutX,debutY)
-    @x=debutX
-    @y=debutY
-    0.upto(@hauteurAfficheCarte-1) do |x|
-      0.upto(@largeurAfficheCarte-1)do |y|
-        afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
+  #def afficheCarte(debutX,debutY)
+  def afficheCarte()
+    @pixbufCarteVue = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
+    @pixbufCarteVue=@pixbufCarteVue.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
+    0.upto(@hauteurAfficheCarte-1) do |i|
+      0.upto(@largeurAfficheCarte-1)do |j|
+        #afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
+        afficheCase(j*@tailleCase,i*@tailleCase,@carte.getCaseAt(i+@x,j+@y))
       end
     end
+    @carteVue.set_pixbuf(@pixbufCarteVue)
   end
 
   def getNumTerrain(intitule)
@@ -197,77 +214,54 @@ class Vue
     end
   end
 
-  def afficheCase(image,caseAffiche)
-    tailleCase=100
-    tailleCase_f=tailleCase.to_f
-    positions=Array.new([[0.1,0.1],[2*tailleCase_f/3,0.1],[0.1,2*tailleCase_f/3],[2*tailleCase_f/3,2*tailleCase_f/3],[tailleCase_f/3,0.1]])
-
-    #test Bordures
-    pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
-    pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+  #def afficheCase(image,caseAffiche)
+  def afficheCase(xAff,yAff,caseAffiche)
     
+    positions=Array.new([[0.1,0.1],[2*@tailleCase_f/3,0.1],[0.1,2*@tailleCase_f/3],[2*@tailleCase_f/3,2*@tailleCase_f/3],[@tailleCase_f/3,0.1]])
+
+    #terrain
+    pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+    pixbufTerrain=pixbufTerrain.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+    @pixbufCarteVue.composite!(pixbufTerrain, xAff,yAff, pixbufTerrain.width, pixbufTerrain.height,xAff, yAff,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+=begin  
+  
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
     
-
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)).to_s()+"2"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-	end
-	
-    
+    end
+  
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)).to_s()+"3"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    #terrain
-    #pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.id_terrainParDefaut.downcase))
-    #pixbufTerrain=pixbufTerrain.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-
-    #if(caseAffiche.getIntitule().downcase=="eau")#a fr pour tous si ça marche
-    # voisin_differents=Array.new(['0','0','0','0'])
-    #if caseAffiche.caseNord.getIntitule()!=caseAffiche.getIntitule()
-    #  voisin_differents[0]='1'
-    # end
-    # if caseAffiche.caseEst.getIntitule()!=caseAffiche.getIntitule()
-    #  voisin_differents[1]='1'
-    # end
-    # if caseAffiche.caseSud.getIntitule()!=caseAffiche.getIntitule()
-    #  voisin_differents[2]='1'
-    #end
-    # if caseAffiche.caseOuest.getIntitule()!=caseAffiche.getIntitule()
-    #   voisin_differents[3]='1'
-    # end
-    # idImage=caseAffiche.getIntitule().downcase()+voisin_differents[0]+voisin_differents[1]+voisin_differents[2]+voisin_differents[3]
-    #pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
-    #else
-    # pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
-    # end
-    #pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(tailleCase, tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-    #pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    
+=end
 
     #joueur
     if(caseAffiche.joueur!=nil)
       pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
-      pixbufElement=pixbufElement.scale(tailleCase_f/2, tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
-      x=tailleCase_f/3
-      y=tailleCase_f/3
-      pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      pixbufElement=pixbufElement.scale(@tailleCase_f/2, @tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
+      x=@tailleCase_f/3
+      y=@tailleCase_f/3
+      @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
     #aides+ennemis
@@ -280,11 +274,11 @@ class Vue
       x=position[0]
       y=position[1]
       pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase))
-      pixbufElement=pixbufElement.scale(tailleCase_f/3, tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-      pixbufTerrain.composite!(pixbufElement, x,y, pixbufElement.width, pixbufElement.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+      @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
-    image.set_pixbuf(pixbufTerrain)
+    #image.set_pixbuf(pixbufTerrain)
     return nil
   end
 
@@ -298,17 +292,19 @@ class Vue
     puts "debut actualiser"
     
     #if(@@threadAffichage == false)
-	#	@@threadAffichage = true
-	#	@modele.enverDuDecors
-		#Thread.new do
-		#	while(true) do
-				#maj Carte Et Zaf
-				afficheCarte(@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2,@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2)
-				@zaf.majZaf(@modele.joueur)
-				#sleep(0.01)		
-		#	end
-		#end
-	#end
+  # @@threadAffichage = true
+  # @modele.enverDuDecors
+    #Thread.new do
+    # while(true) do
+        #maj Carte Et Zaf
+        @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
+        @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
+        afficheCarte()
+        @zaf.majZaf(@modele.joueur)
+        #sleep(0.01)    
+    # end
+    #end
+  #end
     case @modele.stadePartie
 
     #ETAPE CHOIX LIBRE
