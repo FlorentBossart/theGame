@@ -1,8 +1,77 @@
-ï»¿<big><u><b>I - But du jeu</b></u></big>
+<big><u><b>I - But du jeu</b></u></big>
 
-Le but pour le joueur est de se dÃ©placer le plus longtemps possible dans l'environnement de jeu. Pour cela, il peut combattre des monstres et ainsi rÃ©cupÃ©rer leurs objets, armes et armures et s'en Ã©quiper directement ou bien les revendre et acheter des Ã©quipements de meilleurs qualitÃ©s auprÃ¨s de marchands. Le jeu se termine quand le joueur meurt, c'est Ã  dire quand il n'a plus d'Ã©nergie. Le score du joueur est alors calculÃ© suivant diffÃ©rentes caractÃ©ristiques (nombre d'ennemis tuÃ©s, or gagnÃ©, niveau, ...), le but Ã©tant d'obtenir le meilleur score possible.
+Le but pour le joueur est de se déplacer le plus longtemps possible dans l'environnement de jeu. Pour cela, il peut combattre des monstres et ainsi récupérer leurs objets, armes et armures et s'en équiper directement ou bien les revendre et acheter des équipements de meilleurs qualités auprès de marchands. Le jeu se termine quand le joueur meurt, c'est à dire quand il n'a plus d'énergie. Le score du joueur est alors calculé suivant différentes caractéristiques (nombre d'ennemis tués, or gagné, niveau, ...), le but étant d'obtenir le meilleur score possible.
 
-DÃ©placement
 
-Le dÃ©placement s'effectue par un clic sur les touches directionnelles. Le joueur peut se dÃ©placer dans toutes les directions (haut, gauche, bas, droite), sauf s'il veut franchir de l'eau, ce qui est impossible.
+Tours
 
+Un tour correspond à la réalisation d'une action de jeu.
+Par actions de jeu sont comprises:
+-Le deplacement (1 tour)
+-Le repos (10 tours)
+-Actions précédés d'un appuie sur le bouton interaction (interaction avec un guerisseur, un marchand, un objet) (1 tour).
+
+
+L'energie
+
+Le joueur dispose d'une barre d'énergie lui permettant d'effectuer des déplacements et de combattre. Il meurt lorsqu'il n'a plus d'energie.
+
+
+
+L'experience
+
+Le joueur gagne de l'experience lorsqu'il combat un ennemi. Une fois un seuil atteind il monte d'un niveau, il regagne ainsi toute son energie, dont le seuil est augmenté. Un ennemi de bas niveau donne moins d'experience qu'un ennemi de haut niveau.
+
+
+Déplacement
+
+Le déplacement s'effectue par un clic sur les touches directionnelles ou par le pavé directionnel du clavier. Le joueur peut se déplacer dans toutes les directions (haut, gauche, bas, droite), sauf s'il veut franchir de l'eau, ce qui est impossible.
+
+
+Combat
+
+Il y a deux sortent d'ennemis. Les pisteurs et les non pisteurs. Les pisteurs vous suivent lorsque vous arrivés à leur portée.
+Les ennemis disposent également d'une énergie, qui depend de leur niveau.
+Un combat commence lorsqu'un ennemi se trouve sur votre case.
+Le joueur a ensuite accès à un menu d'équipement (s'il dispose d'objets à equiper) lui permettant d'équiper d'une arme et d'une armure.
+Lors d'un combat votre energie est consommée en fonction de l'énergie de l'ennemi.
+
+
+Repos
+
+Le repos permet au joueur de retrouver son énergie. La consommation d'un repos l'immobilise pendan 10 tours, un tour permettant de gagner 10% d'énergie. 
+Le repos peut être interrompu lorsqu'un ennemi arrive sur la case du joueur. 
+Si c'est le cas, le joueur n'a pas acces au menu d'equipement et il a retrouvé autant d'énergie que de tours consommés.
+
+
+Objets
+
+Le joueur peut trouver des objets sur les ennemis ou au sol, il peut également en acheter ou en vendre au près de marchands.
+Il y a 3 types d'objets:
+-L'or (permet l'achat au marchand et au guerisseur)
+-La nourriture (permet de gagner de l'énergie)
+-L'equipement: armes et armures, qui donnent un bonus d'énergie lors des combats.
+-Les bottes, qui permettant de diminuer l'énergie consommée lors des déplacement, dispose d'une durabilité (nombre de tours ou l'objet est utilisable).
+
+
+L'inventaire
+
+Le joueur dispose d'un inventaire où il peut stocker des objets. L'inventaire comporte 12 emplacements.
+
+
+Marchand
+
+Le marchand donne acces a un menu d'achat et un menu de vente.
+Le menu d'achat affiche une liste d'objets en fonction du niveau du joueur et lui permet de les acheter.
+Le menu de vente permet de récuperer de l'or en échange d'objets.
+
+
+Guerisseur
+
+Le guerisseur offre au joueur la possibilité de recevoir des soins. Un soin donne de l'énergie au joueur en échange d'or.
+
+
+
+La mort
+
+Un joueur meurt lorsqu'il n'a plus d'énergie.
