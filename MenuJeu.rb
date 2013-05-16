@@ -589,11 +589,13 @@ class MenuJeu
    # Lorsque le joueur clique sur aide, affiche l'aide sur le jeu
    #
 	def afficherAide()
-    	@fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new(Gtk::Window::TOPLEVEL)
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Aide"))
 		
-		@fenetreMenu.set_resizable(false)
-		@fenetreMenu.set_default_size(300, 400)
+		#@fenetreMenu.set_resizable(false)
+		#@fenetreMenu.set_size_request(500, 500)
+		#@fenetreMenu.resize(300, 500)
+		@fenetreMenu.set_height_request(500)
 		
 		@contenu = VBox.new(false, 10)
 		
@@ -607,13 +609,13 @@ class MenuJeu
 		
 		labelAide = Label.new()
 		labelAide.set_markup(texteAide)
-		labelAide.wrap=true
+		labelAide.wrap = true
 		
-		textview = TextView.new
-		textview.buffer.text = texteAide
-		textview.wrap_mode = TextTag::WRAP_WORD
-		textview.left_margin = 10
-		textview.right_margin = 10
+		#textview = TextView.new
+		#textview.buffer.text = texteAide
+		#textview.wrap_mode = TextTag::WRAP_WORD
+		#textview.left_margin = 10
+		#textview.right_margin = 10
 		
 		scrolled_win = ScrolledWindow.new
 		#scrolled_win.add(textview)
