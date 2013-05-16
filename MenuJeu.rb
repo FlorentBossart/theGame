@@ -192,7 +192,7 @@ class MenuJeu
 		@fenetreMenu.show_all
 
 		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert)
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
 		
 	end
 	
@@ -266,7 +266,7 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
 	end
 	
 	
@@ -291,7 +291,7 @@ class MenuJeu
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
+				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
@@ -328,6 +328,7 @@ class MenuJeu
 				puts "\tSauvegarde sur le slot" + (index+1).to_s 
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
+				@fenetreMenu.destroy()
 				# MAJ de l'affichage des slots de sauvegarde
 				#viderFenetre(@contenu)
 				afficherSauvegarderPartie()
@@ -342,7 +343,7 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
 	end
 	
 	
@@ -406,7 +407,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
 	end
 	
 	
@@ -632,7 +633,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
 	end
 
 	
