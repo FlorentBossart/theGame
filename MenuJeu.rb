@@ -369,7 +369,7 @@ class MenuJeu
 		tabLabel[1] = Label.new("Moyen")
 		tabLabel[2] = Label.new("Expert")
 		
-		XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
+		#XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
 		
 		0.upto(2) do |i|
 			# Rempli une liste de joueur suivant leur niveau de difficult�
