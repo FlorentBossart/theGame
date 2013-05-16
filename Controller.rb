@@ -28,7 +28,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      #Audio.playSoundLoop("stable_boy")
+      Audio.playSoundLoop("stable_boy")
    end
    
    def Controller.creer(modele,vue)
@@ -693,10 +693,10 @@ class Controller
 		puts "Clique sur Valider (dans options)"
 		
 		if(radioButtonOui.active?)
-			Audio.activeSound()
+			Audio.resumeSoundLoop()
 			puts "Son active"
 		elsif(radioButtonNon.active?)
-			Audio.mute()
+			Audio.muteSoundLoop()
 			puts "son desactive"
 		end
 		
