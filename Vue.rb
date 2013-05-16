@@ -18,6 +18,7 @@ require './InteractionModal.rb'
 require './CombatModal.rb'
 require './PopUp.rb'
 require './InventaireModal.rb'
+require './Enum/EnumDirection.rb'
 
 class Vue
 
@@ -252,7 +253,16 @@ class Vue
     #joueur
     if(caseAffiche.joueur!=nil)
       if(caseAffiche.joueur.toujoursEnVie?())
-        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
+        case caseAffiche.joueur.direction
+          when EnumDirection.NORD
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"N"))
+          when EnumDirection.SUD
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"S"))
+          when EnumDirection.EST
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"E"))
+          when EnumDirection.OUEST
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"O"))
+        end
       else
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))
       end
@@ -262,19 +272,46 @@ class Vue
       @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
-    #aides+ennemis
-    aidesEnnemis=caseAffiche.listeElements+caseAffiche.listeEnnemis
-    for e in aidesEnnemis
+      #aides
+      aides=caseAffiche.listeElements
+      for a in aides
+        if(positions.empty?)
+          return nil
+        end
+        position=positions.shift()
+        x=position[0]
+        y=position[1]
+        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(a.getIntitule().downcase))
+        pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+        @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      end
+    
+    #ennemis
+    ennemis=caseAffiche.listeEnnemis
+    for e in ennemis
       if(positions.empty?)
         return nil
       end
       position=positions.shift()
       x=position[0]
       y=position[1]
-      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase))
+       case e.direction
+          when EnumDirection.NORD
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"N"))
+          when EnumDirection.SUD
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"S"))
+          when EnumDirection.EST
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"E"))
+          when EnumDirection.OUEST
+            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"O"))
+        end
+      
       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
       @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
+    
+    
+    
 
     #image.set_pixbuf(pixbufTerrain)
     return nil
