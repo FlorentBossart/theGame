@@ -7,6 +7,76 @@
 ]>
 
 <textesJeu>
+	
+	<texte>
+		<id>nomMenu</id>
+	    <contenu>Menu</contenu>
+	</texte>
+	
+	<texte>
+		<id>votreNom</id>
+	    <contenu>Votre nom</contenu>
+	</texte>
+	<texte>
+		<id>difficulte</id>
+	    <contenu>Difficulte</contenu>
+	</texte>
+	<texte>
+		<id>novice</id>
+	    <contenu>Novice</contenu>
+	</texte>
+	<texte>
+		<id>moyen</id>
+	    <contenu>Moyen</contenu>
+	</texte>
+	<texte>
+		<id>expert</id>
+	    <contenu>Expert</contenu>
+	</texte>
+	<texte>
+		<id>cestPartie</id>
+	    <contenu>C'est parti !</contenu>
+	</texte>
+	<texte>
+		<id>retourMenu</id>
+	    <contenu>Retour au menu</contenu>
+	</texte>
+	
+	
+
+	
+	<texte>
+		<id>ContinuerPartie</id>
+	    <contenu>Continuer partie</contenu>
+	</texte>
+	<texte>
+		<id>NewPartie</id>
+	    <contenu>Nouvelle partie</contenu>
+	</texte>
+	<texte>
+		<id>ChargerPartie</id>
+	    <contenu>Charger partie</contenu>
+	</texte>
+	<texte>
+		<id>SauvegarderPartie</id>
+	    <contenu>Sauvegarder partie</contenu>
+	</texte>
+	<texte>
+		<id>Classement</id>
+	    <contenu>Classement</contenu>
+	</texte>
+	<texte>
+		<id>Options</id>
+	    <contenu>Options</contenu>
+	</texte>
+	<texte>
+		<id>Aide</id>
+	    <contenu>Aide</contenu>
+	</texte>
+	<texte>
+		<id>Quitter</id>
+	    <contenu>Quitter le jeu</contenu>
+	</texte>
 
 	<texte>
 		<id>boutonRepos</id>

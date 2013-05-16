@@ -9,6 +9,68 @@
 <textesJeu>
 
 	<texte>
+		<id>nomMenu_menu</id>
+	    <contenu>Menu</contenu>
+	</texte>
+	<texte>
+		<id>difficulte</id>
+	    <contenu>Difficulty</contenu>
+	</texte>
+	<texte>
+		<id>novice</id>
+	    <contenu>Novice</contenu>
+	</texte>
+	<texte>
+		<id>moyen</id>
+	    <contenu>Medium</contenu>
+	</texte>
+	<texte>
+		<id>expert</id>
+	    <contenu>Expert</contenu>
+	</texte>
+	<texte>
+		<id>cestPartie</id>
+	    <contenu>Go !</contenu>
+	</texte>
+	<texte>
+		<id>retourMenu</id>
+	    <contenu>Back to menu</contenu>
+	</texte>
+	
+	<texte>
+		<id>ContinuerPartie</id>
+	    <contenu>Continue</contenu>
+	</texte>
+	<texte>
+		<id>NewPartie</id>
+	    <contenu>New Game</contenu>
+	</texte>
+	<texte>
+		<id>ChargerPartie</id>
+	    <contenu>Load</contenu>
+	</texte>
+	<texte>
+		<id>SauvegarderPartie</id>
+	    <contenu>Save</contenu>
+	</texte>
+	<texte>
+		<id>Classement</id>
+	    <contenu>Rank</contenu>
+	</texte>
+	<texte>
+		<id>Options</id>
+	    <contenu>Options</contenu>
+	</texte>
+	<texte>
+		<id>Aide</id>
+	    <contenu>Help</contenu>
+	</texte>
+	<texte>
+		<id>Quitter</id>
+	    <contenu>Quit</contenu>
+	</texte>
+
+	<texte>
 		<id>boutonRepos</id>
 	    <contenu>REST(r)</contenu>
 	</texte>
