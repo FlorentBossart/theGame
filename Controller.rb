@@ -771,6 +771,7 @@ class Controller
   btItem.signal_connect('button_press_event'){
   puts "(S) Sélection de l'item "+indiceItem.to_s+"."
   @vue.inventaireModal.setImageSelection(indiceItem) #AFR
+  @modele.indiceItemSelectionne = indiceItem #AFR
   }
   end
   
@@ -789,7 +790,8 @@ class Controller
   #
   def vendreItem(btVendre)
   btVendre.signal_connect('clicked'){
-  puts "(S) Vente de l'item "+"XX"+"."
+  puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
+  @joueur
   #@vue.vueInventaire.setImageSelection(indiceItem)
   }
   end
@@ -799,7 +801,8 @@ class Controller
   #
   def jeterItem(btJeter)
   btJeter.signal_connect('clicked'){
-  puts "(S) Jet de l'item "+"XX"+"."
+  puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
+  @modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
   #@vue.vueInventaire.setImageSelection(indiceItem)
   }
   end
