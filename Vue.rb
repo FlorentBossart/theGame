@@ -17,6 +17,7 @@ require './XMLReader/XmlRefGraphiquesReader.rb'
 require './InteractionModal.rb'
 require './CombatModal.rb'
 require './PopUp.rb'
+require './InventaireModal.rb'
 
 class Vue
 
@@ -51,9 +52,12 @@ class Vue
   @ecouteToucheMenu
   @ecouteToucheInteraction
   
+  @inventaireModal
+  
   @@threadAffichage = false 
-
-  attr_reader :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction
+  
+  
+  attr_reader :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
   def initialize()
     #Gtk.init();
@@ -73,6 +77,9 @@ class Vue
 
   def initInterface()
     Gtk.init();
+    
+    @inventaireModal=InventaireModal.creer(EnumStadePartie.INVENTAIRE_PLEIN,@controller)
+    
     @finInit = false;
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
