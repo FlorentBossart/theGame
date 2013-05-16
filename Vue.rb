@@ -113,7 +113,7 @@ class Vue
 
       #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
-        if((x>=7 && y >=5))then
+        if((x>=@largeurAfficheCarte && y >=@hauteurAfficheCarte))then
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
@@ -266,7 +266,7 @@ class Vue
       else
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))
       end
-      pixbufElement=pixbufElement.scale(@tailleCase_f/2, @tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
       x=@tailleCase_f/3
       y=@tailleCase_f/3
       @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
