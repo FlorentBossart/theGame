@@ -729,8 +729,9 @@ class Controller
    # == Parameters:
    # btRetour : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Retour
    #
-   def retourCreer(btRetour)
+   def retourCreer(btRetour,fenetre)
       btRetour.signal_connect('clicked'){
+          fenetre.destroy()
           retourAction()
       }
    end
