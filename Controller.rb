@@ -606,10 +606,9 @@ class Controller
    def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert,fenetre)
       btCommencerNewPartie.signal_connect('clicked'){
 			entryPseudo.activate # Appel le signal_connect 'activate' sur l'entry du pseudo
-        fenetre.destroy()
       }
       entryPseudo.signal_connect('activate'){
-			commencerNewPartieAction(entryPseudo.text, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+			commencerNewPartieAction(entryPseudo.text, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
 		}
    end
  
@@ -617,7 +616,7 @@ class Controller
 	##
 	# Action(s) � effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
 	#
-	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
 		puts "Clique sur C'est Parti"
 		puts "pseudo : |" + pseudo + "|"
 		if(boutRadioNovice.active?)
@@ -631,12 +630,8 @@ class Controller
 			difficulte = BibliothequeDifficulte.getDifficulte("Expert")
 		end
 		
-		# A enlever apres test
-		#difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
-		
-		
-		# A revoir !!!!!!!
-		@vue.menu.fenetreMenu.destroy
+		#@vue.menu.fenetreMenu.destroy
+		fenetre.destroy
 		puts "destroy menu"
 		@vue.window.destroy
 		puts "Destroy partie"

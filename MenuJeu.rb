@@ -327,7 +327,6 @@ class MenuJeu
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
 				date = slot.date
-				puts slot.to_s
 			else # Pour l'affichage des slots vides
 				nom = "..."
 				diff = "..."

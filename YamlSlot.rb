@@ -77,13 +77,8 @@ class YamlSlot
 	      puts "temps jeu : " + modele.joueur.tempsTotal.to_s
 	      file.syswrite(modele.joueur.tempsTotal.to_yaml())
 	      
-	      #puts modele.joueur
-	     # file.syswrite(modele.joueur.to_yaml())
-	      #puts modele
 	      file.syswrite(modele.to_yaml())
-	      #puts "carte : "
-	      #p modele.carte
-	      #file.syswrite(modele.carte.to_yaml())
+	      
 	   rescue
 			raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
 		ensure
