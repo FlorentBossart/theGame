@@ -110,7 +110,7 @@ class Vue
     @window.signal_connect('size_request'){
 
       x = (@window.size()[0]-1)/@tailleCase;
-      y = (@window.size()[1]-169)/@tailleCase; #169 = taille de la zaf
+      y = (@window.size()[1]-177)/@tailleCase; #177 = taille de la zaf
 
       #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
@@ -118,12 +118,12 @@ class Vue
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
-            @valign.remove(@carteVue);
+            #@valign.remove(@carteVue);
             @vue = Array.new(@hauteurAfficheCarte){Array.new(@largeurAfficheCarte ){Gtk::Image.new()}}
             #@carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
-            @carteVue = Gtk::Image.new()
+            #@carteVue = Gtk::Image.new()
             initCarte();
-            @valign.add(@carteVue);
+            #@valign.add(@carteVue);
             @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
             @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
             afficheCarte()
