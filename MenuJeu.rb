@@ -218,7 +218,7 @@ class MenuJeu
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
+				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
