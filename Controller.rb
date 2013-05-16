@@ -803,7 +803,7 @@ class Controller
   btJeter.signal_connect('clicked'){
   puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
   @modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
-  #@vue.vueInventaire.setImageSelection(indiceItem)
+  @vue.inventaireModal.onDestroy
   }
   end
   
