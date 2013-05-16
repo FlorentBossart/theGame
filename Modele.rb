@@ -253,6 +253,7 @@ class Modele
       for e in @listeEnnemis
 		if(e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
          e.deplacementIntelligent()
+         @@pileExecution.delete(e)
         else
 				@@pileExecution.unshift(e)
         end
