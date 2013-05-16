@@ -534,14 +534,14 @@ class MenuJeu
    # Lorsque le joueur clique sur options, permet de choisir la langue ou d'activer le son 
    #
 	def afficherOptions()
-    @fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Options"))
 		@fenetreMenu.resize(100,100)
 		
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxSon 	= HBox.new(true, 10)
-		labelSon 	= Label.new("Activer le son ?")
+		labelSon 	= Label.new("Activer le son de fond ?")
 		oui 			= RadioButton.new("Oui")
 		non 			= RadioButton.new(oui, "Non")
 		
@@ -579,7 +579,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
-      @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue)
+      @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue, @fenetreMenu)
 		
 	end
 
