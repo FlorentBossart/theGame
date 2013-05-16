@@ -45,7 +45,9 @@ class Audio
       SDL::Mixer.play_channel(-1, @@listSoundLoad[intitule], -1)
    end
    
-   
+   ##
+   # Permet de desactiver le son de fond
+   #
    def Audio.muteSoundLoop()
       if(@firstSound != "")
          SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 0)
@@ -53,6 +55,9 @@ class Audio
    end
    
    
+   ##
+   # Permet d'activer le son de fond
+   #
    def Audio.resumeSoundLoop
       if(@firstSound != "")
          SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 128)
@@ -60,6 +65,9 @@ class Audio
    end
    
    
+   ##
+   # Permet de desactiver les bruitages
+   #
    def Audio.muteBruitage()
       @@listSoundLoad.each {|key, s| 
          if(key != @firstSound)
@@ -69,6 +77,9 @@ class Audio
    end
    
    
+   ##
+   # Permet d'activer les bruitages
+   #
    def Audio.resumeBruitage()
       @@listSoundLoad.each {|key, s| 
          if(key != @firstSound)
