@@ -541,7 +541,7 @@ class MenuJeu
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxSon 	= HBox.new(true, 10)
-		labelSon 	= Label.new("Activer le son ?")
+		labelSon 	= Label.new("Activer le son de fond ?")
 		oui 			= RadioButton.new("Oui")
 		non 			= RadioButton.new(oui, "Non")
 		
