@@ -693,10 +693,10 @@ class Controller
 		puts "Clique sur Valider (dans options)"
 		
 		if(radioButtonOui.active?)
-			Audio.activeSound()
+			Audio.resumeSoundLoop()
 			puts "Son active"
 		elsif(radioButtonNon.active?)
-			Audio.mute()
+			Audio.muteSoundLoop()
 			puts "son desactive"
 		end
 		
