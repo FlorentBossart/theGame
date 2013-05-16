@@ -83,6 +83,19 @@ class Inventaire
   
   
   ##
+  # Retire l'item de l'inventaire placé à l'indice indice passé en paramètre
+  #
+  # == Parameters:
+  # indice: l'indice de l'Item à retirer de l'inventaire
+  #
+  def retirer_at(indice)
+    @items.delete_at(indice)
+    @nbItem=@nbItem-1
+    return indice
+  end
+  
+  
+  ##
   # Test si l'inventaire est plein
   #
   # == Returns:

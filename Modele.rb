@@ -62,11 +62,12 @@ class Modele
    @id_terrainParDefaut
    @nbMaxPisteur
    @nbPisteur
+   @indiceItemSelectionne #AFR
 
    private_class_method :new
 
    attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
-   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur
+   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur, :indiceItemSelectionne #AFR
    
    
    def Modele.initialisationBibliotheques()
@@ -209,6 +210,7 @@ class Modele
          @listeEnnemis.push(ennemi)
       end
    end
+
 
    
    ##
