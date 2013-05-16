@@ -218,6 +218,8 @@ class Controller
   # Action(s) Ã  effectuer lors du clic sur le bouton inventaire
   #
   def inventaireAction
+    @vue.window.modal = false #AFR
+    @vue.inventaireModal.afficherInventaire(@modele.joueur)
     print "oO Bt inventaire pressÃ©!"
   end
 
@@ -418,17 +420,7 @@ class Controller
   end
   
   
-  
-  ## AFR
-  # SÃ©lectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
-  #
-  def selectionnerItem(btItem,indiceItem)
-      btItem.signal_connect('button_press_event'){
-        #equiperItemAction(joueur,elem)
-        puts "(S) SÃ©lection de l'item "+indiceItem.to_s+"."
-        #InventaireVue.
-     }
-  end
+
   
 ##### Pour le menu  
   
@@ -438,7 +430,7 @@ class Controller
    # == Parameters:
    # btContinuerPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur Continuer partie
    #
-   def continuerPartieCreer(btContinuerPartie)
+   def continuerPartieCreer(btContinuerPartie,fenetre)
       btContinuerPartie.signal_connect('clicked'){
           continuerPartieAction()
       }
@@ -448,7 +440,7 @@ class Controller
 	##
 	# Action(s) à effectuer lors du clic sur le bouton ContinuerPartie
 	#
-	def continuerPartieAction
+	def continuerPartieAction()
 		puts "Clique sur continuer partie"
 		@vue.menu.fenetreMenu.destroy
 		puts "Destruction du menu"
@@ -462,9 +454,10 @@ class Controller
    # == Parameters:
    # btNewPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur NouvellePartie
    #
-   def nouvellePartieCreer(btNewPartie)
+   def nouvellePartieCreer(btNewPartie,fenetre)
       btNewPartie.signal_connect('clicked'){
           nouvellePartieAction()
+        fenetre.destroy()
       }
    end
      
@@ -474,8 +467,8 @@ class Controller
 	#
 	def nouvellePartieAction
 		puts "Clique sur nouvelle partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherNouvellePartie()
 	end
 
@@ -486,9 +479,10 @@ class Controller
    # == Parameters:
    # btChargerPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur ChargerPartie
    #
-   def chargerPartieCreer(btChargerPartie)
+   def chargerPartieCreer(btChargerPartie,fenetre)
       btChargerPartie.signal_connect('clicked'){
           chargerPartieAction()
+          fenetre.destroy()
       }
    end  
           
@@ -497,8 +491,8 @@ class Controller
 	#
 	def chargerPartieAction
 		puts "Clique sur charger partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherChargerPartie()
 	end
 
@@ -509,9 +503,10 @@ class Controller
    # == Parameters:
    # btSauvegarderPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur SauvegarderPartie
    #
-   def sauvegarderPartieCreer(btSauvegarderPartie)
+   def sauvegarderPartieCreer(btSauvegarderPartie,fenetre)
       btSauvegarderPartie.signal_connect('clicked'){
           sauvegarderPartieAction()
+        fenetre.destroy()
       }
    end
  
@@ -521,8 +516,8 @@ class Controller
 	#
 	def sauvegarderPartieAction
 		puts "Clique sur sauvegarder partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherSauvegarderPartie()
 	end
 
@@ -534,9 +529,10 @@ class Controller
    # == Parameters:
    # btClassement : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Classement
    #
-   def classementCreer(btClassement)
+   def classementCreer(btClassement,fenetre)
       btClassement.signal_connect('clicked'){
           classementAction()
+        fenetre.destroy()
       }
    end
    
@@ -546,8 +542,8 @@ class Controller
 	#
 	def classementAction
 		puts "Clique sur classement"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherClassement()
 	end
 
@@ -558,9 +554,10 @@ class Controller
    # == Parameters:
    # btOptions : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Options
    #
-   def optionsCreer(btOptions)
+   def optionsCreer(btOptions,fenetre)
       btOptions.signal_connect('clicked'){
           optionsAction()
+        fenetre.destroy()
       }
    end
  
@@ -570,8 +567,8 @@ class Controller
 	#
 	def optionsAction
 		puts "Clique sur options"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherOptions()
 	end
 
@@ -581,9 +578,10 @@ class Controller
    # == Parameters:
    # btAide : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Aide
    #
-   def aideCreer(btAide)
+   def aideCreer(btAide,fenetre)
       btAide.signal_connect('clicked'){
           aideAction()
+          fenetre.destroy()
       }
    end
     
@@ -593,8 +591,8 @@ class Controller
 	#
 	def aideAction
 		puts "Clique sur aide"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherAide()
 	end
 	
@@ -605,9 +603,10 @@ class Controller
    # == Parameters:
    # btCommencerNewPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur "C'est Parti" dans nouvelle partie
    #
-   def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+   def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert,fenetre)
       btCommencerNewPartie.signal_connect('clicked'){
 			entryPseudo.activate # Appel le signal_connect 'activate' sur l'entry du pseudo
+        fenetre.destroy()
       }
       entryPseudo.signal_connect('activate'){
 			commencerNewPartieAction(entryPseudo.text, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
@@ -679,26 +678,35 @@ class Controller
    # == Parameters:
    # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
    #
-   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue)
-      btValiderOptions.signal_connect('clicked'){
-          validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
-      }
+   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue, fenetre)
+         btValiderOptions.signal_connect('clicked'){
+             validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+             fenetre.destroy()
+         }
    end
  
  
 	##
 	# Action(s) � effectuer lors du clic sur le bouton Valider (dans options)
 	#
-	def validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
+   def validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
 		puts "Clique sur Valider (dans options)"
 		
 		if(radioButtonOui.active?)
-			Audio.activeSound()
+			Audio.resumeSoundLoop()
 			puts "Son active"
 		elsif(radioButtonNon.active?)
-			Audio.mute()
+			Audio.muteSoundLoop()
 			puts "son desactive"
 		end
+		
+      if(radioBO2.active?)
+        Audio.resumeBruitage()
+        puts "Son des bruitages active"
+      elsif(radioBN2.active?)
+        Audio.muteBruitage()
+        puts "Son des bruitages desactive"
+      end
 
 		if(comboBoxListeLangue.active == 0)
 			XmlMultilingueReader.setLangue("FR")
@@ -707,9 +715,11 @@ class Controller
 			XmlMultilingueReader.setLangue("EN")
 			puts "Langue EN"
 		end
+		
+		@vue.majLangue()
 	
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
 
@@ -720,8 +730,9 @@ class Controller
    # == Parameters:
    # btRetour : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Retour
    #
-   def retourCreer(btRetour)
+   def retourCreer(btRetour,fenetre)
       btRetour.signal_connect('clicked'){
+          fenetre.destroy()
           retourAction()
       }
    end
@@ -732,8 +743,8 @@ class Controller
 	#
 	def retourAction
 		puts "Clique sur Retour"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
 	
@@ -744,9 +755,10 @@ class Controller
    # == Parameters:
    # btQuitter : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Quitter Partie
    #
-   def quitterPartieCreer(btQuitter)
+   def quitterPartieCreer(btQuitter,fenetre)
       btQuitter.signal_connect('clicked'){
           quitterPartieAction()
+         fenetre.destroy()
       }
    end
  
@@ -758,5 +770,85 @@ class Controller
 		puts "Clique sur Quitter Partie"
 		Gtk.main_quit
 	end
-      
+	
+	
+	##
+   # Liaison de l'action sur le bouton
+   #
+   # == Parameters:
+   # fenetre : la gtk::Window qu'il faudra lier a l'action d'un clic sur la croix de fermeture (croix rouge sous windows)
+   #
+   def destroyMenuCreer(fenetre)
+      fenetre.signal_connect('delete_event'){
+          destroyMenuAction(fenetre)
+      }
+   end
+ 
+ 
+	##
+	# Action(s) ï¿½ effectuer lors du clic sur la croix de fermeture (croix rouge sous windows)
+	#
+	def destroyMenuAction(fenetre)
+		puts "Fermeture du menu par la croix rouge !"
+		puts "Reactivation du jeu"
+		@modele.vue.window.set_sensitive(true)
+		fenetre.destroy
+	end
+	
+
+### Gestion des événements de la fenêtre d'inventaire ###
+ 
+	##
+	# Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+	#
+	def selectionnerItem(btItem,indiceItem)
+		btItem.signal_connect('button_press_event'){
+			puts "(S) Sélection de l'item "+indiceItem.to_s+"."
+			@vue.inventaireModal.setImageSelection(indiceItem) #AFR
+			@modele.indiceItemSelectionne = indiceItem #AFR
+		}
+	end
+	
+	##
+	# Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
+	#
+	def acheterItem(btAcheter)
+		btAcheter.signal_connect('clicked'){
+			puts "(S) Achat de l'item "+"XX"+"."
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+	
+	##
+	# Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
+	#
+	def vendreItem(btVendre)
+		bVendre.signal_connect('clicked'){
+			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			@joueur
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+	
+	##
+	# Jette l'item sélectionné lors de l'appuie sur le bouton "Jeter" dans l'inventaire
+	#
+	def jeterItem(btJeter)
+		btJeter.signal_connect('clicked'){
+			puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			@modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
+			@vue.inventaireModal.onDestroy
+		}
+	end
+	
+	##
+	# Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
+	#
+	def equiperItem(btEquiter)
+		btEquiter.signal_connect('clicked'){
+			puts "(S) Equipement du joueur avec l'item "+"XX"+"."
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+     
 end

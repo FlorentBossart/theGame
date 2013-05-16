@@ -9,6 +9,149 @@
 <textesJeu>
 
 	<texte>
+		<id>nomMenu</id>
+	    <contenu>Menu</contenu>
+	</texte>
+	
+	<texte>
+		<id>votreNom</id>
+	    <contenu>Your name</contenu>
+	</texte>
+	<texte>
+		<id>difficulte</id>
+	    <contenu>Difficulty</contenu>
+	</texte>
+	<texte>
+		<id>novice</id>
+	    <contenu>Novice</contenu>
+	</texte>
+	<texte>
+		<id>moyen</id>
+	    <contenu>Medium</contenu>
+	</texte>
+	<texte>
+		<id>expert</id>
+	    <contenu>Expert</contenu>
+	</texte>
+	<texte>
+		<id>cestPartie</id>
+	    <contenu>Go !</contenu>
+	</texte>
+	<texte>
+		<id>retourMenu</id>
+	    <contenu>Back to menu</contenu>
+	</texte>
+	
+	<texte>
+		<id>emplacement</id>
+	    <contenu>Place</contenu>
+	</texte>
+	<texte>
+		<id>nom</id>
+	    <contenu>Name</contenu>
+	</texte>
+	<texte>
+		<id>date</id>
+	    <contenu>Date</contenu>
+	</texte>
+	
+	<texte>
+		<id>pseudo</id>
+	    <contenu>Pseudo</contenu>
+	</texte>
+	<texte>
+		<id>ennemisTues</id>
+	    <contenu>Killed enemies</contenu>
+	</texte>
+	<texte>
+		<id>distanceParcourue</id>
+	    <contenu>Distance travelled (m)</contenu>
+	</texte>
+	<texte>
+		<id>orTotal</id>
+	    <contenu>Total gold</contenu>
+	</texte>
+	<texte>
+		<id>tempsJeu</id>
+	    <contenu>Game's time</contenu>
+	</texte>
+	<texte>
+		<id>score</id>
+	    <contenu>Score</contenu>
+	</texte>
+	<texte>
+		<id>infoClassement</id>
+	    <contenu>This is ranking's players following the difficulty. Every column can be sorted out by clicking its name.</contenu>
+	</texte>
+	
+	<texte>
+		<id>langue</id>
+	    <contenu>Language</contenu>
+	</texte>
+	<texte>
+		<id>musique?</id>
+	    <contenu>Music ?</contenu>
+	</texte>
+	<texte>
+		<id>bruitage?</id>
+	    <contenu>Sound effects ?</contenu>
+	</texte>
+	<texte>
+		<id>oui</id>
+	    <contenu>Oui</contenu>
+	</texte>
+	<texte>
+		<id>non</id>
+	    <contenu>Non</contenu>
+	</texte>
+	<texte>
+		<id>francais</id>
+	    <contenu>French</contenu>
+	</texte>
+	<texte>
+		<id>anglais</id>
+	    <contenu>English</contenu>
+	</texte>
+	<texte>
+		<id>valider</id>
+	    <contenu>Confirm</contenu>
+	</texte>
+	
+	
+	<texte>
+		<id>ContinuerPartie</id>
+	    <contenu>Continue</contenu>
+	</texte>
+	<texte>
+		<id>NewPartie</id>
+	    <contenu>New Game</contenu>
+	</texte>
+	<texte>
+		<id>ChargerPartie</id>
+	    <contenu>Load</contenu>
+	</texte>
+	<texte>
+		<id>SauvegarderPartie</id>
+	    <contenu>Save</contenu>
+	</texte>
+	<texte>
+		<id>Classement</id>
+	    <contenu>Ranking</contenu>
+	</texte>
+	<texte>
+		<id>Options</id>
+	    <contenu>Options</contenu>
+	</texte>
+	<texte>
+		<id>Aide</id>
+	    <contenu>Help</contenu>
+	</texte>
+	<texte>
+		<id>Quitter</id>
+	    <contenu>Quit</contenu>
+	</texte>
+
+	<texte>
 		<id>boutonRepos</id>
 	    <contenu>REST(r)</contenu>
 	</texte>

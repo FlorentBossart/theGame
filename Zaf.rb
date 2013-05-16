@@ -21,6 +21,8 @@ class Zaf < Gtk::Frame
   @console
   @jauges
   @referencesGraphiques
+  @niveau
+  
   def initialize()
     super();
     #Gtk.init();
@@ -56,7 +58,8 @@ class Zaf < Gtk::Frame
     hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("icone or")));
     vbox.add(@jauges.getJaugeEnergie());
     vbox.add(@jauges.getJaugeExperience());
-    tabNiveau.attach(Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau") + " : "),2,3,0,1)
+    @niveau = Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau")+" : ");
+    tabNiveau.attach(@niveau,2,3,0,1)
     tabNiveau.attach(@jauges.getNiveau(),3,4,0,1)
     vbox.add(tabNiveau);
     
@@ -74,6 +77,10 @@ class Zaf < Gtk::Frame
     while(!joueur.modele.notifications.empty?)
       @console.afficherTexte(joueur.modele.lireNotification())
     end
+  end
+  
+  def majLangue()
+    @niveau.label=XmlMultilingueReader.lireTexte("niveau");
   end
 
 end

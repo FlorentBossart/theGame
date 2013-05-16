@@ -10,252 +10,242 @@
 <ref_graphiques>
 
 <reference>
-   <intitule_objet>joel</intitule_objet>
-   <img_ihm>./img/jo.bmp</img_ihm>
-</reference>
-
-<reference>
-   <intitule_objet>bucheron</intitule_objet>
-   <img_ihm>./img/bucheron.bmp</img_ihm>
-</reference>
-
-<reference>
-   <intitule_objet>caseVerte</intitule_objet>
-   <img_ihm>./img/caseVerte.png</img_ihm>
-</reference>
-
-<reference>
    <intitule_objet>gauche</intitule_objet>
-   <img_ihm>./img/gauche.png</img_ihm>
+   <img_ihm>./img/gui/gauche.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>haut</intitule_objet>
-   <img_ihm>./img/haut.png</img_ihm>
+   <img_ihm>./img/gui/haut.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bas</intitule_objet>
-   <img_ihm>./img/bas.png</img_ihm>
+   <img_ihm>./img/gui/bas.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>droite</intitule_objet>
-   <img_ihm>./img/droite.png</img_ihm>
+   <img_ihm>./img/gui/droite.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>montagne</intitule_objet>
-   <img_ihm>./img/rocher.png</img_ihm>
+   <img_ihm>./img/terrain/rocher.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>desert</intitule_objet>
-   <img_ihm>./img/sable.png</img_ihm>
+   <img_ihm>./img/terrain/sable.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure11</intitule_objet>
-   <img_ihm>./img/bordure11.png</img_ihm>
+   <img_ihm>./img/terrain/bordure11.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure12</intitule_objet>
-   <img_ihm>./img/bordure12.png</img_ihm>
+   <img_ihm>./img/terrain/bordure12.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure13</intitule_objet>
-   <img_ihm>./img/bordure13.png</img_ihm>
+   <img_ihm>./img/terrain/bordure13.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure14</intitule_objet>
-   <img_ihm>./img/bordure14.png</img_ihm>
+   <img_ihm>./img/terrain/bordure14.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure41</intitule_objet>
-   <img_ihm>./img/bordure41.png</img_ihm>
+   <img_ihm>./img/terrain/bordure41.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure42</intitule_objet>
-   <img_ihm>./img/bordure42.png</img_ihm>
+   <img_ihm>./img/terrain/bordure42.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure43</intitule_objet>
-   <img_ihm>./img/bordure43.png</img_ihm>
+   <img_ihm>./img/terrain/bordure43.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure44</intitule_objet>
-   <img_ihm>./img/bordure44.png</img_ihm>
+   <img_ihm>./img/terrain/bordure44.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure21</intitule_objet>
-   <img_ihm>./img/bordure21.png</img_ihm>
+   <img_ihm>./img/terrain/bordure21.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure22</intitule_objet>
-   <img_ihm>./img/bordure22.png</img_ihm>
+   <img_ihm>./img/terrain/bordure22.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure23</intitule_objet>
-   <img_ihm>./img/bordure23.png</img_ihm>
+   <img_ihm>./img/terrain/bordure23.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure24</intitule_objet>
-   <img_ihm>./img/bordure24.png</img_ihm>
+   <img_ihm>./img/terrain/bordure24.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure31</intitule_objet>
-   <img_ihm>./img/bordure31.png</img_ihm>
+   <img_ihm>./img/terrain/bordure31.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure32</intitule_objet>
-   <img_ihm>./img/bordure32.png</img_ihm>
+   <img_ihm>./img/terrain/bordure32.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure33</intitule_objet>
-   <img_ihm>./img/bordure33.png</img_ihm>
+   <img_ihm>./img/terrain/bordure33.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>bordure34</intitule_objet>
-   <img_ihm>./img/bordure34.png</img_ihm>
+   <img_ihm>./img/terrain/bordure34.png</img_ihm>
 </reference>
 <reference>
    <intitule_objet>eau</intitule_objet>
-   <img_ihm>./img/eau.png</img_ihm>
+   <img_ihm>./img/terrain/eau.png</img_ihm>
 </reference>
 
 
 <reference>
    <intitule_objet>plaine</intitule_objet>
-   <img_ihm>./img/plaine.png</img_ihm>
+   <img_ihm>./img/terrain/plaine.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>foret</intitule_objet>
-   <img_ihm>./img/foret.png</img_ihm>
+   <img_ihm>./img/terrain/foret.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>icone or</intitule_objet>
-   <img_ihm>./img/or.png</img_ihm>
+   <img_ihm>./img/gui/or.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>repos</intitule_objet>
-   <img_ihm>./img/repos.png</img_ihm>
+   <img_ihm>./img/gui/repos.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>joueur</intitule_objet>
-   <img_ihm>./img/joueur.png</img_ihm>
+   <img_ihm>./img/joueur/joueur.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>chauve-souris</intitule_objet>
-   <img_ihm>./img/chauve_souris.png</img_ihm>
+   <img_ihm>./img/ennemi/chauve_souris.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>loup</intitule_objet>
-   <img_ihm>./img/loup.png</img_ihm>
+   <img_ihm>./img/ennemi/loup.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>brigand</intitule_objet>
-   <img_ihm>./img/brigand.png</img_ihm>
+   <img_ihm>./img/ennemi/brigand.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>soldat</intitule_objet>
-   <img_ihm>./img/soldat.png</img_ihm>
+   <img_ihm>./img/ennemi/soldat.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>ogre</intitule_objet>
-   <img_ihm>./img/ogre.png</img_ihm>
+   <img_ihm>./img/ennemi/ogre.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bottes en cuir</intitule_objet>
-   <img_ihm>./img/bottes_cuir.png</img_ihm>
+   <img_ihm>./img/item/bottes_cuir.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bottes en fer</intitule_objet>
-   <img_ihm>./img/bottes_fer.png</img_ihm>
+   <img_ihm>./img/item/bottes_fer.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bottes en acier</intitule_objet>
-   <img_ihm>./img/bottes_acier.png</img_ihm>
+   <img_ihm>./img/item/bottes_acier.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>armure en cuir</intitule_objet>
-   <img_ihm>./img/armure_cuir.png</img_ihm>
+   <img_ihm>./img/item/armure_cuir.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>armure en fer</intitule_objet>
-   <img_ihm>./img/armure_fer.png</img_ihm>
+   <img_ihm>./img/item/armure_fer.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>armure en acier</intitule_objet>
-   <img_ihm>./img/armure_acier.png</img_ihm>
+   <img_ihm>./img/item/armure_acier.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>epee en bois</intitule_objet>
-   <img_ihm>./img/epee_bois.png</img_ihm>
+   <img_ihm>./img/item/epee_bois.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>epee en fer</intitule_objet>
-   <img_ihm>./img/epee_fer.png</img_ihm>
+   <img_ihm>./img/item/epee_fer.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>epee en acier</intitule_objet>
-   <img_ihm>./img/epee_acier.png</img_ihm>
+   <img_ihm>./img/item/epee_acier.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bout de pain</intitule_objet>
-   <img_ihm>./img/pain.png</img_ihm>
+   <img_ihm>./img/item/pain.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>brocolie vapeur</intitule_objet>
-   <img_ihm>./img/brocoli.png</img_ihm>
+   <img_ihm>./img/item/brocoli.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>steack de dinde</intitule_objet>
-   <img_ihm>./img/steack_dinde.png</img_ihm>
+   <img_ihm>./img/item/steack_dinde.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>pavé d'émeu</intitule_objet>
-   <img_ihm>./img/pave_emeu.png</img_ihm>
+   <img_ihm>./img/item/pave_emeu.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>poulet rôti</intitule_objet>
-   <img_ihm>./img/poulet.png</img_ihm>
+   <img_ihm>./img/item/poulet.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>marchand</intitule_objet>
-   <img_ihm>./img/marchand.png</img_ihm>
+   <img_ihm>./img/ami/marchand.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>guerisseur</intitule_objet>
-   <img_ihm>./img/guerisseur.png</img_ihm>
+   <img_ihm>./img/ami/guerisseur.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>bourse</intitule_objet>
-   <img_ihm>./img/sac_or.png</img_ihm>
+   <img_ihm>./img/item/sac_or.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>blanc</intitule_objet>
+   <img_ihm>./img/gui/blanc.png</img_ihm>
 </reference>
 	
 	

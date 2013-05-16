@@ -23,7 +23,7 @@ class YamlSlot
    # Méthode statique permettant de récupérer les informations d'un slot de sauvegarde
    # et de les ajouter à la liste des infos d'un slot de sauvegarde (classe Slot).
    #
-   def YamlSlot.lireYaml(nomFicSlotYaml, joueur)
+   def YamlSlot.lireYaml(nomFicSlotYaml)
       #Ouvre le fichier YAML contenant les infos du slot "nomFicXml"
       begin
          file = File.open("YAMLSlot/" + nomFicSlotYaml)
@@ -60,10 +60,7 @@ class YamlSlot
     
       begin
 	      file = File.open("YAMLSlot/" + nomFicSlotYaml, "w")
-	      #file.syswrite("testNom".to_yaml()) #modele.joueur.pseudo
-	      #file.syswrite("Expert".to_yaml()) #modele.difficulte.intitule # gérer par la classe Joueur 
-      							# /!\ Avoir un reader sur le modele dans joueur 
-      							# ou passer en parametre de la méthode la difficulté ou le modele)
+	      
       	puts "pseudo : "
       	p modele.joueur.pseudo
       	file.syswrite(modele.joueur.pseudo.to_yaml())
@@ -86,7 +83,6 @@ class YamlSlot
 	      #puts "carte : "
 	      #p modele.carte
 	      #file.syswrite(modele.carte.to_yaml())
-	    #  file.syswrite(modele.to_yaml()) # Marche pas pour l'instant, car peut etre que tous les champs ne sont pas bien remplis encore
 	   rescue
 			raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
 		ensure

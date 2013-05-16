@@ -5,10 +5,10 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de créer le menu du jeu et contient :
-#* Une fenêtre représentant la fenetre du menu 
-#* Un booléen indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en conséquence
-#* Un contenu représenté par une box et qui contient les éléments de chaque "sous-menu" (nouvelle partie, classement, ...)
+# Cette classe permet de crï¿½er le menu du jeu et contient :
+#* Une fenï¿½tre reprï¿½sentant la fenetre du menu 
+#* Un boolï¿½en indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en consï¿½quence
+#* Un contenu reprï¿½sentï¿½ par une box et qui contient les ï¿½lï¿½ments de chaque "sous-menu" (nouvelle partie, classement, ...)
 # 
 
 require 'gtk2'
@@ -21,7 +21,7 @@ require './Bibliotheque/BibliothequeSlot.rb'
 require 'YamlSlot.rb'
 require 'Slot.rb'
 
-# On inclu le module Gtk, cela évite de préfixer les classes par Gtk::
+# On inclu le module Gtk, cela ï¿½vite de prï¿½fixer les classes par Gtk::
 include Gtk
 
 class MenuJeu
@@ -50,10 +50,10 @@ class MenuJeu
 	
 	
 	##
-   # Crée un nouveau Menu
+   # Crï¿½e un nouveau Menu
    #
    # == Parameters:
-   # isEnJeu : un booléen indiquant si le joueur est en jeu ou non
+   # isEnJeu : un boolï¿½en indiquant si le joueur est en jeu ou non
    #
 	def MenuJeu.creer(isEnJeu, modele, controleur)
 		return new(isEnJeu, modele, controleur)
@@ -61,10 +61,10 @@ class MenuJeu
 	
 	
 	##
-   # Vide la fenêtre de tous ses composants.
+   # Vide la fenï¿½tre de tous ses composants.
    #
    # == Parameters:
-   # box : une boite à supprimer de la fenetre
+   # box : une boite ï¿½ supprimer de la fenetre
    #
 	def viderFenetre(box)
 		@fenetreMenu.remove(box)
@@ -72,24 +72,25 @@ class MenuJeu
 	
 	
 	##
-   # Initialise la fenêtre du menu avec les boutons nécessaires
+   # Initialise la fenï¿½tre du menu avec les boutons nï¿½cessaires
    #
 	def afficherMenu()
-		@fenetreMenu.set_title("Menu")
+	  	@fenetreMenu=Window.new()
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
 		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
 		@fenetreMenu.resize(300,300)
 		
 		@contenu = VBox.new(false, 0)
 		
-		# Création des boutons
+		# Crï¿½ation des boutons
 		if(@isInGame == false)
-			boutNewPartie 		= Button.new("Nouvelle partie")
-			boutChargerPartie = Button.new("Charger partie")
-			boutClassement 	= Button.new("Classement")
-			boutOptions 		= Button.new("Options")
-			boutAide 			= Button.new("Aide")
-			boutQuitter 		= Button.new("Quitter le jeu")
+			boutNewPartie 		= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
+			boutChargerPartie = Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
+			boutClassement 	= Button.new(XmlMultilingueReader.lireTexte("Classement"))
+			boutOptions 		= Button.new(XmlMultilingueReader.lireTexte("Options"))
+			boutAide 			= Button.new(XmlMultilingueReader.lireTexte("Aide"))
+			boutQuitter 		= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
 			
 			@contenu.add(boutNewPartie)
 			@contenu.add(boutChargerPartie)
@@ -98,14 +99,14 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 		else
-			boutContinuerPartie		= Button.new("Continuer partie")
-			boutNewPartie 				= Button.new("Nouvelle partie")
-			boutChargerPartie 		= Button.new("Charger partie")
-			boutSauvegarderPartie 	= Button.new("Sauvegarder partie")
-			boutClassement 			= Button.new("Classement")
-			boutOptions 				= Button.new("Options")
-			boutAide 					= Button.new("Aide")
-			boutQuitter 				= Button.new("Quitter le jeu")
+			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
+			boutNewPartie 				= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
+			boutChargerPartie 		= Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
+			boutSauvegarderPartie 	= Button.new(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
+			boutClassement 			= Button.new(XmlMultilingueReader.lireTexte("Classement"))
+			boutOptions 				= Button.new(XmlMultilingueReader.lireTexte("Options"))
+			boutAide 					= Button.new(XmlMultilingueReader.lireTexte("Aide"))
+			boutQuitter 				= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
 				
 			@contenu.add(boutContinuerPartie)
 			@contenu.add(boutNewPartie)
@@ -116,59 +117,58 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 			
-			@controleur.continuerPartieCreer(boutContinuerPartie)
-			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie)
+			@controleur.continuerPartieCreer(boutContinuerPartie,@fenetreMenu)
+			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie,@fenetreMenu)
 		end
 		
 		@fenetreMenu.add(@contenu)
 		
 		@fenetreMenu.show_all
 		
-		# Pas sur de mettre ça ici, plutot dans le controleur non ?
-		#@fenetreMenu.signal_connect('destroy') {onDestroy}
-		@fenetreMenu.signal_connect('delete_event') {onDestroy}
-
-		@controleur.nouvellePartieCreer(boutNewPartie)
-		@controleur.chargerPartieCreer(boutChargerPartie)
-		@controleur.classementCreer(boutClassement)
-		@controleur.optionsCreer(boutOptions)
-		@controleur.aideCreer(boutAide)
-		@controleur.quitterPartieCreer(boutQuitter)
+		@controleur.nouvellePartieCreer(boutNewPartie,@fenetreMenu)
+		@controleur.chargerPartieCreer(boutChargerPartie,@fenetreMenu)
+		@controleur.classementCreer(boutClassement,@fenetreMenu)
+		@controleur.optionsCreer(boutOptions,@fenetreMenu)
+		@controleur.aideCreer(boutAide,@fenetreMenu)
+		@controleur.quitterPartieCreer(boutQuitter,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 	
 	
 	##
    # Lorsque le joueur clique sur nouvelle partie, affiche un champ pour le nom du joueur, 
-   # des boutons radio pour le choix de difficulté et un bouton lancer partie
+   # des boutons radio pour le choix de difficultï¿½ et un bouton lancer partie
    #
 	def afficherNouvellePartie()
-		# Remarque : c'est le controleur qui récupère les données (nom, difficulté)
+		# Remarque : c'est le controleur qui rï¿½cupï¿½re les donnï¿½es (nom, difficultï¿½)
 		
 		####### Pour tester #######
-		@modele.joueur.dateFinJeu = Time.now
+=begin		@modele.joueur.dateFinJeu = Time.now
 		puts "date fin : " + @modele.joueur.dateFinJeu.to_s
 		puts "diff a ajouter : " + (@modele.joueur.dateFinJeu-@modele.joueur.dateDebutJeu).to_s
 		@modele.joueur.calculerTempsTotal
+=end
 		####### Fin Test ########
 		
-		@fenetreMenu.set_title("Nouvelle Partie")
+		@fenetreMenu = Window.new
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("NewPartie"))
 		@fenetreMenu.resize(100,100)
 		
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxNom 	= HBox.new(true, 10) # 10 => espace entre 2 "objets"
-		labelNom 	= Label.new("Votre nom")
+		labelNom 	= Label.new(XmlMultilingueReader.lireTexte("votreNom"))
 		champNom 	= Entry.new()
 		
 		maHBoxNom.add(labelNom)
 		maHBoxNom.add(champNom)
 		
 		maHboxDifficulte 	= HBox.new(true, 10)
-		labelDiff 			= Label.new("Difficulte :")
-		novice 				= RadioButton.new("Novice")
-		moyen 				= RadioButton.new(novice, "Moyen")
-		expert 				= RadioButton.new(novice, "Expert")
+		labelDiff 			= Label.new(XmlMultilingueReader.lireTexte("difficulte"))
+		novice 				= RadioButton.new(XmlMultilingueReader.lireTexte("novice"))
+		moyen 				= RadioButton.new(novice, XmlMultilingueReader.lireTexte("moyen"))
+		expert 				= RadioButton.new(novice, XmlMultilingueReader.lireTexte("expert"))
 		
 		maHboxDifficulte.add(labelDiff)
 		maHboxDifficulte.add(novice)
@@ -176,8 +176,8 @@ class MenuJeu
 		maHboxDifficulte.add(expert)
 		
 		maHBoxBouton 				= HBox.new(true, 10)
-		boutCommencerNewPartie 	= Button.new("C'est parti !")
-		boutRetour 					= Button.new("Retour au menu")
+		boutCommencerNewPartie 	= Button.new(XmlMultilingueReader.lireTexte("cestPartie"))
+		boutRetour 					= Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		maHBoxBouton.add(boutCommencerNewPartie)
 		maHBoxBouton.add(boutRetour)
@@ -190,8 +190,9 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert)
-		@controleur.retourCreer(boutRetour)
+		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert, @fenetreMenu)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 	
@@ -200,23 +201,24 @@ class MenuJeu
    # Lorsque le joueur clique sur charger partie, affiche les slots de chargement d'une partie
    #
 	def afficherChargerPartie()
-		@fenetreMenu.set_title("Charger Partie")
+    	@fenetreMenu  = Window.new()
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("ChargerPartie"))
 		
 		@contenu = VBox.new(false, 20)
-		# Tableau contenant des EventBox pouvant être cliquées pour charger une partie
+		# Tableau contenant des EventBox pouvant ï¿½tre cliquï¿½es pour charger une partie
 		tabEventBox = Array.new
 		
 		# Tableau contenant les slots de sauvegarde
 		tabSlot = Array.new
 		
-		# Remplissage des frames contenant les différentes EventBox
-		# Ces EventBox contiennent elles-mêmes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Remplissage des frames contenant les diffï¿½rentes EventBox
+		# Ces EventBox contiennent elles-mï¿½mes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
-			frame = Frame.new("Emplacement " + (i+1).to_s)
+			frame = Frame.new(XmlMultilingueReader.lireTexte("emplacement") + " " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
+				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
@@ -227,7 +229,9 @@ class MenuJeu
 				date = "..."
 			end
 			
-			lab = Label.new("Nom : " + nom + " | Difficulte : " + diff + " | Date : " + date)
+			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
 			
@@ -242,10 +246,10 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 		
-		# C'est une fois que les eventBox sont crées et ajoutées à la fenetre qu'elles sont associées à une Gdk::Window (et non Gtk::Window)
-		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante à cette eventBox
+		# C'est une fois que les eventBox sont crï¿½es et ajoutï¿½es ï¿½ la fenetre qu'elles sont associï¿½es ï¿½ une Gdk::Window (et non Gtk::Window)
+		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante ï¿½ cette eventBox
 		tabEventBox.each_with_index{|eb, index|
-			eb.realize # Créer la fenetre GDK (Gdk::Window) associées au widget
+			eb.realize # Crï¿½er la fenetre GDK (Gdk::Window) associï¿½es au widget
 			if(tabSlot[index] != nil)	# Si le slot contient de "vraies" infos
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
@@ -256,7 +260,7 @@ class MenuJeu
 			end
 		}
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(boutRetour)
 		
@@ -264,7 +268,8 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
@@ -272,23 +277,24 @@ class MenuJeu
    # Lorsque le joueur clique sur sauvegarder partie, affiche les slots de sauvegarde d'une partie
    #
 	def afficherSauvegarderPartie()		
-		@fenetreMenu.set_title("Sauvegarder Partie")
+    @fenetreMenu  = Window.new()
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
 		
 		@contenu = VBox.new(false, 20)
-		# Tableau contenant des EventBox pouvant être cliquées pour sauvegarder une partie
+		# Tableau contenant des EventBox pouvant ï¿½tre cliquï¿½es pour sauvegarder une partie
 		tabEventBox = Array.new
 		
 		# Tableau contenant les slots de sauvegarde
 		tabSlot = Array.new
 		
-		# Remplissage des frames contenant les différentes EventBox
-		# Ces EventBox contiennent elles-mêmes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Remplissage des frames contenant les diffï¿½rentes EventBox
+		# Ces EventBox contiennent elles-mï¿½mes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
-			frame = Frame.new("Emplacement " + (i+1).to_s)
+			frame = Frame.new(XmlMultilingueReader.lireTexte("emplacement") + " " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
-				YamlSlot.lireYaml(nomFicYaml, @modele.joueur)
+				YamlSlot.lireYaml(nomFicYaml)
 				slot = BibliothequeSlot.getSlot(nomFicYaml)
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
@@ -300,7 +306,9 @@ class MenuJeu
 				date = "..."
 			end
 			
-			lab = Label.new("Nom : " + nom  + " | Difficulte : " + diff + " | Date : " + date)
+			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
 			
@@ -315,23 +323,24 @@ class MenuJeu
 		
 		@fenetreMenu.add(@contenu)
 				
-		# C'est une fois que les eventBox sont crées et ajoutées à la fenetre qu'elles sont associées à une Gdk::Window (et non Gtk::Window)
-		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante à cette eventBox
+		# C'est une fois que les eventBox sont crï¿½es et ajoutï¿½es ï¿½ la fenetre qu'elles sont associï¿½es ï¿½ une Gdk::Window (et non Gtk::Window)
+		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante ï¿½ cette eventBox
 		tabEventBox.each_with_index{|eb, index|
-			eb.realize # Créer la fenetre GDK (Gdk::Window) associées au widget
+			eb.realize # Crï¿½er la fenetre GDK (Gdk::Window) associï¿½es au widget
 			eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND2) # Change le curseur en forme de main
 			
 			eb.signal_connect('button_press_event') { 
 				puts "\tSauvegarde sur le slot" + (index+1).to_s 
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
+				@fenetreMenu.destroy()
 				# MAJ de l'affichage des slots de sauvegarde
-				viderFenetre(@contenu)
+				#viderFenetre(@contenu)
 				afficherSauvegarderPartie()
 			}
 		}
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(boutRetour)
 		
@@ -339,50 +348,57 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
 	##
    # Lorsque le joueur clique sur classement, affiche le classement des meilleurs joueurs
-   # en récupérant les données du fichier XML
+   # en rï¿½cupï¿½rant les donnï¿½es du fichier XML
    #
 	def afficherClassement()	
-		@fenetreMenu.set_title("Classement")
+    	@fenetreMenu  = Window.new()
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Classement"))
 		@fenetreMenu.resize(300,390)
 		
 		@contenu = VBox.new(false, 10)
 		
-		labelInfo = Label.new("Voici le classement des joueurs suivant la difficulte. Chaque colonne peut etre triee en cliquant sur son nom.")
+		labelInfo = Label.new(XmlMultilingueReader.lireTexte("infoClassement"))
 		labelInfo.justify=Gtk::JUSTIFY_CENTER
   		labelInfo.wrap=true
 		
 		nb = Notebook.new()
 		
 		tabLabel = Array.new
-		tabLabel[0] = Label.new("Novice")
-		tabLabel[1] = Label.new("Moyen")
-		tabLabel[2] = Label.new("Expert")
+		tabLabel[0] = Label.new(XmlMultilingueReader.lireTexte("novice"))
+		tabLabel[1] = Label.new(XmlMultilingueReader.lireTexte("moyen"))
+		tabLabel[2] = Label.new(XmlMultilingueReader.lireTexte("expert"))
 		
-		XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
+		# Rempli toutes les listes de joueurs de toutes les difficultes : retourne un classement
+		c = remplirListeJoueur()
 		
-		0.upto(2) do |i|
-			# Rempli une liste de joueur suivant leur niveau de difficulté
-			listeJoueur = remplirListeJoueur(tabLabel[i].text)
+		#XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
+		
+
+		  0.upto(2) do |i|
+			# Rempli une liste de joueur suivant leur niveau de difficultï¿½
+			#listeJoueur = remplirListeJoueur(tabLabel[i].text)
 			
-			# Création des treeView
+			# Crï¿½ation des treeView
 			treeview = TreeView.new
 			
-			# Ajout des paramètres de rendu aux treeViews
+			# Ajout des paramï¿½tres de rendu aux treeViews
 			setup_tree_view(treeview)
 			
-			# Création et remplissage des ListStore
-			store = remplirListStore(listeJoueur)
+			# Crï¿½ation et remplissage des ListStore
+			#store = remplirListStore(listeJoueur)
+			store = remplirListStore(c.getListeJoueur(tabLabel[i].text))
 			
 			# Ajoute chacun des tree model au tree view correspondant
 			treeview.model = store
 			
-			# Création et ajout des treeviews dans des scrolledWindows
+			# Crï¿½ation et ajout des treeviews dans des scrolledWindows
 			scrolled_win = ScrolledWindow.new.add(treeview)
 			# Affichage ou non des scrollBars
 			scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
@@ -391,7 +407,7 @@ class MenuJeu
 			nb.append_page(scrolled_win, tabLabel[i])
 		end
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.pack_start(labelInfo, false, false)
 		@contenu.add(nb)
@@ -402,30 +418,31 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
 	##
-	# Rempli une ListStore par l'intermédiaire de la liste de joueur passée en paramètre.
+	# Rempli une ListStore par l'intermï¿½diaire de la liste de joueur passï¿½e en paramï¿½tre.
 	# == Parameters: 
    #* <b>listeJoueur :</b> un tableau de joueur
 	#
 	def remplirListStore(listeJoueur)
-		# Créer un nouveau tree model comprenant 6 colonnes
+		# Crï¿½er un nouveau tree model comprenant 6 colonnes
 		store = ListStore.new(String, Integer, Integer, Integer, String, Integer)
 		
-		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" à la ListStore
+		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" ï¿½ la ListStore
 		listeJoueur.each_with_index do |e, i|
 			colonne = store.append
 			
 			colonne[0] = listeJoueur[i][0]	# Correspond au nom du joueur
-			colonne[1] = listeJoueur[i][1]	# Correspond au nombre d'ennemis tués pas le joueur
-			colonne[2] = listeJoueur[i][2]	# Correspond à la distance totale parcourue par le joueur
-			colonne[3] = listeJoueur[i][3]	# Correspond à l'or total accumulé par le joueur
+			colonne[1] = listeJoueur[i][1]	# Correspond au nombre d'ennemis tuï¿½s pas le joueur
+			colonne[2] = listeJoueur[i][2]	# Correspond ï¿½ la distance totale parcourue par le joueur
+			colonne[3] = listeJoueur[i][3]	# Correspond ï¿½ l'or total accumulï¿½ par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
 			dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
-																				# et 0 après => pour trier les strings correctement
+																				# et 0 aprï¿½s => pour trier les strings correctement
 			dureeHeures = dureeTotale / 3600
 			colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
@@ -438,106 +455,79 @@ class MenuJeu
 	##
 	# Ajoute 6 colonnes au treeview
 	# == Parameters: 
-   #* <b>treeview :</b> le treeview à configurer
+   #* <b>treeview :</b> le treeview ï¿½ configurer
 	#
 	def setup_tree_view(treeview)
 	  # Create a new GtkCellRendererText, add it to the tree
 	  # view column and append the column to the tree view.
 	  renderer = CellRendererText.new
 	
-	  # Les propriétés affectent la colonne entière
+	  # Les propriï¿½tï¿½s affectent la colonne entiï¿½re
 	  # On utilise Pango pour obtenir le gras
-     renderer.weight = Pango::FontDescription::WEIGHT_BOLD
-	  column   = TreeViewColumn.new("Pseudo", renderer,  :text => 0)
+    renderer.weight = Pango::FontDescription::WEIGHT_BOLD
+    
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("pseudo"), renderer,  :text => 0)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 0
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
 	  renderer = CellRendererText.new
-	  column   = TreeViewColumn.new("Ennemis tues", renderer, :text => 1)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("ennemisTues"), renderer, :text => 1)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 1
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Distance parcourue (m)", renderer, :text => 2)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("distanceParcourue"), renderer, :text => 2)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 2
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Or total", renderer, :text => 3)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("orTotal"), renderer, :text => 3)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 3
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Temps de jeu", renderer, :text => 4)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("tempsJeu"), renderer, :text => 4)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 4
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Score", renderer, :text => 5)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("score"), renderer, :text => 5)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 5
-	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
+	  
 	end
 	
 	
 	##
-	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficulté
+	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficultï¿½
 	# == Parameters: 
-   #* <b>difficulte :</b> une chaine de caractères permettant de choisir la liste de joueur à retourner en fonction de cette difficulté
+   #* <b>difficulte :</b> une chaine de caractï¿½res permettant de choisir la liste de joueur ï¿½ retourner en fonction de cette difficultï¿½
    #
-	def remplirListeJoueur(difficulte)
-		listeJoueur = Array.new
+	def remplirListeJoueur()
+		#listeJoueur = Array.new
 		c = Classements.new()
 		
 		if(File.exist?("XMLFile/classements.xml")) # Si le fichier xml correspondant aux classements des joueurs existe
 			XmlClassements.lireXml(c)
-			listeJoueur = c.getListeJoueur(difficulte)
+			#listeJoueur = c.getListeJoueur(difficulte)
 		end
 		
-		return listeJoueur # La liste est vide si le fichier xml n'existe pas
+		#return listeJoueur # La liste est vide si le fichier xml n'existe pas
+		return c
 	end
 
 	
@@ -545,33 +535,44 @@ class MenuJeu
    # Lorsque le joueur clique sur options, permet de choisir la langue ou d'activer le son 
    #
 	def afficherOptions()
-		@fenetreMenu.set_title("Options")
+    	@fenetreMenu  = Window.new()
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Options"))
 		@fenetreMenu.resize(100,100)
 		
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxSon 	= HBox.new(true, 10)
-		labelSon 	= Label.new("Activer le son ?")
-		oui 			= RadioButton.new("Oui")
-		non 			= RadioButton.new(oui, "Non")
+		labelSon 	= Label.new(XmlMultilingueReader.lireTexte("musique?"))
+		oui 			= RadioButton.new(XmlMultilingueReader.lireTexte("oui"))
+		non 			= RadioButton.new(oui, XmlMultilingueReader.lireTexte("non"))
 		
 		maHBoxSon.add(labelSon)
 		maHBoxSon.add(oui)
 		maHBoxSon.add(non)
 		
+      maHBoxBruitage   = HBox.new(true, 10)
+      labelBruitage    = Label.new(XmlMultilingueReader.lireTexte("bruitage?"))
+      ouiB             = RadioButton.new(XmlMultilingueReader.lireTexte("oui"))
+      nonB             = RadioButton.new(ouiB, XmlMultilingueReader.lireTexte("non"))
+        
+      maHBoxBruitage.add(labelBruitage)
+      maHBoxBruitage.add(ouiB)
+      maHBoxBruitage.add(nonB)
+		
 		maHBoxLangue 	= HBox.new(true, 10)
-		labelLangue 	= Label.new("Langue :")
+		labelLangue 	= Label.new(XmlMultilingueReader.lireTexte("langue") + " : ")
 		listeLangue 	= ComboBox.new(true)
-		listeLangue.insert_text(0, "Francais")
-		listeLangue.insert_text(1, "Anglais")
+		listeLangue.insert_text(0, XmlMultilingueReader.lireTexte("francais"))
+		listeLangue.insert_text(1, XmlMultilingueReader.lireTexte("anglais"))
 		listeLangue.active=(0)
 		
 		maHBoxLangue.add(labelLangue)
 		maHBoxLangue.add(listeLangue)
 		
-		boutValider = Button.new(Stock::OK)
+		boutValider = Button.new(XmlMultilingueReader.lireTexte("valider"))
 		
 		@contenu.add(maHBoxSon)
+      @contenu.add(maHBoxBruitage)
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
@@ -579,7 +580,8 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
-		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue)
+      @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue, @fenetreMenu)
+      @controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 
@@ -589,7 +591,13 @@ class MenuJeu
    # Lorsque le joueur clique sur aide, affiche l'aide sur le jeu
    #
 	def afficherAide()
-		@fenetreMenu.set_title("Aide")
+    	@fenetreMenu  = Window.new(Gtk::Window::TOPLEVEL)
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Aide"))
+		
+		#@fenetreMenu.set_resizable(false)
+		#@fenetreMenu.set_size_request(500, 500)
+		#@fenetreMenu.resize(300, 500)
+		@fenetreMenu.set_height_request(500)
 		
 		@contenu = VBox.new(false, 10)
 		
@@ -603,13 +611,13 @@ class MenuJeu
 		
 		labelAide = Label.new()
 		labelAide.set_markup(texteAide)
-		labelAide.wrap=true
+		labelAide.wrap = true
 		
-		textview = TextView.new
-		textview.buffer.text = texteAide
-		textview.wrap_mode = TextTag::WRAP_WORD
-		textview.left_margin = 10
-		textview.right_margin = 10
+		#textview = TextView.new
+		#textview.buffer.text = texteAide
+		#textview.wrap_mode = TextTag::WRAP_WORD
+		#textview.left_margin = 10
+		#textview.right_margin = 10
 		
 		scrolled_win = ScrolledWindow.new
 		#scrolled_win.add(textview)
@@ -617,7 +625,7 @@ class MenuJeu
 		# Affichage ou non des scrollBars
 		scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(scrolled_win)
 		@contenu.pack_start(boutRetour, false, false)
@@ -626,15 +634,10 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.retourCreer(boutRetour)
+		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 
-	
-	def onDestroy
-		puts "Fermeture du menu par la croix rouge !"
-		@modele.vue.window.set_sensitive(true)
-		@fenetreMenu.destroy
-	end
 	
 end
 

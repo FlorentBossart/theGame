@@ -44,6 +44,7 @@ require './XMLReader/XmlMangeablesReader.rb'
 require './XMLReader/XmlTerrainsReader.rb'
 require './StockMarchand.rb'
 
+
 class Modele
 
    @vue
@@ -62,11 +63,12 @@ class Modele
    @id_terrainParDefaut
    @nbMaxPisteur
    @nbPisteur
-
+   @indiceItemSelectionne 
+   
    private_class_method :new
 
    attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
-   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur
+   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur, :indiceItemSelectionne
    
    
    def Modele.initialisationBibliotheques()
@@ -246,12 +248,14 @@ class Modele
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
+      Thread.new do
       # Deplacement des ennemis
       for e in @listeEnnemis
 		if(e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
          e.deplacementIntelligent()
         else
 				@@pileExecution.unshift(e)
+        end
         end
       end
       
@@ -286,6 +290,7 @@ class Modele
      if(!@joueur.toujoursEnVie?())
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
+       @vue.popUp.affichePopUp(@messageDefaite) 
      else
         if(@joueur.casePosition.presenceEnnemis?())
             if(@tourDejaPasse)
@@ -385,7 +390,12 @@ class Modele
           @itemAttenteAjout
           changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
         else
-          @joueur.inventaire.ajouter(i) 
+          if(i.estStockable?())
+              @joueur.inventaire.ajouter(i) 
+           else
+              i.caracteristique.utiliseToi(joueur)
+           end
+ 
           str=XmlMultilingueReader.lireTexte("recupCombat")
           str=str.gsub("ITEM",XmlMultilingueReader.lireDeterminant_Nom(i))
           notifier(str)

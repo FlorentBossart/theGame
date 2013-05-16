@@ -38,7 +38,7 @@ class Jauges
   def majJauge(joueur)
     majJaugeOr(joueur.inventaire().capital());
     majJaugeNbRepos(joueur.nombreRepos());
-    majJaugeEnergie(joueur.energie(),joueur.energieMax());
+    majJaugeEnergie((joueur.energie()>0)?(joueur.energie):(0),joueur.energieMax());
     majJaugeExperience(joueur.experience(),joueur.experienceSeuil());
     majNiveau(joueur.niveau());
   end

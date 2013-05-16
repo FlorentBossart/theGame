@@ -19,7 +19,7 @@ class XmlRefSonsReader
    # Méthode statique permettant de récupérer les différents sons du jeu
    # et de les ajouter à la liste des sons du jeu (liste listRefSons).
    #
-   def XmlRefSonsReader.lireXml(listRefSons)
+   def XmlRefSonsReader.lireXml(listRefSons, listRefChannel)
       #Ouvre le fichier XML contenant les sons du jeu
       begin
          file = File.new("XMLFile/references_sons.xml")
@@ -29,9 +29,12 @@ class XmlRefSonsReader
       end
 
       #Pour chaque référence du fichier XML...
+      channel = 0
       doc.elements.each('ref_sons/reference') do |s|
          #... on ajout la référence à la bibliothèque
          listRefSons[s.elements['intitule_objet'].text] = SDL::Mixer::Wave.load(s.elements['son'].text)
+         listRefChannel[s.elements['intitule_objet'].text] = channel
+         channel += 1
       end
      return nil
    end
