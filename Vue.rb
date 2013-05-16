@@ -358,4 +358,13 @@ class Vue
     #@ecouteToucheMenu=false
     @ecouteToucheInteraction=false
   end
+  
+  #mise a jour de la langue
+  def majLangue()
+    @zaf.majLangue();
+    @zoneCtrl.majLangue();
+  end
+  
+  
+  
 end
