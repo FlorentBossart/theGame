@@ -44,6 +44,7 @@ require './XMLReader/XmlMangeablesReader.rb'
 require './XMLReader/XmlTerrainsReader.rb'
 require './StockMarchand.rb'
 
+
 class Modele
 
    @vue
@@ -62,10 +63,11 @@ class Modele
    @id_terrainParDefaut
    @nbMaxPisteur
    @nbPisteur
-
+   @indiceItemSelectionne 
+   
    private_class_method :new
 
-   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
+   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut, :indiceItemSelectionne
    attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur
    
    
@@ -386,7 +388,12 @@ class Modele
           @itemAttenteAjout
           changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
         else
-          @joueur.inventaire.ajouter(i) 
+          if(i.estStockable?())
+              @joueur.inventaire.ajouter(i) 
+           else
+              i.caracteristique.utiliseToi(joueur)
+           end
+ 
           str=XmlMultilingueReader.lireTexte("recupCombat")
           str=str.gsub("ITEM",XmlMultilingueReader.lireDeterminant_Nom(i))
           notifier(str)
