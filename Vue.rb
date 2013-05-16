@@ -81,16 +81,15 @@ class Vue
     
     @inventaireModal=InventaireModal.creer(EnumStadePartie.INVENTAIRE_PLEIN,self)
     
-    @tailleCase=100
+    @tailleCase=130
     @tailleCase_f=@tailleCase.to_f
     
     @finInit = false;
     @referencesGraphiques = ReferencesGraphiques.new()
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
-    @tailleCase= 100;
-    @hauteurAfficheCarte = 5
-    @largeurAfficheCarte = 11
+    @hauteurAfficheCarte = 4
+    @largeurAfficheCarte = 10
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
