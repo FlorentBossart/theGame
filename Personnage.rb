@@ -19,6 +19,8 @@ class Personnage < Elem
 
   @direction
   
+  attr_reader :direction
+  
   def Personnage.creer(casePosition)
     new(casePosition)
   end
