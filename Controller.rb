@@ -287,8 +287,8 @@ class Controller
   #
   def interactionElementCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
-        interactionElementAction(elem,joueur)
         dialog.destroy
+        interactionElementAction(elem,joueur)
      }
   end
       
