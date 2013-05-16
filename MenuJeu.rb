@@ -589,8 +589,11 @@ class MenuJeu
    # Lorsque le joueur clique sur aide, affiche l'aide sur le jeu
    #
 	def afficherAide()
-    @fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Aide"))
+		
+		@fenetreMenu.set_resizable(false)
+		@fenetreMenu.set_default_size(300, 400)
 		
 		@contenu = VBox.new(false, 10)
 		
