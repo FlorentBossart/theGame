@@ -246,12 +246,14 @@ class Modele
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
+      Thread.new do
       # Deplacement des ennemis
       for e in @listeEnnemis
 		if(e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
          e.deplacementIntelligent()
         else
 				@@pileExecution.unshift(e)
+        end
         end
       end
       
