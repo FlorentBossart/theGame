@@ -632,9 +632,10 @@ class Controller
 		end
 		
 		# A enlever apres test
-		difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
+		#difficulte = BibliothequeDifficulte.getDifficulte("difficulteDeTest")
 		
 		
+		# A revoir !!!!!!!
 		@vue.menu.fenetreMenu.destroy
 		puts "destroy menu"
 		@vue.window.destroy
