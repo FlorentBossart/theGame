@@ -89,7 +89,7 @@ class Vue
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
     @hauteurAfficheCarte = 4
-    @largeurAfficheCarte = 10
+    @largeurAfficheCarte = 7
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
@@ -112,7 +112,7 @@ class Vue
 
       #puts @window.size()[0].to_s+" "+@window.size()[1].to_s
       if((@largeurAfficheCarte != x) || (@hauteurAfficheCarte != y))  then
-        if((x>=9 && y >=5))then
+        if((x>=7 && y >=5))then
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
