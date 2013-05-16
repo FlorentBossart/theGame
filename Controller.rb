@@ -28,7 +28,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      Audio.playSoundLoop("stable_boy")
+      #Audio.playSoundLoop("stable_boy")
    end
    
    def Controller.creer(modele,vue)
