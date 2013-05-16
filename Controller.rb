@@ -678,9 +678,10 @@ class Controller
    # == Parameters:
    # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
    #
-   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue, fenetre)
          btValiderOptions.signal_connect('clicked'){
              validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+             fenetre.destroy()
          }
    end
  
