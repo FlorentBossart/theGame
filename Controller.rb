@@ -438,9 +438,10 @@ class Controller
    # == Parameters:
    # btContinuerPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur Continuer partie
    #
-   def continuerPartieCreer(btContinuerPartie)
+   def continuerPartieCreer(btContinuerPartie,fenetre)
       btContinuerPartie.signal_connect('clicked'){
           continuerPartieAction()
+          fenetre.destroy()
       }
    end
    
@@ -448,7 +449,7 @@ class Controller
 	##
 	# Action(s) à effectuer lors du clic sur le bouton ContinuerPartie
 	#
-	def continuerPartieAction
+	def continuerPartieAction()
 		puts "Clique sur continuer partie"
 		@vue.menu.fenetreMenu.destroy
 		puts "Destruction du menu"
@@ -462,9 +463,10 @@ class Controller
    # == Parameters:
    # btNewPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur NouvellePartie
    #
-   def nouvellePartieCreer(btNewPartie)
+   def nouvellePartieCreer(btNewPartie,fenetre)
       btNewPartie.signal_connect('clicked'){
           nouvellePartieAction()
+        fenetre.destroy()
       }
    end
      
@@ -486,9 +488,10 @@ class Controller
    # == Parameters:
    # btChargerPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur ChargerPartie
    #
-   def chargerPartieCreer(btChargerPartie)
+   def chargerPartieCreer(btChargerPartie,fenetre)
       btChargerPartie.signal_connect('clicked'){
           chargerPartieAction()
+          fenetre.destroy()
       }
    end  
           
@@ -509,9 +512,10 @@ class Controller
    # == Parameters:
    # btSauvegarderPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur SauvegarderPartie
    #
-   def sauvegarderPartieCreer(btSauvegarderPartie)
+   def sauvegarderPartieCreer(btSauvegarderPartie,fenetre)
       btSauvegarderPartie.signal_connect('clicked'){
           sauvegarderPartieAction()
+        fenetre.destroy()
       }
    end
  
@@ -534,9 +538,10 @@ class Controller
    # == Parameters:
    # btClassement : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Classement
    #
-   def classementCreer(btClassement)
+   def classementCreer(btClassement,fenetre)
       btClassement.signal_connect('clicked'){
           classementAction()
+        fenetre.destroy()
       }
    end
    
@@ -558,9 +563,10 @@ class Controller
    # == Parameters:
    # btOptions : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Options
    #
-   def optionsCreer(btOptions)
+   def optionsCreer(btOptions,fenetre)
       btOptions.signal_connect('clicked'){
           optionsAction()
+        fenetre.destroy()
       }
    end
  
@@ -581,9 +587,10 @@ class Controller
    # == Parameters:
    # btAide : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Aide
    #
-   def aideCreer(btAide)
+   def aideCreer(btAide,fenetre)
       btAide.signal_connect('clicked'){
           aideAction()
+          fenetre.destroy()
       }
    end
     
@@ -605,9 +612,10 @@ class Controller
    # == Parameters:
    # btCommencerNewPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur "C'est Parti" dans nouvelle partie
    #
-   def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
+   def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert,fenetre)
       btCommencerNewPartie.signal_connect('clicked'){
 			entryPseudo.activate # Appel le signal_connect 'activate' sur l'entry du pseudo
+        fenetre.destroy()
       }
       entryPseudo.signal_connect('activate'){
 			commencerNewPartieAction(entryPseudo.text, boutRadioNovice, boutRadioMoyen, boutRadioExpert)
@@ -679,9 +687,10 @@ class Controller
    # == Parameters:
    # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
    #
-   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue)
+   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue,fenetre)
       btValiderOptions.signal_connect('clicked'){
           validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
+        fenetre.destroy()
       }
    end
  
@@ -744,9 +753,10 @@ class Controller
    # == Parameters:
    # btQuitter : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Quitter Partie
    #
-   def quitterPartieCreer(btQuitter)
+   def quitterPartieCreer(btQuitter,fenetre)
       btQuitter.signal_connect('clicked'){
           quitterPartieAction()
+         fenetre.destroy()
       }
    end
  
@@ -758,5 +768,56 @@ class Controller
 		puts "Clique sur Quitter Partie"
 		Gtk.main_quit
 	end
+  ### Gestion des événements de la fenêtre d'inventaire ###
+  
+  ##
+  # Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+  #
+  def selectionnerItem(btItem,indiceItem)
+  btItem.signal_connect('button_press_event'){
+  puts "(S) Sélection de l'item "+indiceItem.to_s+"."
+  @vue.inventaireVue.setImageSelection(indiceItem)
+  }
+  end
+  
+  ##
+  # Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
+  #
+  def acheterItem(btAcheter)
+  btAcheter.signal_connect('clicked'){
+  puts "(S) Achat de l'item "+"XX"+"."
+  #@vue.vueInventaire.setImageSelection(indiceItem)
+  }
+  end
+  
+  ##
+  # Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
+  #
+  def vendreItem(btVendre)
+  btVendre.signal_connect('clicked'){
+  puts "(S) Vente de l'item "+"XX"+"."
+  #@vue.vueInventaire.setImageSelection(indiceItem)
+  }
+  end
+  
+  ##
+  # Jette l'item sélectionné lors de l'appuie sur le bouton "Jeter" dans l'inventaire
+  #
+  def jeterItem(btJeter)
+  btJeter.signal_connect('clicked'){
+  puts "(S) Jet de l'item "+"XX"+"."
+  #@vue.vueInventaire.setImageSelection(indiceItem)
+  }
+  end
+  
+  ##
+  # Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
+  #
+  def equiperItem(btEquiter)
+  btEquiter.signal_connect('clicked'){
+  puts "(S) Equipement du joueur avec l'item "+"XX"+"."
+  #@vue.vueInventaire.setImageSelection(indiceItem)
+  }
+  end
       
 end
