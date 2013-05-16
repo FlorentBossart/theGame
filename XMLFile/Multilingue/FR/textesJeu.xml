@@ -42,6 +42,18 @@
 	    <contenu>Retour au menu</contenu>
 	</texte>
 	
+	<texte>
+		<id>emplacement</id>
+	    <contenu>Emplacement</contenu>
+	</texte>
+	<texte>
+		<id>nom</id>
+	    <contenu>Nom</contenu>
+	</texte>
+	<texte>
+		<id>date</id>
+	    <contenu>Date</contenu>
+	</texte>
 	
 
 	
