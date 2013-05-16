@@ -371,7 +371,8 @@ class MenuJeu
 		
 		#XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
 		
-		0.upto(2) do |i|
+
+		  0.upto(2) do |i|
 			# Rempli une liste de joueur suivant leur niveau de difficult�
 			listeJoueur = remplirListeJoueur(tabLabel[i].text)
 			
@@ -452,16 +453,12 @@ class MenuJeu
 	
 	  # Les propri�t�s affectent la colonne enti�re
 	  # On utilise Pango pour obtenir le gras
-     renderer.weight = Pango::FontDescription::WEIGHT_BOLD
+    renderer.weight = Pango::FontDescription::WEIGHT_BOLD
 	  column   = TreeViewColumn.new("Pseudo", renderer,  :text => 0)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 0
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -471,10 +468,7 @@ class MenuJeu
 	  column.sort_indicator=true
 	  column.sort_column_id = 1
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
+
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -483,10 +477,7 @@ class MenuJeu
 	  column.sort_indicator=true
 	  column.sort_column_id = 2
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
+
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -495,10 +486,7 @@ class MenuJeu
 	  column.sort_indicator=true
 	  column.sort_column_id = 3
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
+
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -507,10 +495,7 @@ class MenuJeu
 	  column.sort_indicator=true
 	  column.sort_column_id = 4
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
+
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -519,10 +504,7 @@ class MenuJeu
 	  column.sort_indicator=true
 	  column.sort_column_id = 5
 	  	
-	  column.signal_connect('clicked') do |w|
-	    w.sort_order = 
-	      w.sort_order == Gtk::SORT_ASCENDING ? Gtk::SORT_DESCENDING : Gtk::SORT_ASCENDING
-	  end
+
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	end
