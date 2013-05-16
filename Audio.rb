@@ -15,6 +15,8 @@ require 'XMLReader/XmlRefSonsReader.rb'
 class Audio
    
    @@listSoundLoad = Hash.new()
+   @@listRefChannel = Hash.new()
+   @firstSound
    
    private_class_method :new
    
@@ -24,7 +26,8 @@ class Audio
    def Audio.load()
       SDL::init(SDL::INIT_AUDIO) # Initialisation de l'audio SDL
       SDL::Mixer.open(22050, SDL::Mixer::DEFAULT_FORMAT, 2, 1024) # Ouverture du Mixer SDL
-      XmlRefSonsReader.lireXml(@@listSoundLoad) # Chargement des sons
+      XmlRefSonsReader.lireXml(@@listSoundLoad, @@listRefChannel) # Chargement des sons
+      @firstSound = ""
       return self
    end
    
@@ -40,6 +43,38 @@ class Audio
    #
    def Audio.playSoundLoop(intitule)
       SDL::Mixer.play_channel(-1, @@listSoundLoad[intitule], -1)
+   end
+   
+   
+   def Audio.muteSoundLoop()
+      if(@firstSound != "")
+         SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 0)
+      end
+   end
+   
+   
+   def Audio.resumeSoundLoop
+      if(@firstSound != "")
+         SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 128)
+      end
+   end
+   
+   
+   def Audio.muteBruitage()
+      @@listSoundLoad.each {|key, s| 
+         if(key != @firstSound)
+            SDL::Mixer.set_volume(@@listRefChannel[key], 0)
+         end
+      }
+   end
+   
+   
+   def Audio.resumeBruitage()
+      @@listSoundLoad.each {|key, s| 
+         if(key != @firstSound)
+            SDL::Mixer.set_volume(@@listRefChannel[key], 128)
+         end
+      }
    end
    
    ##
