@@ -549,6 +549,15 @@ class MenuJeu
 		maHBoxSon.add(oui)
 		maHBoxSon.add(non)
 		
+      maHBoxBruitage   = HBox.new(true, 10)
+      labelBruitage    = Label.new("Activer les bruitages ?")
+      ouiB             = RadioButton.new("Oui")
+      nonB             = RadioButton.new(ouiB, "Non")
+        
+      maHBoxBruitage.add(labelBruitage)
+      maHBoxBruitage.add(ouiB)
+      maHBoxBruitage.add(nonB)
+		
 		maHBoxLangue 	= HBox.new(true, 10)
 		labelLangue 	= Label.new("Langue :")
 		listeLangue 	= ComboBox.new(true)
@@ -562,6 +571,7 @@ class MenuJeu
 		boutValider = Button.new(Stock::OK)
 		
 		@contenu.add(maHBoxSon)
+      @contenu.add(maHBoxBruitage)
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
@@ -569,7 +579,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
-		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue,@fenetreMenu)
+      @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue)
 		
 	end
 
