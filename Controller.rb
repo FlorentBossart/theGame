@@ -218,6 +218,7 @@ class Controller
   # Action(s) Ã  effectuer lors du clic sur le bouton inventaire
   #
   def inventaireAction
+    @vue.inventaireModal.afficherInventaire(@modele.joueur)
     print "oO Bt inventaire pressÃ©!"
   end
 
