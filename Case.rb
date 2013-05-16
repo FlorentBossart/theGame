@@ -37,6 +37,14 @@ class Case
 	end
   end
   
+  def verifEnnemis
+	for e in listeEnnemis
+		if(!e.vivant)
+			e.meurt
+			listeEnnemis.delete(e)
+		end
+	end
+  end
   
   def estAccessible?()
     return @typeTerrain.isAccessible

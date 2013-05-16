@@ -23,12 +23,13 @@ require './Interface/Deplacable.rb'
 class Ennemi < PNJ
    include Deplacable
   
+   @vivant
    @type
    @energie
    @niveau
    @modele #un ennemi connait desormais le modele puisqu'on veut qu'il prennent en charge sa mort (afin de lim le nb de pisteur)
    
-   attr_reader :energie, :type, :niveau
+   attr_reader :energie, :type, :niveau, :vivant
   
    
    ##
@@ -40,7 +41,8 @@ class Ennemi < PNJ
    #* <b>type :</b> le type de PNJ Ennemi
    #
    def initialize(casePosition, niveau, type,modele)
-     @modele=modele
+     @vivant = true
+	 @modele=modele
      @listeItem = Array.new
       fourchette=3
       super(casePosition)
@@ -113,6 +115,7 @@ class Ennemi < PNJ
    end
   
    def meurt()
+     @vivant = false
      @modele.listeEnnemis.delete(self)
      @casePosition.retirerEnnemi(self)
    end
@@ -125,18 +128,19 @@ class Ennemi < PNJ
    #
    def deplacement(cible)
      @direction=cible
-     Thread.new do
        caseCible= @casePosition.getDestination(cible)
-        
+        if(!@vivant)
+		this.meurt
+		return nil
+		end
         if(!caseCible.isFull?() && caseCible.typeTerrain.isAccessible)
            @casePosition.retirerEnnemi(self)
           caseCible.ajouterEnnemi(self)
            @casePosition = caseCible
            AffichageDebug.Afficher("#{self} \ndéplacé dans \n#{caseCible}")
         else
-       AffichageDebug.Afficher("#{self}\n pas déplacé")
+			AffichageDebug.Afficher("#{self}\n pas déplacé")
         end
-      end
       return nil
    end
   

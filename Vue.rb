@@ -189,6 +189,7 @@ class Vue
     0.upto(@hauteurAfficheCarte-1) do |i|
       0.upto(@largeurAfficheCarte-1)do |j|
         #afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
+		@carte.getCaseAt(i+@x,j+@y).verifEnnemis
         afficheCase(j*@tailleCase,i*@tailleCase,@carte.getCaseAt(i+@x,j+@y))
       end
     end

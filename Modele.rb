@@ -250,13 +250,16 @@ class Modele
       @compteurTour += 1
       Thread.new do
       # Deplacement des ennemis
-      for e in @listeEnnemis
-		if(e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
-         e.deplacementIntelligent()
-         @@pileExecution.delete(e)
-        else
+		for e in @listeEnnemis
+			if(e.vivant && e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
+				e.deplacementIntelligent()
+				@@pileExecution.delete(e)
+			elsif(e.vivant)
 				@@pileExecution.unshift(e)
-        end
+			else
+				@listeEnnemis.delete(e)
+				@@pileExecution.delete(e)
+			end
         end
       end
       

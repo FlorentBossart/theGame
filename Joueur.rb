@@ -209,6 +209,10 @@ class Joueur < Personnage
    # ennemi : l'ennemi a combattre
    #
    def combattreEnnemi(ennemi)
+	if(!ennemi.vivant)
+		ennemi.meurt
+		return
+	end
      str=XmlMultilingueReader.lireTexte("combatEnCours")
      str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(ennemi)).gsub("NIVEAU",ennemi.niveau().to_s).gsub("ENERGIE",ennemi.energie().to_s)
      @modele.notifier(str)
@@ -249,7 +253,7 @@ class Joueur < Personnage
       else
          @causeMort =XmlMultilingueReader.lireTexte("mortCombat")
       end
-      
+      ennemi.meurt()
       return Array.new()
    end
 
