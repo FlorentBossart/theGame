@@ -43,7 +43,6 @@ class Vue
   @interactionModal
   @popUp
   @window
-  @valign
   @tailleCase #taille d'une case
   @finInit
 
@@ -118,12 +117,8 @@ class Vue
           if(@carteVue != nil && @finInit)then
             @largeurAfficheCarte = x;
             @hauteurAfficheCarte = y;
-            #@valign.remove(@carteVue);
             @vue = Array.new(@hauteurAfficheCarte){Array.new(@largeurAfficheCarte ){Gtk::Image.new()}}
-            #@carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
-            #@carteVue = Gtk::Image.new()
             initCarte();
-            #@valign.add(@carteVue);
             @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
             @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
             afficheCarte()
@@ -143,11 +138,8 @@ class Vue
     tabBot.attach(@zoneCtrl,2,3,0,1)
 
     #image pour afficher la carte
-    #@carteVue = Gtk::Table.new(@hauteurAfficheCarte,@largeurAfficheCarte,true)
     @carteVue = Gtk::Image.new()
     vbox = Gtk::VBox.new()
-
-    #initialisation de la carte
 
     #initialisation de la carte
 
@@ -156,10 +148,10 @@ class Vue
     @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
     afficheCarte()
     
-    @valign = Alignment.new(0.5,1,0,0);
-    @valign.add(@carteVue);
+    valign = Alignment.new(0.5,1,0,0);
+    valign.add(@carteVue);
 
-    vbox.add(@valign)
+    vbox.add(valign)
     valignBot = Alignment.new(0.5,1,1,0);
     valignBot.add(tabBot);
     vbox.add(valignBot);
