@@ -218,6 +218,7 @@ class Controller
   # Action(s) Ã  effectuer lors du clic sur le bouton inventaire
   #
   def inventaireAction
+    @vue.window.modal = false #AFR
     @vue.inventaireModal.afficherInventaire(@modele.joueur)
     print "oO Bt inventaire pressÃ©!"
   end
@@ -419,17 +420,7 @@ class Controller
   end
   
   
-  
-  ## AFR
-  # SÃ©lectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
-  #
-  def selectionnerItem(btItem,indiceItem)
-      btItem.signal_connect('button_press_event'){
-        #equiperItemAction(joueur,elem)
-        puts "(S) SÃ©lection de l'item "+indiceItem.to_s+"."
-        #InventaireVue.
-     }
-  end
+
   
 ##### Pour le menu  
   
@@ -779,7 +770,7 @@ class Controller
   def selectionnerItem(btItem,indiceItem)
   btItem.signal_connect('button_press_event'){
   puts "(S) Sélection de l'item "+indiceItem.to_s+"."
-  @vue.inventaireVue.setImageSelection(indiceItem)
+  @vue.inventaireModal.setImageSelection(indiceItem) #AFR
   }
   end
   
