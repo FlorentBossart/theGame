@@ -124,6 +124,8 @@ class Vue
             @carteVue = Gtk::Image.new()
             initCarte();
             @valign.add(@carteVue);
+            @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
+            @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
             afficheCarte()
             @window.show_all()
         
