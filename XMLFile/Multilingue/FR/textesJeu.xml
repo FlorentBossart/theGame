@@ -181,7 +181,7 @@
 		<contenu> Vous avez utilise vos BOTTES ayant une protection de PROTEC %</contenu>
 	</texte>
 	<texte><id>perteEnergie</id>
-		<contenu> Vous perdez ENERGIE points d'�nergie</contenu>
+		<contenu> Vous perdez ENERGIE points d'énergie</contenu>
 	</texte>
 	<texte><id>perteBotte</id>
 		<contenu> Vous perdez vos bottes!</contenu>
