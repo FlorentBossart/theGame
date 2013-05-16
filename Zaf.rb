@@ -80,7 +80,7 @@ class Zaf < Gtk::Frame
   end
   
   def majLangue()
-    niveau.text=XmlMultilingueReader.lireTexte("niveau");
+    niveau.label=XmlMultilingueReader.lireTexte("niveau");
   end
 
 end

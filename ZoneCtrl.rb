@@ -113,5 +113,12 @@ class ZoneCtrl <  Gtk::Frame
       @interaction.sensitive=false
   end
 
+  #mise a jour de la langue
+  def majLangue()
+    @repos.label=(XmlMultilingueReader.lireTexte("boutonRepos"))
+    @inventaire.label=(XmlMultilingueReader.lireTexte("boutonInventaire"))
+    @menu.label=(XmlMultilingueReader.lireTexte("boutonMenu"))
+    @interaction.label=(XmlMultilingueReader.lireTexte("boutonInteraction"))
+  end
 end
 
