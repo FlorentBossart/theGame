@@ -468,7 +468,7 @@ class Controller
 	def nouvellePartieAction
 		puts "Clique sur nouvelle partie"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherNouvellePartie()
 	end
 
@@ -492,7 +492,7 @@ class Controller
 	def chargerPartieAction
 		puts "Clique sur charger partie"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherChargerPartie()
 	end
 
@@ -517,7 +517,7 @@ class Controller
 	def sauvegarderPartieAction
 		puts "Clique sur sauvegarder partie"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherSauvegarderPartie()
 	end
 
@@ -543,7 +543,7 @@ class Controller
 	def classementAction
 		puts "Clique sur classement"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherClassement()
 	end
 
@@ -568,7 +568,7 @@ class Controller
 	def optionsAction
 		puts "Clique sur options"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherOptions()
 	end
 
@@ -592,7 +592,7 @@ class Controller
 	def aideAction
 		puts "Clique sur aide"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherAide()
 	end
 	
@@ -719,7 +719,7 @@ class Controller
 		@vue.majLangue()
 	
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
 
@@ -744,7 +744,7 @@ class Controller
 	def retourAction
 		puts "Clique sur Retour"
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		puts "Vidage du contenu du menu principal"
+		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
 	
@@ -770,59 +770,85 @@ class Controller
 		puts "Clique sur Quitter Partie"
 		Gtk.main_quit
 	end
-  ### Gestion des événements de la fenêtre d'inventaire ###
-  
-  ##
-  # Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
-  #
-  def selectionnerItem(btItem,indiceItem)
-  btItem.signal_connect('button_press_event'){
-  puts "(S) Sélection de l'item "+indiceItem.to_s+"."
-  @vue.inventaireModal.setImageSelection(indiceItem) #AFR
-  @modele.indiceItemSelectionne = indiceItem #AFR
-  }
-  end
-  
-  ##
-  # Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
-  #
-  def acheterItem(btAcheter)
-  btAcheter.signal_connect('clicked'){
-  puts "(S) Achat de l'item "+"XX"+"."
-  #@vue.vueInventaire.setImageSelection(indiceItem)
-  }
-  end
-  
-  ##
-  # Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
-  #
-  def vendreItem(btVendre)
-  btVendre.signal_connect('clicked'){
-  puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
-  @joueur
-  #@vue.vueInventaire.setImageSelection(indiceItem)
-  }
-  end
-  
-  ##
-  # Jette l'item sélectionné lors de l'appuie sur le bouton "Jeter" dans l'inventaire
-  #
-  def jeterItem(btJeter)
-  btJeter.signal_connect('clicked'){
-  puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
-  @modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
-  @vue.inventaireModal.onDestroy
-  }
-  end
-  
-  ##
-  # Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
-  #
-  def equiperItem(btEquiter)
-  btEquiter.signal_connect('clicked'){
-  puts "(S) Equipement du joueur avec l'item "+"XX"+"."
-  #@vue.vueInventaire.setImageSelection(indiceItem)
-  }
-  end
-      
+	
+	
+	##
+   # Liaison de l'action sur le bouton
+   #
+   # == Parameters:
+   # fenetre : la gtk::Window qu'il faudra lier a l'action d'un clic sur la croix de fermeture (croix rouge sous windows)
+   #
+   def destroyMenuCreer(fenetre)
+      fenetre.signal_connect('delete_event'){
+          destroyMenuAction(fenetre)
+      }
+   end
+ 
+ 
+	##
+	# Action(s) ï¿½ effectuer lors du clic sur la croix de fermeture (croix rouge sous windows)
+	#
+	def destroyMenuAction(fenetre)
+		puts "Fermeture du menu par la croix rouge !"
+		puts "Reactivation du jeu"
+		@modele.vue.window.set_sensitive(true)
+		fenetre.destroy
+	end
+	
+
+### Gestion des événements de la fenêtre d'inventaire ###
+ 
+	##
+	# Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+	#
+	def selectionnerItem(btItem,indiceItem)
+		btItem.signal_connect('button_press_event'){
+			puts "(S) Sélection de l'item "+indiceItem.to_s+"."
+			@vue.inventaireModal.setImageSelection(indiceItem) #AFR
+			@modele.indiceItemSelectionne = indiceItem #AFR
+		}
+	end
+	
+	##
+	# Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
+	#
+	def acheterItem(btAcheter)
+		btAcheter.signal_connect('clicked'){
+			puts "(S) Achat de l'item "+"XX"+"."
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+	
+	##
+	# Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
+	#
+	def vendreItem(btVendre)
+		bVendre.signal_connect('clicked'){
+			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			@joueur
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+	
+	##
+	# Jette l'item sélectionné lors de l'appuie sur le bouton "Jeter" dans l'inventaire
+	#
+	def jeterItem(btJeter)
+		btJeter.signal_connect('clicked'){
+			puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			@modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
+			@vue.inventaireModal.onDestroy
+		}
+	end
+	
+	##
+	# Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
+	#
+	def equiperItem(btEquiter)
+		btEquiter.signal_connect('clicked'){
+			puts "(S) Equipement du joueur avec l'item "+"XX"+"."
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+     
 end

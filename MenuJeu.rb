@@ -75,7 +75,7 @@ class MenuJeu
    # Initialise la fen�tre du menu avec les boutons n�cessaires
    #
 	def afficherMenu()
-	  @fenetreMenu=Window.new()
+	  	@fenetreMenu=Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
 		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
@@ -125,16 +125,13 @@ class MenuJeu
 		
 		@fenetreMenu.show_all
 		
-		# Pas sur de mettre �a ici, plutot dans le controleur non ?
-		#@fenetreMenu.signal_connect('destroy') {onDestroy}
-		@fenetreMenu.signal_connect('delete_event') {onDestroy}
-
 		@controleur.nouvellePartieCreer(boutNewPartie,@fenetreMenu)
 		@controleur.chargerPartieCreer(boutChargerPartie,@fenetreMenu)
 		@controleur.classementCreer(boutClassement,@fenetreMenu)
 		@controleur.optionsCreer(boutOptions,@fenetreMenu)
 		@controleur.aideCreer(boutAide,@fenetreMenu)
 		@controleur.quitterPartieCreer(boutQuitter,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 	
@@ -195,6 +192,7 @@ class MenuJeu
 
 		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert, @fenetreMenu)
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 	
@@ -271,6 +269,7 @@ class MenuJeu
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
@@ -350,6 +349,7 @@ class MenuJeu
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
@@ -419,6 +419,7 @@ class MenuJeu
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 	
 	
@@ -541,34 +542,34 @@ class MenuJeu
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxSon 	= HBox.new(true, 10)
-		labelSon 	= Label.new("Activer le son de fond ?")
-		oui 			= RadioButton.new("Oui")
-		non 			= RadioButton.new(oui, "Non")
+		labelSon 	= Label.new(XmlMultilingueReader.lireTexte("musique?"))
+		oui 			= RadioButton.new(XmlMultilingueReader.lireTexte("oui"))
+		non 			= RadioButton.new(oui, XmlMultilingueReader.lireTexte("non"))
 		
 		maHBoxSon.add(labelSon)
 		maHBoxSon.add(oui)
 		maHBoxSon.add(non)
 		
       maHBoxBruitage   = HBox.new(true, 10)
-      labelBruitage    = Label.new("Activer les bruitages ?")
-      ouiB             = RadioButton.new("Oui")
-      nonB             = RadioButton.new(ouiB, "Non")
+      labelBruitage    = Label.new(XmlMultilingueReader.lireTexte("bruitage?"))
+      ouiB             = RadioButton.new(XmlMultilingueReader.lireTexte("oui"))
+      nonB             = RadioButton.new(ouiB, XmlMultilingueReader.lireTexte("non"))
         
       maHBoxBruitage.add(labelBruitage)
       maHBoxBruitage.add(ouiB)
       maHBoxBruitage.add(nonB)
 		
 		maHBoxLangue 	= HBox.new(true, 10)
-		labelLangue 	= Label.new("Langue :")
+		labelLangue 	= Label.new(XmlMultilingueReader.lireTexte("langue") + " : ")
 		listeLangue 	= ComboBox.new(true)
-		listeLangue.insert_text(0, "Francais")
-		listeLangue.insert_text(1, "Anglais")
+		listeLangue.insert_text(0, XmlMultilingueReader.lireTexte("francais"))
+		listeLangue.insert_text(1, XmlMultilingueReader.lireTexte("anglais"))
 		listeLangue.active=(0)
 		
 		maHBoxLangue.add(labelLangue)
 		maHBoxLangue.add(listeLangue)
 		
-		boutValider = Button.new(Stock::OK)
+		boutValider = Button.new(XmlMultilingueReader.lireTexte("valider"))
 		
 		@contenu.add(maHBoxSon)
       @contenu.add(maHBoxBruitage)
@@ -580,6 +581,7 @@ class MenuJeu
 		@fenetreMenu.show_all
 		
       @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue, @fenetreMenu)
+      @controleur.destroyMenuCreer(@fenetreMenu)
 		
 	end
 
@@ -633,14 +635,9 @@ class MenuJeu
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
+		@controleur.destroyMenuCreer(@fenetreMenu)
 	end
 
-	
-	def onDestroy
-		puts "Fermeture du menu par la croix rouge !"
-		@modele.vue.window.set_sensitive(true)
-		#@fenetreMenu.destroy
-	end
 	
 end
 

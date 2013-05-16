@@ -84,7 +84,38 @@
 	    <contenu>Voici le classement des joueurs suivant la difficulte. Chaque colonne peut etre triee en cliquant sur son nom.</contenu>
 	</texte>
 	
-
+	<texte>
+		<id>langue</id>
+	    <contenu>Langue</contenu>
+	</texte>
+	<texte>
+		<id>musique?</id>
+	    <contenu>Musique ?</contenu>
+	</texte>
+	<texte>
+		<id>bruitage?</id>
+	    <contenu>Bruitages ?</contenu>
+	</texte>
+	<texte>
+		<id>oui</id>
+	    <contenu>Oui</contenu>
+	</texte>
+	<texte>
+		<id>non</id>
+	    <contenu>Non</contenu>
+	</texte>
+	<texte>
+		<id>francais</id>
+	    <contenu>Francais</contenu>
+	</texte>
+	<texte>
+		<id>anglais</id>
+	    <contenu>Anglais</contenu>
+	</texte>
+	<texte>
+		<id>valider</id>
+	    <contenu>Valider</contenu>
+	</texte>
 	
 	<texte>
 		<id>ContinuerPartie</id>
@@ -103,8 +134,8 @@
 	    <contenu>Sauvegarder partie</contenu>
 	</texte>
 	<texte>
-		<id>Classements</id>
-	    <contenu>Classement</contenu>
+		<id>Classement</id>
+	    <contenu>Classements</contenu>
 	</texte>
 	<texte>
 		<id>Options</id>

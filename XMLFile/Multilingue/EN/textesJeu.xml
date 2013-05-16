@@ -84,6 +84,39 @@
 	    <contenu>This is ranking's players following the difficulty. Every column can be sorted out by clicking its name.</contenu>
 	</texte>
 	
+	<texte>
+		<id>langue</id>
+	    <contenu>Language</contenu>
+	</texte>
+	<texte>
+		<id>musique?</id>
+	    <contenu>Music ?</contenu>
+	</texte>
+	<texte>
+		<id>bruitage?</id>
+	    <contenu>Sound effects ?</contenu>
+	</texte>
+	<texte>
+		<id>oui</id>
+	    <contenu>Oui</contenu>
+	</texte>
+	<texte>
+		<id>non</id>
+	    <contenu>Non</contenu>
+	</texte>
+	<texte>
+		<id>francais</id>
+	    <contenu>French</contenu>
+	</texte>
+	<texte>
+		<id>anglais</id>
+	    <contenu>English</contenu>
+	</texte>
+	<texte>
+		<id>valider</id>
+	    <contenu>Confirm</contenu>
+	</texte>
+	
 	
 	<texte>
 		<id>ContinuerPartie</id>
