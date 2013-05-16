@@ -420,17 +420,7 @@ class Controller
   end
   
   
-  
-  ## AFR
-  # SÃ©lectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
-  #
-  def selectionnerItem(btItem,indiceItem)
-      btItem.signal_connect('button_press_event'){
-        #equiperItemAction(joueur,elem)
-        puts "(S) SÃ©lection de l'item "+indiceItem.to_s+"."
-        #InventaireVue.
-     }
-  end
+
   
 ##### Pour le menu  
   
