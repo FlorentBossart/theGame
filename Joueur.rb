@@ -146,6 +146,7 @@ class Joueur < Personnage
    #
    def deplacement(cible)
 
+      @destination=cible
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
       end

@@ -11,12 +11,19 @@
 #
 
 require './Elem.rb'
+require './Enum/EnumDirection.rb'
+
+
 
 class Personnage < Elem
+
+  @direction
+  
   def Personnage.creer(casePosition)
     new(casePosition)
   end
   def initialize(casePosition)
     super(casePosition)
+    @direction=EnumDirection.SUD()
   end
 end

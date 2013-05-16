@@ -124,6 +124,7 @@ class Ennemi < PNJ
    #* <b>cible :</b> la cible de destination
    #
    def deplacement(cible)
+     @direction=cible
      Thread.new do
        caseCible= @casePosition.getDestination(cible)
         
