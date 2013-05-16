@@ -75,6 +75,7 @@ class MenuJeu
    # Initialise la fen�tre du menu avec les boutons n�cessaires
    #
 	def afficherMenu()
+	  @fenetreMenu=Window.new()
 		@fenetreMenu.set_title("Menu")
 		# L'application est toujours centree
 		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
@@ -328,7 +329,7 @@ class MenuJeu
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
 				# MAJ de l'affichage des slots de sauvegarde
-				viderFenetre(@contenu)
+				#viderFenetre(@contenu)
 				afficherSauvegarderPartie()
 			}
 		}
@@ -583,7 +584,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
-		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue)
+		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue,@fenetreMenu)
 		
 	end
 
@@ -638,7 +639,7 @@ class MenuJeu
 	def onDestroy
 		puts "Fermeture du menu par la croix rouge !"
 		@modele.vue.window.set_sensitive(true)
-		@fenetreMenu.destroy
+		#@fenetreMenu.destroy
 	end
 	
 end

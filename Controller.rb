@@ -442,7 +442,6 @@ class Controller
    def continuerPartieCreer(btContinuerPartie,fenetre)
       btContinuerPartie.signal_connect('clicked'){
           continuerPartieAction()
-          fenetre.destroy()
       }
    end
    
@@ -477,7 +476,7 @@ class Controller
 	#
 	def nouvellePartieAction
 		puts "Clique sur nouvelle partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherNouvellePartie()
 	end
@@ -501,7 +500,7 @@ class Controller
 	#
 	def chargerPartieAction
 		puts "Clique sur charger partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherChargerPartie()
 	end
@@ -526,7 +525,7 @@ class Controller
 	#
 	def sauvegarderPartieAction
 		puts "Clique sur sauvegarder partie"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherSauvegarderPartie()
 	end
@@ -552,7 +551,7 @@ class Controller
 	#
 	def classementAction
 		puts "Clique sur classement"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherClassement()
 	end
@@ -577,7 +576,7 @@ class Controller
 	#
 	def optionsAction
 		puts "Clique sur options"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherOptions()
 	end
@@ -601,7 +600,7 @@ class Controller
 	#
 	def aideAction
 		puts "Clique sur aide"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherAide()
 	end
@@ -718,7 +717,7 @@ class Controller
 			puts "Langue EN"
 		end
 	
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
@@ -742,7 +741,7 @@ class Controller
 	#
 	def retourAction
 		puts "Clique sur Retour"
-		@vue.menu.viderFenetre(@vue.menu.contenu)
+		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
