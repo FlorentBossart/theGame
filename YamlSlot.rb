@@ -42,11 +42,12 @@ class YamlSlot
 		nomDiff 	= tabElement[1]
 		date 		= tabElement[2]
 		temps 	= tabElement[3]
+		modele 	= tabElement[4]
 		
 		
 		# Ajoute le pseudo du joueur, la difficulté et la date aux informations du slot
       BibliothequeSlot.ajouter(nomFicSlotYaml, 
-      							Slot.creer(nomFicSlotYaml, pseudo, nomDiff, date, temps))
+      							Slot.creer(nomFicSlotYaml, pseudo, nomDiff, date, temps, modele))
  
    end
    
@@ -78,7 +79,7 @@ class YamlSlot
 	      
 	      #puts modele.joueur
 	     # file.syswrite(modele.joueur.to_yaml())
-	      puts modele
+	      #puts modele
 	      file.syswrite(modele.to_yaml())
 	      #puts "carte : "
 	      #p modele.carte

@@ -223,7 +223,7 @@ class MenuJeu
 				nom = slot.pseudo
 				diff = slot.intituleDifficulte
 				date = slot.date
-			else # Pour l'affichage des slots
+			else # Pour l'affichage des slots vides
 				nom = "..."
 				diff = "..."
 				date = "..."
@@ -244,27 +244,55 @@ class MenuJeu
 			@contenu.add(eventbox)
 		end
 		
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
+		
+		@contenu.add(boutRetour)
+		@contenu.set_border_width(20)
+		
 		@fenetreMenu.add(@contenu)
 		
 		# C'est une fois que les eventBox sont crï¿½es et ajoutï¿½es ï¿½ la fenetre qu'elles sont associï¿½es ï¿½ une Gdk::Window (et non Gtk::Window)
 		# On peut donc appeler eventbox.window pour pouvoir modifier la zone correspondante ï¿½ cette eventBox
 		tabEventBox.each_with_index{|eb, index|
 			eb.realize # Crï¿½er la fenetre GDK (Gdk::Window) associï¿½es au widget
-			if(tabSlot[index] != nil)	# Si le slot contient de "vraies" infos
+			if(tabSlot[index] != nil)	# Si le slot "existe"
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
 					puts " Chargement du slot" + (index+1).to_s 
 					@modele.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
 					puts "temps de jeu session d'avant : " + @modele.joueur.tempsTotal.to_s
+					
+					
+					#puts "modele charger : " + tabSlot[index].modele.to_s
+					#@modele = tabSlot[index].modele
+					modeleCharger = tabSlot[index].modele
+					
+					@fenetreMenu.destroy
+					#Destruction ancienne vue partie
+					@modele.vue.window.destroy
+					puts "Destroy partie"
+					
+					# Creation de la vue chargée
+					vue = modeleCharger.vue
+					puts "Vue creer"
+					
+					
+					#controller = Controller.creer(modele,vue)
+					controller = modeleCharger.vue.controller
+					puts "controller creer"
+					
+					vue.defM(modeleCharger)
+					vue.defC(controller)
+					puts "vue defc"
+					#modele.initialiseToi()
+					#puts "init modele"
+					vue.initInterface()
+					puts "init interface"
 				}
 			end
 		}
 		
-		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
-		@contenu.add(boutRetour)
-		
-		@contenu.set_border_width(20)
 		
 		@fenetreMenu.show_all
 
@@ -277,7 +305,7 @@ class MenuJeu
    # Lorsque le joueur clique sur sauvegarder partie, affiche les slots de sauvegarde d'une partie
    #
 	def afficherSauvegarderPartie()		
-    @fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
 		
 		@contenu = VBox.new(false, 20)
@@ -300,7 +328,7 @@ class MenuJeu
 				diff = slot.intituleDifficulte
 				date = slot.date
 				puts slot.to_s
-			else # Pour l'affichage des slots
+			else # Pour l'affichage des slots vides
 				nom = "..."
 				diff = "..."
 				date = "..."

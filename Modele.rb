@@ -419,7 +419,7 @@ class Modele
    # de l'objet Modele sur lequel la méthode est appellée.
    #
    def to_s
-      return "[MODELE]"
+      return "[MODELE] : ListeEnnemis = #{@listeEnnemis}\n *****Joueur #{@joueur}"
    end
 
 end
