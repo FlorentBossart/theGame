@@ -251,7 +251,11 @@ class Vue
 
     #joueur
     if(caseAffiche.joueur!=nil)
-      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
+      if(caseAffiche.joueur.toujoursEnVie?())
+        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase))
+      else
+        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))
+      end
       pixbufElement=pixbufElement.scale(@tailleCase_f/2, @tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
       x=@tailleCase_f/3
       y=@tailleCase_f/3
