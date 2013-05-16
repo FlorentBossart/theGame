@@ -76,7 +76,7 @@ class MenuJeu
    #
 	def afficherMenu()
 	  @fenetreMenu=Window.new()
-		@fenetreMenu.set_title("Menu")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
 		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
 		@fenetreMenu.resize(300,300)
@@ -85,12 +85,12 @@ class MenuJeu
 		
 		# Cr�ation des boutons
 		if(@isInGame == false)
-			boutNewPartie 		= Button.new("Nouvelle partie")
-			boutChargerPartie = Button.new("Charger partie")
-			boutClassement 	= Button.new("Classement")
-			boutOptions 		= Button.new("Options")
-			boutAide 			= Button.new("Aide")
-			boutQuitter 		= Button.new("Quitter le jeu")
+			boutNewPartie 		= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
+			boutChargerPartie = Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
+			boutClassement 	= Button.new(XmlMultilingueReader.lireTexte("Classement"))
+			boutOptions 		= Button.new(XmlMultilingueReader.lireTexte("Options"))
+			boutAide 			= Button.new(XmlMultilingueReader.lireTexte("Aide"))
+			boutQuitter 		= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
 			
 			@contenu.add(boutNewPartie)
 			@contenu.add(boutChargerPartie)
@@ -99,14 +99,14 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 		else
-			boutContinuerPartie		= Button.new("Continuer partie")
-			boutNewPartie 				= Button.new("Nouvelle partie")
-			boutChargerPartie 		= Button.new("Charger partie")
-			boutSauvegarderPartie 	= Button.new("Sauvegarder partie")
-			boutClassement 			= Button.new("Classement")
-			boutOptions 				= Button.new("Options")
-			boutAide 					= Button.new("Aide")
-			boutQuitter 				= Button.new("Quitter le jeu")
+			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
+			boutNewPartie 				= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
+			boutChargerPartie 		= Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
+			boutSauvegarderPartie 	= Button.new(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
+			boutClassement 			= Button.new(XmlMultilingueReader.lireTexte("Classement"))
+			boutOptions 				= Button.new(XmlMultilingueReader.lireTexte("Options"))
+			boutAide 					= Button.new(XmlMultilingueReader.lireTexte("Aide"))
+			boutQuitter 				= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
 				
 			@contenu.add(boutContinuerPartie)
 			@contenu.add(boutNewPartie)
@@ -153,23 +153,23 @@ class MenuJeu
 		@modele.joueur.calculerTempsTotal
 		####### Fin Test ########
 		
-		@fenetreMenu.set_title("Nouvelle Partie")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("NewPartie"))
 		@fenetreMenu.resize(100,100)
 		
 		@contenu = VBox.new(true, 10)
 		
 		maHBoxNom 	= HBox.new(true, 10) # 10 => espace entre 2 "objets"
-		labelNom 	= Label.new("Votre nom")
+		labelNom 	= Label.new(XmlMultilingueReader.lireTexte("votreNom"))
 		champNom 	= Entry.new()
 		
 		maHBoxNom.add(labelNom)
 		maHBoxNom.add(champNom)
 		
 		maHboxDifficulte 	= HBox.new(true, 10)
-		labelDiff 			= Label.new("Difficulte :")
-		novice 				= RadioButton.new("Novice")
-		moyen 				= RadioButton.new(novice, "Moyen")
-		expert 				= RadioButton.new(novice, "Expert")
+		labelDiff 			= Label.new(XmlMultilingueReader.lireTexte("difficulte"))
+		novice 				= RadioButton.new(XmlMultilingueReader.lireTexte("novice"))
+		moyen 				= RadioButton.new(novice, XmlMultilingueReader.lireTexte("moyen"))
+		expert 				= RadioButton.new(novice, XmlMultilingueReader.lireTexte("expert"))
 		
 		maHboxDifficulte.add(labelDiff)
 		maHboxDifficulte.add(novice)
@@ -177,8 +177,8 @@ class MenuJeu
 		maHboxDifficulte.add(expert)
 		
 		maHBoxBouton 				= HBox.new(true, 10)
-		boutCommencerNewPartie 	= Button.new("C'est parti !")
-		boutRetour 					= Button.new("Retour au menu")
+		boutCommencerNewPartie 	= Button.new(XmlMultilingueReader.lireTexte("cestPartie"))
+		boutRetour 					= Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		maHBoxBouton.add(boutCommencerNewPartie)
 		maHBoxBouton.add(boutRetour)
@@ -202,7 +202,7 @@ class MenuJeu
    #
 	def afficherChargerPartie()
     @fenetreMenu  = Window.new()
-		@fenetreMenu.set_title("Charger Partie")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("ChargerPartie"))
 		
 		@contenu = VBox.new(false, 20)
 		# Tableau contenant des EventBox pouvant �tre cliqu�es pour charger une partie
@@ -258,7 +258,7 @@ class MenuJeu
 			end
 		}
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(boutRetour)
 		
@@ -275,7 +275,7 @@ class MenuJeu
    #
 	def afficherSauvegarderPartie()		
     @fenetreMenu  = Window.new()
-		@fenetreMenu.set_title("Sauvegarder Partie")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
 		
 		@contenu = VBox.new(false, 20)
 		# Tableau contenant des EventBox pouvant �tre cliqu�es pour sauvegarder une partie
@@ -335,7 +335,7 @@ class MenuJeu
 			}
 		}
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(boutRetour)
 		
@@ -353,7 +353,7 @@ class MenuJeu
    #
 	def afficherClassement()	
     @fenetreMenu  = Window.new()
-		@fenetreMenu.set_title("Classement")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Classement"))
 		@fenetreMenu.resize(300,390)
 		
 		@contenu = VBox.new(false, 10)
@@ -369,12 +369,15 @@ class MenuJeu
 		tabLabel[1] = Label.new("Moyen")
 		tabLabel[2] = Label.new("Expert")
 		
+		# Rempli toutes les listes de joueurs de toutes les difficultes : retourne un classement
+		c = remplirListeJoueur()
+		
 		#XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
 		
 
 		  0.upto(2) do |i|
 			# Rempli une liste de joueur suivant leur niveau de difficult�
-			listeJoueur = remplirListeJoueur(tabLabel[i].text)
+			#listeJoueur = remplirListeJoueur(tabLabel[i].text)
 			
 			# Cr�ation des treeView
 			treeview = TreeView.new
@@ -383,7 +386,8 @@ class MenuJeu
 			setup_tree_view(treeview)
 			
 			# Cr�ation et remplissage des ListStore
-			store = remplirListStore(listeJoueur)
+			#store = remplirListStore(listeJoueur)
+			store = remplirListStore(c.getListeJoueur(tabLabel[i].text))
 			
 			# Ajoute chacun des tree model au tree view correspondant
 			treeview.model = store
@@ -397,7 +401,7 @@ class MenuJeu
 			nb.append_page(scrolled_win, tabLabel[i])
 		end
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.pack_start(labelInfo, false, false)
 		@contenu.add(nb)
@@ -454,11 +458,11 @@ class MenuJeu
 	  # Les propri�t�s affectent la colonne enti�re
 	  # On utilise Pango pour obtenir le gras
     renderer.weight = Pango::FontDescription::WEIGHT_BOLD
+    
 	  column   = TreeViewColumn.new("Pseudo", renderer,  :text => 0)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 0
-	  	
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -467,8 +471,6 @@ class MenuJeu
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 1
-	  	
-
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -476,8 +478,6 @@ class MenuJeu
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 2
-	  	
-
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -485,8 +485,6 @@ class MenuJeu
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 3
-	  	
-
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -494,8 +492,6 @@ class MenuJeu
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 4
-	  	
-
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
@@ -503,10 +499,9 @@ class MenuJeu
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 5
-	  	
-
 	  # ======= Fin du tri
 	  treeview.append_column(column)
+	  
 	end
 	
 	
@@ -516,15 +511,16 @@ class MenuJeu
    #* <b>difficulte :</b> une chaine de caract�res permettant de choisir la liste de joueur � retourner en fonction de cette difficult�
    #
 	def remplirListeJoueur(difficulte)
-		listeJoueur = Array.new
+		#listeJoueur = Array.new
 		c = Classements.new()
 		
 		if(File.exist?("XMLFile/classements.xml")) # Si le fichier xml correspondant aux classements des joueurs existe
 			XmlClassements.lireXml(c)
-			listeJoueur = c.getListeJoueur(difficulte)
+			#listeJoueur = c.getListeJoueur(difficulte)
 		end
 		
-		return listeJoueur # La liste est vide si le fichier xml n'existe pas
+		#return listeJoueur # La liste est vide si le fichier xml n'existe pas
+		return c
 	end
 
 	
@@ -533,7 +529,7 @@ class MenuJeu
    #
 	def afficherOptions()
     @fenetreMenu  = Window.new()
-		@fenetreMenu.set_title("Options")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Options"))
 		@fenetreMenu.resize(100,100)
 		
 		@contenu = VBox.new(true, 10)
@@ -578,7 +574,7 @@ class MenuJeu
    #
 	def afficherAide()
     @fenetreMenu  = Window.new()
-		@fenetreMenu.set_title("Aide")
+		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Aide"))
 		
 		@contenu = VBox.new(false, 10)
 		
@@ -606,7 +602,7 @@ class MenuJeu
 		# Affichage ou non des scrollBars
 		scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
 		
-		boutRetour = Button.new("Retour au menu")
+		boutRetour = Button.new(XmlMultilingueReader.lireTexte("retourMenu"))
 		
 		@contenu.add(scrolled_win)
 		@contenu.pack_start(boutRetour, false, false)
