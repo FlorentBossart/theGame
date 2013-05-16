@@ -18,7 +18,7 @@ class InventaireModal
 	
    @fenetreInventaire
    @contenu
-   @controleur #TODO Controler depuis vue
+   @vue #TODO Controler depuis vue
    @referencesGraphiques
    @nbColonnesMax
    @boutonInteraction
@@ -38,8 +38,8 @@ class InventaireModal
    ##
    # Constructeur privé : la construction se fait par le biais de la méthode de classe InventaireModal.creer
    #	
-   def initialize(modeAffichage, controleur)
-      @controleur    = controleur
+   def initialize(modeAffichage, vue)
+      @vue    = vue
       @nbColonnesMax = 5
       @tabImages     = Array.new()
 
@@ -98,7 +98,7 @@ class InventaireModal
 	 eventBoxCourante = EventBox.new.add(imageCourante)
 
          #On lie l'événement de clic de l'eventBox au Controlleur
-         @controleur.selectionnerItem(eventBoxCourante,indice)
+         @vue.controller.selectionnerItem(eventBoxCourante,indice)
 
          #On place l'EventBox dans le tableau destiné à contenir les items
  	 @tableauItems.attach(eventBoxCourante, indice_colonne, (indice_colonne+1), indice_ligne, (indice_ligne+1) )
@@ -127,6 +127,7 @@ class InventaireModal
       #On ajoute la vbox à la fenêtre
       @fenetreInventaire.add(@contenu)
 
+      @fenetreInventaire.modal = true
       @fenetreInventaire.show_all
       return @fenetreInventaire
 	
@@ -145,6 +146,7 @@ class InventaireModal
       @contenu.remove(@tableauItems)
       @contenu.remove(@boutonInteraction)
       @fenetreInventaire.remove(@contenu)
+      @fenetreInventaire.modal = false
       @fenetreInventaire.hide_all
       @tabImages.clear
    end
@@ -178,19 +180,19 @@ class InventaireModal
       case modeAffichage
          when EnumStadePartie.INVENTAIRE_PLEIN then
             @boutonInteraction = @@boutonJeter
-            @controleur.jeterItem(@boutonInteraction) #AFR
+            @vue.controller.jeterItem(@boutonInteraction) #AFR
          when EnumStadePartie.EQUIPEMENT_ARME then
             @boutonInteraction = @@boutonEquiper
-            @controleur.equiperItem(@boutonInteraction) #AFR
+            @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.EQUIPEMENT_ARMURE then
             @boutonInteraction = @@boutonEquiper
-            @controleur.equiperItem(@boutonInteraction) #AFR
+            @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction = @@boutonAcheter
-            @controleur.acheterItem(@boutonInteraction) #AFR
+            @vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction = @@boutonVente
-            @controleur.vendreItem(@boutonInteraction) #AFR
+            @vue.controller.vendreItem(@boutonInteraction) #AFR
         end
    end
 
