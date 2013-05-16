@@ -24,12 +24,15 @@ class Vue
   @vue; #affichage carte
   @zaf
   @menu
-  @zoneCtrl;
-  @carte; #la classe carte
-  @referencesGraphiques; #fichier xml des images
-  @carteVue; #tableau pour affichager la carte
-  @hauteurAfficheCarte; #hauteurVisible
-  @largeurAfficheCarte; #largeurVisible
+  @zoneCtrl
+  @carte #la classe carte
+  @referencesGraphiques #fichier xml des images
+  
+  @carteVue #image pour affichager la carte
+  @pixbufCarteVue #son pixbuf attitré
+  
+  @hauteurAfficheCarte #hauteurVisible
+  @largeurAfficheCarte #largeurVisible
   @modele
   @controller
   @x #coordonné actuel
@@ -59,12 +62,9 @@ class Vue
   
   attr_reader :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
-  def initialize()
-    #Gtk.init();
-    #@carteVue = Modele.carte;
-    #initInterface();
-    #Gtk.main();
-
+  
+  def Vue.creer()
+   new()
   end
 
   def defM(modele)

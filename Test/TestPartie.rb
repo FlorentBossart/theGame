@@ -38,7 +38,7 @@ end while(choixDifficulte!="T" && choixDifficulte!="N" && choixDifficulte!="M" &
 
 
 # Creation de la vue
-vue=Vue.new()
+vue=Vue.creer()
 
 # Creation du modele
 modele = Modele.creer(vue,difficulte,pseudo)
