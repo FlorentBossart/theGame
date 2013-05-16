@@ -121,7 +121,6 @@ class XmlMultilingueReader
          determinant=""
        end
        nom=@@dicoObjetCourant[objet.getIntitule()][1]
-       puts objet.getIntitule()
        return determinant+nom
   end
   

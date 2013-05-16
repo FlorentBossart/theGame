@@ -192,6 +192,20 @@ class Vue
         #afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
 		@carte.getCaseAt(i+@x,j+@y).verifEnnemis
         afficheCase(j*@tailleCase,i*@tailleCase,@carte.getCaseAt(i+@x,j+@y))
+        c=@carte.getCaseAt(i+@x,j+@y)
+        if(c.joueur!=nil || !c.listeElements.empty? || !c.listeEnnemis.empty?)
+          puts "CASE("+(i+@x).to_s+":"+(j+@y).to_s+")"
+          if(c.joueur!=nil)
+            puts "\tJOUEUR"
+          end
+          for n in c.listeElements
+            puts "\tELEMENT "+n.getIntitule
+          end
+          for n in c.listeEnnemis
+            puts "\tENNEMI "+n.getIntitule
+          end
+          puts "\n"
+        end
       end
     end
     @carteVue.set_pixbuf(@pixbufCarteVue)
@@ -324,7 +338,7 @@ class Vue
   def actualiser
     @window.modal=true
 
-    puts "debut actualiser"
+    puts "\tdebut actualiser"
     
     #if(@@threadAffichage == false)
   # @@threadAffichage = true
@@ -373,7 +387,7 @@ class Vue
     when EnumStadePartie.INTERACTION_GUERISSEUR
       @popUp.afficheChoixGuerisseur(@modele.joueur, @modele.pnjAideEnInteraction)
     end #fin case
-    puts "fin actualiser"
+    puts "\tfin actualiser"
   end
 
   def majEcouteClavier()

@@ -117,7 +117,7 @@ class Modele
       @notifications.push("Debut de partie")
       
       # Creation de la carte
-      @id_terrainParDefaut="plaine" #et plus tard "Plaine0000"
+      @id_terrainParDefaut="plaine" 
       @carte = Carte.nouvelle(@difficulte.longueurCarte, @difficulte.largeurCarte, @id_terrainParDefaut)
 
       # Initialisation de la case du joueur
@@ -230,7 +230,7 @@ class Modele
          elsif(choix == 1)
             caracteristique = Equipable.creer(BibliothequeTypeEquipable.getTypeEquipableAuHasard())
          else
-            montant = rand(1000)+1
+            montant = rand(50)+1
             caracteristique = Encaissable.creer(montant)
          end
          element = Item.creer(caseAleatoire, caracteristique)
@@ -248,9 +248,12 @@ class Modele
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
+      
+=begin
+     
       Thread.new do
-      # Deplacement des ennemis
-		for e in @listeEnnemis
+      # Deplacement des ennemis   
+		  for e in @listeEnnemis
 			if(e.vivant && e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
 				e.deplacementIntelligent()
 				@@pileExecution.delete(e)
@@ -260,9 +263,15 @@ class Modele
 				@listeEnnemis.delete(e)
 				@@pileExecution.delete(e)
 			end
-        end
-      end
+    end
+  end
+  
+=end
       
+      #SANS THREAD
+     for e in @listeEnnemis
+        e.deplacementIntelligent()   
+     end
       
       # Ajout d'ennemis
       if(@compteurTour % @difficulte.nbToursInterGenerations == 0)
@@ -270,6 +279,8 @@ class Modele
          ajoutItems(@difficulte.objetsParGeneration)
       end
    end
+   
+=begin
    
    def enverDuDecors
 		Thread.new do
@@ -282,7 +293,9 @@ class Modele
 				end
 			end
 		end
-      end
+   end
+   
+=end
 
    ##
    # Permet de lancer un tour: 
@@ -307,7 +320,7 @@ class Modele
             choixLibre()
         end
      end
-     puts "fin debutTour"
+     puts "fin debutTour\n"
    end
   
    def preparationHostilites(momentCombat)
