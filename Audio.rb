@@ -35,14 +35,15 @@ class Audio
    # Permet de jouer un son suivant son intitule
    #
    def Audio.playSound(intitule)
-      SDL::Mixer.play_channel(-1, @@listSoundLoad[intitule], 0)
+      SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], 0)
    end
    
    ##
    # Permet de jouer un son en boucle suivant son intitule
    #
    def Audio.playSoundLoop(intitule)
-      SDL::Mixer.play_channel(-1, @@listSoundLoad[intitule], -1)
+      @firstSound = intitule
+      SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], -1)
    end
    
    ##
