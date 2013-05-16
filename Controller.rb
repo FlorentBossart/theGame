@@ -716,6 +716,8 @@ class Controller
 			XmlMultilingueReader.setLangue("EN")
 			puts "Langue EN"
 		end
+		
+		@vue.majLangue()
 	
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		puts "Vidage du contenu du menu principal"
