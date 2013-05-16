@@ -147,12 +147,14 @@ class MenuJeu
 		# Remarque : c'est le controleur qui r�cup�re les donn�es (nom, difficult�)
 		
 		####### Pour tester #######
-		@modele.joueur.dateFinJeu = Time.now
+=begin		@modele.joueur.dateFinJeu = Time.now
 		puts "date fin : " + @modele.joueur.dateFinJeu.to_s
 		puts "diff a ajouter : " + (@modele.joueur.dateFinJeu-@modele.joueur.dateDebutJeu).to_s
 		@modele.joueur.calculerTempsTotal
+=end
 		####### Fin Test ########
 		
+		@fenetreMenu = Window.new
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("NewPartie"))
 		@fenetreMenu.resize(100,100)
 		
@@ -191,7 +193,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
-		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert)
+		@controleur.commencerNewPartieCreer(boutCommencerNewPartie, champNom, novice, moyen, expert, @fenetreMenu)
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
 		
 	end
@@ -201,7 +203,7 @@ class MenuJeu
    # Lorsque le joueur clique sur charger partie, affiche les slots de chargement d'une partie
    #
 	def afficherChargerPartie()
-    @fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("ChargerPartie"))
 		
 		@contenu = VBox.new(false, 20)
@@ -214,7 +216,7 @@ class MenuJeu
 		# Remplissage des frames contenant les diff�rentes EventBox
 		# Ces EventBox contiennent elles-m�mes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
-			frame = Frame.new("Emplacement " + (i+1).to_s)
+			frame = Frame.new(XmlMultilingueReader.lireTexte("emplacement") + " " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
@@ -229,7 +231,9 @@ class MenuJeu
 				date = "..."
 			end
 			
-			lab = Label.new("Nom : " + nom + " | Difficulte : " + diff + " | Date : " + date)
+			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
 			
@@ -287,7 +291,7 @@ class MenuJeu
 		# Remplissage des frames contenant les diff�rentes EventBox
 		# Ces EventBox contiennent elles-m�mes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
-			frame = Frame.new("Emplacement " + (i+1).to_s)
+			frame = Frame.new(XmlMultilingueReader.lireTexte("emplacement") + " " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
 			
 			if(File.exist?("YAMLSlot/" + nomFicYaml)) # Si le fichier yaml correspondant au slot existe
@@ -303,7 +307,9 @@ class MenuJeu
 				date = "..."
 			end
 			
-			lab = Label.new("Nom : " + nom  + " | Difficulte : " + diff + " | Date : " + date)
+			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
 			
@@ -352,7 +358,7 @@ class MenuJeu
    # en r�cup�rant les donn�es du fichier XML
    #
 	def afficherClassement()	
-    @fenetreMenu  = Window.new()
+    	@fenetreMenu  = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Classement"))
 		@fenetreMenu.resize(300,390)
 		
@@ -510,7 +516,7 @@ class MenuJeu
 	# == Parameters: 
    #* <b>difficulte :</b> une chaine de caract�res permettant de choisir la liste de joueur � retourner en fonction de cette difficult�
    #
-	def remplirListeJoueur(difficulte)
+	def remplirListeJoueur()
 		#listeJoueur = Array.new
 		c = Classements.new()
 		
@@ -543,6 +549,15 @@ class MenuJeu
 		maHBoxSon.add(oui)
 		maHBoxSon.add(non)
 		
+      maHBoxBruitage   = HBox.new(true, 10)
+      labelBruitage    = Label.new("Activer les bruitages ?")
+      ouiB             = RadioButton.new("Oui")
+      nonB             = RadioButton.new(ouiB, "Non")
+        
+      maHBoxBruitage.add(labelBruitage)
+      maHBoxBruitage.add(ouiB)
+      maHBoxBruitage.add(nonB)
+		
 		maHBoxLangue 	= HBox.new(true, 10)
 		labelLangue 	= Label.new("Langue :")
 		listeLangue 	= ComboBox.new(true)
@@ -556,6 +571,7 @@ class MenuJeu
 		boutValider = Button.new(Stock::OK)
 		
 		@contenu.add(maHBoxSon)
+      @contenu.add(maHBoxBruitage)
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
@@ -563,7 +579,7 @@ class MenuJeu
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
-		@controleur.validerOptionsCreer(boutValider, oui, non, listeLangue,@fenetreMenu)
+      @controleur.validerOptionsCreer(boutValider, oui, non, ouiB, nonB, listeLangue)
 		
 	end
 

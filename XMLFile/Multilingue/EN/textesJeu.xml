@@ -9,8 +9,13 @@
 <textesJeu>
 
 	<texte>
-		<id>nomMenu_menu</id>
+		<id>nomMenu</id>
 	    <contenu>Menu</contenu>
+	</texte>
+	
+	<texte>
+		<id>votreNom</id>
+	    <contenu>Your name</contenu>
 	</texte>
 	<texte>
 		<id>difficulte</id>
@@ -36,6 +41,20 @@
 		<id>retourMenu</id>
 	    <contenu>Back to menu</contenu>
 	</texte>
+	
+	<texte>
+		<id>emplacement</id>
+	    <contenu>Place</contenu>
+	</texte>
+	<texte>
+		<id>nom</id>
+	    <contenu>Name</contenu>
+	</texte>
+	<texte>
+		<id>date</id>
+	    <contenu>Date</contenu>
+	</texte>
+	
 	
 	<texte>
 		<id>ContinuerPartie</id>

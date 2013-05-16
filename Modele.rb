@@ -62,12 +62,11 @@ class Modele
    @id_terrainParDefaut
    @nbMaxPisteur
    @nbPisteur
-   @indiceItemSelectionne #AFR
 
    private_class_method :new
 
    attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
-   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur, :indiceItemSelectionne #AFR
+   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur
    
    
    def Modele.initialisationBibliotheques()
@@ -211,7 +210,6 @@ class Modele
       end
    end
 
-
    
    ##
    # Permet d'ajouter des items au jeu.
@@ -288,6 +286,7 @@ class Modele
      if(!@joueur.toujoursEnVie?())
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
+       @vue.popUp.affichePopUp(@messageDefaite) 
      else
         if(@joueur.casePosition.presenceEnnemis?())
             if(@tourDejaPasse)

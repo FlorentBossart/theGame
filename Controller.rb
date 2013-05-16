@@ -678,18 +678,17 @@ class Controller
    # == Parameters:
    # btValiderOptions : le gtkButton qu'il faudra lier � l'action d'un clic sur Valider (dans options)
    #
-   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, comboBoxListeLangue,fenetre)
-      btValiderOptions.signal_connect('clicked'){
-          validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
-        fenetre.destroy()
-      }
+   def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+         btValiderOptions.signal_connect('clicked'){
+             validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+         }
    end
  
  
 	##
 	# Action(s) � effectuer lors du clic sur le bouton Valider (dans options)
 	#
-	def validerOptionsAction(radioButtonOui, radioButtonNon, comboBoxListeLangue)
+   def validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
 		puts "Clique sur Valider (dans options)"
 		
 		if(radioButtonOui.active?)
@@ -699,6 +698,14 @@ class Controller
 			Audio.mute()
 			puts "son desactive"
 		end
+		
+      if(radioBO2.active?)
+        Audio.resumeBruitage()
+        puts "Son des bruitages active"
+      elsif(radioBN2.active?)
+        Audio.muteBruitage()
+        puts "Son des bruitages desactive"
+      end
 
 		if(comboBoxListeLangue.active == 0)
 			XmlMultilingueReader.setLangue("FR")
