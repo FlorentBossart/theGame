@@ -364,16 +364,16 @@ class MenuJeu
 		
 		@contenu = VBox.new(false, 10)
 		
-		labelInfo = Label.new("Voici le classement des joueurs suivant la difficulte. Chaque colonne peut etre triee en cliquant sur son nom.")
+		labelInfo = Label.new(XmlMultilingueReader.lireTexte("infoClassement"))
 		labelInfo.justify=Gtk::JUSTIFY_CENTER
   		labelInfo.wrap=true
 		
 		nb = Notebook.new()
 		
 		tabLabel = Array.new
-		tabLabel[0] = Label.new("Novice")
-		tabLabel[1] = Label.new("Moyen")
-		tabLabel[2] = Label.new("Expert")
+		tabLabel[0] = Label.new(XmlMultilingueReader.lireTexte("novice"))
+		tabLabel[1] = Label.new(XmlMultilingueReader.lireTexte("moyen"))
+		tabLabel[2] = Label.new(XmlMultilingueReader.lireTexte("expert"))
 		
 		# Rempli toutes les listes de joueurs de toutes les difficultes : retourne un classement
 		c = remplirListeJoueur()
@@ -465,7 +465,7 @@ class MenuJeu
 	  # On utilise Pango pour obtenir le gras
     renderer.weight = Pango::FontDescription::WEIGHT_BOLD
     
-	  column   = TreeViewColumn.new("Pseudo", renderer,  :text => 0)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("pseudo"), renderer,  :text => 0)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 0
@@ -473,35 +473,35 @@ class MenuJeu
 	  treeview.append_column(column)
 	  
 	  renderer = CellRendererText.new
-	  column   = TreeViewColumn.new("Ennemis tues", renderer, :text => 1)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("ennemisTues"), renderer, :text => 1)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 1
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Distance parcourue (m)", renderer, :text => 2)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("distanceParcourue"), renderer, :text => 2)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 2
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Or total", renderer, :text => 3)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("orTotal"), renderer, :text => 3)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 3
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Temps de jeu", renderer, :text => 4)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("tempsJeu"), renderer, :text => 4)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 4
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
-	  column   = TreeViewColumn.new("Score", renderer, :text => 5)
+	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("score"), renderer, :text => 5)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
 	  column.sort_column_id = 5

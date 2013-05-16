@@ -55,6 +55,35 @@
 	    <contenu>Date</contenu>
 	</texte>
 	
+	<texte>
+		<id>pseudo</id>
+	    <contenu>Pseudo</contenu>
+	</texte>
+	<texte>
+		<id>ennemisTues</id>
+	    <contenu>Ennemis tues</contenu>
+	</texte>
+	<texte>
+		<id>distanceParcourue</id>
+	    <contenu>Distance parcourue (m)</contenu>
+	</texte>
+	<texte>
+		<id>orTotal</id>
+	    <contenu>Or total</contenu>
+	</texte>
+	<texte>
+		<id>tempsJeu</id>
+	    <contenu>Temps de jeu</contenu>
+	</texte>
+	<texte>
+		<id>score</id>
+	    <contenu>Score</contenu>
+	</texte>
+	<texte>
+		<id>infoClassement</id>
+	    <contenu>Voici le classement des joueurs suivant la difficulte. Chaque colonne peut etre triee en cliquant sur son nom.</contenu>
+	</texte>
+	
 
 	
 	<texte>
@@ -74,7 +103,7 @@
 	    <contenu>Sauvegarder partie</contenu>
 	</texte>
 	<texte>
-		<id>Classement</id>
+		<id>Classements</id>
 	    <contenu>Classement</contenu>
 	</texte>
 	<texte>

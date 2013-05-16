@@ -55,6 +55,35 @@
 	    <contenu>Date</contenu>
 	</texte>
 	
+	<texte>
+		<id>pseudo</id>
+	    <contenu>Pseudo</contenu>
+	</texte>
+	<texte>
+		<id>ennemisTues</id>
+	    <contenu>Killed enemies</contenu>
+	</texte>
+	<texte>
+		<id>distanceParcourue</id>
+	    <contenu>Distance travelled (m)</contenu>
+	</texte>
+	<texte>
+		<id>orTotal</id>
+	    <contenu>Total gold</contenu>
+	</texte>
+	<texte>
+		<id>tempsJeu</id>
+	    <contenu>Game's time</contenu>
+	</texte>
+	<texte>
+		<id>score</id>
+	    <contenu>Score</contenu>
+	</texte>
+	<texte>
+		<id>infoClassement</id>
+	    <contenu>This is ranking's players following the difficulty. Every column can be sorted out by clicking its name.</contenu>
+	</texte>
+	
 	
 	<texte>
 		<id>ContinuerPartie</id>
@@ -74,7 +103,7 @@
 	</texte>
 	<texte>
 		<id>Classement</id>
-	    <contenu>Rank</contenu>
+	    <contenu>Ranking</contenu>
 	</texte>
 	<texte>
 		<id>Options</id>
