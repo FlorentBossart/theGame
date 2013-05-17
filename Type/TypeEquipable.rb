@@ -72,5 +72,9 @@ class TypeEquipable
      return s
    end
 
+    def getIntitule
+       return @intitule
+    end
+
 end
 
