@@ -29,6 +29,7 @@
 #
 
 require "./Enum/EnumDirection.rb"
+require './Enum/EnumStadePartie.rb'
 require "./Enum/EnumMomentCombat.rb"
 require "./Enum/EnumRarete.rb"
 require "./Elem.rb"
@@ -36,6 +37,7 @@ require "./Personnage.rb"
 require "./Interface/Deplacable.rb"
 require "./Interface/Commercant.rb"
 require "./Carte.rb"
+require './XMLReader/XmlClassements.rb'
 
 class Joueur < Personnage
    include Deplacable, Commercant
@@ -119,7 +121,7 @@ class Joueur < Personnage
       @nbEnnemiTues=0
       @distanceParcourue=0
       @peutSEquiper=true
-      @dateDebutJeu = Time.now
+      @dateDebutJeu = Time.now # Debut du temps a la creation du joueur
       @tempsTotal = 0
    end
 
@@ -511,6 +513,20 @@ class Joueur < Personnage
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
    	puts XmlMultilingueReader.lireTexte("tempsTotal")+"#{@tempsTotal}"
+   end
+   
+   
+   def meurt(messageDefaite)
+   	@modele.changerStadePartie(EnumStadePartie.PERDU)
+         
+      # Arret du temps de jeu
+		@dateFinJeu = Time.now
+		puts "---> date fin : " + @dateFinJeu.to_s
+		puts "diff a ajouter : " + (@dateFinJeu - @dateDebutJeu).to_s
+		calculerTempsTotal
+		
+		XmlClassements.ecrireXml(@modele)
+		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
 

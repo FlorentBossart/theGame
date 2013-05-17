@@ -362,7 +362,6 @@ class Vue
       majEcouteClavier()
       #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
-      XmlClassements.ecrireXml(@modele)
       @zoneCtrl.bloquerBoutons(@modele)
       bloquerEcouteClavier()
       #ETAPE EQUIPEMENT ARMURE

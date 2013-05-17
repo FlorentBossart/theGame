@@ -155,17 +155,7 @@ class MenuJeu
    # Lorsque le joueur clique sur nouvelle partie, affiche un champ pour le nom du joueur, 
    # des boutons radio pour le choix de difficult� et un bouton lancer partie
    #
-	def afficherNouvellePartie()
-		# Remarque : c'est le controleur qui r�cup�re les donn�es (nom, difficult�)
-		
-		####### Pour tester #######
-=begin		@modele.joueur.dateFinJeu = Time.now
-		puts "date fin : " + @modele.joueur.dateFinJeu.to_s
-		puts "diff a ajouter : " + (@modele.joueur.dateFinJeu-@modele.joueur.dateDebutJeu).to_s
-		@modele.joueur.calculerTempsTotal
-=end
-		####### Fin Test ########
-		
+	def afficherNouvellePartie()		
 		@fenetreMenu = Window.new
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("NewPartie"))
 		@fenetreMenu.resize(100,100)
@@ -274,8 +264,7 @@ class MenuJeu
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
 					puts " Chargement du slot" + (index+1).to_s 
-					@modele.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
-					puts "temps de jeu session d'avant : " + @modele.joueur.tempsTotal.to_s
+					
 					
 					
 					#puts "modele charger : " + tabSlot[index].modele.to_s
@@ -303,6 +292,9 @@ class MenuJeu
 					#puts "init modele"
 					vue.initInterface()
 					puts "init interface"
+					
+					@modele.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
+					puts "temps de jeu session d'avant : " + @modele.joueur.tempsTotal.to_s
 				}
 			end
 		}
@@ -371,7 +363,7 @@ class MenuJeu
 			eb.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
 			eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND2) # Change le curseur en forme de main
 			
-			eb.signal_connect('button_press_event') { 
+			eb.signal_connect('button_press_event') {
 				puts "\tSauvegarde sur le slot" + (index+1).to_s 
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				

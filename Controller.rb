@@ -671,10 +671,13 @@ class Controller
 		vue.defM(modele)
 		vue.defC(controller)
 		puts "vue defc"
-		modele.initialiseToi()
+		modele.initialiseToi() # Debut du temps à la création d'un joueur
 		puts "init modele"
 		vue.initInterface()
 		puts "init interface"
+		
+		
+		
 	end
 
 
