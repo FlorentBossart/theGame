@@ -80,25 +80,35 @@ class InventaireModal
    ##
    # Actualise et affiche la fenÃªtre d'inventaire
    #
-   def afficherInventaire(joueur, modeAffichage)
-     @fenetreInventaire = Window.new()
-     @fenetreInventaire.set_default_size(100,100)
-     @fenetreInventaire.set_title("Inventaire")
+   def afficherInventaire(protagoniste, modeAffichage)
+      @fenetreInventaire = Window.new()
+      @fenetreInventaire.set_default_size(100,100)
+      @fenetreInventaire.set_title("Inventaire")
       @vue.window.modal=false
 
       setModeAffichage(modeAffichage)
       
       @contenu = VBox.new(false,10)
+      
+      #Récupération de l'inventaire à afficher      
+      if modeAffichage == EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+         inventaire = protagoniste.listeItem.itemsStock
+         puts "Nb items avt suppression des trop chers = " + protagoniste.listeItem.itemsStock.count.to_s
+         #On supprime les items dont le prix est trop cher
+         #inventaire.delete_if { |item| @vue.modele.joueur.peutSePermettreAchat?(item) } 
+      else
+         inventaire = protagoniste.inventaire.items
+      end
 
       #CrÃ©ation du tableau qui contiendra les items
-      @tableauItems = Table.new(joueur.inventaire.items.count/@nbColonnesMax, @nbColonnesMax, true) 
+      @tableauItems = Table.new(inventaire.count/@nbColonnesMax, @nbColonnesMax, true) 
 
 
-      #On parcrous ensuite les items du joueur
+      #On parcrous ensuite les items du protagoniste
       indice_ligne   = 0
       indice_colonne = 0
 
-      joueur.inventaire.items.each_with_index do |item, indice| #Pour chaque item...
+      inventaire.each_with_index do |item, indice| #Pour chaque item...
          #On crÃ©e l'image de l'item
          pixbufItemCourant = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule.downcase))
          pixbufItemCourant = pixbufItemCourant.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
@@ -114,7 +124,7 @@ class InventaireModal
          @vue.controller.selectionnerItem(eventBoxCourante,indice)
 
          #On place l'EventBox dans le tableau destinÃ© Ã  contenir les items
-   @tableauItems.attach(eventBoxCourante, indice_colonne, (indice_colonne+1), indice_ligne, (indice_ligne+1) )
+        @tableauItems.attach(eventBoxCourante, indice_colonne, (indice_colonne+1), indice_ligne, (indice_ligne+1) )
          
    #On gÃ¨re les indices de placement
    indice_colonne +=1

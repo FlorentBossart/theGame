@@ -334,12 +334,7 @@ class Controller
   end
   
   
-  ##
-  # Action(s) Ã  effectuer lors du clic sur le bouton d'achat
-  #
-  def achatMarchandAction()
-    print "oO Bt achatMarchandAction  pressÃ©!"
-  end
+
   
   
   ##
@@ -357,6 +352,14 @@ class Controller
   }
   end
   
+  ##
+  # Action(s) Ã  effectuer lors du clic sur le bouton d'achat
+  #
+  def achatMarchandAction()
+    print "oO Bt achatMarchandAction  pressÃ©!"
+    @modele.joueur.encaisser(10000) #TODO : supprimmer cette ligne
+    @vue.inventaireModal.afficherInventaire(@modele.pnjAideEnInteraction, EnumStadePartie.INTERACTION_MARCHAND_ACHAT)
+  end
   
   ##
   # Action(s) Ã  effectuer lors du clic sur le bouton de vente
@@ -824,7 +827,8 @@ class Controller
 	def acheterItem(btAcheter)
 	  btAcheter.signal_connect('clicked'){
 	  puts "(S) Achat de l'item "+"XX"+"."
-	  @modele.joueur.acheter(@modele.indiceItemSelectionne)
+	  @modele.joueur.acheter(@modele.pnjAideEnInteraction.listeItem.itemsStock[@modele.indiceItemSelectionne])
+	  @vue.inventaireModal.onDestroy()
       @marchand==false
       @modele.debutTour()
 			#@vue.vueInventaire.setImageSelection(indiceItem)

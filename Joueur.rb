@@ -288,7 +288,8 @@ class Joueur < Personnage
    # boolean : true si le joueur a un capital supérieur au prix de l'item
    # 
    def peutSePermettreAchat?(item)
-     return @inventaire.capital>item.prix
+     #return @inventaire.capital>item.prix #AFR
+     return @inventaire.capital>item.caracteristique.prix
    end
    
   ##
