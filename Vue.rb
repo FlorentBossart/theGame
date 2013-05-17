@@ -80,7 +80,7 @@ class Vue
   def initInterface()
     Gtk.init();
     
-    @inventaireModal=InventaireModal.creer(EnumStadePartie.INVENTAIRE_USAGE,self)
+    @inventaireModal=InventaireModal.creer(self)
     
     @tailleCase=130
     @tailleCase_f=@tailleCase.to_f

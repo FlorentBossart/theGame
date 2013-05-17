@@ -26,7 +26,7 @@ class InventaireModal
 
    #Variables de classe/globales
    @@boutonVente    = Button.new("Vendre")
-   @@boutonEquiper  = Button.new("Equiper")
+   #@@boutonEquiper  = Button.new("Equiper")
    @@boutonUtiliser = Button.new("Utiliser")
    @@boutonAcheter  = Button.new("Acheter")
    @@boutonJeter    = Button.new("Jeter")
@@ -39,7 +39,8 @@ class InventaireModal
    ##
    # Constructeur privé : la construction se fait par le biais de la méthode de classe InventaireModal.creer
    #	
-   def initialize(modeAffichage, vue)
+   #AFR : on ne tient plus compte du mode d'affichage
+   def initialize(vue)
       @vue    = vue
       @nbColonnesMax = 5
       @tabImages     = Array.new()
@@ -53,8 +54,14 @@ class InventaireModal
       #TODO : récupérer les référence depuis la vue
       @referencesGraphiques = ReferencesGraphiques.new()
       XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
-
-      setModeAffichage(modeAffichage)
+      
+      
+      #Attribution des action liés aux différents boutons possibles
+      @vue.controller.vendreItem(@@boutonVente)
+      @vue.controller.utiliserItem(@@boutonUtiliser)
+      @vue.controller.acheterItem(@@boutonAcheter)
+      @vue.controller.jeterItem(@@boutonJeter)
+      
    end
 	
 	
@@ -65,8 +72,8 @@ class InventaireModal
    # modeAffichage : le mode d'affichage de l'inventaire (cf EnumStadePartie)
    # controleur    : le controleur lié à l'inventaire
    #
-   def InventaireModal.creer(modeAffichage, controleur)
-      return new(modeAffichage, controleur)
+   def InventaireModal.creer(vue)
+      return new(vue)
    end
 	
 	
@@ -74,8 +81,10 @@ class InventaireModal
    ##
    # Actualise et affiche la fenêtre d'inventaire
    #
-   def afficherInventaire(joueur)
+   def afficherInventaire(joueur, modeAffichage)
 
+      setModeAffichage(modeAffichage)
+      
       @contenu = VBox.new(false,10)
 
       #Création du tableau qui contiendra les items
@@ -92,11 +101,11 @@ class InventaireModal
          pixbufItemCourant = pixbufItemCourant.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
          imageCourante = Image.new(pixbufItemCourant)
 
-	 #On ajoute cette image au tableau d'images
+	     #On ajoute cette image au tableau d'images
          @tabImages << imageCourante
 
          #On crée une EventBox avec l'image de l'item
-	 eventBoxCourante = EventBox.new.add(imageCourante)
+	     eventBoxCourante = EventBox.new.add(imageCourante)
 
          #On lie l'événement de clic de l'eventBox au Controlleur
          @vue.controller.selectionnerItem(eventBoxCourante,indice)
@@ -181,7 +190,7 @@ class InventaireModal
       case modeAffichage
          when EnumStadePartie.INVENTAIRE_PLEIN then
             @boutonInteraction = @@boutonJeter
-            @vue.controller.jeterItem(@boutonInteraction) #AFR
+            #@vue.controller.jeterItem(@boutonInteraction) #AFR
          #when EnumStadePartie.EQUIPEMENT_ARME then
          #   @boutonInteraction = @@boutonEquiper
          #   @vue.controller.equiperItem(@boutonInteraction) #AFR
@@ -190,13 +199,13 @@ class InventaireModal
          #   @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction = @@boutonAcheter
-            @vue.controller.acheterItem(@boutonInteraction) #AFR
+            #@vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction = @@boutonVente
-            @vue.controller.vendreItem(@boutonInteraction) #AFR
+            #@vue.controller.vendreItem(@boutonInteraction) #AFR
          when EnumStadePartie.INVENTAIRE_USAGE then
             @boutonInteraction = @@boutonUtiliser
-            @vue.controller.utiliserItem(@boutonInteraction) #AFR
+            #@vue.controller.utiliserItem(@boutonInteraction) #AFR
         end
    end
 

@@ -219,7 +219,7 @@ class Controller
   #
   def inventaireAction
     @vue.window.modal = false #AFR
-    @vue.inventaireModal.afficherInventaire(@modele.joueur)
+    @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_USAGE)
     print "oO Bt inventaire pressÃ©!"
   end
 
