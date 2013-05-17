@@ -76,8 +76,9 @@ class Marchand < Ami
    #* <b>item :</b> l'item vendu
    #
    def vendre(acheteur, item)
-      acheteur.ajouterAuStock(item)
-      acheteur.debourser(item.caracteristique.type.prix)
+      #acheteur.ajouterAuStock(item)
+      #acheteur.debourser(item.caracteristique.type.prix)
+      acheteur.acheter(item) #AFR
       AffichageDebug.Afficher("#{item} \nvendu à \n#{acheteur}")
       return nil
    end

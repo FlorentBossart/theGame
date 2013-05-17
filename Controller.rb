@@ -827,7 +827,10 @@ class Controller
 	def acheterItem(btAcheter)
 	  btAcheter.signal_connect('clicked'){
 	  puts "(S) Achat de l'item "+"XX"+"."
-	  @modele.joueur.acheter(@modele.pnjAideEnInteraction.listeItem.itemsStock[@modele.indiceItemSelectionne])
+	  #@modele.joueur.acheter(@modele.pnjAideEnInteraction.listeItem.itemsStock[@modele.indiceItemSelectionne])
+	  marchand = @modele.pnjAideEnInteraction
+	  #Le marchand vent l'item sélectionné par le joueur à ce dernier
+	  marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
 	  @vue.inventaireModal.onDestroy()
       @marchand==false
       @modele.debutTour()
