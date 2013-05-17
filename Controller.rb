@@ -244,7 +244,7 @@ class Controller
   #
   def menuAction
     puts "<--> Creation du menu"
-    if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, création menu avec moins de bouton
+    if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, crï¿½ation menu avec moins de bouton
     	@vue.menu = MenuJeu.creer(false, @modele, self)
     else
     	@vue.menu = MenuJeu.creer(true, @modele, self)
@@ -671,7 +671,7 @@ class Controller
 		vue.defM(modele)
 		vue.defC(controller)
 		puts "vue defc"
-		modele.initialiseToi() # Debut du temps à la création d'un joueur
+		modele.initialiseToi() # Debut du temps ï¿½ la crï¿½ation d'un joueur
 		puts "init modele"
 		vue.initInterface()
 		puts "init interface"
@@ -824,6 +824,8 @@ class Controller
 	def acheterItem(btAcheter)
 		btAcheter.signal_connect('clicked'){
 			puts "(S) Achat de l'item "+"XX"+"."
+      @marchand==false
+      @modele.debutTour()
 			#@vue.vueInventaire.setImageSelection(indiceItem)
 		}
 	end
@@ -839,6 +841,7 @@ class Controller
 			@modele.joueur.vendre(@modele.indiceItemSelectionne)
 			@vue.inventaireModal.onDestroy()
 			@marchand==false
+			@modele.debutTour()
 			#@vue.vueInventaire.setImageSelection(indiceItem)
 		}
 	end
