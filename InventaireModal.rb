@@ -96,7 +96,7 @@ class InventaireModal
          inventaire = protagoniste.listeItem.itemsStock
          puts "Nb items avt suppression des trop chers = " + protagoniste.listeItem.itemsStock.count.to_s
          #On supprime les items dont le prix est trop cher
-         #inventaire.delete_if { |item| @vue.modele.joueur.peutSePermettreAchat?(item) } 
+         inventaire.delete_if { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
       else
          inventaire = protagoniste.inventaire.items
       end
@@ -173,7 +173,7 @@ class InventaireModal
       #Supression du tableau d'items (il sera rÃ©gÃ©nÃ©rÃ©)
       #@contenu.remove(@tableauItems)
       #@contenu.remove(@boutonInteraction)
-     # @fenetreInventaire.remove(@contenu)
+      # @fenetreInventaire.remove(@contenu)
       @fenetreInventaire.modal = false
       #@fenetreInventaire.hide_all
       @tabImages.clear
