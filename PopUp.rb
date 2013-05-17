@@ -155,10 +155,6 @@ class PopUp
     end
    dialog.show_all
    dialog.run do |response|
-     case response
-       when Gtk::Dialog::RESPONSE_ACCEPT
-       else
-     end
    end
   end
 
