@@ -244,7 +244,11 @@ class Controller
   #
   def menuAction
     puts "<--> Creation du menu"
-    @vue.menu = MenuJeu.creer(true, @modele, self)
+    if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, création menu avec moins de bouton
+    	@vue.menu = MenuJeu.creer(false, @modele, self)
+    else
+    	@vue.menu = MenuJeu.creer(true, @modele, self)
+    end
     puts "-- Affichage du menu"
     @vue.window.modal = false;
     @vue.menu.afficherMenu()

@@ -84,6 +84,7 @@ class PopUp
     dialog.signal_connect('response') { 
     	dialog.destroy
     	@vue.menu = MenuJeu.creer(false, @vue.modele, @vue.controller)
+    	@vue.window.set_sensitive(false)
       @vue.controller.classementAction
     }
     dialog.vbox.add(Gtk::Label.new(message))
