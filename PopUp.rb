@@ -51,7 +51,7 @@ class PopUp
   # Affiche le PopUp contenant le message
   #
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
+  # * <b>message :</b> representant le message a afficher
   #
   def affichePopUp(message)
     @vue.window.modal=false
@@ -59,6 +59,33 @@ class PopUp
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
     dialog.signal_connect('response') { dialog.destroy }
+    dialog.vbox.add(Gtk::Label.new(message))
+    dialog.show_all
+    dialog.run do |response|
+      case response
+        when Gtk::Dialog::RESPONSE_ACCEPT
+        else
+      end
+    end
+  end
+  
+  
+  ## 
+  # Affiche le PopUp contenant le message
+  #
+  # == Parameters: 
+  # * <b>message :</b> representant le message a afficher
+  #
+  def affichePopUpMort(message)
+    @vue.window.modal=false
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
+             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+             [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+    dialog.signal_connect('response') { 
+    	dialog.destroy
+    	@vue.menu = MenuJeu.creer(false, @vue.modele, @vue.controller)
+      @vue.controller.classementAction
+    }
     dialog.vbox.add(Gtk::Label.new(message))
     dialog.show_all
     dialog.run do |response|

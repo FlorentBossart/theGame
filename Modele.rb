@@ -305,9 +305,10 @@ class Modele
    def debutTour()
      puts "debut debutTour"
      if(!@joueur.toujoursEnVie?())
+     	puts "!!!!!!!! Vous etes MORT !!!!!!!"
        @messageDefaite=@joueur.causeMort
        changerStadePartie(EnumStadePartie.PERDU)
-       @vue.popUp.affichePopUp(@messageDefaite) 
+       @vue.popUp.affichePopUpMort(@messageDefaite) 
      else
         if(@joueur.casePosition.presenceEnnemis?())
             if(@tourDejaPasse)
