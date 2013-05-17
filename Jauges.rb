@@ -56,13 +56,13 @@ class Jauges
   #mise a jour  de l'energie
   def majJaugeEnergie(quantite,max)
     @barEnergie.fraction = quantite/max.to_f();
-    @barEnergie.set_text(XmlMultilingueReader.lireTexte("energie")+ " : " +quantite.to_s + " / " + max.to_s());
+    @barEnergie.set_text(XmlMultilingueReader.lireTexte("energie")+ " : " +sprintf("%.2f",quantite.to_s) + " / " + sprintf("%.2f",max.to_s()));
   end
 
   #mise a jour de l'experience
   def majJaugeExperience(quantite,max)
     @barExperience.fraction = quantite/max.to_f();
-    @barExperience.set_text(XmlMultilingueReader.lireTexte("experience")+ " : " +quantite.to_s + " / " + max.to_s());
+    @barExperience.set_text(XmlMultilingueReader.lireTexte("experience")+ " : " +sprintf("%.2f",quantite.to_s) + " / " + sprintf("%.2f",max.to_s()));
   end
 
   def majNiveau(niveau)
