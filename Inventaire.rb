@@ -52,7 +52,7 @@ class Inventaire
   end
   
   def getItem(indice)
-    return items.fetch(indice)
+    return @items.fetch(indice)
   end
   ##
   # Ajoute un item a l'inventaire

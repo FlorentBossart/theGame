@@ -373,12 +373,12 @@ class Joueur < Personnage
    # Perte d'argent du joueur
    #
    # == Parameters:
-   # vendeur: PNJ a qui on achete l'item
    # item: Item acheté
    #
    def acheter(item)
+      #impossibilité de passer par un indice ici
       ajouterAuStock(item)
-      debourser(item.prix())
+      debourser(item.caracteristique.prix())
       str=XmlMultilingueReader.lireTexte("achete")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)
@@ -390,12 +390,12 @@ class Joueur < Personnage
    # Gain d'argent du joueur
    #
    # == Parameters:
-   # acheteur: PNJ a qui on vend l'item
-   # item: Item vendu
+   # i: indice de l'Item vendu
    #
-   def vendre(item)
+   def vendre(i)
+      item=@inventaire.getItem(i)
       retirerDuStock(item)
-      encaisser(item.prix())
+      encaisser(item.caracteristique.prix()/2)
       str=XmlMultilingueReader.lireTexte("vendu")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)

@@ -826,9 +826,10 @@ class Controller
 	#
 	def vendreItem(btVendre)
 		btVendre.signal_connect('clicked'){
-			puts "(S) Vente de l'item " + @modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
-			@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
-			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
+			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			#@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
+			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
+			@modele.joueur.vendre(@modele.indiceItemSelectionne)
 			@vue.inventaireModal.onDestroy()
 			@marchand==false
 			#@vue.vueInventaire.setImageSelection(indiceItem)
