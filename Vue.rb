@@ -226,7 +226,7 @@ class Vue
   #def afficheCase(image,caseAffiche)
   def afficheCase(xAff,yAff,caseAffiche)
     
-    positions=Array.new([[0.1,0.1],[2*@tailleCase_f/3,0.1],[0.1,2*@tailleCase_f/3],[2*@tailleCase_f/3,2*@tailleCase_f/3],[@tailleCase_f/3,0.1]])
+    positions=Array.new([[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],[2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
 
     #terrain
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))

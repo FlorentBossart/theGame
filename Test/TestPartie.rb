@@ -17,7 +17,8 @@ Modele.initialisationBibliotheques()
 
 Audio.load()
 
-pseudo = "pseudoADefinirALaFin"
+puts "\nChoix pseudo:"
+pseudo = gets.chomp
 
 
 
