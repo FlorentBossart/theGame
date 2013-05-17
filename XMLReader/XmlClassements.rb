@@ -75,41 +75,40 @@ class XmlClassements
       
       joueur = Element.new("joueur")
       
-      nom = Element.new("nom")
-      #nom.text = "BestOfTheBest" # modele.joueur.pseudo # gérer par la classe Joueur 
+      nom = Element.new("nom") 
       nom.text = modele.joueur.pseudo
       joueur.add_element(nom)
       
       nbEnnemisTues = Element.new("nb_ennemis_tues")
-     # nbEnnemisTues.text = 32 # modele.joueur.nbEnnemiTues # gérer par la classe Joueur
       nbEnnemisTues.text = modele.joueur.nbEnnemiTues
       joueur.add_element(nbEnnemisTues)
       
       dist = Element.new("distance")
-     # dist.text = 3200 # modele.joueur.distanceParcourue # gérer par la classe Joueur
       dist.text = modele.joueur.distanceParcourue # gérer par la classe Joueur
       joueur.add_element(dist)
       
       argent = Element.new("or")
-      #argent.text = 33333 # modele.joueur.inventaire.capital # gérer par la classe Inventaire
       argent.text = modele.joueur.inventaire.capital # gérer par la classe Inventaire
       joueur.add_element(argent)
       
       tps = Element.new("temps")
-      #tps.text = 36005 # ??? modele.joueur.tempsTotal # gérer par la classe Modele
       tps.text = modele.joueur.tempsTotal
       joueur.add_element(tps)
       
       score = Element.new("score")
-      #score.text = 9865 # Mettre ici la formule de calcul du score
-      if(modele.compteurTour == 0) # A supprimer quand le jeu sera finalisé
-      	modele.compteurTour = 1 # A supprimer quand le jeu sera finalisé
+      #facteurDiff = 1
+      if(modele.difficulte.intitule == "Novice")
+      	facteurDiff = 3
+      elsif(modele.difficulte.intitule == "Moyen")
+      	facteurDiff = 2
+      else
+      	facteurDiff = 1
       end
-      score.text = (modele.joueur.distanceParcourue*1000 / modele.compteurTour) + modele.joueur.inventaire.capital
+      score.text = ((modele.joueur.distanceParcourue*100 + modele.joueur.nbEnnemiTues*10) / facteurDiff)+
+      					modele.joueur.inventaire.capital
       joueur.add_element(score)
       
       diff = Element.new("difficulte")
-      #diff.text = "Expert" # modele.difficulte.intitule # gérer par la classe Modele
       diff.text = modele.difficulte.intitule # gérer par la classe Modele
       joueur.add_element(diff)
       
