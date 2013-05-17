@@ -317,9 +317,9 @@ class Controller
   #
   def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
-
-    achatMarchandAction()
     dialog.destroy
+    achatMarchandAction()
+    
   }
   end
   
@@ -342,9 +342,9 @@ class Controller
   #
   def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
-
-    vendreMarchandAction()
     dialog.destroy
+    vendreMarchandAction()
+    
   }
   end
   
