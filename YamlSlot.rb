@@ -58,7 +58,15 @@ class YamlSlot
    # Il faut stocker (dans le fichier yaml) tous les objets nécessaires au chargement d'une partie :
    # carte (position ennemis, joueur, terrains...) => contenus dans modele
 	def YamlSlot.ecrireYaml(nomFicSlotYaml, modele)
-    
+		
+		# Arret du temps pour l'enregistrer
+		modele.joueur.dateFinJeu = Time.now
+		puts "Arret temps jeu le " + modele.joueur.dateFinJeu.to_s
+		
+		# Calcul du temps total depuis le debut de la session de jeu
+		modele.joueur.calculerTempsTotal
+		puts "Temps total calculer"
+
       begin
 	      file = File.open("YAMLSlot/" + nomFicSlotYaml, "w")
 	      
@@ -78,6 +86,10 @@ class YamlSlot
 	      file.syswrite(modele.joueur.tempsTotal.to_yaml())
 	      
 	      file.syswrite(modele.to_yaml())
+	      
+	      # Reprise du temps apres avoir sauvegarder
+	      modele.joueur.dateDebutJeu = Time.now
+	      puts "Reprise du temps jeu le " + modele.joueur.dateDebutJeu.to_s
 	      
 	   rescue
 			raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
