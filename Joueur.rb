@@ -513,6 +513,7 @@ class Joueur < Personnage
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
+   	convertirTemps(@tempsTotal)
    	puts XmlMultilingueReader.lireTexte("tempsTotal")+"#{@tempsTotal}"
    end
    
@@ -528,6 +529,14 @@ class Joueur < Personnage
 		
 		XmlClassements.ecrireXml(@modele)
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
+   end
+   
+   def convertirTemps(temps)
+   	dureeSec = "%02.0f" % ((temps % 3600) % 60)
+   	dureeMinutes = "%02.0f" % ((temps % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
+																				# et 0 apr�s => pour trier les strings correctement
+		dureeHeures = "%02.0f" % (temps / 3600)
+		puts "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
    end
    
 
