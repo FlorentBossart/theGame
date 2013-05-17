@@ -855,6 +855,7 @@ class Controller
 		btUtiliser.signal_connect('clicked'){
 			puts "(U) Utilisation de l'item "+"XX"+"."
 			@modele.joueur.inventaire.items[@modele.indiceItemSelectionne].utiliseToi(@modele.joueur)
+			@vue.actualiser()
 			@vue.inventaireModal.onDestroy
 		}
 	end
