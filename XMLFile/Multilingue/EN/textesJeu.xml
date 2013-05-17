@@ -341,7 +341,7 @@
 	</texte>
 	<texte>
 		<id>mortFatigue</id>
-		<contenu>You died from exhaustion !.</contenu>
+		<contenu>You died from exhaustion !</contenu>
 	</texte>
 	<texte>
 		<id>combatEnCours</id>

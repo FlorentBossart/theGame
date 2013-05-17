@@ -332,7 +332,7 @@
 		<contenu> Vos bottes peuvent etres utilisees encore NB fois.</contenu>
 	</texte>
 	<texte><id>mortFatigue</id>
-		<contenu> Vous etes mort de fatigue !.</contenu>
+		<contenu> Vous etes mort de fatigue !</contenu>
 	</texte>
 	<texte><id>combatEnCours</id>
 		<contenu> Vous avez combattu un INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>

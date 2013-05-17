@@ -12,6 +12,7 @@
 # 
 
 require 'gtk2'
+require 'sdl'
 
 require 'Classements.rb'
 require './XMLReader/XmlClassements.rb'
@@ -31,6 +32,8 @@ class MenuJeu
 	@contenu
 	@controleur
 	@modele
+	
+	#FONT= "Diploma"
 	
 	attr_accessor :fenetreMenu
 	
@@ -83,6 +86,8 @@ class MenuJeu
 		
 		@contenu = VBox.new(false, 0)
 		
+		
+		
 		# Cr�ation des boutons
 		if(@isInGame == false)
 			boutNewPartie 		= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
@@ -99,6 +104,16 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 		else
+			  
+=begin			  SDL::TTF.init
+			  font = SDL::TTF.open("diploma.ttf", 32, 0)
+			  
+			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
+			#arial_12 = Pango::FontDescription.new("#{FONT} 18")
+			
+				boutContinuerPartie.child.modify_font(Pango::FontDescription.new(font.to_s))
+=end				
+				
 			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
 			boutNewPartie 				= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
 			boutChargerPartie 		= Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
