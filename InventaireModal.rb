@@ -56,10 +56,10 @@ class InventaireModal
       XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
       
       #Attribution des action liÃ©s aux diffÃ©rents boutons possibles
-      @vue.controller.vendreItem(@@boutonVente)
-      @vue.controller.utiliserItem(@@boutonUtiliser)
-      @vue.controller.acheterItem(@@boutonAcheter)
-      @vue.controller.jeterItem(@@boutonJeter)
+     # @vue.controller.vendreItem(@@boutonVente)
+     # @vue.controller.utiliserItem(@@boutonUtiliser)
+     # @vue.controller.acheterItem(@@boutonAcheter)
+     # @vue.controller.jeterItem(@@boutonJeter)
       
    end
   
