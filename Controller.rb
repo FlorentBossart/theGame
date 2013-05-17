@@ -17,7 +17,8 @@ class Controller
 
    @modele
    @vue
-
+   @marchand
+   attr_accessor :marchand
    ##
    # CrÃ©e un nouveau Controlleur Ã  partir de la Vue et du Modele passÃ©s en paramÃ¨tre.
    #
@@ -28,6 +29,7 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
+      @marchand=false
       #Audio.playSoundLoop("stable_boy")
    end
    
@@ -304,7 +306,10 @@ class Controller
     print "oO Bt interaction "+elem.getIntitule+" pressÃ©!"
      Audio.playSound("coin")
     elem.interaction(joueur)
-    @modele.debutTour()
+    if(@marchand==false)
+      @modele.debutTour()
+      puts "teeeessssssst"
+    end
   end
   
   
@@ -317,6 +322,7 @@ class Controller
   #
   def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
+    @marchand=true
     dialog.destroy
     achatMarchandAction()
     
@@ -329,7 +335,6 @@ class Controller
   #
   def achatMarchandAction()
     print "oO Bt achatMarchandAction  pressÃ©!"
-    @modele.debutTour()
   end
   
   
@@ -342,9 +347,9 @@ class Controller
   #
   def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
+    @marchand=true
     dialog.destroy
     vendreMarchandAction()
-    
   }
   end
   
@@ -356,7 +361,6 @@ class Controller
     print "oO Bt venndreMarchandAction  pressÃ©!"
     puts "====>>> Affichage de l'inventaire en mode vente" 
     @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INTERACTION_MARCHAND_VENTE)
-    @modele.debutTour()
   end
       
   
@@ -372,9 +376,9 @@ class Controller
   #
   def soinCreer(btInteraction,joueur, choix, guerisseur,dialog)
   btInteraction.signal_connect('clicked'){
-
-    soinAction(joueur,choix,guerisseur)
     dialog.destroy
+    soinAction(joueur,choix,guerisseur)
+
   }
   end
   
@@ -823,7 +827,10 @@ class Controller
 	def vendreItem(btVendre)
 		btVendre.signal_connect('clicked'){
 			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
-			@joueur
+			@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
+			@modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
+			@vue.inventaireModal.onDestroy()
+			@marchand==false
 			#@vue.vueInventaire.setImageSelection(indiceItem)
 		}
 	end
@@ -861,5 +868,4 @@ class Controller
 			@vue.inventaireModal.onDestroy
 		}
 	end
-     
 end

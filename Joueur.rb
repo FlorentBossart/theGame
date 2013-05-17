@@ -376,11 +376,9 @@ class Joueur < Personnage
    # vendeur: PNJ a qui on achete l'item
    # item: Item acheté
    #
-   def acheter(vendeur,item)
-      vendeur.retirerDuStock(item)
-      vendeur.encaisser(itemAchete.prix())
+   def acheter(item)
       ajouterAuStock(item)
-      debourser(itemAchete.prix())
+      debourser(item.prix())
       str=XmlMultilingueReader.lireTexte("achete")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)
@@ -395,11 +393,9 @@ class Joueur < Personnage
    # acheteur: PNJ a qui on vend l'item
    # item: Item vendu
    #
-   def vendre(acheteur,item)
+   def vendre(item)
       retirerDuStock(item)
-      encaisser(itemAchete.prix())
-      acheteur.ajouterAuStock(item)
-      acheteur.debourser(itemAchete.prix())
+      encaisser(item.prix())
       str=XmlMultilingueReader.lireTexte("vendu")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)

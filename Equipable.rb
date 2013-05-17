@@ -48,6 +48,9 @@ class Equipable < Caracteristique
       return @typeEquipable.intitule
    end
 
+   def prix
+     return @typeEquipable.prix
+   end
    
    def utiliseToi(joueur)
       if(@typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)

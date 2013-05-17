@@ -81,6 +81,16 @@ class Inventaire
     return nil
   end
   
+  ##
+  # Retourne le prix de l'item placé a l'indice i
+  #
+  # == Parameters:
+  # item: Item a retirer de l'inventaire
+  #
+  def prix(i)
+    
+    return @items.fetch(i).caracteristique.prix
+  end
   
   ##
   # Retire l'item de l'inventaire placé à l'indice indice passé en paramètre

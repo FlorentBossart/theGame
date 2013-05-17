@@ -68,6 +68,7 @@ class Item < Elem
        joueur.modele.tourPasse()
      end
      @casePosition=nil
+     joueur.modele.debutTour()
      return nil
    end
    

@@ -81,6 +81,7 @@ class InventaireModal
    # Actualise et affiche la fenêtre d'inventaire
    #
    def afficherInventaire(joueur, modeAffichage)
+      @vue.window.modal=false
 
       setModeAffichage(modeAffichage)
       

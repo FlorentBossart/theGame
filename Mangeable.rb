@@ -37,7 +37,9 @@ class Mangeable < Caracteristique
         return typeMangeable.intitule
     end
     
-    
+    def prix
+      return @typeMangeable.prix
+    end
     def utiliseToi(joueur)
         if((joueur.energie+typeMangeable.energieRendue)>=joueur.energieMax)
             joueur.energie=joueur.energieMax
