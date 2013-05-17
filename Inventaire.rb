@@ -51,7 +51,9 @@ class Inventaire
     @nbItem=0
   end
   
-  
+  def getItem(indice)
+    return items.fetch(indice)
+  end
   ##
   # Ajoute un item a l'inventaire
   #
@@ -88,7 +90,6 @@ class Inventaire
   # item: Item a retirer de l'inventaire
   #
   def prix(i)
-    
     return @items.fetch(i).caracteristique.prix
   end
   

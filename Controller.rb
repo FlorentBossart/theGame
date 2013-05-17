@@ -826,9 +826,9 @@ class Controller
 	#
 	def vendreItem(btVendre)
 		btVendre.signal_connect('clicked'){
-			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
+			puts "(S) Vente de l'item " + @modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
 			@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
-			@modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
+			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
 			@vue.inventaireModal.onDestroy()
 			@marchand==false
 			#@vue.vueInventaire.setImageSelection(indiceItem)
@@ -840,8 +840,8 @@ class Controller
 	#
 	def jeterItem(btJeter)
 		btJeter.signal_connect('clicked'){
-			puts "(S) Jet de l'item " + @modele.indiceItemSelectionne.to_s + "."
-			@modele.joueur.inventaire.retirer_at(@modele.indiceItemSelectionne)
+			puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
+			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
 			@vue.inventaireModal.onDestroy
 		}
 	end
@@ -863,7 +863,7 @@ class Controller
 	def utiliserItem(btUtiliser)
 		btUtiliser.signal_connect('clicked'){
 			puts "(U) Utilisation de l'item "+"XX"+"."
-			@modele.joueur.inventaire.items[@modele.indiceItemSelectionne].utiliseToi(@modele.joueur)
+			@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).utiliseToi(@modele.joueur)
 			@vue.actualiser()
 			@vue.inventaireModal.onDestroy
 		}
