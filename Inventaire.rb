@@ -89,9 +89,9 @@ class Inventaire
   # indice: l'indice de l'Item à retirer de l'inventaire
   #
   def retirer_at(indice)
-    @items.delete_at(indice)
+    itemJette = @items.delete_at(indice)
     @nbItem=@nbItem-1
-    return indice
+    return itemJette
   end
   
   

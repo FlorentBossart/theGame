@@ -837,15 +837,15 @@ class Controller
 		}
 	end
 	
-	##
+	## ==> Fonction à présent inutile : a supprimer
 	# Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
 	#
-	def equiperItem(btEquiter)
-		btEquiter.signal_connect('clicked'){
-			puts "(S) Equipement du joueur avec l'item "+"XX"+"."
-			#@vue.vueInventaire.setImageSelection(indiceItem)
-		}
-	end
+	#def equiperItem(btEquiter)
+	#	btEquiter.signal_connect('clicked'){
+	#		puts "(S) Equipement du joueur avec l'item "+"XX"+"."
+	#		@vue.vueInventaire.setImageSelection(indiceItem)
+	#	}
+	#end
 	
 	
     ##
@@ -854,7 +854,8 @@ class Controller
 	def utiliserItem(btUtiliser)
 		btUtiliser.signal_connect('clicked'){
 			puts "(U) Utilisation de l'item "+"XX"+"."
-			#@vue.vueInventaire.setImageSelection(indiceItem)
+			@modele.joueur.inventaire.items[@modele.indiceItemSelectionne].utiliseToi(@modele.joueur)
+			@vue.inventaireModal.onDestroy
 		}
 	end
      
