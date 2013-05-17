@@ -25,10 +25,11 @@ class InventaireModal
    @tabImages
 
    #Variables de classe/globales
-   @@boutonVente   = Button.new("Vendre")
-   @@boutonEquiper = Button.new("Equiper")
-   @@boutonAcheter = Button.new("Acheter")
-   @@boutonJeter   = Button.new("Jeter")
+   @@boutonVente    = Button.new("Vendre")
+   @@boutonEquiper  = Button.new("Equiper")
+   @@boutonUtiliser = Button.new("Utiliser")
+   @@boutonAcheter  = Button.new("Acheter")
+   @@boutonJeter    = Button.new("Jeter")
 	
    #attr_accessor :fenetreInventaire
    #attr_reader :contenu
@@ -181,18 +182,21 @@ class InventaireModal
          when EnumStadePartie.INVENTAIRE_PLEIN then
             @boutonInteraction = @@boutonJeter
             @vue.controller.jeterItem(@boutonInteraction) #AFR
-         when EnumStadePartie.EQUIPEMENT_ARME then
-            @boutonInteraction = @@boutonEquiper
-            @vue.controller.equiperItem(@boutonInteraction) #AFR
-         when EnumStadePartie.EQUIPEMENT_ARMURE then
-            @boutonInteraction = @@boutonEquiper
-            @vue.controller.equiperItem(@boutonInteraction) #AFR
+         #when EnumStadePartie.EQUIPEMENT_ARME then
+         #   @boutonInteraction = @@boutonEquiper
+         #   @vue.controller.equiperItem(@boutonInteraction) #AFR
+         #when EnumStadePartie.EQUIPEMENT_ARMURE then
+         #   @boutonInteraction = @@boutonEquiper
+         #   @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction = @@boutonAcheter
             @vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction = @@boutonVente
             @vue.controller.vendreItem(@boutonInteraction) #AFR
+         when EnumStadePartie.INVENTAIRE_USAGE then
+            @boutonInteraction = @@boutonUtiliser
+            @vue.controller.utiliserItem(@boutonInteraction) #AFR
         end
    end
 

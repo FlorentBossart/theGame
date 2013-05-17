@@ -30,6 +30,7 @@ class EnumStadePartie
    @@INTERACTION_GUERISSEUR     = 8
    @@INTERACTION_MARCHAND_ACHAT = 9
    @@INTERACTION_MARCHAND_VENTE = 10
+   @@INVENTAIRE_USAGE           = 11
    
    
    ##
@@ -139,6 +140,17 @@ class EnumStadePartie
    #
    def EnumStadePartie.INTERACTION_MARCHAND_VENTE
       return @@INTERACTION_MARCHAND_VENTE
+   end
+   
+   
+   ##
+   #===Indique le stade INTERACTION_MARCHAND_VENTE.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade INTERACTION_MARCHAND_VENTE
+   #
+   def EnumStadePartie.INVENTAIRE_USAGE
+      return @@INVENTAIRE_USAGE
    end
 
 end

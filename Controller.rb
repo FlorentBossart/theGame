@@ -819,7 +819,7 @@ class Controller
 	# Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
 	#
 	def vendreItem(btVendre)
-		bVendre.signal_connect('clicked'){
+		btVendre.signal_connect('clicked'){
 			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
 			@joueur
 			#@vue.vueInventaire.setImageSelection(indiceItem)
@@ -843,6 +843,17 @@ class Controller
 	def equiperItem(btEquiter)
 		btEquiter.signal_connect('clicked'){
 			puts "(S) Equipement du joueur avec l'item "+"XX"+"."
+			#@vue.vueInventaire.setImageSelection(indiceItem)
+		}
+	end
+	
+	
+    ##
+	# Utiliser l'item sélectionné au profit du joueur lors de l'appuie sur le bouton "Utiliser" dans l'inventaire
+	#
+	def utiliserItem(btUtiliser)
+		btUtiliser.signal_connect('clicked'){
+			puts "(U) Utilisation de l'item "+"XX"+"."
 			#@vue.vueInventaire.setImageSelection(indiceItem)
 		}
 	end
