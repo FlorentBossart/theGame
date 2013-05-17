@@ -55,7 +55,6 @@ class InventaireModal
       @referencesGraphiques = ReferencesGraphiques.new()
       XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
       
-      
       #Attribution des action liés aux différents boutons possibles
       @vue.controller.vendreItem(@@boutonVente)
       @vue.controller.utiliserItem(@@boutonUtiliser)

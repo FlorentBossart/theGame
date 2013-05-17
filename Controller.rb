@@ -354,6 +354,8 @@ class Controller
   #
   def vendreMarchandAction()
     print "oO Bt venndreMarchandAction  pressÃ©!"
+    puts "====>>> Affichage de l'inventaire en mode vente" 
+    @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INTERACTION_MARCHAND_VENTE)
     @modele.debutTour()
   end
       
