@@ -87,7 +87,8 @@ class InventaireModal
       @vue.window.modal=false
 
       setModeAffichage(modeAffichage)
-      
+      setBoutonInteractionActif(false)
+            
       @contenu = VBox.new(false,10)
       
       #Récupération de l'inventaire à afficher      
@@ -114,7 +115,7 @@ class InventaireModal
          pixbufItemCourant = pixbufItemCourant.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
          imageCourante = Image.new(pixbufItemCourant)
 
-       #On ajoute cette image au tableau d'images
+         #On ajoute cette image au tableau d'images
          @tabImages << imageCourante
 
          #On crÃ©e une EventBox avec l'image de l'item
@@ -156,6 +157,10 @@ class InventaireModal
   
    end
   
+  
+   def setBoutonInteractionActif(isActif)
+      @boutonInteraction.set_sensitive(isActif)
+   end
   
 
    ##
@@ -215,8 +220,8 @@ class InventaireModal
          #   @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             #@boutonInteraction = @@boutonAcheter
-        @boutonInteraction=Button.new("Acheter")
-             @vue.controller.acheterItem(@boutonInteraction)
+            @boutonInteraction=Button.new("Acheter")
+            @vue.controller.acheterItem(@boutonInteraction)
 
             #@vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
