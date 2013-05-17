@@ -822,8 +822,9 @@ class Controller
 	# Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
 	#
 	def acheterItem(btAcheter)
-		btAcheter.signal_connect('clicked'){
-			puts "(S) Achat de l'item "+"XX"+"."
+	  btAcheter.signal_connect('clicked'){
+	  puts "(S) Achat de l'item "+"XX"+"."
+	  @modele.joueur.acheter(@modele.indiceItemSelectionne)
       @marchand==false
       @modele.debutTour()
 			#@vue.vueInventaire.setImageSelection(indiceItem)
