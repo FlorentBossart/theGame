@@ -426,6 +426,8 @@ class MenuJeu
 			# Cr�ation et remplissage des ListStore
 			store = remplirListStore(c.getListeJoueur(tabLabel[i].text))
 			
+			
+			
 			# Ajoute chacun des tree model au tree view correspondant
 			treeview.model = store
 			
@@ -467,7 +469,7 @@ class MenuJeu
 		# Cr�er un nouveau tree model comprenant 6 colonnes
 		store = ListStore.new(String, Integer, Integer, Integer, String, Integer)
 		
-		# Ajoute toutes les statistiques des joueurs @contenues dans "listeJoueur" � la ListStore
+		# Ajoute toutes les statistiques des joueurs contenues dans "listeJoueur" � la ListStore
 		listeJoueur.each_with_index do |e, i|
 			colonne = store.append
 			
@@ -476,13 +478,11 @@ class MenuJeu
 			colonne[2] = listeJoueur[i][2]	# Correspond � la distance totale parcourue par le joueur
 			colonne[3] = listeJoueur[i][3]	# Correspond � l'or total accumul� par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
-			#dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
-																				# et 0 apr�s => pour trier les strings correctement
-			#dureeHeures = dureeTotale / 3600
-			#colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
 			colonne[4] = @modele.joueur.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
 		end
+		
+		store.set_sort_column_id(5, SORT_DESCENDING)
 		
 		return store
 	end
@@ -538,6 +538,8 @@ class MenuJeu
 	  # ======= Fin du tri
 	  treeview.append_column(column)
 	  
+	  renderer = CellRendererText.new
+	  renderer.weight = Pango::FontDescription::WEIGHT_BOLD
 	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("score"), renderer, :text => 5)
 	  # ======= Pour pouvoir trier la colonne
 	  column.sort_indicator=true
