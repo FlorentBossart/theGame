@@ -305,22 +305,9 @@ class Modele
    def debutTour()
      puts "debut debutTour"
      if(!@joueur.toujoursEnVie?())
-     		# !!! Mettre ce qui suit dans une methode "meurt" de joueur ??
 			puts "!!!!!!!! Vous etes MORT !!!!!!!"
 			@messageDefaite=@joueur.causeMort
 			@joueur.meurt(@messageDefaite)
-=begin
-			changerStadePartie(EnumStadePartie.PERDU)
-			
-			# Arret du temps de jeu
-			@joueur.dateFinJeu = Time.now
-			puts "---> date fin : " + @joueur.dateFinJeu.to_s
-			puts "diff a ajouter : " + (@joueur.dateFinJeu - @joueur.dateDebutJeu).to_s
-			@joueur.calculerTempsTotal
-			
-			XmlClassements.ecrireXml(self)
-			@vue.popUp.affichePopUpMort(@messageDefaite) 
-=end
      else
         if(@joueur.casePosition.presenceEnnemis?())
             if(@tourDejaPasse)
@@ -407,20 +394,8 @@ class Modele
        if(@joueur.toujoursEnVie?())
          itemsEnnemis += itemsUnEnnemi 
        else
-         @messageDefaite=@joueur.causeMort+" "+"->lors du combat avec "+ennemi.getIntitule()
+         @messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
          @joueur.meurt(@messageDefaite)
-=begin
-         changerStadePartie(EnumStadePartie.PERDU)
-         
-         # Arret du temps de jeu
-			@joueur.dateFinJeu = Time.now
-			puts "---> date fin : " + @joueur.dateFinJeu.to_s
-			puts "diff a ajouter : " + (@joueur.dateFinJeu - @joueur.dateDebutJeu).to_s
-			@joueur.calculerTempsTotal
-			
-			XmlClassements.ecrireXml(self)
-			@vue.popUp.affichePopUpMort(@messageDefaite)
-=end
          break
        end
      end
