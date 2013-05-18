@@ -234,7 +234,7 @@ class Controller
   # dialog: PopUp lie au bouton
   #
  def choixInventairePleinCreer(buttonJeter,dialog)
-    btInventaire.signal_connect('clicked'){
+    buttonJeter.signal_connect('clicked'){
       dialog.destroy
       choixInventairePleinAction(buttonJeter)
      }
@@ -383,8 +383,16 @@ class Controller
   def achatMarchandAction()
     print "oO Bt achatMarchandAction  pressÃ©!"
     #@modele.joueur.encaisser(10000) #TODO : supprimmer cette ligne
-    @vue.inventaireModal.afficherInventaire(@modele.pnjAideEnInteraction, EnumStadePartie.INTERACTION_MARCHAND_ACHAT)
+    
+    #AFR
+    if @modele.joueur.inventaire.estPlein?
+        puts "Inventaire plein avant achat"
+        @vue.popUp.choixInventairePlein
+    else 
+       @vue.inventaireModal.afficherInventaire(@modele.pnjAideEnInteraction, EnumStadePartie.INTERACTION_MARCHAND_ACHAT)
+    end
   end
+  
   
   ##
   # Action(s) Ã  effectuer lors du clic sur le bouton de vente
@@ -854,9 +862,8 @@ class Controller
 	  btAcheter.signal_connect('clicked'){
 	  puts "(S) Achat de l'item "+"XX"+"."
       marchand = @modele.pnjAideEnInteraction
-	  #Le marchand vent l'item sélectionné par le joueur à ce dernier
+	  #Le marchand vend l'item sélectionné par le joueur à ce dernier
 	  marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
-	  #end
 	  @vue.inventaireModal.onDestroy()
       @marchand==false
       @modele.debutTour()
@@ -889,16 +896,6 @@ class Controller
 			@vue.inventaireModal.onDestroy
 		}
 	end
-	
-	## ==> Fonction à présent inutile : a supprimer
-	# Equipe le joueur de l'item sélectionné lors de l'appuie sur le bouton "Equiper" dans l'inventaire
-	#
-	#def equiperItem(btEquiter)
-	#	btEquiter.signal_connect('clicked'){
-	#		puts "(S) Equipement du joueur avec l'item "+"XX"+"."
-	#		@vue.vueInventaire.setImageSelection(indiceItem)
-	#	}
-	#end
 	
 	
     ##
