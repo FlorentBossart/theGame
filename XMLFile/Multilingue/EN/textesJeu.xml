@@ -365,7 +365,7 @@
 	</texte>
 	<texte>
 		<id>mortCombat</id>
-		<contenu>You died fighting !!</contenu>
+		<contenu>You died fighting against ENNEMI !!</contenu>
 	</texte>
 	<texte>
 		<id>passageNiveau</id>

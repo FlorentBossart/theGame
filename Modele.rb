@@ -394,8 +394,8 @@ class Modele
        if(@joueur.toujoursEnVie?())
          itemsEnnemis += itemsUnEnnemi 
        else
-         @messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
-         @joueur.meurt(@messageDefaite)
+         #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
+         #@joueur.meurt(@messageDefaite)
          break
        end
      end

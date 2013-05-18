@@ -354,7 +354,7 @@
 		<contenu> Suite a un enchainement de coups fulgurants, vous avez mis fin � votre ennemi, mais ce dernier vous a emporte avec lui!!</contenu>
 	</texte>
 	<texte><id>mortCombat</id>
-		<contenu> Vous etes mort au combat !!</contenu>
+		<contenu> Vous etes mort au combat contre ENNEMI !!</contenu>
 	</texte>
 	<texte><id>passageNiveau</id>
 		<contenu> Passage au niveau  NIVEAU!! Votre energie est restitue et est plus grande d�sormais.</contenu>

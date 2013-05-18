@@ -253,7 +253,9 @@ class Joueur < Personnage
          @nbEnnemiTues += 1
          @causeMort= XmlMultilingueReader.lireTexte("entretue")
       else
-         @causeMort =XmlMultilingueReader.lireTexte("mortCombat")
+      	str = XmlMultilingueReader.lireTexte("mortCombat")
+      	str = str.gsub("ENNEMI", ennemi.getIntitule())
+         @causeMort = str
       end
       ennemi.meurt()
       return Array.new()
