@@ -335,10 +335,6 @@ class Controller
     print "oO Bt interaction "+elem.getIntitule+" pressÃ©!"
      Audio.playSound("coin")
     elem.interaction(joueur)
-    if(@marchand==false)
-      @modele.debutTour()
-      puts "teeeessssssst"
-    end
   end
   
   
