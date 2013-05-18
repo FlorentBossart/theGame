@@ -506,11 +506,13 @@ class Joueur < Personnage
      @itemAttenteAjout=item
      if(@inventaire.estPlein?())
         @modele.changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
+        @modele.vue.popUp.choixInventairePlein#AFR 
      else
         @inventaire.ajouter(item)
         @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{item.getIntitule}.")
+        @casePosition.retirerElement(item) #AFR (était après le end à la base)
      end
-     @casePosition.retirerElement(item)
+
      @modele.tourPasse()
    end
    
