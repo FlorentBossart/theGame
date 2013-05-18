@@ -476,10 +476,11 @@ class MenuJeu
 			colonne[2] = listeJoueur[i][2]	# Correspond � la distance totale parcourue par le joueur
 			colonne[3] = listeJoueur[i][3]	# Correspond � l'or total accumul� par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
-			dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
+			#dureeMinutes = "%02.0f" % ((dureeTotale % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
 																				# et 0 apr�s => pour trier les strings correctement
-			dureeHeures = dureeTotale / 3600
-			colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
+			#dureeHeures = dureeTotale / 3600
+			#colonne[4] = "#{dureeHeures} h #{dureeMinutes} min"
+			colonne[4] = @modele.joueur.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
 		end
 		

@@ -514,10 +514,14 @@ class Joueur < Personnage
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
    	convertirTemps(@tempsTotal)
-   	puts XmlMultilingueReader.lireTexte("tempsTotal")+"#{@tempsTotal}"
    end
    
-   
+   ##
+   # Fait mourir le joueur, arrete le temps de jeu, ecrit le score du joueur dans le classement et affiche un popup de mort
+   #
+   # == Parameters
+   # <b>messageDefaite<b> : Le message de mort a afficher
+   #
    def meurt(messageDefaite)
    	@modele.changerStadePartie(EnumStadePartie.PERDU)
          
@@ -531,12 +535,26 @@ class Joueur < Personnage
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
+   
+   ##
+   # Convertit un temps (en secondes) en heures, minutes, secondes
+   #
+   # == Parameters
+   # <b>temps<b> : Le temps en secondes a convertir
+   #
+   # == Returns:
+   # <b>tempsTot<b> : Une chaine représentant le temps sous la forme h min sec
+   #
    def convertirTemps(temps)
-   	dureeSec = "%02.0f" % ((temps % 3600) % 60)
-   	dureeMinutes = "%02.0f" % ((temps % 3600) / 60) # "%02.0f" => affiche 2 chiffres avant la virgule
-																				# et 0 aprï¿½s => pour trier les strings correctement
-		dureeHeures = "%02.0f" % (temps / 3600)
-		puts "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
+		dureeSec = "%02.0i" % (temps % 60)
+   	dureeMinutes = "%02.0i" % ((temps / 60) % 60) # "%02.0f" => affiche 2 chiffres avant la virgule
+																				# et 0 aprï¿½s => pour trier les strings correctement																		
+		dureeHeures = "%02.0i" % (temps / 3600)
+		
+		tempsTot = "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
+		puts tempsTot
+		return tempsTot
+		
    end
    
 
