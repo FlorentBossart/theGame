@@ -19,26 +19,27 @@ Audio.load()
 difficulte = BibliothequeDifficulte.getDifficulte("Novice")
 pseudo = "Fake"
 
-#Création vue
+#Crï¿½ation vue
 vue = Vue.new
 
-#Création modele
-modele = Modele.creer(vue, difficulte, pseudo)
+#Crï¿½ation modele
+modele = Modele.creer(vue,nil,nil)
 
-#Création controlleur
+#Crï¿½ation controlleur
 controleur = Controller.creer(modele, vue)
 
 vue.defM(modele)
 vue.defC(controleur)
-modele.initialiseToi()
+#modele.initialiseToi()
 
-#Création menu
+#Crï¿½ation menu
 menu = MenuJeu.creer(false, modele, controleur)
 vue.menu = menu
 
-menu.afficherMenu()
 
-vue.initInterface(true)
-#Gtk.main()
+menu.afficherMenu()
+Gtk.main()
+#vue.initInterface(true)
+
 
 

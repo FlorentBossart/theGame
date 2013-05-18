@@ -145,7 +145,7 @@ class InventaireModal
       
       #On ajoute la vbox Ã  la fenÃªtre
       @fenetreInventaire.add(@contenu)
-
+      @fenetreInventaire.transient_for=@vue.window
       @fenetreInventaire.modal = true
       @fenetreInventaire.show_all
       return @fenetreInventaire
