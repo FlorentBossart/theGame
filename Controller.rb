@@ -881,6 +881,7 @@ class Controller
 			puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
 			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
 			@vue.inventaireModal.onDestroy
+			@vue.actualiser
 		}
 	end
 	

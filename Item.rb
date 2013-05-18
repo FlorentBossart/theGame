@@ -68,9 +68,11 @@ class Item < Elem
        joueur.modele.tourPasse()
      end
      @casePosition=nil
-     if(joueur.inventaire.estPlein?()==false)
-       joueur.modele.debutTour()
-     end
+       if(joueur.inventaire.estPlein?()==false)
+
+         joueur.modele.debutTour()
+       end
+     joueur.modele.vue.actualiser
      return nil
    end
    
