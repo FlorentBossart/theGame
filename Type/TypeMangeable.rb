@@ -57,5 +57,13 @@ class TypeMangeable
       s+= "Prix: #{@prix} | "
       s+= "<<< TypeMangeable==]"
    end
+   
+    def getIntitule
+       return @intitule
+    end
+    
+    def estEquipable?
+       return false
+    end
 
 end

@@ -15,9 +15,15 @@ class StockMarchand
    
   def initialize()
     @itemsStock=Array.new()
-    caracteristiquesDuJeu=BibliothequeTypeEquipable.getTypes()+BibliothequeTypeMangeable.getTypes()
+    caracteristiquesDuJeu=BibliothequeTypeEquipable.getTypes()
     for c in caracteristiquesDuJeu
-      @itemsStock.push(Item.creer(nil,c))
+      caract = Equipable.creer(c)
+      @itemsStock.push(Item.creer(nil,caract))
+    end
+    caracteristiquesDuJeu=BibliothequeTypeMangeable.getTypes()
+    for c in caracteristiquesDuJeu
+      caract = Mangeable.creer(c)
+      @itemsStock.push(Item.creer(nil,caract))
     end
   end
   
