@@ -154,7 +154,7 @@ class Vue
     @timeout_id=nil
     @delay=10
     @numEtapeAffichage=0
-    @nbEtapeAffivhage=50
+    @nbEtapeAffivhage=5
     @background = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
     @background=@background.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
     @frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,false, 8,@background.width, @background.height)
@@ -223,7 +223,7 @@ class Vue
     end
     #@carteVue.set_pixbuf(@background)
     
-    @pix= Gdk::Pixbuf.new("joueurS.png")
+    @pix= Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"S"))
     @pix=@pix.scale(20,20,Gdk::Pixbuf::INTERP_BILINEAR)
     if(@timeout_id==nil)
       bloquerEcouteClavier()
@@ -470,7 +470,7 @@ class Vue
       
       x=xd+@numEtapeAffichage*(xa-xd)/@nbEtapeAffivhage
       y=yd+@numEtapeAffichage*(ya-yd)/@nbEtapeAffivhage
-      @frame.composite!(@pix,x,y,@pix.width, @pix.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      #@frame.composite!(@pix,x,y,@pix.width, @pix.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
       
       @carteVue.queue_draw
       if(@numEtapeAffichage==@nbEtapeAffivhage)

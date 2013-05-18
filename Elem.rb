@@ -30,8 +30,12 @@ class Elem
     # casePosition : un objet Case corespondant à la case où se trouvera l'Element
     #
     def initialize(casePosition)
-        nbElemCase=casePosition.listeElements.length+casePosition.listeEnnemis.length
-        @rangCase=nbElemCase+1
+        if(casePosition!=nil)
+          nbElemCase=casePosition.listeElements.length+casePosition.listeEnnemis.length
+          @rangCase=nbElemCase+1
+        else
+          @rangCase=-1
+        end
          @anciennePositionX=-1
          @anciennePositionY=-1
          @ancienRangCase=-1
