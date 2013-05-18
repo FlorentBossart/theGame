@@ -353,7 +353,7 @@
 	</texte>
 	<texte>
 		<id>utiliserProtec</id>
-		<contenu>You equipped you INTITULE which shield you for PROTEC %.</contenu>
+		<contenu>You equipped your INTITULE which shield you for PROTEC %.</contenu>
 	</texte>
 	<texte>
 		<id>protectTotale</id>
@@ -365,7 +365,7 @@
 	</texte>
 	<texte>
 		<id>mortCombat</id>
-		<contenu>You died fighting !!</contenu>
+		<contenu>You died fighting against ENNEMI !!</contenu>
 	</texte>
 	<texte>
 		<id>passageNiveau</id>
@@ -434,6 +434,22 @@
 	<texte>
 		<id>pistage</id>
 		<contenu>PISTEUR of the (CX-CY) case is chasing you !</contenu>
+	</texte>
+	<texte>
+		<id>choixInventairePlein</id>
+		<contenu>Your inventory is full !</contenu>
+	</texte>
+	<texte>
+		<id>fenetreInventairePlein</id>
+		<contenu>You inventory is full, what do you want to do ?</contenu>
+	</texte>
+	<texte>
+		<id>boutonJeter</id>
+		<contenu>Throw</contenu>
+	</texte>
+	<texte>
+		<id>boutonUtiliser</id>
+		<contenu>Use</contenu>
 	</texte>
 </textesJeu>
 

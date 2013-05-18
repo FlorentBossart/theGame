@@ -157,6 +157,31 @@ class PopUp
    dialog.run do |response|
    end
   end
+  
+## 
+# Affiche le PopUp contenant un choix entre le menu d'achat ou le menu de vente d'un marchand
+#
+def choixInventairePlein()
+  @vue.window.modal=false
+  #todo : faire une trad pour le nom de la fenetre
+  dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("fenetreInventairePlein"), @vue.window,
+           Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+           [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+  dialog.signal_connect('response') { dialog.destroy }
+    #todo : faire une trad pour blabla jeter
+  dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInventairePlein")))
+  buttonJeter=Gtk::Button.new(XmlMultilingueReader.lireTexte("Jeter"))
+  @vue.controller.choixInventairePleinCreer(buttonJeter,dialog)
+  dialog.vbox.add(buttonJeter)
+
+  dialog.show_all
+  dialog.run do |response|
+    case response
+      when Gtk::Dialog::RESPONSE_ACCEPT
+      else
+    end
+  end
+end
 
 
   ## 
