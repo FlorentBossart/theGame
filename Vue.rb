@@ -77,7 +77,7 @@ class Vue
     @controller=controller
   end
 
-  def initInterface()
+  def initInterface(demarrageJeu)
     Gtk.init()
     
     @inventaireModal=InventaireModal.creer(self)
@@ -161,7 +161,9 @@ class Vue
 
     @window.set_title("THE GAME")
 
-    @window.show_all()
+	if(demarrageJeu == false)
+    	@window.show_all()
+	end
 
     #lancé ici car on a pas encore de bouton debut partie
     @modele.debutTour()

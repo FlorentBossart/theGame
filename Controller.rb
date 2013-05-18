@@ -670,22 +670,13 @@ class Controller
 		
 		#@vue.menu.fenetreMenu.destroy
 		fenetre.destroy
-		puts "destroy menu"
-		@vue.window.destroy
-		puts "Destroy partie"
+		
+		if(@vue.menu.isInGame == true)
+			@vue.window.destroy
+			puts "Destroy partie"
+		end
 		
 		quitterPartieAction()
-	
-		#XmlMultilingueReader.setLangue("EN")
-		#XmlMultilingueReader.setLangue("FR")
-		puts "langue"
-		
-		# Remplissage des bibliothèque
-		#Modele.initialisationBibliotheques()
-		puts "modele init biblio"
-
-		#Audio.load()
-
 	
 		# Creation de la vue
 		vue=Vue.new()
@@ -701,7 +692,7 @@ class Controller
 		puts "vue defc"
 		modele.initialiseToi() # Debut du temps � la cr�ation d'un joueur
 		puts "init modele"
-		vue.initInterface()
+		vue.initInterface(false)
 		puts "init interface"
 		
 		
