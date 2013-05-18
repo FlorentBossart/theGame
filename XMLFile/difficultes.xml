@@ -22,7 +22,7 @@
 	<difficulte>
 	    <intitule>difficulteDeTest</intitule>
 	    <longueurCarte>5</longueurCarte>
-	    <largeurCarte>10</largeurCarte>
+	    <largeurCarte>3</largeurCarte>
 	    <energieDepart>1000</energieDepart>
 	    <nbRepos>3</nbRepos>
 	    <pnjAmisDepart>2</pnjAmisDepart>

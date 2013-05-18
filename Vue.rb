@@ -78,7 +78,7 @@ class Vue
   end
 
   def initInterface()
-    Gtk.init();
+    Gtk.init()
     
     @inventaireModal=InventaireModal.creer(self)
     
@@ -187,14 +187,24 @@ class Vue
   def afficheCarte()
     @pixbufCarteVue = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
     @pixbufCarteVue=@pixbufCarteVue.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
-    0.upto(@hauteurAfficheCarte-1) do |i|
-      0.upto(@largeurAfficheCarte-1)do |j|
+    
+    0.upto(@carte.longueur-1) do |x|
+         0.upto(@carte.largeur-1)do |y|
+            print @carte.getCaseAt(x,y).getIntitule()[0,1]+" "
+         end
+         puts ""
+    end
+    
+    0.upto(@hauteurAfficheCarte-1) do |x|
+      0.upto(@largeurAfficheCarte-1)do |y|
         #afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
-		@carte.getCaseAt(i+@x,j+@y).verifEnnemis
-        afficheCase(j*@tailleCase,i*@tailleCase,@carte.getCaseAt(i+@x,j+@y))
-        c=@carte.getCaseAt(i+@x,j+@y)
+        @carte.getCaseAt(x+@x,y+@y).verifEnnemis # A METTRE AILLEUR -> VUE MODIF PAS MODELE
+        afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x,y+@y))
+        #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
+        
+        c=@carte.getCaseAt(x+@x,y+@y)
         if(c.joueur!=nil || !c.listeElements.empty? || !c.listeEnnemis.empty?)
-          puts "CASE("+(i+@x).to_s+":"+(j+@y).to_s+")"
+          puts "CASE("+(x).to_s+":"+(y).to_s+")"
           if(c.joueur!=nil)
             puts "\tJOUEUR"
           end
@@ -348,6 +358,7 @@ class Vue
         #maj Carte Et Zaf
         @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
         @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
+        #COORD DU COIN GAUCHE SUP DE LA VUE
         afficheCarte()
         @zaf.majZaf(@modele.joueur)
         #sleep(0.01)    
