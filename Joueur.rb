@@ -543,7 +543,7 @@ class Joueur < Personnage
    # <b>temps<b> : Le temps en secondes a convertir
    #
    # == Returns:
-   # <b>tempsTot<b> : Une chaine représentant le temps sous la forme h min sec
+   # <b>tempsTot<b> : Une chaine reprï¿½sentant le temps sous la forme h min sec
    #
    def convertirTemps(temps)
 		dureeSec = "%02.0i" % (temps % 60)

@@ -225,6 +225,30 @@ class Controller
     print "oO Bt inventaire pressÃ©!"
   end
 
+  
+  ##
+  #  todo
+  #
+  # == Parameters:
+  # todo
+  #
+ def choixInventairePleinCreer(buttonJeter,dialog)
+    btInventaire.signal_connect('clicked'){
+      dialog.destroy
+      choixInventairePleinAction(buttonJeter)
+     }
+ end
+       
+
+ ##
+ # todo
+ #
+ def choixInventairePleinAction(buttonJeter)
+   @vue.window.modal = false #AFR
+   @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_JETER)
+   print "oO Bt inventaire pressÃ©!"
+ end
+  
 
    ##
    # Fait le lien entre un bouton et l'action liÃ©e Ã  l'affichage du menu
@@ -357,7 +381,7 @@ class Controller
   #
   def achatMarchandAction()
     print "oO Bt achatMarchandAction  pressÃ©!"
-    @modele.joueur.encaisser(10000) #TODO : supprimmer cette ligne
+    #@modele.joueur.encaisser(10000) #TODO : supprimmer cette ligne
     @vue.inventaireModal.afficherInventaire(@modele.pnjAideEnInteraction, EnumStadePartie.INTERACTION_MARCHAND_ACHAT)
   end
   
