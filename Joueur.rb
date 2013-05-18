@@ -103,6 +103,7 @@ class Joueur < Personnage
   # pseudo : pseudo du joueur
   #
    def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
+      @rangCase=0
       super(casePosition)
       @intitule="Joueur"
       @nombreRepos = nbRepos
@@ -147,7 +148,9 @@ class Joueur < Personnage
    # cible : la case ou le joueur doit se deplacer
    #
    def deplacement(cible)
-
+      @ancienRangCase=@rangCase
+      @anciennePositionX=@casePosition.coordonneeX
+      @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
@@ -158,6 +161,8 @@ class Joueur < Personnage
       if(self.toujoursEnVie?())
          @modele.tourDejaPasse = false;
          dest = @casePosition.getDestination(cible)
+          nbElemCase=dest.listeElements.length+dest.listeEnnemis.length
+         @rangCase=nbElemCase+1
          if(dest != nil)
             dest.joueur = self
             @casePosition.joueur = nil
@@ -501,11 +506,13 @@ class Joueur < Personnage
      @itemAttenteAjout=item
      if(@inventaire.estPlein?())
         @modele.changerStadePartie(EnumStadePartie.INVENTAIRE_PLEIN)
+        @modele.vue.popUp.choixInventairePlein#AFR 
      else
         @inventaire.ajouter(item)
         @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{item.getIntitule}.")
+        @casePosition.retirerElement(item) #AFR (était après le end à la base)
      end
-     @casePosition.retirerElement(item)
+
      @modele.tourPasse()
    end
    

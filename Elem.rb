@@ -13,6 +13,10 @@
 class Elem
     
     @casePosition
+    @rangCase
+    @anciennePositionX
+    @anciennePositionY
+    @ancienDansCase
     
     attr_reader :casePosition
     
@@ -26,6 +30,15 @@ class Elem
     # casePosition : un objet Case corespondant à la case où se trouvera l'Element
     #
     def initialize(casePosition)
+        if(casePosition!=nil)
+          nbElemCase=casePosition.listeElements.length+casePosition.listeEnnemis.length
+          @rangCase=nbElemCase+1
+        else
+          @rangCase=-1
+        end
+         @anciennePositionX=-1
+         @anciennePositionY=-1
+         @ancienRangCase=-1
         @casePosition=casePosition
     end
     

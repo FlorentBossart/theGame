@@ -29,10 +29,16 @@ class Vue
   @carte #la classe carte
   @referencesGraphiques #fichier xml des images
   
-  @carteVue #image pour affichager la carte
-  @pixbufCarteVue #son pixbuf attitré
   @tailleCase
   @tailleCase_f
+  
+  @delay
+  @numEtapeAffichage
+  @nbEtapeAffivhage
+  @background
+  @frame
+  @carteVue
+  @timeout_id
       
   @hauteurAfficheCarte #hauteurVisible
   @largeurAfficheCarte #largeurVisible
@@ -90,7 +96,7 @@ class Vue
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
     @hauteurAfficheCarte = 4
-    @largeurAfficheCarte = 7
+    @largeurAfficheCarte = 8
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
@@ -103,9 +109,14 @@ class Vue
 
     @window = Gtk::Window.new()
     @window.signal_connect('destroy') {
+      if(@timeout_id!=nil)
+        Gtk.timeout_remove(@timeout_id)
+      end
       Gtk.main_quit()
     }
 
+=begin
+    
     @window.signal_connect('size_request'){
 
       x = (@window.size()[0]-1)/@tailleCase;
@@ -128,7 +139,9 @@ class Vue
         end
       end
     }
-
+    
+=end
+   
     bloquerEcouteClavier()
     @controller.ecouteClavierCreer(@window)
     #tableau pour le bas de la fenêtre
@@ -138,7 +151,19 @@ class Vue
     tabBot.attach(@zoneCtrl,2,3,0,1)
 
     #image pour afficher la carte
-    @carteVue = Gtk::Image.new()
+    @timeout_id=nil
+    @delay=10
+    @numEtapeAffichage=0
+    @nbEtapeAffivhage=5
+    @background = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
+    @background=@background.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
+    @frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,false, 8,@background.width, @background.height)
+    @carteVue = Gtk::DrawingArea.new
+    @carteVue.set_size_request(@background.width, @background.height)
+    @carteVue.signal_connect('expose_event') do |w, e|
+          expose(w, e)
+    end
+        
     vbox = Gtk::VBox.new()
 
     #initialisation de la carte
@@ -146,17 +171,18 @@ class Vue
     initCarte();
     @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
     @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
-    afficheCarte()
+    #afficheCarte()
     
-    valign = Alignment.new(0.5,1,0,0);
-    valign.add(@carteVue);
-
-    vbox.add(valign)
-    valignBot = Alignment.new(0.5,1,1,0);
-    valignBot.add(tabBot);
-    vbox.add(valignBot);
-
-    #window.set_resizable(false)
+    #valign = Alignment.new(0.5,1,0,0);
+    #valign.add(@carteVue);
+    #vbox.add(valign)
+    
+    vbox.add(@carteVue)
+    valignBot = Alignment.new(0.5,1,1,0)
+    valignBot.add(tabBot)
+    vbox.add(valignBot)
+    
+    window.set_resizable(false)
     @window.add(vbox)
 
     @window.set_title("THE GAME")
@@ -185,17 +211,9 @@ class Vue
 
   end
 
+  
   #def afficheCarte(debutX,debutY)
   def afficheCarte()
-    @pixbufCarteVue = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
-    @pixbufCarteVue=@pixbufCarteVue.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
-    
-    0.upto(@carte.longueur-1) do |x|
-         0.upto(@carte.largeur-1)do |y|
-            print @carte.getCaseAt(x,y).getIntitule()[0,1]+" "
-         end
-         puts ""
-    end
     
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
@@ -203,24 +221,19 @@ class Vue
         @carte.getCaseAt(x+@x,y+@y).verifEnnemis # A METTRE AILLEUR -> VUE MODIF PAS MODELE
         afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x,y+@y))
         #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
-        
-        c=@carte.getCaseAt(x+@x,y+@y)
-        if(c.joueur!=nil || !c.listeElements.empty? || !c.listeEnnemis.empty?)
-          puts "CASE("+(x).to_s+":"+(y).to_s+")"
-          if(c.joueur!=nil)
-            puts "\tJOUEUR"
-          end
-          for n in c.listeElements
-            puts "\tELEMENT "+n.getIntitule
-          end
-          for n in c.listeEnnemis
-            puts "\tENNEMI "+n.getIntitule
-          end
-          puts "\n"
-        end
       end
     end
-    @carteVue.set_pixbuf(@pixbufCarteVue)
+    #@carteVue.set_pixbuf(@background)
+    
+    @pix= Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"S"))
+    @pix=@pix.scale(20,20,Gdk::Pixbuf::INTERP_BILINEAR)
+    if(@timeout_id==nil)
+      bloquerEcouteClavier()
+      @zoneCtrl.bloquerBoutons(@modele)
+      @timeout_id = Gtk.timeout_add(@delay) do
+                      timeout(0,0,100,100)
+              end
+    end
   end
 
   def getNumTerrain(intitule)
@@ -274,7 +287,7 @@ class Vue
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
     
-    @pixbufCarteVue.composite!(pixbufTerrain, xAff,yAff, pixbufTerrain.width, pixbufTerrain.height,xAff, yAff,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+    @background.composite!(pixbufTerrain, xAff,yAff, pixbufTerrain.width, pixbufTerrain.height,xAff, yAff,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
 
     #joueur
     if(caseAffiche.joueur!=nil)
@@ -295,7 +308,7 @@ class Vue
       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
       x=@tailleCase_f/3
       y=@tailleCase_f/3
-      @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
       #aides
@@ -309,7 +322,7 @@ class Vue
         y=position[1]
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(a.getIntitule().downcase))
         pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-        @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+        @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
       end
     
     #ennemis
@@ -333,7 +346,7 @@ class Vue
         end
       
       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-      @pixbufCarteVue.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
     
     
@@ -371,8 +384,8 @@ class Vue
 
     #ETAPE CHOIX LIBRE
     when EnumStadePartie.CHOIX_LIBRE
-      @zoneCtrl.majBoutons(@modele)
-      majEcouteClavier()
+      #@zoneCtrl.majBoutons(@modele)
+      #majEcouteClavier()
       #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
       @zoneCtrl.bloquerBoutons(@modele)
@@ -399,6 +412,7 @@ class Vue
     when EnumStadePartie.INTERACTION_GUERISSEUR
       @popUp.afficheChoixGuerisseur(@modele.joueur, @modele.pnjAideEnInteraction)
     end #fin case
+    
     puts "\tfin actualiser"
   end
 
@@ -432,4 +446,48 @@ class Vue
   
   
   
+  
+  
+    def expose(widget, event)
+      rowstride = @frame.rowstride
+
+      pixels = @frame.pixels
+      pixels[0, rowstride * event.area.y + event.area.x * 3] = ''
+
+      Gdk::RGB.draw_rgb_image(widget.window,
+                              widget.style.black_gc,
+                              event.area.x, event.area.y,
+                              event.area.width, event.area.height,
+                              Gdk::RGB::Dither::NORMAL,
+                              pixels, rowstride,
+                              event.area.x, event.area.y)
+      true
+    end
+
+    # Timeout handler to regenerate the frame
+    def timeout(xd,yd,xa,ya)
+      @background.copy_area(0, 0, @background.width, @background.height,
+                           @frame, 0, 0)
+      @numEtapeAffichage+=1
+      
+      x=xd+@numEtapeAffichage*(xa-xd)/@nbEtapeAffivhage
+      y=yd+@numEtapeAffichage*(ya-yd)/@nbEtapeAffivhage
+      #@frame.composite!(@pix,x,y,@pix.width, @pix.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      
+      @carteVue.queue_draw
+      if(@numEtapeAffichage==@nbEtapeAffivhage)
+              Gtk.timeout_remove(@timeout_id)
+              @numEtapeAffichage=0       
+              @timeout_id=nil
+              majEcouteClavier()
+              @zoneCtrl.majBoutons(@modele)
+      end    
+      true
+    end
+  
 end
+
+
+
+
+
