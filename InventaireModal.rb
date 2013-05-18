@@ -24,12 +24,6 @@ class InventaireModal
    @boutonInteraction
    @tabImages
 
-   #Variables de classe/globales
-   #@@boutonVente    = Button.new("Vendre")
-   #@@boutonEquiper  = Button.new("Equiper")
-   #@@boutonUtiliser = Button.new("Utiliser")
-   #@@boutonAcheter  = Button.new("Acheter")
-  # @@boutonJeter    = Button.new("Jeter")
   
    #attr_accessor :fenetreInventaire
    #attr_reader :contenu
@@ -208,9 +202,8 @@ class InventaireModal
    def setModeAffichage(modeAffichage)
       case modeAffichage
          when EnumStadePartie.INVENTAIRE_PLEIN then
-            #@boutonInteraction =@@boutonJeter
-           @boutonInteraction=Button.new("Jeter")
-        @vue.controller.jeterItem(@boutonInteraction)
+            @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("boutonJeter"))
+            @vue.controller.jeterItem(@boutonInteraction)
             #@vue.controller.jeterItem(@boutonInteraction) #AFR
          #when EnumStadePartie.EQUIPEMENT_ARME then
          #   @boutonInteraction = @@boutonEquiper
@@ -219,21 +212,18 @@ class InventaireModal
          #   @boutonInteraction = @@boutonEquiper
          #   @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
-            #@boutonInteraction = @@boutonAcheter
-            @boutonInteraction=Button.new("Acheter")
+            @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("achat"))
             @vue.controller.acheterItem(@boutonInteraction)
 
             #@vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
-           # @boutonInteraction = @@boutonVente
-        @boutonInteraction=Button.new("Vendre")
-        @vue.controller.vendreItem(@boutonInteraction)
+            @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("vendre"))
+            @vue.controller.vendreItem(@boutonInteraction)
 
             #@vue.controller.vendreItem(@boutonInteraction) #AFR
          when EnumStadePartie.INVENTAIRE_USAGE then
-           # @boutonInteraction = @@boutonUtiliser
-        @boutonInteraction=Button.new("Utiliser")
-             @vue.controller.utiliserItem(@boutonInteraction)
+            @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("boutonUtiliser"))
+            @vue.controller.utiliserItem(@boutonInteraction)
 
             #@vue.controller.utiliserItem(@boutonInteraction) #AFR
         end

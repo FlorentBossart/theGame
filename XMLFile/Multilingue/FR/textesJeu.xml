@@ -1,4 +1,4 @@
-<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+﻿<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!DOCTYPE textesJeu [
 <!ELEMENT textesJeu (texte+)>
@@ -420,6 +420,30 @@
 	<texte>
 		<id>pistage</id>
 		<contenu>PISTEUR de la case (CX-CY) vous traque !</contenu>
+	</texte>
+	<texte>
+		<id>choixInventairePlein</id>
+		<contenu>Votre inventaire est plein</contenu>
+	</texte>
+	<texte>
+		<id>fenetreInventairePlein</id>
+		<contenu>Votre inventaire est plein, que voulez vous faire ?</contenu>
+	</texte>
+	<texte>
+		<id>choixInventairePlein</id>
+		<contenu>Votre inventaire est plein</contenu>
+	</texte>
+	<texte>
+		<id>fenetreInventairePlein</id>
+		<contenu>Votre inventaire est plein, que voulez vous faire ?</contenu>
+	</texte>
+	<texte>
+		<id>boutonJeter</id>
+		<contenu>Jeter</contenu>
+	</texte>
+	<texte>
+		<id>boutonUtiliser</id>
+		<contenu>Utiliser</contenu>
 	</texte>
 </textesJeu>
 

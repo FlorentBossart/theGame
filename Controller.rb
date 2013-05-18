@@ -227,10 +227,11 @@ class Controller
 
   
   ##
-  #  todo
+  #  Fait le lien entre un bouton et l'action lié au choix Jeter
   #
   # == Parameters:
-  # todo
+  # btInventaire : le gtkButton qu'il faudra lier Ã  l'action du clic sur le bouton inventaire
+  # dialog: PopUp lie au bouton
   #
  def choixInventairePleinCreer(buttonJeter,dialog)
     btInventaire.signal_connect('clicked'){
@@ -241,11 +242,11 @@ class Controller
        
 
  ##
- # todo
+ # Action(s) a  effectuer lors du clic sur le bouton Jeter (choix)
  #
  def choixInventairePleinAction(buttonJeter)
    @vue.window.modal = false #AFR
-   @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_JETER)
+   @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_PLEIN)
    print "oO Bt inventaire pressÃ©!"
  end
   
