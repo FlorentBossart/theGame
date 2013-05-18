@@ -271,6 +271,11 @@ class MenuJeu
 					#@modele = tabSlot[index].modele
 					modeleCharger = tabSlot[index].modele
 					
+					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
+					puts "temps de jeu session d'avant : " + modeleCharger.joueur.tempsTotal.to_s
+					modeleCharger.joueur.dateDebutJeu = Time.now
+					puts "Debut du temps de jeu le " + modeleCharger.joueur.dateDebutJeu.to_s
+					
 					@fenetreMenu.destroy
 					#Destruction ancienne vue partie
 					@modele.vue.window.destroy
@@ -293,10 +298,7 @@ class MenuJeu
 					vue.initInterface()
 					puts "init interface"
 					
-					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
-					puts "temps de jeu session d'avant : " + modeleCharger.joueur.tempsTotal.to_s
-					modeleCharger.joueur.dateDebutJeu = Time.now
-					puts "Debut du temps de jeu le " + modeleCharger.joueur.dateDebutJeu.to_s
+					
 				}
 			end
 		}

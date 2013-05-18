@@ -11,6 +11,8 @@
 
 require'Classements.rb'
 
+require './XMLReader/XmlMultilingueReader.rb'
+
 require 'rexml/document'
 include REXML
 
@@ -96,10 +98,10 @@ class XmlClassements
       joueur.add_element(tps)
       
       score = Element.new("score")
-      #facteurDiff = 1
-      if(modele.difficulte.intitule == "Novice")
+      
+      if(modele.difficulte.intitule == XmlMultilingueReader.lireTexte("novice"))
       	facteurDiff = 3
-      elsif(modele.difficulte.intitule == "Moyen")
+      elsif(modele.difficulte.intitule == XmlMultilingueReader.lireTexte("moyen"))
       	facteurDiff = 2
       else
       	facteurDiff = 1
@@ -109,7 +111,7 @@ class XmlClassements
       joueur.add_element(score)
       
       diff = Element.new("difficulte")
-      diff.text = modele.difficulte.intitule # gérer par la classe Modele
+      diff.text = modele.difficulte.intitule
       joueur.add_element(diff)
       
       doc.root.add_element(joueur)
