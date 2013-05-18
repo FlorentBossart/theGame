@@ -150,7 +150,7 @@ class MenuJeu
 		end
 		
 		@fenetreMenu.add(@contenu)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.show_all
 		
 		@controleur.nouvellePartieCreer(boutNewPartie,@fenetreMenu)
@@ -205,6 +205,7 @@ class MenuJeu
 		@contenu.add(maHBoxBouton)
 		@contenu.set_border_width(20)		
 		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -293,7 +294,7 @@ class MenuJeu
 						puts "Destroy partie"
 					end
 					
-					# Creation de la vue chargée
+					# Creation de la vue chargï¿½e
 					vue = modeleCharger.vue
 					puts "Vue creer"
 					
@@ -316,7 +317,7 @@ class MenuJeu
 		}
 		
 		
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
@@ -461,7 +462,7 @@ class MenuJeu
 		@contenu.pack_start(boutRetour, false, false)
 		
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -621,7 +622,7 @@ class MenuJeu
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
@@ -675,7 +676,7 @@ class MenuJeu
 		@contenu.add(scrolled_win)
 		@contenu.pack_start(boutRetour, false, false)
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 

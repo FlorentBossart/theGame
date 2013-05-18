@@ -147,6 +147,7 @@ class InventaireModal
       @fenetreInventaire.add(@contenu)
       @fenetreInventaire.transient_for=@vue.window
       @fenetreInventaire.modal = true
+      @fenetreInventaire.set_window_position Gtk::Window::POS_CENTER
       @fenetreInventaire.show_all
       return @fenetreInventaire
   
