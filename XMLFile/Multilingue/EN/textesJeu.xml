@@ -12,6 +12,10 @@
 		<id>nomMenu</id>
 	    <contenu>Menu</contenu>
 	</texte>
+	<texte>
+		<id>...</id>
+	    <contenu>...</contenu>
+	</texte>
 	
 	<texte>
 		<id>votreNom</id>

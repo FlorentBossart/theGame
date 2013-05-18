@@ -235,7 +235,7 @@ class MenuJeu
 			end
 			
 			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
-							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + XmlMultilingueReader.lireTexte(diff.downcase) + 
 							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
@@ -345,7 +345,7 @@ class MenuJeu
 			end
 			
 			lab = Label.new(XmlMultilingueReader.lireTexte("nom") + " : " + nom + 
-							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + diff + 
+							" | " + XmlMultilingueReader.lireTexte("difficulte") + " : " + XmlMultilingueReader.lireTexte(diff.downcase) + 
 							" | " + XmlMultilingueReader.lireTexte("date") + " : " + date)
 			lab.set_height_request(50)
 			frame.add(lab)
@@ -409,20 +409,14 @@ class MenuJeu
 		nb = Notebook.new()
 		
 		tabLabel = Array.new
-		tabLabel[0] = Label.new(XmlMultilingueReader.lireTexte("novice"))
-		tabLabel[1] = Label.new(XmlMultilingueReader.lireTexte("moyen"))
-		tabLabel[2] = Label.new(XmlMultilingueReader.lireTexte("expert"))
+		tabLabel[0] = Label.new("Novice")
+		tabLabel[1] = Label.new("Moyen")
+		tabLabel[2] = Label.new("Expert")
 		
 		# Rempli toutes les listes de joueurs de toutes les difficultes : retourne un classement
-		c = remplirListeJoueur()
-		
-		#XmlClassements.ecrireXml(@modele) ###### !!!!!! A mettre en fin de partie !!!!!!!! ######
-		
+		c = remplirListeJoueur()		
 
 		  0.upto(2) do |i|
-			# Rempli une liste de joueur suivant leur niveau de difficult�
-			#listeJoueur = remplirListeJoueur(tabLabel[i].text)
-			
 			# Cr�ation des treeView
 			treeview = TreeView.new
 			
@@ -430,7 +424,6 @@ class MenuJeu
 			setup_tree_view(treeview)
 			
 			# Cr�ation et remplissage des ListStore
-			#store = remplirListStore(listeJoueur)
 			store = remplirListStore(c.getListeJoueur(tabLabel[i].text))
 			
 			# Ajoute chacun des tree model au tree view correspondant
@@ -440,6 +433,10 @@ class MenuJeu
 			scrolled_win = ScrolledWindow.new.add(treeview)
 			# Affichage ou non des scrollBars
 			scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
+			
+			# Pour traduire les textes des onglets
+			texteOnglet = XmlMultilingueReader.lireTexte(tabLabel[i].text.downcase)
+			tabLabel[i].text = texteOnglet
 			
 			# Ajoute dans chaque page des onglets du notebook une ScrolledWindow
 			nb.append_page(scrolled_win, tabLabel[i])
@@ -556,15 +553,12 @@ class MenuJeu
    #* <b>difficulte :</b> une chaine de caract�res permettant de choisir la liste de joueur � retourner en fonction de cette difficult�
    #
 	def remplirListeJoueur()
-		#listeJoueur = Array.new
 		c = Classements.new()
 		
 		if(File.exist?("XMLFile/classements.xml")) # Si le fichier xml correspondant aux classements des joueurs existe
 			XmlClassements.lireXml(c)
-			#listeJoueur = c.getListeJoueur(difficulte)
 		end
 		
-		#return listeJoueur # La liste est vide si le fichier xml n'existe pas
 		return c
 	end
 

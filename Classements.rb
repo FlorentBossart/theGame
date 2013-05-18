@@ -41,11 +41,11 @@ class Classements
    # 
    def addJoueur(nom, nbEnnemisTues, distance, orTotal, temps, score, difficulte)
    	
-   	if(difficulte == XmlMultilingueReader.lireTexte("novice"))
+   	if(difficulte == "Novice")
 			@listeStatsNovice.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
-		elsif(difficulte == XmlMultilingueReader.lireTexte("moyen"))
+		elsif(difficulte == "Moyen")
 			@listeStatsMoyen.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
-		elsif(difficulte == XmlMultilingueReader.lireTexte("expert"))
+		elsif(difficulte == "Expert")
 			@listeStatsExpert.push([nom, nbEnnemisTues, distance, orTotal, temps, score])
 		end
 		
@@ -61,11 +61,11 @@ class Classements
    # 
    def getListeJoueur(difficulte)
    	
-   	if(difficulte == XmlMultilingueReader.lireTexte("novice"))
+   	if(difficulte == "Novice")
 			return @listeStatsNovice
-		elsif(difficulte == XmlMultilingueReader.lireTexte("moyen"))
+		elsif(difficulte == "Moyen")
 			return @listeStatsMoyen
-		elsif(difficulte == XmlMultilingueReader.lireTexte("expert"))
+		elsif(difficulte == "Expert")
 			return @listeStatsExpert
 		end
       

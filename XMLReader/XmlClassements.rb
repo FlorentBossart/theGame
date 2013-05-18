@@ -47,7 +47,7 @@ class XmlClassements
    ##
    # Méthode statique permettant d'ajouter les statistiques d'un joueur au fichier XML (classements.xml)
    #
-   def XmlClassements.ecrireXml(modele) # Prendre un Modele en paramètre ?
+   def XmlClassements.ecrireXml(modele)
    	   	
       if(File.exist?("XMLFile/classements.xml") == false)# Création du fichier s'il n'existe pas
       	begin
@@ -86,11 +86,11 @@ class XmlClassements
       joueur.add_element(nbEnnemisTues)
       
       dist = Element.new("distance")
-      dist.text = modele.joueur.distanceParcourue # gérer par la classe Joueur
+      dist.text = modele.joueur.distanceParcourue
       joueur.add_element(dist)
       
       argent = Element.new("or")
-      argent.text = modele.joueur.inventaire.capital # gérer par la classe Inventaire
+      argent.text = modele.joueur.inventaire.capital
       joueur.add_element(argent)
       
       tps = Element.new("temps")
@@ -99,9 +99,10 @@ class XmlClassements
       
       score = Element.new("score")
       
-      if(modele.difficulte.intitule == XmlMultilingueReader.lireTexte("novice"))
+      # L'intitule de la difficulte est toujours en francais dans le modele
+      if(modele.difficulte.intitule == "Novice")
       	facteurDiff = 3
-      elsif(modele.difficulte.intitule == XmlMultilingueReader.lireTexte("moyen"))
+      elsif(modele.difficulte.intitule == "Moyen")
       	facteurDiff = 2
       else
       	facteurDiff = 1
