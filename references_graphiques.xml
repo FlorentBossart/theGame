@@ -334,7 +334,7 @@
 
 <reference>
    <intitule_objet>blanc</intitule_objet>
-   <img_ihm>./img/gui/blanc.png</img_ihm>
+   <img_ihm>./img/gui/blanc.jpg</img_ihm>
 </reference>	
 <reference>
    <intitule_objet>tombe</intitule_objet>

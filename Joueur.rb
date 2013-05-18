@@ -103,6 +103,7 @@ class Joueur < Personnage
   # pseudo : pseudo du joueur
   #
    def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
+      @rangCase=0
       super(casePosition)
       @intitule="Joueur"
       @nombreRepos = nbRepos
@@ -147,7 +148,9 @@ class Joueur < Personnage
    # cible : la case ou le joueur doit se deplacer
    #
    def deplacement(cible)
-
+      @ancienRangCase=@rangCase
+      @anciennePositionX=@casePosition.coordonneeX
+      @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
@@ -158,6 +161,8 @@ class Joueur < Personnage
       if(self.toujoursEnVie?())
          @modele.tourDejaPasse = false;
          dest = @casePosition.getDestination(cible)
+          nbElemCase=dest.listeElements.length+dest.listeEnnemis.length
+         @rangCase=nbElemCase+1
          if(dest != nil)
             dest.joueur = self
             @casePosition.joueur = nil
@@ -543,7 +548,7 @@ class Joueur < Personnage
    # <b>temps<b> : Le temps en secondes a convertir
    #
    # == Returns:
-   # <b>tempsTot<b> : Une chaine représentant le temps sous la forme h min sec
+   # <b>tempsTot<b> : Une chaine reprï¿½sentant le temps sous la forme h min sec
    #
    def convertirTemps(temps)
 		dureeSec = "%02.0i" % (temps % 60)

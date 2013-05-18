@@ -127,8 +127,13 @@ class Ennemi < PNJ
    #* <b>cible :</b> la cible de destination
    #
    def deplacement(cible)
+     @ancienRangCase=@rangCase
+     @anciennePositionX=@casePosition.coordonneeX
+     @anciennePositionY=@casePosition.coordonneeY
      @direction=cible
        caseCible= @casePosition.getDestination(cible)
+     nbElemCase=caseCible.listeElements.length+caseCible.listeEnnemis.length
+              @rangCase=nbElemCase+1
         if(!@vivant)
 		this.meurt
 		return nil

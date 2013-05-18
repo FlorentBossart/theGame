@@ -6,7 +6,7 @@
 # Fait partie de : TheGame
 #
 # Cette classe représente les différents stades de la partie définie par:
-#* Un stade ETAPE_FINIE
+#* Un stade NO_ETAPE
 #* Un stade CHOIX_LIBRE
 #* Un stade PERDU
 #* Un stade EQUIPEMENT_ARMURE
@@ -20,7 +20,7 @@
 
 class EnumStadePartie
    
-   @@ETAPE_FINIE                = 1
+   @@NO_ETAPE                = 1
    @@CHOIX_LIBRE                = 2
    @@PERDU                      = 3
    @@EQUIPEMENT_ARMURE          = 4
@@ -34,13 +34,13 @@ class EnumStadePartie
    
    
    ##
-   #===Indique le stade ETAPE_FINIE.
+   #===Indique le stade NO_ETAPE.
    #
    #===Retourne:
-   #* <b>stade :</b> le stade ETAPE_FINIE
+   #* <b>stade :</b> le stade NO_ETAPE
    #
-   def EnumStadePartie.ETAPE_FINIE
-      return @@ETAPE_FINIE
+   def EnumStadePartie.NO_ETAPE
+      return @@NO_ETAPE
    end
 
    

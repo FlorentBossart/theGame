@@ -163,7 +163,7 @@ class Modele
       ajoutItems(@difficulte.objetsDepart)
      
      #PAS D'ACTUALISATION CAR MODELE SE CREER AVANT LA VUE  
-     #changerStadePartie(EnumStadePartie.ETAPE_FINIE)
+     #changerStadePartie(EnumStadePartie.NO_ETAPE)
    end
 
    def changerStadePartie(nouveauStade)
@@ -171,7 +171,7 @@ class Modele
      AffichageDebug.Afficher("Stade Partie=#{nouveauStade}")
      #METHODE VUE
      @vue.actualiser()
-     @stadePartie=EnumStadePartie.ETAPE_FINIE
+     @stadePartie=EnumStadePartie.NO_ETAPE
      AffichageDebug.Afficher("Stade Partie Terminé")
    end
    
@@ -245,6 +245,9 @@ class Modele
    # Permet de faire passer un tour. 
    # 
    def tourPasse()
+     
+     puts "debut tourPasse"
+     
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
@@ -278,6 +281,11 @@ class Modele
          ajoutEnnemis(@difficulte.pnjEnnemisParGeneration)
          ajoutItems(@difficulte.objetsParGeneration)
       end
+      
+     #changerStadePartie(EnumStadePartie.NO_ETAPE)
+      
+     puts "fin tourPasse"
+         
    end
    
 =begin
