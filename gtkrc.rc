@@ -1,0 +1,9 @@
+ 
+style "Windows"
+{
+	bg_pixmap[NORMAL] = "/img/GTA.PNG"
+	bg[NORMAL] = "#CC9664"
+	fg[NORMAL] = "yellow"
+	fg[INSENSITIVE] = "white"
+}
+class "GtkWindow" style "Windows"
