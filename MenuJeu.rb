@@ -86,6 +86,7 @@ class MenuJeu
    #
 	def afficherMenu()
 	  	fenMenuPrincipal = Window.new()
+	  	fenMenuPrincipal.name = "fenMenuPrincipal" # Référence pour le fichier gtkrc.rc
 		fenMenuPrincipal.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
 		#fenMenuPrincipal.set_window_position(Window::POS_CENTER_ALWAYS)

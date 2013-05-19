@@ -6,4 +6,4 @@ style "Windows"
 	fg[NORMAL] = "yellow"
 	fg[INSENSITIVE] = "white"
 }
-class "GtkWindow" style "Windows"
+widget "fenMenuPrincipal" style "Windows"
