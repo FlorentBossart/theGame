@@ -68,17 +68,12 @@ class Vue
   
   @inventaireModal
   
-  @initialisee
   
   @@threadAffichage = false 
   
   
-  attr_reader :modele, :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal, :initialisee
+  attr_reader :modele, :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal, :fini
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
-  
-  def initialize()
-    @initialisee=false
-  end
   
   def Vue.creer()
    new()
@@ -95,8 +90,7 @@ class Vue
   def initInterface()
     Gtk.init()
     
-    @initialisee=true
-    
+    @fini=true
     @inventaireModal=InventaireModal.creer(self)
     
     @tailleCase=130
@@ -227,14 +221,39 @@ class Vue
 
   
   def afficheCarte()
-    @structureEnnemisDeplacement.clear()
-    @structureAidesGenere.clear()
+    puts "afficheCarte"
+    
+    0.upto(@hauteurAfficheCarte-1) do |x|
+             0.upto(@largeurAfficheCarte-1)do |y|
+                print @carte.getCaseAt(x+@x,y+@y).getIntitule()[0,1]+" "
+             end
+             puts ""
+        end
+    
     
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
         @carte.getCaseAt(x+@x,y+@y).verifEnnemis # A METTRE AILLEUR -> VUE MODIF PAS MODELE
         afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x,y+@y))
         #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
+        
+        
+        c=@carte.getCaseAt(x+@x,y+@y)
+                if(c.joueur!=nil || !c.listeElements.empty? || !c.listeEnnemis.empty?)
+                  puts "CASE("+(x).to_s+":"+(y).to_s+")"
+                  if(c.joueur!=nil)
+                    puts "\tJOUEUR"
+                  end
+                  for n in c.listeElements
+                    puts "\tELEMENT "+n.getIntitule
+                  end
+                  for n in c.listeEnnemis
+                    puts "\tENNEMI "+n.getIntitule
+                  end
+                  puts "\n"
+                end
+        
+        
       end
     end
     @carteVue.window.draw_pixbuf(nil, @background, 0, 0, 0, 0, @background.width, @background.height, Gdk::RGB::DITHER_NORMAL, 0, 0)
@@ -243,6 +262,7 @@ class Vue
   
   
   def afficheCarteDyn()
+    puts "afficheCarteDyn"
     @structureEnnemisDeplacement.clear()
     @structureAidesGenere.clear()
     
@@ -577,8 +597,9 @@ def afficheCase(xAff,yAff,caseAffiche)
         #COORD DU COIN GAUCHE SUP DE LA VUE
         if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || @modele.compteurTour==0)
           afficheCarteDyn()
+          
         else
-          afficheCarte()
+          #afficheCarte()
         end
         @zaf.majZaf(@modele.joueur)
         #sleep(0.01)    
@@ -724,6 +745,7 @@ def afficheCase(xAff,yAff,caseAffiche)
               @timeout_id=nil
               majEcouteClavier()
               @zoneCtrl.majBoutons(@modele)
+              @fini=true
       end    
       true
     end
