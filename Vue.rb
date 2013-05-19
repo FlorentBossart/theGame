@@ -336,8 +336,11 @@ class Vue
       ennemis=caseAffiche.listeEnnemis
       for e in ennemis
         rg=e.rangCase
+        puts "rg = " + rg.to_s
         xPos=@positions[rg][0]
+        puts "xPos = " + xPos.to_s
         yPos=@positions[rg][1]
+        puts "yPos = " + yPos.to_s
         
         xAncien=e.anciennePositionX
         yAncien=e.anciennePositionY

@@ -5,7 +5,8 @@ require 'gtk2'
 require 'Modele.rb'
 require 'XMLReader/XmlMultilingueReader.rb'
 require 'Audio.rb'
-require 'Controller.rb'
+#require 'Controller.rb'
+#require 'Vue.rb'
 
 #Gtk.init
 
@@ -16,8 +17,8 @@ Modele.initialisationBibliotheques()
 
 Audio.load()
 
-difficulte = BibliothequeDifficulte.getDifficulte("Novice")
-pseudo = "Fake"
+#difficulte = BibliothequeDifficulte.getDifficulte("Novice")
+#pseudo = "Fake"
 
 #Cr�ation vue
 vue = Vue.new

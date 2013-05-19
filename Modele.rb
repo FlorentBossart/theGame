@@ -44,6 +44,8 @@ require './XMLReader/XmlMangeablesReader.rb'
 require './XMLReader/XmlTerrainsReader.rb'
 require './StockMarchand.rb'
 
+require './Vue.rb'
+
 
 class Modele
 
