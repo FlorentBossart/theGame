@@ -47,6 +47,7 @@ require './StockMarchand.rb'
 
 class Modele
 
+   @@compteurTourGlob=0
    @vue
    @listeEnnemis
    @compteurTour
@@ -106,6 +107,10 @@ class Modele
       @pseudoPartie=pseudo
    end
      
+   def Modele.Cpt
+     return @@compteurTourGlob
+   end
+   
    def initialiseToi()
      
       @nbPisteur=0 
@@ -251,6 +256,7 @@ class Modele
      notifier(XmlMultilingueReader.lireTexte("tourPasse"))
       @tourDejaPasse=true
       @compteurTour += 1
+      @@compteurTourGlob +=1
       
 =begin
      

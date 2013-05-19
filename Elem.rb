@@ -10,15 +10,18 @@
 # C'est une classe abtraite.
 #
 
+require './Modele.rb'
+
 class Elem
     
     @casePosition
     @rangCase
     @anciennePositionX
     @anciennePositionY
-    @ancienDansCase
+    @ancienRangCase
+    @tourDeCreation
     
-    attr_reader :casePosition
+    attr_reader :casePosition, :rangCase, :anciennePositionX, :anciennePositionY, :ancienRangCase
     
     private_class_method :new
     
@@ -40,6 +43,7 @@ class Elem
          @anciennePositionY=-1
          @ancienRangCase=-1
         @casePosition=casePosition
+        @tourDeCreation=Modele.Cpt
     end
     
     
@@ -56,6 +60,9 @@ class Elem
         return new(casePosition)
     end
     
+    def vientDEtreGenere?()
+      return (@tourDeCreation==Modele.Cpt)
+    end
     
     ##
     # (Abstraite) Renvoi la clé pour accèder à l'image dans la table  de RefGraphiques.

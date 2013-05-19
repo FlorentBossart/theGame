@@ -103,8 +103,8 @@ class Joueur < Personnage
   # pseudo : pseudo du joueur
   #
    def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
-      @rangCase=0
       super(casePosition)
+      @rangCase=0
       @intitule="Joueur"
       @nombreRepos = nbRepos
       @niveau = 1
@@ -148,7 +148,6 @@ class Joueur < Personnage
    # cible : la case ou le joueur doit se deplacer
    #
    def deplacement(cible)
-      @ancienRangCase=@rangCase
       @anciennePositionX=@casePosition.coordonneeX
       @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
@@ -161,8 +160,6 @@ class Joueur < Personnage
       if(self.toujoursEnVie?())
          @modele.tourDejaPasse = false;
          dest = @casePosition.getDestination(cible)
-          nbElemCase=dest.listeElements.length+dest.listeEnnemis.length
-         @rangCase=nbElemCase+1
          if(dest != nil)
             dest.joueur = self
             @casePosition.joueur = nil

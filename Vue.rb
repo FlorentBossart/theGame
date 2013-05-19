@@ -34,12 +34,15 @@ class Vue
   
   @delay
   @numEtapeAffichage
-  @nbEtapeAffivhage
+  @nbEtapeAffichage
   @background
   @frame
   @carteVue
   @timeout_id
-      
+  @positions
+  @structureEnnemisDeplacement
+  @structureAidesGenere
+  
   @hauteurAfficheCarte #hauteurVisible
   @largeurAfficheCarte #largeurVisible
   @modele
@@ -154,7 +157,12 @@ class Vue
     @timeout_id=nil
     @delay=10
     @numEtapeAffichage=0
-    @nbEtapeAffivhage=5
+    @nbEtapeAffichage=50
+    @positions=Array.new([[@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],
+                          [2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
+    
+    @structureEnnemisDeplacement  = Array.new()      
+    @structureAidesGenere = Array.new()   
     @background = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc")) 
     @background=@background.scale(@tailleCase*@largeurAfficheCarte, @tailleCase*@hauteurAfficheCarte,Gdk::Pixbuf::INTERP_BILINEAR)
     @frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,false, 8,@background.width, @background.height)
@@ -212,6 +220,8 @@ class Vue
   
   #def afficheCarte(debutX,debutY)
   def afficheCarte()
+    @structureEnnemisDeplacement.clear()
+    @structureAidesGenere.clear()
     
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
@@ -223,13 +233,11 @@ class Vue
     end
     #@carteVue.set_pixbuf(@background)
     
-    @pix= Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"S"))
-    @pix=@pix.scale(20,20,Gdk::Pixbuf::INTERP_BILINEAR)
-    if(@timeout_id==nil)
+   if(@timeout_id==nil)
       bloquerEcouteClavier()
       @zoneCtrl.bloquerBoutons(@modele)
       @timeout_id = Gtk.timeout_add(@delay) do
-                      timeout(0,0,100,100)
+                      timeout()
               end
     end
   end
@@ -248,15 +256,11 @@ class Vue
 
   #def afficheCase(image,caseAffiche)
   def afficheCase(xAff,yAff,caseAffiche)
-    
-    positions=Array.new([[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],[2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
-
+  
     #terrain
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
     pixbufTerrain=pixbufTerrain.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
-    
  
-  
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
@@ -304,34 +308,109 @@ class Vue
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))
       end
       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-      x=@tailleCase_f/3
-      y=@tailleCase_f/3
+      rg=caseAffiche.joueur.rangCase
+      x=@positions[rg][0]
+      y=@positions[rg][1]
       @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
 
       #aides
       aides=caseAffiche.listeElements
       for a in aides
-        if(positions.empty?)
-          return nil
-        end
-        position=positions.shift()
-        x=position[0]
-        y=position[1]
+        rg=a.rangCase
+        x=@positions[rg][0]
+        y=@positions[rg][1]
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(a.getIntitule().downcase))
         pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
-        @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+        if(!a.vientDEtreGenere?())
+          @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+        else
+          @structureAidesGenere.push([xAff+x,yAff+y,pixbufElement])
+        end
       end
     
+      
+      #ennemis  
+      ennemis=caseAffiche.listeEnnemis
+      for e in ennemis
+        rg=e.rangCase
+        xPos=@positions[rg][0]
+        yPos=@positions[rg][1]
+        
+        xAncien=e.anciennePositionX
+        yAncien=e.anciennePositionY
+        
+        xArr=xAff
+        yArr=yAff
+        
+        if(e.vientDEtreGenere?())
+          traitement="zoom"
+        else
+          traitement="depl"
+          rgAncien=e.ancienRangCase
+          xPosAncien=@positions[rgAncien][0]
+          yPosAncien=@positions[rgAncien][1]
+          
+          ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
+          if(ancienneCase==e.casePosition.caseNord())
+            xDep=xArr
+            yDep=yArr-@tailleCase
+          elsif(ancienneCase==e.casePosition.caseSud())
+            xDep=xArr
+            yDep=yArr+@tailleCase
+          elsif(ancienneCase==e.casePosition.caseEst())
+            xDep=xArr+@tailleCase
+            yDep=yArr
+          elsif(ancienneCase==e.casePosition.caseOuest())
+            xDep=xArr-@tailleCase
+            yDep=yArr
+          end
+          
+          if(xDep<0)
+            xDep=0
+          end
+          if(xDep>=@largeurAfficheCarte*@tailleCase)
+            xDep=(@largeurAfficheCarte-1)*@tailleCase
+          end
+          if(yDep<0)
+            yDep=0
+          end
+          if(yDep>=@hauteurAfficheCarte*@tailleCase)
+            yDep=(@hauteurAfficheCarte-1)*@tailleCase
+          end
+          xDep=xDep+xPosAncien
+          yDep=yDep+yPosAncien
+        end
+        xArr=xArr+xPos
+        yArr=yArr+yPos
+        
+         case e.direction
+            when EnumDirection.NORD
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"N"))
+            when EnumDirection.SUD
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"S"))
+            when EnumDirection.EST
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"E"))
+            when EnumDirection.OUEST
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"O"))
+          end
+        pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+        
+        @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
+        #puts "XDEP"+xDep.to_s
+        #puts "YDEP"+yDep.to_s
+        #puts "XARR"+xArr.to_s
+        #puts "YARR"+yArr.to_s
+      end
+      
+=begin
+
     #ennemis
     ennemis=caseAffiche.listeEnnemis
     for e in ennemis
-      if(positions.empty?)
-        return nil
-      end
-      position=positions.shift()
-      x=position[0]
-      y=position[1]
+      rg=e.rangCase
+      x=@positions[rg][0]
+      y=@positions[rg][1]
        case e.direction
           when EnumDirection.NORD
             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"N"))
@@ -343,9 +422,13 @@ class Vue
             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"O"))
         end
       
-      pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+      pixbufElement=pixbufElement.scale(@tailleCase_f/2, @tailleCase_f/2,Gdk::Pixbuf::INTERP_BILINEAR)
       @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
+=end
+
+
+
     
     
     
@@ -463,17 +546,55 @@ class Vue
     end
 
     # Timeout handler to regenerate the frame
-    def timeout(xd,yd,xa,ya)
+    def timeout()
       @background.copy_area(0, 0, @background.width, @background.height,
                            @frame, 0, 0)
       @numEtapeAffichage+=1
       
-      x=xd+@numEtapeAffichage*(xa-xd)/@nbEtapeAffivhage
-      y=yd+@numEtapeAffichage*(ya-yd)/@nbEtapeAffivhage
-      #@frame.composite!(@pix,x,y,@pix.width, @pix.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      for a in @structureAidesGenere
+        xArr=a[0]
+        yArr=a[1]
+        pixbuf=a[2]
+        w= (pixbuf.width*(@numEtapeAffichage.to_f()/@nbEtapeAffichage)).to_i
+        h= (pixbuf.height*(@numEtapeAffichage.to_f()/@nbEtapeAffichage)).to_i
+        if w==0
+          w=1
+        end
+        if h==0
+          h=1
+        end
+        zoomPix=pixbuf.scale(w,h,Gdk::Pixbuf::INTERP_BILINEAR)
+        @frame.composite!(zoomPix,xArr,yArr,zoomPix.width, zoomPix.height,xArr,yArr,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      end
+      
+      for e in @structureEnnemisDeplacement
+        traitement=e[0]
+        xDep=e[1]
+        yDep=e[2]
+        xArr=e[3]
+        yArr=e[4]
+        pixbuf=e[5]
+        
+        if(traitement=="zoom")
+          w= (pixbuf.width*(@numEtapeAffichage.to_f()/@nbEtapeAffichage)).to_i
+          h= (pixbuf.height*(@numEtapeAffichage.to_f()/@nbEtapeAffichage)).to_i
+          if w==0
+            w=1
+          end
+          if h==0
+            h=1
+          end
+          zoomPix=pixbuf.scale(w,h,Gdk::Pixbuf::INTERP_BILINEAR)
+          @frame.composite!(zoomPix,xArr,yArr,zoomPix.width, zoomPix.height,xArr,yArr,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+        else
+          x=xDep+@numEtapeAffichage*(xArr-xDep)/@nbEtapeAffichage
+          y=yDep+@numEtapeAffichage*(yArr-yDep)/@nbEtapeAffichage
+          @frame.composite!(pixbuf,x,y,pixbuf.width, pixbuf.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+        end
+      end
       
       @carteVue.queue_draw
-      if(@numEtapeAffichage==@nbEtapeAffivhage)
+      if(@numEtapeAffichage==@nbEtapeAffichage)
               Gtk.timeout_remove(@timeout_id)
               @numEtapeAffichage=0       
               @timeout_id=nil
