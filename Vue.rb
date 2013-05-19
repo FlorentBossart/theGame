@@ -368,8 +368,8 @@ class Vue
               yArr=yAff
               
               # Rajout� par ludo
-              xDep = 0 
-              yDep = 0
+              #xDep = 0 
+              #yDep = 0
               
               if(e.vientDEtreGenere?())
                 if(!(xAncien==-1 && yAncien==-1))
