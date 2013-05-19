@@ -474,7 +474,8 @@ class Controller
    # btContinuerPartie : le gtkButton qu'il faudra lier � l'action d'un clic sur Continuer partie
    #
    def continuerPartieCreer(btContinuerPartie,fenetre)
-      btContinuerPartie.signal_connect('clicked'){
+      #btContinuerPartie.signal_connect('clicked'){
+      btContinuerPartie.signal_connect('button_press_event'){
           continuerPartieAction()
           fenetre.destroy()
       }
@@ -499,7 +500,8 @@ class Controller
    # btNewPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur NouvellePartie
    #
    def nouvellePartieCreer(btNewPartie,fenetre)
-      btNewPartie.signal_connect('clicked'){
+     # btNewPartie.signal_connect('clicked'){
+     btNewPartie.signal_connect('button_press_event'){
           nouvellePartieAction()
         fenetre.destroy()
       }
@@ -524,7 +526,8 @@ class Controller
    # btChargerPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur ChargerPartie
    #
    def chargerPartieCreer(btChargerPartie,fenetre)
-      btChargerPartie.signal_connect('clicked'){
+      #btChargerPartie.signal_connect('clicked'){
+      btChargerPartie.signal_connect('button_press_event'){
           chargerPartieAction()
           fenetre.destroy()
       }
@@ -548,7 +551,8 @@ class Controller
    # btSauvegarderPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur SauvegarderPartie
    #
    def sauvegarderPartieCreer(btSauvegarderPartie,fenetre)
-      btSauvegarderPartie.signal_connect('clicked'){
+     # btSauvegarderPartie.signal_connect('clicked'){
+      btSauvegarderPartie.signal_connect('button_press_event'){
           sauvegarderPartieAction()
         fenetre.destroy()
       }
@@ -574,7 +578,8 @@ class Controller
    # btClassement : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Classement
    #
    def classementCreer(btClassement,fenetre)
-      btClassement.signal_connect('clicked'){
+     # btClassement.signal_connect('clicked'){
+     btClassement.signal_connect('button_press_event'){
           classementAction()
         fenetre.destroy()
       }
@@ -599,7 +604,8 @@ class Controller
    # btOptions : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Options
    #
    def optionsCreer(btOptions,fenetre)
-      btOptions.signal_connect('clicked'){
+     # btOptions.signal_connect('clicked'){
+     btOptions.signal_connect('button_press_event'){
           optionsAction()
         fenetre.destroy()
       }
@@ -623,7 +629,8 @@ class Controller
    # btAide : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Aide
    #
    def aideCreer(btAide,fenetre)
-      btAide.signal_connect('clicked'){
+      #btAide.signal_connect('clicked'){
+      btAide.signal_connect('button_press_event'){
           aideAction()
           fenetre.destroy()
       }
@@ -792,7 +799,8 @@ class Controller
    # btQuitter : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Quitter Partie
    #
    def quitterPartieCreer(btQuitter,fenetre)
-      btQuitter.signal_connect('clicked'){
+      #btQuitter.signal_connect('clicked'){
+      btQuitter.signal_connect('button_press_event'){
           quitterPartieAction()
          fenetre.destroy()
       }
