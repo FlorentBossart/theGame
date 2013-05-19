@@ -113,6 +113,10 @@ class Modele
      return @@compteurTourGlob
    end
    
+    def Modele.majCpt(compteurTour)
+       @@compteurTourGlob=compteurTour
+    end
+   
    def initialiseToi()
      
       @nbPisteur=0 

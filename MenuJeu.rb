@@ -280,6 +280,7 @@ class MenuJeu
 					puts " Chargement du slot" + (index+1).to_s 
 					
 					modeleCharger = tabSlot[index].modele
+          Modele.majCpt(modeleCharger.compteurTour)
 					
 					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
 					puts "temps de jeu session d'avant : " + modeleCharger.joueur.tempsTotal.to_s
@@ -297,6 +298,8 @@ class MenuJeu
 					# Creation de la vue charg�e
 					vue = modeleCharger.vue
 					puts "Vue creer"
+					
+					
 					
 					
 					#controller = Controller.creer(modele,vue)
