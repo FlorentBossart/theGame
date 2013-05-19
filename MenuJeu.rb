@@ -51,10 +51,10 @@ class MenuJeu
 		#Configuration aspect graphique de l'interface par un Gtkrc
 		Gtk::RC.parse("gtkrc.rc")
 		
-		@fenetreMenu 	= Gtk::Window.new()
+		#@fenetreMenu 	= Gtk::Window.new()
 		#@fenetreMenu.set_default_size(300,300)
 		
-		@fenetreMenu.set_default_size(669,534)
+		#@fenetreMenu.set_default_size(669,534)
 		
 	end
 	
@@ -88,29 +88,13 @@ class MenuJeu
 	  	fenMenuPrincipal = Window.new()
 	  	fenMenuPrincipal.name = "fenMenuPrincipal" # Référence pour le fichier gtkrc.rc
 		fenMenuPrincipal.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
-		# L'application est toujours centree
-		#fenMenuPrincipal.set_window_position(Window::POS_CENTER_ALWAYS)
-		fenMenuPrincipal.resize(669,534)
 		
-		# Image de fond
-		#begin       
-		#	fondGTA = Gdk::Pixbuf.new("img/GTA.png")
-		#rescue IOError => e
-		#	puts e
-		#	puts "cannot load images"
-		#	exit
-		#end
-  
-		imageGTA = Gtk::Image.new("img/GTA.png")
-		#fenMenuPrincipal.set_background(imageGTA)
-		
-		vbox = Gtk::VBox.new false, 5
-		
+		#fenMenuPrincipal.set_default_size(669,534) # Marche pas !
+		fenMenuPrincipal.set_width_request(669)
+		fenMenuPrincipal.set_height_request(534)
+		fenMenuPrincipal.set_resizable(false)
+	
 		@contenu = VBox.new(false, 0)
-		
-		valign = Gtk::Alignment.new 0, 1, 0.5, 0.5
-      vbox.pack_start valign
-		
 		
 		# Crï¿½ation des boutons
 		if(@isInGame == false)
@@ -127,6 +111,7 @@ class MenuJeu
 			@contenu.add(boutOptions)
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
+			align = Alignment.new(0.95, 0.95, 0.3, 0.15)
 		else
 			  
 =begin			  SDL::TTF.init
@@ -158,15 +143,11 @@ class MenuJeu
 			
 			@controleur.continuerPartieCreer(boutContinuerPartie,fenMenuPrincipal)
 			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie,fenMenuPrincipal)
+			align = Alignment.new(0.95, 0.96, 0.3, 0.10)
 		end
 		
-		halign = Gtk::Alignment.new 1, 0, 0, 0
-		halign.add @contenu
-		
-		vbox.pack_start halign, false, false, 3
-		
-		#fenMenuPrincipal.add(@contenu)
-		fenMenuPrincipal.add(vbox)
+		align.add(@contenu)
+		fenMenuPrincipal.add(align)
    	fenMenuPrincipal.set_window_position Gtk::Window::POS_CENTER
 		fenMenuPrincipal.show_all
 		
