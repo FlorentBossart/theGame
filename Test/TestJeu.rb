@@ -8,7 +8,7 @@ require 'Audio.rb'
 #require 'Controller.rb'
 #require 'Vue.rb'
 
-#Gtk.init
+Gtk.init
 
 XmlMultilingueReader.setLangue("FR")
 
