@@ -307,7 +307,7 @@ class MenuJeu
 					puts "vue defc"
 					#modele.initialiseToi()
 					#puts "init modele"
-					vue.initInterface(false)
+					vue.initInterface()
 					puts "init interface"
 					
 					

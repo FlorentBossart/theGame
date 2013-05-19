@@ -698,7 +698,7 @@ class Controller
 		puts "vue defc"
 		modele.initialiseToi() # Debut du temps � la cr�ation d'un joueur
 		puts "init modele"
-		vue.initInterface(false)
+		vue.initInterface()
 		puts "init interface"
 		
 		
