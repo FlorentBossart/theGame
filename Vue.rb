@@ -356,11 +356,8 @@ class Vue
         #COORD SUR CARTE -> INVERSEES PAR / AU PIXBUF
         xAncien=e.anciennePositionX
         yAncien=e.anciennePositionY
-        ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
         
-        if(ancienneCase==e.casePosition)
-          @background.composite!(pixbufElement, xAff+xPos,yAff+yPos, pixbufElement.width, pixbufElement.height,xAff+xPos, yAff+yPos,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-        else          
+                  
               
               xArr=xAff
               yArr=yAff
@@ -374,50 +371,69 @@ class Vue
                   raise "err1"
                 end
                 traitement="zoom"
+                xArr=xArr+xPos
+                yArr=yArr+yPos
+                @structureEnnemisDeplacement.push([traitement,nil,nil,xArr,yArr,pixbufElement])
               else
-                traitement="depl"
-                rgAncien=e.ancienRangCase
-                xPosAncien=@positions[rgAncien][0]
-                yPosAncien=@positions[rgAncien][1]
-                
-                if(ancienneCase==e.casePosition.caseNord())
-                  xDep=xArr
-                  yDep=yArr-@tailleCase
-                elsif(ancienneCase==e.casePosition.caseSud())
-                  xDep=xArr
-                  yDep=yArr+@tailleCase
-                elsif(ancienneCase==e.casePosition.caseEst())
-                  xDep=xArr+@tailleCase
-                  yDep=yArr
-                elsif(ancienneCase==e.casePosition.caseOuest())
-                  xDep=xArr-@tailleCase
-                  yDep=yArr
-                end
-                
-                if(xDep<0)
-                  xDep=0
-                end
-                if(xDep>(@largeurAfficheCarte-1)*@tailleCase)
-                  xDep=(@largeurAfficheCarte-1)*@tailleCase
-                end
-                if(yDep<0)
-                  yDep=0
-                end
-                if(yDep>(@hauteurAfficheCarte-1)*@tailleCase)
-                  yDep=(@hauteurAfficheCarte-1)*@tailleCase
-                end
-                xDep=xDep+xPosAncien
-                yDep=yDep+yPosAncien
+                ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
+                    
+                #puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
+                #puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s   
+                if(ancienneCase==e.casePosition)
+                  #puts "ici "+e.getIntitule()
+                  @background.composite!(pixbufElement, xAff+xPos,yAff+yPos, pixbufElement.width, pixbufElement.height,xAff+xPos, yAff+yPos,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+                else
+                  #puts "la "+e.getIntitule()
+                    traitement="depl"
+                    rgAncien=e.ancienRangCase
+                    xPosAncien=@positions[rgAncien][0]
+                    yPosAncien=@positions[rgAncien][1]
+                    
+                    if(ancienneCase==e.casePosition.caseNord())
+                      xDep=xArr
+                      yDep=yArr-@tailleCase
+                    elsif(ancienneCase==e.casePosition.caseSud())
+                      xDep=xArr
+                      yDep=yArr+@tailleCase
+                    elsif(ancienneCase==e.casePosition.caseEst())
+                      xDep=xArr+@tailleCase
+                      yDep=yArr
+                    elsif(ancienneCase==e.casePosition.caseOuest())
+                      xDep=xArr-@tailleCase
+                      yDep=yArr
+                    end
+                    
+                    if(xDep==nil)
+                      puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
+                      puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s  
+                      raise "err2"
+                    end
+                    
+                    if(xDep<0)
+                      xDep=0
+                    end
+                    if(xDep>(@largeurAfficheCarte-1)*@tailleCase)
+                      xDep=(@largeurAfficheCarte-1)*@tailleCase
+                    end
+                    if(yDep<0)
+                      yDep=0
+                    end
+                    if(yDep>(@hauteurAfficheCarte-1)*@tailleCase)
+                      yDep=(@hauteurAfficheCarte-1)*@tailleCase
+                    end
+                    xDep=xDep+xPosAncien
+                    yDep=yDep+yPosAncien
+                  end
+                  xArr=xArr+xPos
+                  yArr=yArr+yPos
+                  
+                  @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
+                  #puts "XDEP"+xDep.to_s
+                  #puts "YDEP"+yDep.to_s
+                  #puts "XARR"+xArr.to_s
+                  #puts "YARR"+yArr.to_s
               end
-              xArr=xArr+xPos
-              yArr=yArr+yPos
-              
-              @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
-              #puts "XDEP"+xDep.to_s
-              #puts "YDEP"+yDep.to_s
-              #puts "XARR"+xArr.to_s
-              #puts "YARR"+yArr.to_s
-          end
+          
       end
       
     return nil
