@@ -23,6 +23,7 @@ class InventaireModal
    @nbColonnesMax
    @boutonInteraction
    @tabImages
+   @tooltips
 
   
    #attr_accessor :fenetreInventaire
@@ -54,6 +55,8 @@ class InventaireModal
      # @vue.controller.utiliserItem(@@boutonUtiliser)
      # @vue.controller.acheterItem(@@boutonAcheter)
      # @vue.controller.jeterItem(@@boutonJeter)
+     
+    @tooltips = Gtk::Tooltips.new
       
    end
   
@@ -114,7 +117,8 @@ class InventaireModal
 
          #On crÃ©e une EventBox avec l'image de l'item
          eventBoxCourante = EventBox.new.add(imageCourante)
-         eventBoxCourante.set_tooltip_text item.getIntitule + " (" + item.caracteristique.prix.to_s + ")"
+         #eventBoxCourante.set_tooltip_text item.getIntitule + " (" + item.caracteristique.prix.to_s + ")"
+         @tooltips.set_tip( eventBoxCourante, item.getIntitule + " (" + item.caracteristique.prix.to_s + ")", nil )
 
          #On lie l'Ã©vÃ©nement de clic de l'eventBox au Controlleur
          @vue.controller.selectionnerItem(eventBoxCourante,indice)
