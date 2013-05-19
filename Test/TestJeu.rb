@@ -10,7 +10,7 @@ require 'Audio.rb'
 
 Gtk.init
 
-XmlMultilingueReader.setLangue("FR")
+XmlMultilingueReader.setLangue("EN")
 
 # Remplissage des bibliothèque
 Modele.initialisationBibliotheques()

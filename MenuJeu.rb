@@ -94,10 +94,37 @@ class MenuJeu
 		fenMenuPrincipal.set_height_request(534)
 		fenMenuPrincipal.set_resizable(false)
 	
-		@contenu = VBox.new(false, 0)
+		@contenu = VBox.new(false, 6)
 		
 		# Cr�ation des boutons
 		if(@isInGame == false)
+						
+			ebNewPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("NewPartie")))
+			ebNewPartie.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebChargerPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("ChargerPartie")))
+			ebChargerPartie.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebClassement = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Classement")))
+			ebClassement.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebOptions = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Options")))
+			ebOptions.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebAide = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Aide")))
+			ebAide.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebQuitter = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Quitter")))
+			ebQuitter.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			@contenu.add(ebNewPartie)
+			@contenu.add(ebChargerPartie)
+			@contenu.add(ebClassement)
+			@contenu.add(ebOptions)
+			@contenu.add(ebAide)
+			@contenu.add(ebQuitter)
+			
+=begin
 			boutNewPartie 		= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
 			boutChargerPartie = Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
 			boutClassement 	= Button.new(XmlMultilingueReader.lireTexte("Classement"))
@@ -111,18 +138,43 @@ class MenuJeu
 			@contenu.add(boutOptions)
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
-			align = Alignment.new(0.95, 0.95, 0.3, 0.15)
-		else
-			  
-=begin			  SDL::TTF.init
-			  font = SDL::TTF.open("diploma.ttf", 32, 0)
-			  
-			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
-			#arial_12 = Pango::FontDescription.new("#{FONT} 18")
+=end
+			#align = Alignment.new(0.95, 0.95, 0.3, 0.15)
+			align = Alignment.new(0.85, 0.9, 0, 0)
+		else	
+			ebContinuerPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("ContinuerPartie")))
+			ebContinuerPartie.events = Gdk::Event::BUTTON_PRESS_MASK
 			
-				boutContinuerPartie.child.modify_font(Pango::FontDescription.new(font.to_s))
-=end				
-				
+			ebNewPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("NewPartie")))
+			ebNewPartie.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebChargerPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("ChargerPartie")))
+			ebChargerPartie.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebSauvegarderPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("SauvegarderPartie")))
+			ebSauvegarderPartie.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebClassement = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Classement")))
+			ebClassement.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebOptions = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Options")))
+			ebOptions.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebAide = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Aide")))
+			ebAide.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			ebQuitter = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("Quitter")))
+			ebQuitter.events = Gdk::Event::BUTTON_PRESS_MASK
+			
+			@contenu.add(ebContinuerPartie)
+			@contenu.add(ebNewPartie)
+			@contenu.add(ebChargerPartie)
+			@contenu.add(ebSauvegarderPartie)
+			@contenu.add(ebClassement)
+			@contenu.add(ebOptions)
+			@contenu.add(ebAide)
+			@contenu.add(ebQuitter)
+=begin			
 			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
 			boutNewPartie 				= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
 			boutChargerPartie 		= Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
@@ -140,10 +192,8 @@ class MenuJeu
 			@contenu.add(boutOptions)
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
-			
-			@controleur.continuerPartieCreer(boutContinuerPartie,fenMenuPrincipal)
-			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie,fenMenuPrincipal)
-			align = Alignment.new(0.95, 0.96, 0.3, 0.10)
+=end			
+			align = Alignment.new(0.98, 0.98, 0.1, 0)
 		end
 		
 		align.add(@contenu)
@@ -151,13 +201,51 @@ class MenuJeu
    	fenMenuPrincipal.set_window_position Gtk::Window::POS_CENTER
 		fenMenuPrincipal.show_all
 		
-		@controleur.nouvellePartieCreer(boutNewPartie,fenMenuPrincipal)
+		if(@isInGame == true)
+			ebContinuerPartie.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+			ebContinuerPartie.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+			@controleur.continuerPartieCreer(ebContinuerPartie,fenMenuPrincipal)
+			
+			ebSauvegarderPartie.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+			ebSauvegarderPartie.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+			@controleur.sauvegarderPartieCreer(ebSauvegarderPartie,fenMenuPrincipal)
+		end
+		
+		ebNewPartie.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebNewPartie.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.nouvellePartieCreer(ebNewPartie,fenMenuPrincipal)
+		
+		ebChargerPartie.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebChargerPartie.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.chargerPartieCreer(ebChargerPartie,fenMenuPrincipal)
+		
+		ebClassement.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebClassement.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.classementCreer(ebClassement,fenMenuPrincipal)
+		
+		ebOptions.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebOptions.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.optionsCreer(ebOptions,fenMenuPrincipal)
+		
+		ebAide.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebAide.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.aideCreer(ebAide,fenMenuPrincipal)
+		
+		ebQuitter.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
+		ebQuitter.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
+		@controleur.quitterPartieCreer(ebQuitter,fenMenuPrincipal)
+		
+			
+		@controleur.destroyMenuCreer(fenMenuPrincipal)
+=begin
+		@controleur.nouvellePartieCreer(boutNewPartie,fenMenuPrincipal)		
 		@controleur.chargerPartieCreer(boutChargerPartie,fenMenuPrincipal)
 		@controleur.classementCreer(boutClassement,fenMenuPrincipal)
 		@controleur.optionsCreer(boutOptions,fenMenuPrincipal)
 		@controleur.aideCreer(boutAide,fenMenuPrincipal)
 		@controleur.quitterPartieCreer(boutQuitter,fenMenuPrincipal)
 		@controleur.destroyMenuCreer(fenMenuPrincipal)
+=end
 		
 	end
 	
@@ -203,7 +291,7 @@ class MenuJeu
 		@contenu.add(maHBoxBouton)
 		@contenu.set_border_width(20)		
 		
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
+    	@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 

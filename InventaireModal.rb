@@ -113,8 +113,8 @@ class InventaireModal
          @tabImages << imageCourante
 
          #On crÃ©e une EventBox avec l'image de l'item
-       eventBoxCourante = EventBox.new.add(imageCourante)
-     #  eventBoxCourante.set_tooltip_text item.getIntitule + " (" + item.caracteristique.prix.to_s + ")"
+         eventBoxCourante = EventBox.new.add(imageCourante)
+         eventBoxCourante.set_tooltip_text(item.getIntitule + " (" + item.caracteristique.prix.to_s + ")")
 
          #On lie l'Ã©vÃ©nement de clic de l'eventBox au Controlleur
          @vue.controller.selectionnerItem(eventBoxCourante,indice)

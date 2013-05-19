@@ -610,7 +610,7 @@ def afficheCase(xAff,yAff,caseAffiche)
 
     #ETAPE CHOIX LIBRE
     when EnumStadePartie.CHOIX_LIBRE
-      #@zoneCtrl.majBoutons(@modele)
+      @zoneCtrl.majBoutons(@modele)
       #majEcouteClavier()
       #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
