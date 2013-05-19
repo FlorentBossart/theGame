@@ -24,6 +24,7 @@ require 'Slot.rb'
 
 # On inclu le module Gtk, cela �vite de pr�fixer les classes par Gtk::
 include Gtk
+include Gtk::RC
 
 class MenuJeu
 	
@@ -47,8 +48,13 @@ class MenuJeu
 		@controleur 	= controleur
 		@modele 			= modele
 		
-		@fenetreMenu 	= Window.new()
-		@fenetreMenu.set_default_size(300,300)
+		#Configuration aspect graphique de l'interface par un Gtkrc
+		Gtk::RC.parse("gtkrc.rc")
+		
+		@fenetreMenu 	= Gtk::Window.new()
+		#@fenetreMenu.set_default_size(300,300)
+		
+		@fenetreMenu.set_default_size(669,534)
 		
 	end
 	
@@ -79,11 +85,11 @@ class MenuJeu
    # Initialise la fen�tre du menu avec les boutons n�cessaires
    #
 	def afficherMenu()
-	  	@fenetreMenu = Window.new()
-		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
+	  	fenMenuPrincipal = Window.new()
+		fenMenuPrincipal.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
-		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
-		@fenetreMenu.resize(300,300)
+		#fenMenuPrincipal.set_window_position(Window::POS_CENTER_ALWAYS)
+		fenMenuPrincipal.resize(669,534)
 		
 		# Image de fond
 		#begin       
@@ -95,11 +101,15 @@ class MenuJeu
 		#end
   
 		imageGTA = Gtk::Image.new("img/GTA.png")
-		#@fenetreMenu.set_background(imageGTA)
+		#fenMenuPrincipal.set_background(imageGTA)
 		
-		
+		vbox = Gtk::VBox.new false, 5
 		
 		@contenu = VBox.new(false, 0)
+		
+		valign = Gtk::Alignment.new 0, 1, 0.5, 0.5
+      vbox.pack_start valign
+		
 		
 		# Cr�ation des boutons
 		if(@isInGame == false)
@@ -145,21 +155,27 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 			
-			@controleur.continuerPartieCreer(boutContinuerPartie,@fenetreMenu)
-			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie,@fenetreMenu)
+			@controleur.continuerPartieCreer(boutContinuerPartie,fenMenuPrincipal)
+			@controleur.sauvegarderPartieCreer(boutSauvegarderPartie,fenMenuPrincipal)
 		end
 		
-		@fenetreMenu.add(@contenu)
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
-		@fenetreMenu.show_all
+		halign = Gtk::Alignment.new 1, 0, 0, 0
+		halign.add @contenu
 		
-		@controleur.nouvellePartieCreer(boutNewPartie,@fenetreMenu)
-		@controleur.chargerPartieCreer(boutChargerPartie,@fenetreMenu)
-		@controleur.classementCreer(boutClassement,@fenetreMenu)
-		@controleur.optionsCreer(boutOptions,@fenetreMenu)
-		@controleur.aideCreer(boutAide,@fenetreMenu)
-		@controleur.quitterPartieCreer(boutQuitter,@fenetreMenu)
-		@controleur.destroyMenuCreer(@fenetreMenu)
+		vbox.pack_start halign, false, false, 3
+		
+		#fenMenuPrincipal.add(@contenu)
+		fenMenuPrincipal.add(vbox)
+   	fenMenuPrincipal.set_window_position Gtk::Window::POS_CENTER
+		fenMenuPrincipal.show_all
+		
+		@controleur.nouvellePartieCreer(boutNewPartie,fenMenuPrincipal)
+		@controleur.chargerPartieCreer(boutChargerPartie,fenMenuPrincipal)
+		@controleur.classementCreer(boutClassement,fenMenuPrincipal)
+		@controleur.optionsCreer(boutOptions,fenMenuPrincipal)
+		@controleur.aideCreer(boutAide,fenMenuPrincipal)
+		@controleur.quitterPartieCreer(boutQuitter,fenMenuPrincipal)
+		@controleur.destroyMenuCreer(fenMenuPrincipal)
 		
 	end
 	
@@ -280,7 +296,7 @@ class MenuJeu
 					puts " Chargement du slot" + (index+1).to_s 
 					
 					modeleCharger = tabSlot[index].modele
-          Modele.majCpt(modeleCharger.compteurTour)
+					Modele.majCpt(modeleCharger.compteurTour)
 					
 					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
 					puts "temps de jeu session d'avant : " + modeleCharger.joueur.tempsTotal.to_s
@@ -298,8 +314,6 @@ class MenuJeu
 					# Creation de la vue charg�e
 					vue = modeleCharger.vue
 					puts "Vue creer"
-					
-					
 					
 					
 					#controller = Controller.creer(modele,vue)

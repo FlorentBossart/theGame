@@ -476,6 +476,7 @@ class Controller
    def continuerPartieCreer(btContinuerPartie,fenetre)
       btContinuerPartie.signal_connect('clicked'){
           continuerPartieAction()
+          fenetre.destroy()
       }
    end
    
@@ -485,8 +486,8 @@ class Controller
 	#
 	def continuerPartieAction()
 		puts "Clique sur continuer partie"
-		@vue.menu.fenetreMenu.destroy
-		puts "Destruction du menu"
+		#@vue.menu.fenetreMenu.destroy
+		#puts "Destruction du menu"
 		@vue.window.set_sensitive(true)
 	end
   
