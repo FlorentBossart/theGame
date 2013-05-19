@@ -519,7 +519,7 @@ class Joueur < Personnage
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
-   	convertirTemps(@tempsTotal)
+   	@modele.convertirTemps(@tempsTotal)
    end
    
    ##
@@ -541,7 +541,7 @@ class Joueur < Personnage
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
-   
+=begin   
    ##
    # Convertit un temps (en secondes) en heures, minutes, secondes
    #
@@ -562,6 +562,7 @@ class Joueur < Personnage
 		return tempsTot
 		
    end
+=end
    
 
    ##

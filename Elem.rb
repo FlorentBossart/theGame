@@ -10,7 +10,7 @@
 # C'est une classe abtraite.
 #
 
-require './Modele.rb'
+#require './Modele.rb'
 
 class Elem
     

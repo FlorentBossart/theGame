@@ -489,7 +489,8 @@ class MenuJeu
 			colonne[2] = listeJoueur[i][2]	# Correspond � la distance totale parcourue par le joueur
 			colonne[3] = listeJoueur[i][3]	# Correspond � l'or total accumul� par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
-			colonne[4] = @modele.joueur.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
+			#colonne[4] = @modele.joueur.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
+			colonne[4] = @modele.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
 		end
 		

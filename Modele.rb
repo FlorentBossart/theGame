@@ -445,6 +445,29 @@ class Modele
      AffichageDebug.Afficher("Fin de 'choixLibre'")
    end
    
+   
+   ##
+   # Convertit un temps (en secondes) en heures, minutes, secondes
+   #
+   # == Parameters
+   # <b>temps<b> : Le temps en secondes a convertir
+   #
+   # == Returns:
+   # <b>tempsTot<b> : Une chaine repr�sentant le temps sous la forme h min sec
+   #
+   def convertirTemps(temps)
+		dureeSec = "%02.0i" % (temps % 60)
+   	dureeMinutes = "%02.0i" % ((temps / 60) % 60) # "%02.0f" => affiche 2 chiffres avant la virgule
+																				# et 0 apr�s => pour trier les strings correctement																		
+		dureeHeures = "%02.0i" % (temps / 3600)
+		
+		tempsTot = "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
+		puts tempsTot
+		return tempsTot
+		
+   end
+   
+   
    ##
    # Retourne une chaîne de caractères reprenant les différentes caractéristiques
    # de l'objet Modele sur lequel la méthode est appellée.

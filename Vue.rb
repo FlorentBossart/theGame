@@ -345,6 +345,10 @@ class Vue
         xArr=xAff
         yArr=yAff
         
+        # Rajouté par ludo
+        xDep = 0 
+        yDep = 0
+        
         if(e.vientDEtreGenere?())
           traitement="zoom"
         else

@@ -276,8 +276,9 @@ class Controller
     end
     puts "-- Affichage du menu"
     @vue.window.modal = false;
-    @vue.menu.afficherMenu()
     @vue.window.set_sensitive(false)
+    @vue.menu.afficherMenu()
+    
   end
 
     
@@ -748,7 +749,9 @@ class Controller
 			puts "Langue EN"
 		end
 		
-		@vue.majLangue()
+		if(@vue.menu.isInGame == true)
+			@vue.majLangue()
+		end
 	
 		#@vue.menu.viderFenetre(@vue.menu.contenu)
 		#puts "Vidage du contenu du menu principal"
@@ -822,8 +825,11 @@ class Controller
 	#
 	def destroyMenuAction(fenetre)
 		puts "Fermeture du menu par la croix rouge !"
-		puts "Reactivation du jeu"
-		@modele.vue.window.set_sensitive(true)
+		if(@vue.menu.isInGame == true)
+			@modele.vue.window.set_sensitive(true)
+		else
+			Gtk.main_quit
+		end
 		fenetre.destroy
 	end
 	
