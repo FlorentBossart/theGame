@@ -7,29 +7,39 @@ require 'XMLReader/XmlMultilingueReader.rb'
 require 'Audio.rb'
 require 'Controller.rb'
 
-Gtk.init
+#Gtk.init
 
-#XmlMultilingueReader.setLangue("FR")
+XmlMultilingueReader.setLangue("FR")
 
 # Remplissage des bibliothÃ¨que
-#Modele.initialisationBibliotheques()
+Modele.initialisationBibliotheques()
 
 Audio.load()
 
-#Création vue
+difficulte = BibliothequeDifficulte.getDifficulte("Novice")
+pseudo = "Fake"
+
+#Crï¿½ation vue
 vue = Vue.new
 
-#Création modele
-modele = Modele.creer(vue, nil, nil)
+#Crï¿½ation modele
+modele = Modele.creer(vue,nil,nil)
 
-#Création controlleur
+#Crï¿½ation controlleur
 controleur = Controller.creer(modele, vue)
 
-#Création menu
+vue.defM(modele)
+vue.defC(controleur)
+#modele.initialiseToi()
+
+#Crï¿½ation menu
 menu = MenuJeu.creer(false, modele, controleur)
-vue.defMenu(menu)
+vue.menu = menu
+
 
 menu.afficherMenu()
 Gtk.main()
+#vue.initInterface(true)
+
 
 

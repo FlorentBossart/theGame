@@ -170,7 +170,8 @@ def choixInventairePlein()
   dialog.signal_connect('response') { dialog.destroy }
     #todo : faire une trad pour blabla jeter
   dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInventairePlein")))
-  buttonJeter=Gtk::Button.new(XmlMultilingueReader.lireTexte("Jeter"))
+  buttonJeter=Gtk::Button.new(XmlMultilingueReader.lireTexte("boutonJeter")) 
+    #buttonJeter=Gtk::Button.new("Jeter")
   @vue.controller.choixInventairePleinCreer(buttonJeter,dialog)
   dialog.vbox.add(buttonJeter)
 

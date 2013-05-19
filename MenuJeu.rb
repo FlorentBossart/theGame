@@ -37,7 +37,7 @@ class MenuJeu
 	
 	attr_accessor :fenetreMenu
 	
-	attr_reader :contenu
+	attr_reader :contenu, :isInGame
 	
 	private_class_method :new
 	
@@ -46,6 +46,7 @@ class MenuJeu
 		@isInGame 		= isEnJeu
 		@controleur 	= controleur
 		@modele 			= modele
+		
 		@fenetreMenu 	= Window.new()
 		@fenetreMenu.set_default_size(300,300)
 		
@@ -78,15 +79,27 @@ class MenuJeu
    # Initialise la fenï¿½tre du menu avec les boutons nï¿½cessaires
    #
 	def afficherMenu()
-	  	@fenetreMenu=Window.new()
+	  	@fenetreMenu = Window.new()
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		# L'application est toujours centree
 		#@fenetreMenu.set_window_position(Window::POS_CENTER_ALWAYS)
 		@fenetreMenu.resize(300,300)
 		
+		# Image de fond
+		#begin       
+		#	fondGTA = Gdk::Pixbuf.new("img/GTA.png")
+		#rescue IOError => e
+		#	puts e
+		#	puts "cannot load images"
+		#	exit
+		#end
+  
+		imageGTA = Gtk::Image.new("img/GTA.png")
+		#@fenetreMenu.set_background(imageGTA)
+		
+		
+		
 		@contenu = VBox.new(false, 0)
-		
-		
 		
 		# Crï¿½ation des boutons
 		if(@isInGame == false)
@@ -137,7 +150,7 @@ class MenuJeu
 		end
 		
 		@fenetreMenu.add(@contenu)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.show_all
 		
 		@controleur.nouvellePartieCreer(boutNewPartie,@fenetreMenu)
@@ -192,6 +205,7 @@ class MenuJeu
 		@contenu.add(maHBoxBouton)
 		@contenu.set_border_width(20)		
 		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -265,10 +279,6 @@ class MenuJeu
 				eb.signal_connect('button_press_event') { 
 					puts " Chargement du slot" + (index+1).to_s 
 					
-					
-					
-					#puts "modele charger : " + tabSlot[index].modele.to_s
-					#@modele = tabSlot[index].modele
 					modeleCharger = tabSlot[index].modele
 					
 					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
@@ -277,11 +287,14 @@ class MenuJeu
 					puts "Debut du temps de jeu le " + modeleCharger.joueur.dateDebutJeu.to_s
 					
 					@fenetreMenu.destroy
-					#Destruction ancienne vue partie
-					@modele.vue.window.destroy
-					puts "Destroy partie"
 					
-					# Creation de la vue chargée
+					if(@isInGame == true)
+						#Destruction ancienne vue partie
+						@modele.vue.window.destroy
+						puts "Destroy partie"
+					end
+					
+					# Creation de la vue chargï¿½e
 					vue = modeleCharger.vue
 					puts "Vue creer"
 					
@@ -295,7 +308,7 @@ class MenuJeu
 					puts "vue defc"
 					#modele.initialiseToi()
 					#puts "init modele"
-					vue.initInterface()
+					vue.initInterface(false)
 					puts "init interface"
 					
 					
@@ -304,7 +317,7 @@ class MenuJeu
 		}
 		
 		
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
@@ -371,9 +384,9 @@ class MenuJeu
 				puts "\tSauvegarde sur le slot" + (index+1).to_s 
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
-				@fenetreMenu.destroy()
+				@fenetreMenu.destroy
+				
 				# MAJ de l'affichage des slots de sauvegarde
-				#viderFenetre(@contenu)
 				afficherSauvegarderPartie()
 			}
 		}
@@ -426,8 +439,6 @@ class MenuJeu
 			# Crï¿½ation et remplissage des ListStore
 			store = remplirListStore(c.getListeJoueur(tabLabel[i].text))
 			
-			
-			
 			# Ajoute chacun des tree model au tree view correspondant
 			treeview.model = store
 			
@@ -451,7 +462,7 @@ class MenuJeu
 		@contenu.pack_start(boutRetour, false, false)
 		
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -611,7 +622,7 @@ class MenuJeu
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
@@ -665,7 +676,7 @@ class MenuJeu
 		@contenu.add(scrolled_win)
 		@contenu.pack_start(boutRetour, false, false)
 		@contenu.set_border_width(20)
-		
+    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 

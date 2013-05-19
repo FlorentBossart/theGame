@@ -114,6 +114,7 @@ class InventaireModal
 
          #On crÃ©e une EventBox avec l'image de l'item
        eventBoxCourante = EventBox.new.add(imageCourante)
+     #  eventBoxCourante.set_tooltip_text item.getIntitule + " (" + item.caracteristique.prix.to_s + ")"
 
          #On lie l'Ã©vÃ©nement de clic de l'eventBox au Controlleur
          @vue.controller.selectionnerItem(eventBoxCourante,indice)
@@ -144,8 +145,9 @@ class InventaireModal
       
       #On ajoute la vbox Ã  la fenÃªtre
       @fenetreInventaire.add(@contenu)
-
+      @fenetreInventaire.transient_for=@vue.window
       @fenetreInventaire.modal = true
+      @fenetreInventaire.set_window_position Gtk::Window::POS_CENTER
       @fenetreInventaire.show_all
       return @fenetreInventaire
   

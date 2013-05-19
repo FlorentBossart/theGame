@@ -47,7 +47,7 @@ controller=Controller.creer(modele,vue)
 vue.defM(modele)
 vue.defC(controller)
 modele.initialiseToi()
-vue.initInterface()
+vue.initInterface(false)
 
 #ne sert à rien ici
 # modele.lancerPartie()
