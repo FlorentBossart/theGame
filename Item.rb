@@ -15,14 +15,12 @@ class Item < Elem
 
    @caracteristique
    @selected
-   @vientDEtreGenere
    
    attr_reader :caracteristique
    
    def initialize(casePosition, caracteristique)
       super(casePosition)
       @caracteristique = caracteristique
-      @vientDEtreGenere = true
    end
    
    def Item.creer(casePosition, caracteristique)

@@ -133,7 +133,7 @@ class Ennemi < PNJ
      @direction=cible
        caseCible= @casePosition.getDestination(cible)
      nbElemCase=caseCible.listeElements.length+caseCible.listeEnnemis.length
-              @rangCase=nbElemCase+1
+     @rangCase=nbElemCase+1
         if(!@vivant)
 		this.meurt
 		return nil
