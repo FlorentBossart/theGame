@@ -174,7 +174,9 @@ class Modele
       ajoutItems(@difficulte.objetsDepart)
      
      #PAS D'ACTUALISATION CAR MODELE SE CREER AVANT LA VUE  
-     #changerStadePartie(EnumStadePartie.NO_ETAPE)
+     if(@vue.initialisee)
+       changerStadePartie(EnumStadePartie.TOUR_PASSE)
+     end
    end
 
    def changerStadePartie(nouveauStade)

@@ -68,11 +68,17 @@ class Vue
   
   @inventaireModal
   
+  @initialisee
+  
   @@threadAffichage = false 
   
   
-  attr_reader :modele, :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal
+  attr_reader :modele, :hauteurAfficheCarte, :largeurAfficheCarte, :ecouteUp, :ecouteDown, :ecouteLeft, :ecouteRight, :ecouteToucheRepos, :ecouteToucheInventaire, :ecouteToucheMenu, :ecouteToucheInteraction, :inventaireModal, :initialisee
   attr_accessor :x , :y, :menu, :interactionModal, :popUp, :combatModal, :controller, :zoneCtrl, :window
+  
+  def initialize()
+    @initialisee=false
+  end
   
   def Vue.creer()
    new()
@@ -88,6 +94,8 @@ class Vue
 
   def initInterface()
     Gtk.init()
+    
+    @initialisee=true
     
     @inventaireModal=InventaireModal.creer(self)
     
@@ -218,20 +226,33 @@ class Vue
   end
 
   
-  #def afficheCarte(debutX,debutY)
   def afficheCarte()
     @structureEnnemisDeplacement.clear()
     @structureAidesGenere.clear()
     
     0.upto(@hauteurAfficheCarte-1) do |x|
       0.upto(@largeurAfficheCarte-1)do |y|
-        #afficheCase(@vue[x][y],@carte.getCaseAt(x+debutX,y+debutY))
         @carte.getCaseAt(x+@x,y+@y).verifEnnemis # A METTRE AILLEUR -> VUE MODIF PAS MODELE
         afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x,y+@y))
         #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
       end
     end
-    #@carteVue.set_pixbuf(@background)
+    @carteVue.window.draw_pixbuf(nil, @background, 0, 0, 0, 0, @background.width, @background.height, Gdk::RGB::DITHER_NORMAL, 0, 0)
+                  
+  end
+  
+  
+  def afficheCarteDyn()
+    @structureEnnemisDeplacement.clear()
+    @structureAidesGenere.clear()
+    
+    0.upto(@hauteurAfficheCarte-1) do |x|
+      0.upto(@largeurAfficheCarte-1)do |y|
+        @carte.getCaseAt(x+@x,y+@y).verifEnnemis # A METTRE AILLEUR -> VUE MODIF PAS MODELE
+        afficheCaseDyn(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x,y+@y))
+        #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
+      end
+    end
     
    if(@timeout_id==nil)
       bloquerEcouteClavier()
@@ -254,8 +275,113 @@ class Vue
     end
   end
 
-  #def afficheCase(image,caseAffiche)
-  def afficheCase(xAff,yAff,caseAffiche)
+  
+  
+  
+  
+  
+def afficheCase(xAff,yAff,caseAffiche)
+ 
+   #terrain
+   pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
+   pixbufTerrain=pixbufTerrain.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+
+   if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)))
+     idImage="bordure"+(getNumTerrain(caseAffiche.caseNord.getIntitule().downcase)).to_s()+"1"
+     pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+     pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+     pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+   if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)))
+     idImage="bordure"+(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)).to_s()+"2"
+     pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+     pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+     pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+   if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)))
+     idImage="bordure"+(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)).to_s()+"3"
+     pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+     pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+     pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+   if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
+     idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
+     pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
+     pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
+     pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+  
+   @background.composite!(pixbufTerrain, xAff,yAff, pixbufTerrain.width, pixbufTerrain.height,xAff, yAff,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+
+   #joueur
+   if(caseAffiche.joueur!=nil)
+     if(caseAffiche.joueur.toujoursEnVie?())
+       case caseAffiche.joueur.direction
+         when EnumDirection.NORD
+           pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"N"))
+         when EnumDirection.SUD
+           pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"S"))
+         when EnumDirection.EST
+           pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"E"))
+         when EnumDirection.OUEST
+           pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"O"))
+       end
+     else
+       pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))
+     end
+     pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+     rg=caseAffiche.joueur.rangCase
+     x=@positions[rg][0]
+     y=@positions[rg][1]
+     @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+   end
+
+     #aides
+     aides=caseAffiche.listeElements
+     for a in aides
+       rg=a.rangCase
+       x=@positions[rg][0]
+       y=@positions[rg][1]
+       pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(a.getIntitule().downcase))
+       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+       @background.composite!(pixbufElement, xAff+x,yAff+y, pixbufElement.width, pixbufElement.height,xAff+x, yAff+y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+     end
+     
+     #ennemis  
+     ennemis=caseAffiche.listeEnnemis
+     for e in ennemis
+       
+       case e.direction
+           when EnumDirection.NORD
+             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"N"))
+           when EnumDirection.SUD
+             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"S"))
+           when EnumDirection.EST
+             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"E"))
+           when EnumDirection.OUEST
+             pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"O"))
+         end
+       pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+       
+       rg=e.rangCase
+       xPos=@positions[rg][0]
+       yPos=@positions[rg][1]
+       
+       xArr=xAff+xPos
+       yArr=yAff+yPos
+       
+       @background.composite!(pixbufElement, xArr,yArr, pixbufElement.width, pixbufElement.height,xArr,yArr,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+     end
+   return nil
+ end
+  
+  
+  
+  
+  
+  
+  
+  def afficheCaseDyn(xAff,yAff,caseAffiche)
   
     #terrain
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
@@ -267,28 +393,25 @@ class Vue
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseEst.getIntitule().downcase)).to_s()+"2"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-  
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseSud.getIntitule().downcase)).to_s()+"3"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-
     if((getNumTerrain(caseAffiche.getIntitule().downcase))<(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)))
       idImage="bordure"+(getNumTerrain(caseAffiche.caseOuest.getIntitule().downcase)).to_s()+"4"
       pixbufTerrainSurcouche = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(idImage))
       pixbufTerrainSurcouche=pixbufTerrainSurcouche.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
       pixbufTerrain.composite!(pixbufTerrainSurcouche, 0,0, pixbufTerrainSurcouche.width, pixbufTerrainSurcouche.height,0, 0,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
     end
-    
+   
     @background.composite!(pixbufTerrain, xAff,yAff, pixbufTerrain.width, pixbufTerrain.height,xAff, yAff,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
 
     #joueur
@@ -328,7 +451,6 @@ class Vue
           @structureAidesGenere.push([xAff+x,yAff+y,pixbufElement])
         end
       end
-    
       
       #ennemis  
       ennemis=caseAffiche.listeEnnemis
@@ -356,86 +478,82 @@ class Vue
         #COORD SUR CARTE -> INVERSEES PAR / AU PIXBUF
         xAncien=e.anciennePositionX
         yAncien=e.anciennePositionY
+         
+        xArr=xAff
+        yArr=yAff
         
-                  
+        # Rajout� par ludo
+        #xDep = 0 
+        #yDep = 0
+        
+        if(e.vientDEtreGenere?())
+          if(!(xAncien==-1 && yAncien==-1))
+            raise "err1"
+          end
+          traitement="zoom"
+          xArr=xArr+xPos
+          yArr=yArr+yPos
+          @structureEnnemisDeplacement.push([traitement,nil,nil,xArr,yArr,pixbufElement])
+        else
+          ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
               
-              xArr=xAff
-              yArr=yAff
+          #puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
+          #puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s   
+          if(ancienneCase==e.casePosition)
+            #puts "ici "+e.getIntitule()
+            @background.composite!(pixbufElement, xAff+xPos,yAff+yPos, pixbufElement.width, pixbufElement.height,xAff+xPos, yAff+yPos,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+          else
+            #puts "la "+e.getIntitule()
+              traitement="depl"
+              rgAncien=e.ancienRangCase
+              xPosAncien=@positions[rgAncien][0]
+              yPosAncien=@positions[rgAncien][1]
               
-              # Rajout� par ludo
-              #xDep = 0 
-              #yDep = 0
-              
-              if(e.vientDEtreGenere?())
-                if(!(xAncien==-1 && yAncien==-1))
-                  raise "err1"
-                end
-                traitement="zoom"
-                xArr=xArr+xPos
-                yArr=yArr+yPos
-                @structureEnnemisDeplacement.push([traitement,nil,nil,xArr,yArr,pixbufElement])
-              else
-                ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
-                    
-                #puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
-                #puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s   
-                if(ancienneCase==e.casePosition)
-                  #puts "ici "+e.getIntitule()
-                  @background.composite!(pixbufElement, xAff+xPos,yAff+yPos, pixbufElement.width, pixbufElement.height,xAff+xPos, yAff+yPos,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-                else
-                  #puts "la "+e.getIntitule()
-                    traitement="depl"
-                    rgAncien=e.ancienRangCase
-                    xPosAncien=@positions[rgAncien][0]
-                    yPosAncien=@positions[rgAncien][1]
-                    
-                    if(ancienneCase==e.casePosition.caseNord())
-                      xDep=xArr
-                      yDep=yArr-@tailleCase
-                    elsif(ancienneCase==e.casePosition.caseSud())
-                      xDep=xArr
-                      yDep=yArr+@tailleCase
-                    elsif(ancienneCase==e.casePosition.caseEst())
-                      xDep=xArr+@tailleCase
-                      yDep=yArr
-                    elsif(ancienneCase==e.casePosition.caseOuest())
-                      xDep=xArr-@tailleCase
-                      yDep=yArr
-                    end
-                    
-                    if(xDep==nil)
-                      puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
-                      puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s  
-                      raise "err2"
-                    end
-                    
-                    if(xDep<0)
-                      xDep=0
-                    end
-                    if(xDep>(@largeurAfficheCarte-1)*@tailleCase)
-                      xDep=(@largeurAfficheCarte-1)*@tailleCase
-                    end
-                    if(yDep<0)
-                      yDep=0
-                    end
-                    if(yDep>(@hauteurAfficheCarte-1)*@tailleCase)
-                      yDep=(@hauteurAfficheCarte-1)*@tailleCase
-                    end
-                    xDep=xDep+xPosAncien
-                    yDep=yDep+yPosAncien
-                  end
-                  xArr=xArr+xPos
-                  yArr=yArr+yPos
-                  
-                  @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
-                  #puts "XDEP"+xDep.to_s
-                  #puts "YDEP"+yDep.to_s
-                  #puts "XARR"+xArr.to_s
-                  #puts "YARR"+yArr.to_s
+              if(ancienneCase==e.casePosition.caseNord())
+                xDep=xArr
+                yDep=yArr-@tailleCase
+              elsif(ancienneCase==e.casePosition.caseSud())
+                xDep=xArr
+                yDep=yArr+@tailleCase
+              elsif(ancienneCase==e.casePosition.caseEst())
+                xDep=xArr+@tailleCase
+                yDep=yArr
+              elsif(ancienneCase==e.casePosition.caseOuest())
+                xDep=xArr-@tailleCase
+                yDep=yArr
               end
-          
+              
+              if(xDep==nil)
+                puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
+                puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s  
+                raise "err2"
+              end
+              
+              if(xDep<0)
+                xDep=0
+              end
+              if(xDep>(@largeurAfficheCarte-1)*@tailleCase)
+                xDep=(@largeurAfficheCarte-1)*@tailleCase
+              end
+              if(yDep<0)
+                yDep=0
+              end
+              if(yDep>(@hauteurAfficheCarte-1)*@tailleCase)
+                yDep=(@hauteurAfficheCarte-1)*@tailleCase
+              end
+              xDep=xDep+xPosAncien
+              yDep=yDep+yPosAncien
+            end
+            xArr=xArr+xPos
+            yArr=yArr+yPos
+            
+            @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
+            #puts "XDEP"+xDep.to_s
+            #puts "YDEP"+yDep.to_s
+            #puts "XARR"+xArr.to_s
+            #puts "YARR"+yArr.to_s
+        end
       end
-      
     return nil
   end
 
@@ -457,7 +575,11 @@ class Vue
         @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
         @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
         #COORD DU COIN GAUCHE SUP DE LA VUE
-        afficheCarte()
+        if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || @modele.compteurTour==0)
+          afficheCarteDyn()
+        else
+          afficheCarte()
+        end
         @zaf.majZaf(@modele.joueur)
         #sleep(0.01)    
     # end
