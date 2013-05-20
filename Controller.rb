@@ -205,8 +205,10 @@ class Controller
   def reposAction
     #print "ZZzzzZZZzzzz Bt repos pressÃ©!\n"
     Audio.playSound("ronfle")
+    Thread.new do
     @modele.joueur.utiliserRepos() 
     @modele.debutTour()
+    end
   end
 
     
@@ -343,7 +345,9 @@ class Controller
   def interactionElementAction(elem,joueur)
     print "oO Bt interaction "+elem.getIntitule+" pressÃ©!"
      Audio.playSound("coin")
-    elem.interaction(joueur)
+     Thread.new do
+        elem.interaction(joueur)
+     end
   end
   
   

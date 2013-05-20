@@ -158,7 +158,7 @@ class Vue
 
     #image pour afficher la carte
     @timeout_id=nil
-    @delay=50
+    @delay=25
     @numEtapeAffichage=0
     @nbEtapeAffichage=50
     @positions=Array.new([[@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],
@@ -863,25 +863,25 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
           ecartH=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
           x=0
           y=ecartH
-          puts ecartH
+          #puts ecartH
         when EnumDirection.SUD
           parcours=@pixFond.height-@background.height
           ecartH=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
           x=0
           y=ecartH
-          puts ecartH
+          #puts ecartH
         when EnumDirection.EST
           parcours=@pixFond.width-@background.width
           ecartL=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
           x=ecartL
           y=0
-          puts ecartL
+          #puts ecartL
         when EnumDirection.OUEST
           parcours=@pixFond.width-@background.width
           ecartL=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
           x=ecartL
           y=0
-          puts ecartL
+          #puts ecartL
       end
       
       if(
