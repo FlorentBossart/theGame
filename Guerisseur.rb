@@ -71,7 +71,7 @@ class Guerisseur < Ami
          joueur.energie = energieG
       end
      joueur.modele.tourPasse()
-     joueur.modele.debutTour()
+     #joueur.modele.debutTour()
       return nil
       
    end
