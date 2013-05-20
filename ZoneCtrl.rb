@@ -8,14 +8,12 @@
 # Cette classe représente la zone de controle en bas a droite du jeu, avec les boutons d'intération
 #
 require 'gtk2'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
 
 class ZoneCtrl <  Gtk::Frame
   private_class_method :new
-  @referencesGraphiques
+  
   @vue
   @controller
   
@@ -27,16 +25,12 @@ class ZoneCtrl <  Gtk::Frame
   @inventaire
   @menu
   @interaction
+  
   def initialize(vue,controller)
     super() #Frame
-    #Gtk.init();
     @vue=vue
     @controller=controller
-    @referencesGraphiques = ReferencesGraphiques.new()
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
     initInterface()
-
-    #Gtk.main();
   end
 
   def ZoneCtrl.creer(vue,controller)
@@ -45,10 +39,10 @@ class ZoneCtrl <  Gtk::Frame
 
   def initInterface()
     #creation image bouton
-    @gauche = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("gauche")))
-    @droite = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("droite")))
-    @haut = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("haut")))
-    @bas = Gtk::EventBox.new.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("bas")))
+    @gauche = Gtk::EventBox.new.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("gauche")))
+    @droite = Gtk::EventBox.new.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("droite")))
+    @haut = Gtk::EventBox.new.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("haut")))
+    @bas = Gtk::EventBox.new.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("bas")))
     #association au controlleur
     @controller.deplacementGaucheCreer(@gauche)
     @controller.deplacementDroiteCreer(@droite)

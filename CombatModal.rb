@@ -14,8 +14,6 @@
 
 #com
 require 'gtk2'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
 require "./Enum/EnumMomentCombat.rb"
@@ -25,9 +23,8 @@ require 'Audio.rb'
 class CombatModal
   private_class_method :new
   @vue
-  @referencesGraphiques
   @modele
-  attr_reader :vue, :referencesGraphiques, :modele
+  attr_reader :vue, :modele
   
   ## 
   # Crée un nouveau CombatModal à partir des informations passées en paramètre. 
@@ -39,8 +36,6 @@ class CombatModal
   def initialize(vue,modele)
     @vue=vue
     @modele=modele
-    @referencesGraphiques = ReferencesGraphiques.new()
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
   end
   
   
@@ -109,7 +104,7 @@ class CombatModal
     listeArmure.each{ |item|
         button=Gtk::Button.new()
         image= Gtk::Image.new()
-        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
         pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
         image.set_pixbuf(pixbufElement)
         button.image = image
@@ -153,7 +148,7 @@ class CombatModal
     listeArme.each{ |item|
       button=Gtk::Button.new()
       image= Gtk::Image.new()
-      pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+      pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
       pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
       image.set_pixbuf(pixbufElement)
       button.image = image

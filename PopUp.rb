@@ -11,17 +11,14 @@
 # 
 
 require 'gtk2'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 
 
 
 class PopUp
   private_class_method :new
-  @referencesGraphiques
   @vue
-  attr_reader :vue, :referencesGraphiques, :message
+  attr_reader :vue, :message
   ## 
   # CrÃ©e un nouveau PopUp. 
   # 
@@ -30,8 +27,6 @@ class PopUp
   # 
   def initialize(vue)
     @vue=vue
-    @referencesGraphiques = ReferencesGraphiques.new()
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
     @message=message
   end
   

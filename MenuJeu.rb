@@ -34,8 +34,6 @@ class MenuJeu
 	@controleur
 	@modele
 	
-	#FONT= "Diploma"
-	
 	attr_accessor :fenetreMenu
 	
 	attr_reader :contenu, :isInGame

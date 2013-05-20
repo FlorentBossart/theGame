@@ -13,8 +13,6 @@
 
 
 require 'gtk2'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 require './Controller.rb'
 
@@ -26,7 +24,6 @@ class InteractionModal
   private_class_method :new
   @vue
   @modele
-  @referencesGraphiques
   
   ## 
   # Crée une nouvelle InteractionModal à partir des informations passées en paramètre. 
@@ -38,8 +35,6 @@ class InteractionModal
   def initialize(modele,vue)
     @vue=vue
     @modele=modele
-    @referencesGraphiques = ReferencesGraphiques.new()
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
   end
   
   
@@ -75,7 +70,7 @@ class InteractionModal
         
         button=Gtk::Button.new()
         image= Gtk::Image.new()
-        pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
+        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
         pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
         image.set_pixbuf(pixbufElement)
         button.image = image

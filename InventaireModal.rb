@@ -9,7 +9,6 @@
 #
 
 require 'gtk2'
-require 'Bibliotheque/ReferencesGraphiques.rb'
 
 # On inclut le module Gtk : cela Ã©vite de prÃ©fixer les classes par 
 include Gtk
@@ -19,7 +18,6 @@ class InventaireModal
    @fenetreInventaire
    @contenu
    @vue #TODO Controler depuis vue
-   @referencesGraphiques
    @nbColonnesMax
    @boutonInteraction
    @tabImages
@@ -44,11 +42,6 @@ class InventaireModal
      # @fenetreInventaire = Window.new()
      # @fenetreInventaire.set_default_size(100,100)
      # @fenetreInventaire.set_title("Inventaire")
-
-      #Initialisation des rÃ©fÃ©rences graphiques
-      #TODO : rÃ©cupÃ©rer les rÃ©fÃ©rence depuis la vue
-      @referencesGraphiques = ReferencesGraphiques.new()
-      XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
       
       #Attribution des action liÃ©s aux diffÃ©rents boutons possibles
      # @vue.controller.vendreItem(@@boutonVente)
@@ -108,7 +101,7 @@ class InventaireModal
 
       inventaire.each_with_index do |item, indice| #Pour chaque item...
          #On crÃ©e l'image de l'item
-         pixbufItemCourant = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(item.getIntitule.downcase))
+         pixbufItemCourant = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule.downcase))
          pixbufItemCourant = pixbufItemCourant.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
          imageCourante = Image.new(pixbufItemCourant)
 
