@@ -386,12 +386,11 @@ class Joueur < Personnage
    #
    def acheter(item)
       #impossibilité de passer par un indice ici
-      ajouterAuStock(item)
+      ajouterAuStock(item.clone)
       debourser(item.caracteristique.prix())
       str=XmlMultilingueReader.lireTexte("achete")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)
-      @modele.tourPasse()
    end
 
    ##
@@ -408,7 +407,6 @@ class Joueur < Personnage
       str=XmlMultilingueReader.lireTexte("vendu")
       str=str.gsub("INTITULE",item.getIntitule())
       @modele.notifier(str)
-      @modele.tourPasse()
    end
 
    ##
