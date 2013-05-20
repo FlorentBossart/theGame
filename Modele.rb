@@ -294,7 +294,7 @@ class Modele
          ajoutItems(@difficulte.objetsParGeneration)
       end
       
-     #changerStadePartie(EnumStadePartie.TOUR_PASSE)
+     changerStadePartie(EnumStadePartie.TOUR_PASSE)
       
      puts "fin tourPasse"
          

@@ -146,6 +146,25 @@
    <intitule_objet>joueurO</intitule_objet>
    <img_ihm>./img/joueur/joueurO.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>joueurNb</intitule_objet>
+   <img_ihm>./img/joueur/joueurNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>joueurSb</intitule_objet>
+   <img_ihm>./img/joueur/joueurSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>joueurEb</intitule_objet>
+   <img_ihm>./img/joueur/joueurEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>joueurOb</intitule_objet>
+   <img_ihm>./img/joueur/joueurOb.png</img_ihm>
+</reference>
 
 <reference>
    <intitule_objet>chauve-sourisN</intitule_objet>
@@ -165,6 +184,25 @@
 <reference>
    <intitule_objet>chauve-sourisO</intitule_objet>
    <img_ihm>./img/ennemi/chauve_sourisO.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>chauve-sourisNb</intitule_objet>
+   <img_ihm>./img/ennemi/chauve_sourisNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>chauve-sourisSb</intitule_objet>
+   <img_ihm>./img/ennemi/chauve_sourisSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>chauve-sourisEb</intitule_objet>
+   <img_ihm>./img/ennemi/chauve_sourisEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>chauve-sourisOb</intitule_objet>
+   <img_ihm>./img/ennemi/chauve_sourisOb.png</img_ihm>
 </reference>
 
 <reference>
@@ -186,6 +224,25 @@
    <intitule_objet>loupO</intitule_objet>
    <img_ihm>./img/ennemi/loupO.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>loupNb</intitule_objet>
+   <img_ihm>./img/ennemi/loupNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>loupSb</intitule_objet>
+   <img_ihm>./img/ennemi/loupSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>loupEb</intitule_objet>
+   <img_ihm>./img/ennemi/loupEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>loupOb</intitule_objet>
+   <img_ihm>./img/ennemi/loupOb.png</img_ihm>
+</reference>
 
 <reference>
    <intitule_objet>brigandN</intitule_objet>
@@ -205,6 +262,25 @@
 <reference>
    <intitule_objet>brigandO</intitule_objet>
    <img_ihm>./img/ennemi/brigandO.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>brigandNb</intitule_objet>
+   <img_ihm>./img/ennemi/brigandNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>brigandSb</intitule_objet>
+   <img_ihm>./img/ennemi/brigandSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>brigandEb</intitule_objet>
+   <img_ihm>./img/ennemi/brigandEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>brigandOb</intitule_objet>
+   <img_ihm>./img/ennemi/brigandOb.png</img_ihm>
 </reference>
 
 <reference>
@@ -226,6 +302,25 @@
    <intitule_objet>soldatO</intitule_objet>
    <img_ihm>./img/ennemi/soldatO.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>soldatNb</intitule_objet>
+   <img_ihm>./img/ennemi/soldatNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>soldatSb</intitule_objet>
+   <img_ihm>./img/ennemi/soldatSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>soldatEb</intitule_objet>
+   <img_ihm>./img/ennemi/soldatEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>soldatOb</intitule_objet>
+   <img_ihm>./img/ennemi/soldatOb.png</img_ihm>
+</reference>
 
 <reference>
    <intitule_objet>ogreN</intitule_objet>
@@ -245,6 +340,25 @@
 <reference>
    <intitule_objet>ogreO</intitule_objet>
    <img_ihm>./img/ennemi/ogreO.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>ogreNb</intitule_objet>
+   <img_ihm>./img/ennemi/ogreNb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>ogreSb</intitule_objet>
+   <img_ihm>./img/ennemi/ogreSb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>ogreEb</intitule_objet>
+   <img_ihm>./img/ennemi/ogreEb.png</img_ihm>
+</reference>
+
+<reference>
+   <intitule_objet>ogreOb</intitule_objet>
+   <img_ihm>./img/ennemi/ogreOb.png</img_ihm>
 </reference>
 
 <reference>

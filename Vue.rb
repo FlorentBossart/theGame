@@ -102,7 +102,7 @@ class Vue
     XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
     @hauteurAfficheCarte = 4
-    @largeurAfficheCarte = 8
+    @largeurAfficheCarte = 10
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
@@ -294,19 +294,22 @@ Thread.new do @modele.debutTour() end
   def afficheCarteMvt()
     puts "\t\tafficheCarteMvt"
     
-    if(@modele.joueur.direction==EnumDirection.NORD||@modele.joueur.direction==EnumDirection.NORD)
+    if(@modele.joueur.direction==EnumDirection.NORD||@modele.joueur.direction==EnumDirection.SUD)
       h=1
       l=0
     elsif(@modele.joueur.direction==EnumDirection.EST||@modele.joueur.direction==EnumDirection.OUEST)
       h=0
       l=1
     end
-    if(@modele.joueur.direction==EnumDirection.NORD)
-      xDec=-1
-      yDec=0
-    elsif(@modele.joueur.direction==EnumDirection.OUEST)
-      xDec=0
-      yDec=-1
+    if(@modele.joueur.direction==EnumDirection.SUD)
+      hDec=-1
+      lDec=0
+    elsif(@modele.joueur.direction==EnumDirection.EST)
+      hDec=0
+      lDec=-1
+    else
+      hDec=0
+      lDec=0
     end
     
     @pixFond=pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("blanc"))
@@ -314,18 +317,38 @@ Thread.new do @modele.debutTour() end
     0.upto(@hauteurAfficheCarte-1+h) do |x|
       0.upto(@largeurAfficheCarte-1+l)do |y|
         #@carte.getCaseAt(x+@x,y+@y).verifEnnemis  A METTRE AILLEUR -> VUE MODIF PAS MODELE
-        afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x+xDec,y+@y+yDec),false,@pixFond)
+        afficheCase(y*@tailleCase,x*@tailleCase,@carte.getCaseAt(x+@x+hDec,y+@y+lDec),false,@pixFond)
         #POUR UN PIXBUF, AXE X ET Y SONT INVERSE PAR RAPOORT AUX NOTRES
       end
     end
+
+    case @modele.joueur.direction
+      when EnumDirection.NORD
+        pixbufJoueur = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"N"))
+        pixbufJoueurb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"Nb"))
+      when EnumDirection.SUD
+        pixbufJoueur = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"S"))
+        pixbufJoueurb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"Sb"))
+      when EnumDirection.EST
+        pixbufJoueur = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"E"))
+        pixbufJoueurb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"Eb"))
+      when EnumDirection.OUEST
+        pixbufJoueur = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"O"))
+        pixbufJoueurb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(@modele.joueur.getIntitule().downcase+"Ob"))
+    end
+    pixbufJoueur=pixbufJoueur.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+    pixbufJoueurb=pixbufJoueurb.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+    
     
    if(@timeout_id==nil)
       bloquerEcouteClavier()
       @zoneCtrl.bloquerBoutons(@modele)
       @timeout_id = Gtk.timeout_add(@delay) do
-                      timeoutMvt()
+                      timeoutMvt(pixbufJoueur,pixbufJoueurb)
               end
-    end
+   else
+     raise "actualisation pas synchro"
+   end
   end
   
   
@@ -525,14 +548,19 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
         case e.direction
             when EnumDirection.NORD
               pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"N"))
+              pixbufElementb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"Nb"))
             when EnumDirection.SUD
               pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"S"))
+              pixbufElementb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"Sb"))
             when EnumDirection.EST
               pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"E"))
+              pixbufElementb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"Eb"))
             when EnumDirection.OUEST
               pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"O"))
+              pixbufElementb = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(e.getIntitule().downcase+"Ob"))
           end
         pixbufElement=pixbufElement.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
+        pixbufElementb=pixbufElementb.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
         
         rg=e.rangCase
         #puts "rg = " + rg.to_s
@@ -559,7 +587,7 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
           traitement="zoom"
           xArr=xArr+xPos
           yArr=yArr+yPos
-          @structureEnnemisDeplacement.push([traitement,nil,nil,xArr,yArr,pixbufElement])
+          @structureEnnemisDeplacement.push([traitement,nil,nil,xArr,yArr,pixbufElement,nil])
         else
           ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
               
@@ -613,7 +641,7 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
             xArr=xArr+xPos
             yArr=yArr+yPos
             
-            @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement])
+            @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement,pixbufElementb])
             #puts "XDEP"+xDep.to_s
             #puts "YDEP"+yDep.to_s
             #puts "XARR"+xArr.to_s
@@ -647,14 +675,14 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
           @transitionFini=false
           afficheCarteDyn()
           while(!@transitionFini) do
-            puts "jepassela"
+            #puts "jepassela"
             sleep(0.1)
           end
         elsif(@modele.stadePartie==EnumStadePartie.JOUEUR_MVT)
             @transitionFini=false
             afficheCarteMvt()
             while(!@transitionFini) do
-              puts "jepassela"
+              #puts "jepassela"
               sleep(0.1)
             end
         else
@@ -781,6 +809,7 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
         xArr=e[3]
         yArr=e[4]
         pixbuf=e[5]
+        pixbufb=e[6]
         
         if(traitement=="zoom")
           w= (pixbuf.width*(@numEtapeAffichage.to_f()/@nbEtapeAffichage)).to_i
@@ -794,9 +823,19 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
           zoomPix=pixbuf.scale(w,h,Gdk::Pixbuf::INTERP_BILINEAR)
           @frame.composite!(zoomPix,xArr,yArr,zoomPix.width, zoomPix.height,xArr,yArr,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
         else
+          if(
+              (   @numEtapeAffichage<=@nbEtapeAffichage*(1.0/6) )  ||
+              (   @numEtapeAffichage> @nbEtapeAffichage*(1.0/3) && @numEtapeAffichage<=@nbEtapeAffichage*0.5  )   ||
+              (   @numEtapeAffichage> @nbEtapeAffichage*(2.0/3) && @numEtapeAffichage<=@nbEtapeAffichage*(5.0/6)   )   
+          )
+            pixbufActuel=pixbuf
+          else
+            pixbufActuel=pixbufb
+          end
+          
           x=xDep+@numEtapeAffichage*(xArr-xDep)/@nbEtapeAffichage
           y=yDep+@numEtapeAffichage*(yArr-yDep)/@nbEtapeAffichage
-          @frame.composite!(pixbuf,x,y,pixbuf.width, pixbuf.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+          @frame.composite!(pixbufActuel,x,y,pixbufActuel.width, pixbufActuel.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
         end
       end
       
@@ -813,31 +852,52 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
     end
     
     # Timeout handler to regenerate the frame
-    def timeoutMvt()
+    def timeoutMvt(pix,pixb)
       @background.copy_area(0, 0, @background.width, @background.height,
                            @frame, 0, 0)
       @numEtapeAffichage+=1
-      ecartH=(@numEtapeAffichage*((@pixFond.height-@background.height).to_f)/@nbEtapeAffichage).to_i
-      ecartL=(@numEtapeAffichage*((@pixFond.width-@background.width).to_f)/@nbEtapeAffichage).to_i
-      #puts ecartH
-      #puts ecartL
+      
       case @modele.joueur.direction
         when EnumDirection.NORD
-          ecartH=((@nbEtapeAffichage-@numEtapeAffichage)*((@pixFond.height-@background.height).to_f)/@nbEtapeAffichage).to_i
+          parcours=@pixFond.height-@background.height
+          ecartH=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
           x=0
           y=ecartH
           puts ecartH
         when EnumDirection.SUD
+          parcours=@pixFond.height-@background.height
+          ecartH=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
           x=0
-          y=-ecartH
+          y=ecartH
+          puts ecartH
         when EnumDirection.EST
+          parcours=@pixFond.width-@background.width
+          ecartL=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
           x=ecartL
           y=0
+          puts ecartL
         when EnumDirection.OUEST
-          x=-ecartL
+          parcours=@pixFond.width-@background.width
+          ecartL=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
+          x=ecartL
           y=0
+          puts ecartL
       end
+      
+      if(
+                    (   @numEtapeAffichage<=@nbEtapeAffichage*(1.0/6) )  ||
+                    (   @numEtapeAffichage> @nbEtapeAffichage*(1.0/3) && @numEtapeAffichage<=@nbEtapeAffichage*0.5  )   ||
+                    (   @numEtapeAffichage> @nbEtapeAffichage*(2.0/3) && @numEtapeAffichage<=@nbEtapeAffichage*(5.0/6)   )   
+                )
+        pixActuel=pix
+      else
+        pixActuel=pixb
+      end
+      
+      xJ=@tailleCase*@largeurAfficheCarte/2+@positions[0][0]
+      yJ=@tailleCase*@hauteurAfficheCarte/2+@positions[0][1]
       @frame.composite!(@pixFond,0,0,@background.width, @background.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
+      @frame.composite!(pixActuel,xJ, yJ,pixActuel.width, pixActuel.height,xJ, yJ,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
             
       @carteVue.queue_draw
       if(@numEtapeAffichage==@nbEtapeAffichage)

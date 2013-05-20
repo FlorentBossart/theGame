@@ -151,6 +151,7 @@ class Joueur < Personnage
       @anciennePositionX=@casePosition.coordonneeX
       @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
+      puts "direction change pour "+cible.to_s()
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
       end
@@ -193,7 +194,7 @@ class Joueur < Personnage
               @modele.notifier(str)     
             end
             @distanceParcourue += 1
-            #@modele.changerStadePartie(EnumStadePartie.JOUEUR_MVT)
+            @modele.changerStadePartie(EnumStadePartie.JOUEUR_MVT)
          end
          if(!toujoursEnVie?()) 
             @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")
