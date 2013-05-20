@@ -53,7 +53,7 @@ class Vue
   @interactionModal
   @popUp
   @window
-  @tailleCase #taille d'une case
+  #@tailleCase #taille d'une case
   @finInit
 
   #touches ecoutees
