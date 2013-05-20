@@ -279,8 +279,8 @@ class Controller
     puts "<--> Creation du menu"
     if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, cr�ation menu avec moins de bouton
     	@vue.menu = MenuJeu.creer(false, @modele, self)
-    else
-    	@vue.menu = MenuJeu.creer(true, @modele, self)
+    #else
+    	#@vue.menu = MenuJeu.creer(true, @modele, self)
     end
     puts "-- Affichage du menu"
     @vue.window.modal = false;
