@@ -158,9 +158,9 @@ class Vue
 
     #image pour afficher la carte
     @timeout_id=nil
-    @delay=25
+    @delay=20
     @numEtapeAffichage=0
-    @nbEtapeAffichage=50
+    @nbEtapeAffichage=40
     @positions=Array.new([[@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],
                           [2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
     
