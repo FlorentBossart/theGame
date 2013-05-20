@@ -106,7 +106,7 @@ class Vue
     #matrice de stockage
     @vue = Array.new(@hauteurAfficheCarte){|x|Array.new(@largeurAfficheCarte ){|y|Gtk::Image.new()}}
     @zaf = Zaf.new()
-    #@menu = MenuJeu.creer(true, @modele, @controller)
+    @menu = MenuJeu.creer(true, @modele, @controller)
     @zoneCtrl = ZoneCtrl.creer(self,@controller)
     @carte = @modele.carte
     @popUp=PopUp.creer(self)
