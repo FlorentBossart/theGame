@@ -193,6 +193,7 @@ class Joueur < Personnage
               @modele.notifier(str)     
             end
             @distanceParcourue += 1
+            #@modele.changerStadePartie(EnumStadePartie.JOUEUR_MVT)
          end
          if(!toujoursEnVie?()) 
             @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")

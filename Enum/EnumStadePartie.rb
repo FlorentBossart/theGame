@@ -17,6 +17,7 @@
 #* Un stade INTERACTION_MARCHAND_ACHAT
 #* Un stade INTERACTION_MARCHAND_VENTE
 #* Un stade TOUR_PASSE
+#* Un stade JOUEUR_MVT
 #
 
 class EnumStadePartie
@@ -34,6 +35,7 @@ class EnumStadePartie
    @@INVENTAIRE_USAGE           = 11
 
   @@TOUR_PASSE           = 12
+  @@JOUEUR_MVT           =13
    
    
    ##
@@ -165,5 +167,15 @@ class EnumStadePartie
    def EnumStadePartie.TOUR_PASSE
       return @@TOUR_PASSE
    end
+   
+      ##
+     #===Indique le stade JOUEUR_MVT.
+     #
+     #===Retourne:
+     #* <b>stade :</b> le stade JOUEUR_MVT
+     #
+     def EnumStadePartie.JOUEUR_MVT
+        return @@JOUEUR_MVT
+     end
 
 end

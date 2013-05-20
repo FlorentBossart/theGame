@@ -294,7 +294,7 @@ class Modele
          ajoutItems(@difficulte.objetsParGeneration)
       end
       
-     changerStadePartie(EnumStadePartie.TOUR_PASSE)
+     #changerStadePartie(EnumStadePartie.TOUR_PASSE)
       
      puts "fin tourPasse"
          
@@ -323,24 +323,26 @@ class Modele
    # il faut attaquer les ennemis deja present si il y en a
    #
    def debutTour()
-     puts "debut debutTour"
-     if(!@joueur.toujoursEnVie?())
-			puts "!!!!!!!! Vous etes MORT !!!!!!!"
-			@messageDefaite=@joueur.causeMort
-			@joueur.meurt(@messageDefaite)
-     else
-        if(@joueur.casePosition.presenceEnnemis?())
-            if(@tourDejaPasse)
-              preparationHostilites(EnumMomentCombat.APRES_ACTION)
-            else
-              preparationHostilites(EnumMomentCombat.APRES_DEPLACEMENT)
-            end
-        end
-        if(@joueur.toujoursEnVie?())
-            choixLibre()
-        end
-     end
-     puts "fin debutTour\n"
+     #Thread.new do
+           puts "debut debutTour"
+           if(!@joueur.toujoursEnVie?())
+      			puts "!!!!!!!! Vous etes MORT !!!!!!!"
+      			@messageDefaite=@joueur.causeMort
+      			@joueur.meurt(@messageDefaite)
+           else
+              if(@joueur.casePosition.presenceEnnemis?())
+                  if(@tourDejaPasse)
+                    preparationHostilites(EnumMomentCombat.APRES_ACTION)
+                  else
+                    preparationHostilites(EnumMomentCombat.APRES_DEPLACEMENT)
+                  end
+              end
+              if(@joueur.toujoursEnVie?())
+                  choixLibre()
+              end
+           end
+           puts "fin debutTour\n"
+     #end
    end
   
    def preparationHostilites(momentCombat)
