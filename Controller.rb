@@ -206,8 +206,8 @@ class Controller
     #print "ZZzzzZZZzzzz Bt repos pressÃ©!\n"
     Audio.playSound("ronfle")
     Thread.new do
-    @modele.joueur.utiliserRepos() 
-    @modele.debutTour()
+      @modele.joueur.utiliserRepos() 
+      @modele.debutTour()
     end
   end
 
@@ -441,8 +441,10 @@ class Controller
   # guerisseur : le guerisseur repondant a la demande de soin
   #
   def soinAction(joueur,choix,guerisseur)
-    guerisseur.guerrir(joueur,choix)
-    @modele.debutTour()
+    Thread.new do
+      guerisseur.guerrir(joueur,choix)
+      @modele.debutTour()
+    end
   end
       
   
@@ -470,7 +472,9 @@ class Controller
   # elem : element a equiper
   #
   def equiperItemAction(joueur,elem)
-    joueur.utiliserItem(elem)
+    Thread.new do
+      joueur.utiliserItem(elem)
+    end
     print "oO Bt interaction "+elem.getIntitule()+" pressÃ©!"
   end
   
@@ -875,12 +879,16 @@ class Controller
 	def acheterItem(btAcheter)
 	  btAcheter.signal_connect('clicked'){
 	  puts "(S) Achat de l'item "+"XX"+"."
+	    
+	  Thread.new do
       marchand = @modele.pnjAideEnInteraction
 	  #Le marchand vend l'item sélectionné par le joueur à ce dernier
 	  marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
 	  @vue.inventaireModal.onDestroy()
       @marchand==false
       @modele.debutTour()
+      
+	  end
 		}
 	end
 	
@@ -890,13 +898,15 @@ class Controller
 	def vendreItem(btVendre)
 		btVendre.signal_connect('clicked'){
 			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
-			#@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
-			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
-			@modele.joueur.vendre(@modele.indiceItemSelectionne)
-			@vue.inventaireModal.onDestroy()
-			@marchand==false
-			@modele.debutTour()
-			#@vue.vueInventaire.setImageSelection(indiceItem)
+			Thread.new do
+  			#@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
+  			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
+  			@modele.joueur.vendre(@modele.indiceItemSelectionne)
+  			@vue.inventaireModal.onDestroy()
+  			@marchand==false
+  			@modele.debutTour()
+  			#@vue.vueInventaire.setImageSelection(indiceItem)
+			end
 		}
 	end
 	
@@ -905,10 +915,12 @@ class Controller
 	#
 	def jeterItem(btJeter)
 		btJeter.signal_connect('clicked'){
-			puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
-			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
-			@vue.inventaireModal.onDestroy
-			@vue.actualiser
+			Thread.new do 
+			  puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
+  			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
+  			@vue.inventaireModal.onDestroy
+  			@vue.actualiser
+			end
 		}
 	end
 	
@@ -919,9 +931,11 @@ class Controller
 	def utiliserItem(btUtiliser)
 		btUtiliser.signal_connect('clicked'){
 			puts "(U) Utilisation de l'item "+"XX"+"."
-			@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).utiliseToi(@modele.joueur)
-			@vue.actualiser()
-			@vue.inventaireModal.onDestroy
+      Thread.new do 
+  			@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).utiliseToi(@modele.joueur)
+  			@vue.actualiser()
+  			@vue.inventaireModal.onDestroy
+      end
 		}
 	end
 end
