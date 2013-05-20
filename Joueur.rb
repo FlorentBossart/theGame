@@ -44,6 +44,7 @@ class Joueur < Personnage
    private_class_method :new
    @intitule
    @nombreRepos
+   @enRepos
    @niveau
    @energie
    @energieMax
@@ -66,7 +67,7 @@ class Joueur < Personnage
 
    attr_reader :nombreRepos, :niveau, :experience,
                :experienceSeuil, :inventaire, :casePosition, :nbEnnemiTues, :distanceParcourue,
-               :causeMort, :modele
+               :causeMort, :modele, :enRepos
    attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax, :peutSEquiper,
    				:dateDebutJeu, :dateFinJeu, :tempsTotal
    
@@ -107,6 +108,7 @@ class Joueur < Personnage
       @rangCase=0
       @intitule="Joueur"
       @nombreRepos = nbRepos
+      @enRepos=false
       @niveau = 1
       @energie = energieDepart
       @energieMax = energieDepart
@@ -469,6 +471,7 @@ class Joueur < Personnage
    # Consomme un repos
    #
    def utiliserRepos()
+     @enRepos=true
      @peutSEquiper=true
      @nombreRepos=@nombreRepos-1
      @modele.notifier(XmlMultilingueReader.lireTexte("utiliserRepos"))
@@ -491,6 +494,7 @@ class Joueur < Personnage
       if(i==10)
         @modele.notifier(XmlMultilingueReader.lireTexte("reposOK"))
       end
+      @enRepos=false
    end
 
    ##

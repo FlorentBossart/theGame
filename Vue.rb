@@ -506,15 +506,19 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
     #joueur
     if(caseAffiche.joueur!=nil)
       if(caseAffiche.joueur.toujoursEnVie?())
-        case caseAffiche.joueur.direction
-          when EnumDirection.NORD
-            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"N"))
-          when EnumDirection.SUD
-            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"S"))
-          when EnumDirection.EST
-            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"E"))
-          when EnumDirection.OUEST
-            pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"O"))
+        if(caseAffiche.joueur.enRepos)
+          pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("dormeur"))
+        else
+          case caseAffiche.joueur.direction
+            when EnumDirection.NORD
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"N"))
+            when EnumDirection.SUD
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"S"))
+            when EnumDirection.EST
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"E"))
+            when EnumDirection.OUEST
+              pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.joueur.getIntitule().downcase+"O"))
+          end
         end
       else
         pixbufElement = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique("tombe"))

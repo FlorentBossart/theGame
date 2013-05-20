@@ -454,6 +454,10 @@
    <intitule_objet>tombe</intitule_objet>
    <img_ihm>./img/joueur/tombe.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>dormeur</intitule_objet>
+   <img_ihm>./img/joueur/dormeur.png</img_ihm>
+</reference>
 	
 	
 	
