@@ -642,8 +642,6 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
         @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
         #COORD DU COIN GAUCHE SUP DE LA VUE
         
-=begin
-
 
         if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || @modele.compteurTour==0)
           @transitionFini=false
@@ -662,10 +660,9 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
         else
           afficheCarte()
         end
-        
-=end
+      
 
-        afficheCarte()
+        #afficheCarte()
         @zaf.majZaf(@modele.joueur)
         #sleep(0.01)    
     # end
