@@ -11,8 +11,6 @@
 require 'gtk2'
 require './Console.rb'
 require './Jauges.rb'
-require './Bibliotheque/ReferencesGraphiques.rb'
-require './XMLReader/XmlRefGraphiquesReader.rb'
 require './XMLReader/XmlMultilingueReader.rb'
 
 #affiche console + jauges
@@ -20,20 +18,17 @@ require './XMLReader/XmlMultilingueReader.rb'
 class Zaf < Gtk::Frame
   @console
   @jauges
-  @referencesGraphiques
   @niveau
+  @vue
   
-  def initialize()
+  def initialize(vue)
     super();
-    #Gtk.init();
-    @referencesGraphiques = ReferencesGraphiques.new();
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques);
+    @vue = vue;
     @console = Console.new();
     #@jauges = Jauges.new(0,5,50,80,100,1);
     @jauges = Jauges.new();
     initInterface();
 
-    #Gtk.main();
 
   end
 
@@ -53,9 +48,9 @@ class Zaf < Gtk::Frame
 
     #ajout jauges
     hbox2.add(@jauges.getJaugeNbRepos());
-    hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("repos")));
+    hbox2.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("repos")));
     hbox2.add(@jauges.getJaugeOr());
-    hbox2.add(Gtk::Image.new(@referencesGraphiques.getRefGraphique("icone or")));
+    hbox2.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("icone or")));
     vbox.add(@jauges.getJaugeEnergie());
     vbox.add(@jauges.getJaugeExperience());
     @niveau = Gtk::Label.new(XmlMultilingueReader.lireTexte("niveau")+" : ");
@@ -84,5 +79,3 @@ class Zaf < Gtk::Frame
   end
 
 end
-
-#Zaf.new();
