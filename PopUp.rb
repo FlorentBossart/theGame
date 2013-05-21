@@ -49,7 +49,8 @@ class PopUp
   # * <b>message :</b> representant le message a afficher
   #
   def affichePopUp(message)
-    @vue.window.modal=false
+    Gtk.idle_add do
+      @vue.window.modal=false
 
       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
                Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
@@ -57,8 +58,11 @@ class PopUp
       dialog.signal_connect('response') { dialog.destroy }
       dialog.vbox.add(Gtk::Label.new(message))
       dialog.show_all
+
       dialog.run do |response|
       end
+      false
+    end
   end
   
   
@@ -69,8 +73,8 @@ class PopUp
   # * <b>message :</b> representant le message a afficher
   #
   def affichePopUpMort(message)
-    @vue.window.modal=false
-    Gtk.idle_add_priority( Gtk::PRIORITY_RESIZE) do
+    Gtk.idle_add do
+      @vue.window.modal=false
       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
                Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
                [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
@@ -84,6 +88,7 @@ class PopUp
       dialog.show_all
       dialog.run do |response|
       end
+    false
     end
   end
 

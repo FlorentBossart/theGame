@@ -346,9 +346,7 @@ class Modele
    end
   
    def preparationHostilites(momentCombat)
-     Thread.new do
      @vue.combatModal.majCombatModal(momentCombat)
-     end
      if(@joueur.peutSEquiper)
          choixEquipementAvantCombat()
      elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
