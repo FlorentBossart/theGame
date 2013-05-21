@@ -86,7 +86,7 @@ class InventaireModal
          inventaire = protagoniste.listeItem.itemsStock.clone
          puts "Nb items avt suppression des trop chers = " + protagoniste.listeItem.itemsStock.count.to_s
          #On supprime les items dont le prix est trop cher
-         inventaire.reject { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
+         inventaire=inventaire.reject { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
       else
          inventaire = protagoniste.inventaire.items
       end

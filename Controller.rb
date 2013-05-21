@@ -17,7 +17,6 @@ class Controller
 
    @modele
    @vue
-   @marchand
    attr_accessor :marchand
    ##
    # CrÃ©e un nouveau Controlleur Ã  partir de la Vue et du Modele passÃ©s en paramÃ¨tre.
@@ -29,7 +28,6 @@ class Controller
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      @marchand=false
       #Audio.playSoundLoop("stable_boy")
    end
    
@@ -364,7 +362,6 @@ class Controller
   #
   def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
-    @marchand=true
     dialog.destroy
     achatMarchandAction()
     
@@ -384,7 +381,6 @@ class Controller
   #
   def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
-    @marchand=true
     dialog.destroy
     vendreMarchandAction()
   }
@@ -892,7 +888,6 @@ class Controller
 	  #Le marchand vend l'item sélectionné par le joueur à ce dernier
 	  marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
 	  @vue.inventaireModal.onDestroy()
-      @marchand==false
       @modele.debutTour()
       
 	  end
@@ -910,7 +905,6 @@ class Controller
   			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
   			@modele.joueur.vendre(@modele.indiceItemSelectionne)
   			@vue.inventaireModal.onDestroy()
-  			@marchand==false
   			@modele.debutTour()
   			#@vue.vueInventaire.setImageSelection(indiceItem)
 			end
