@@ -123,7 +123,7 @@
 	
 	<texte>
 		<id>ContinuerPartie</id>
-	    <contenu>Continuer partie</contenu>
+	    <contenu>Continuer</contenu>
 	</texte>
 	<texte>
 		<id>NewPartie</id>
@@ -131,11 +131,11 @@
 	</texte>
 	<texte>
 		<id>ChargerPartie</id>
-	    <contenu>Charger partie</contenu>
+	    <contenu>Charger</contenu>
 	</texte>
 	<texte>
 		<id>SauvegarderPartie</id>
-	    <contenu>Sauvegarder partie</contenu>
+	    <contenu>Sauvegarder</contenu>
 	</texte>
 	<texte>
 		<id>Classement</id>

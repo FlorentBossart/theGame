@@ -97,6 +97,7 @@ class Controller
   def deplacementHautAction
     #print "/\ Bt dÃ©placement haut pressÃ©!\n"
      Audio.playSound("deplacement")
+     @vue.zoneCtrl.bloquerBoutons(@modele)
      Thread.new do
        @modele.joueur.deplacement(EnumDirection.NORD)
        @modele.debutTour()
@@ -124,6 +125,7 @@ class Controller
   def deplacementBasAction
     #print "\/ Bt dÃ©placement bas pressÃ©!\n"
      Audio.playSound("deplacement")
+     @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.SUD)
       @modele.debutTour()
@@ -149,6 +151,7 @@ class Controller
   def deplacementGaucheAction
     #print "<< Bt dÃ©placement gauche pressÃ©!\n"
      Audio.playSound("deplacement")
+     @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.OUEST)
       @modele.debutTour()
@@ -179,6 +182,7 @@ class Controller
   def deplacementDroiteAction
     #print ">> Bt dÃ©placement droite pressÃ©!\n"
      Audio.playSound("deplacement")
+     @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.EST)
       @modele.debutTour()
@@ -681,10 +685,13 @@ class Controller
  
  
 	##
-	# Action(s) � effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
+	# Action(s) a effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
 	#
 	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
 		puts "Clique sur C'est Parti"
+		if(pseudo == "")
+			pseudo = "JoueurInconnu"
+		end
 		puts "pseudo : |" + pseudo + "|"
 		if(boutRadioNovice.active?)
 			puts "Difficulte choisi : Novice"

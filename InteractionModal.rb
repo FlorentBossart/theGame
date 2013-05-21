@@ -75,8 +75,6 @@ class InteractionModal
         image.set_pixbuf(pixbufElement)
         button.image = image
         
-        
-        
         tooltips.set_tip( button, element.description(), nil )
 
         @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
