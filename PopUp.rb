@@ -18,7 +18,9 @@ require './XMLReader/XmlMultilingueReader.rb'
 class PopUp
   private_class_method :new
   @vue
+  
   attr_reader :vue, :message
+  
   ## 
   # CrÃ©e un nouveau PopUp. 
   # 
