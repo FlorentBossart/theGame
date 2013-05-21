@@ -685,6 +685,9 @@ class Controller
 	#
 	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
 		puts "Clique sur C'est Parti"
+		if(pseudo == "")
+			pseudo = "JoueurInconnu"
+		end
 		puts "pseudo : |" + pseudo + "|"
 		if(boutRadioNovice.active?)
 			puts "Difficulte choisi : Novice"
