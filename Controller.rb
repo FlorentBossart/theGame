@@ -685,7 +685,7 @@ class Controller
  
  
 	##
-	# Action(s) � effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
+	# Action(s) a effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
 	#
 	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
 		puts "Clique sur C'est Parti"
