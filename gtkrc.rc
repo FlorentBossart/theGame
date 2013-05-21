@@ -9,7 +9,7 @@ widget "fenMenuPrincipal" style "Windows"
 
 style "police18"
 {
-	font_name = "Algerian 18"
+	font_name = "Algerian 16"
 	#bg[NORMAL] = "#CC9664"
 	#bg[ACTIVE] = "#CC9664"
 	#bg[PRELIGHT] = "#CC9664"

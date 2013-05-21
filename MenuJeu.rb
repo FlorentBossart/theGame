@@ -92,7 +92,8 @@ class MenuJeu
 		fenMenuPrincipal.set_height_request(534)
 		fenMenuPrincipal.set_resizable(false)
 	
-		@contenu = VBox.new(false, 6)
+		#@contenu = VBox.new(false, 6)
+		@contenu = VBox.new(false, 0)
 		
 		# Cr�ation des boutons
 		if(@isInGame == false)
@@ -137,9 +138,14 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 =end
-			#align = Alignment.new(0.95, 0.95, 0.3, 0.15)
-			align = Alignment.new(0.85, 0.9, 0, 0)
-		else	
+			if(XmlMultilingueReader.getLangue() == "FR")
+				@contenu.set_spacing(6)
+				align = Alignment.new(0.85, 0.9, 0, 0)
+			else
+				@contenu.set_spacing(6)
+				align = Alignment.new(0.8, 0.9, 0, 0)
+			end
+		else
 			ebContinuerPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("ContinuerPartie")))
 			ebContinuerPartie.events = Gdk::Event::BUTTON_PRESS_MASK
 			
@@ -191,7 +197,11 @@ class MenuJeu
 			@contenu.add(boutAide)
 			@contenu.add(boutQuitter)
 =end			
-			align = Alignment.new(0.98, 0.98, 0.1, 0)
+			if(XmlMultilingueReader.getLangue() == "FR")
+				align = Alignment.new(0.85, 0.9, 0, 0)
+			else
+				align = Alignment.new(0.8, 0.9, 0, 0)
+			end
 		end
 		
 		align.add(@contenu)

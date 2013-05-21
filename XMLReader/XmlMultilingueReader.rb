@@ -98,13 +98,21 @@ class XmlMultilingueReader
        when "FR"
          @@dicoObjetCourant=@@FR_dicoObjet
          @@textesJeuCourant=@@FR_textesJeu
+         @@LANGUE = "FR"
        when "EN"
          @@dicoObjetCourant=@@EN_dicoObjet
          @@textesJeuCourant=@@EN_textesJeu
+         @@LANGUE = "EN"
        else
          @@dicoObjetCourant=@@FR_dicoObjet
          @@textesJeuCourant=@@FR_textesJeu
+         @@LANGUE = "FR"
      end
+   end
+   
+   
+   def XmlMultilingueReader.getLangue()
+   	return @@LANGUE
    end
     
    def XmlMultilingueReader.lireNom(objet)
