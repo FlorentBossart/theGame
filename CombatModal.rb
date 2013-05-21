@@ -94,29 +94,27 @@ class CombatModal
         listeArmure.push(i)
       end
     end
-    Gtk.idle_add do
-      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
-               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-               [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
-      dialog.signal_connect('response') { dialog.destroy }
-      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
-        
-      listeArmure.each{ |item|
-          button=Gtk::Button.new()
-          image= Gtk::Image.new()
-          pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
-          pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
-          image.set_pixbuf(pixbufElement)
-          button.image = image
-          tooltips.set_tip( button, item.description, nil )
-  
-          @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
-          dialog.vbox.add(button)
-         }
-     dialog.show_all
-     dialog.run do |response|
-     end
-     false
+    
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
+             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+    dialog.signal_connect('response') { dialog.destroy }
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
+      
+    listeArmure.each{ |item|
+        button=Gtk::Button.new()
+        image= Gtk::Image.new()
+        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+        image.set_pixbuf(pixbufElement)
+        button.image = image
+        tooltips.set_tip( button, item.description, nil )
+
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
+        dialog.vbox.add(button)
+       }
+   dialog.show_all
+   dialog.run do |response|
    end
   end
   
@@ -134,31 +132,29 @@ class CombatModal
        listeArme.push(i)
      end
     end
-    Gtk.idle_add do
-      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
-               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
-      dialog.signal_connect('response') { dialog.destroy }
-      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
-        
-      listeArme.each{ |item|
-        button=Gtk::Button.new()
-        image= Gtk::Image.new()
-        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
-        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
-        image.set_pixbuf(pixbufElement)
-        button.image = image
-        tooltips.set_tip( button, item.description, nil )
-  
-  
-        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
-        dialog.vbox.add(button)
-      }
-      dialog.show_all
-      dialog.run do |response|
-      end
-      false
-    end 
+    
+    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
+             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+            [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+    dialog.signal_connect('response') { dialog.destroy }
+    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
+      
+    listeArme.each{ |item|
+      button=Gtk::Button.new()
+      image= Gtk::Image.new()
+      pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+      pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+      image.set_pixbuf(pixbufElement)
+      button.image = image
+      tooltips.set_tip( button, item.description, nil )
+
+
+      @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
+      dialog.vbox.add(button)
+    }
+    dialog.show_all
+    dialog.run do |response|
+    end
   end
   
   
@@ -166,7 +162,7 @@ class CombatModal
   # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
   # 
   # == Returns:
-  #  String
+  #  @intitule : String
   #
   def to_s
     return XmlMultilingueReader.lireTexte("popupCombatModal")
