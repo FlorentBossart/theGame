@@ -51,7 +51,7 @@ class PopUp
   # * <b>message :</b> representant le message a afficher
   #
   def affichePopUp(message)
-    @vue.window.modal=false
+   # @vue.window.modal=false
     Gtk.idle_add do
       @vue.window.modal=false
       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
