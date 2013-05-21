@@ -109,18 +109,12 @@ class CombatModal
         image.set_pixbuf(pixbufElement)
         button.image = image
         tooltips.set_tip( button, item.description, nil )
-        #version juste textuelle, peut etre y ajouter les stats de l'item en question
-       # button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
 
         @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
         dialog.vbox.add(button)
        }
    dialog.show_all
    dialog.run do |response|
-    case response
-      when Gtk::Dialog::RESPONSE_ACCEPT
-       else
-     end
    end
   end
   
@@ -153,27 +147,23 @@ class CombatModal
       image.set_pixbuf(pixbufElement)
       button.image = image
       tooltips.set_tip( button, item.description, nil )
-      
-      #version juste textuelle, peut etre y ajouter les stats de l'item en question
-      #button=Gtk::Button.new(item.intitule()+" "+item.typeEquipable.pourcentageProtection()+"energie")
+
 
       @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
       dialog.vbox.add(button)
     }
     dialog.show_all
     dialog.run do |response|
-      case response
-        when Gtk::Dialog::RESPONSE_ACCEPT
-        else
-      end
     end
-
   end
   
   
   ## 
   # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
   # 
+  # == Returns:
+  #  String
+  #
   def to_s
     return XmlMultilingueReader.lireTexte("popupCombatModal")
   end

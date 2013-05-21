@@ -172,7 +172,7 @@ class Joueur < Personnage
             @modele.notifier(str)
             if(@bottes!=nil)
               str=XmlMultilingueReader.lireTexte("enfilerBottes")
-              str=str.gsub("BOTTES",@bottes.getIntitule()).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
+              str=str.gsub("BOTTES",XmlMultilingueReader.lireDeterminant_Nom(@bottes)).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
               @modele.notifier(str)
               energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
               str=XmlMultilingueReader.lireTexte("perteEnergie")
@@ -228,14 +228,14 @@ class Joueur < Personnage
       if(self.armureEquip?())
         protection=protection+@armure.typeEquipable.pourcentageProtection()
         str=XmlMultilingueReader.lireTexte("utiliserProtec")
-        str=str.gsub("INTITULE",@armure.getIntitule()).gsub("PROTEC",(@armure.typeEquipable.pourcentageProtection()*100).to_s)
+        str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(@armure)).gsub("PROTEC",(@armure.typeEquipable.pourcentageProtection()*100).to_s)
         @modele.notifier(str)
         @armure=nil
       end
       if(self.armeEquip?())
         protection=protection+@arme.typeEquipable.pourcentageProtection()
         str=XmlMultilingueReader.lireTexte("utiliserProtec")
-        str=str.gsub("INTITULE",@arme.getIntitule()).gsub("PROTEC",(@arme.typeEquipable.pourcentageProtection()*100).to_s)
+        str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(@arme)).gsub("PROTEC",(@arme.typeEquipable.pourcentageProtection()*100).to_s)
         @modele.notifier(str)
         @arme=nil
       end
@@ -260,7 +260,7 @@ class Joueur < Personnage
          @causeMort= XmlMultilingueReader.lireTexte("entretue")
       else
       	str = XmlMultilingueReader.lireTexte("mortCombat")
-      	str = str.gsub("ENNEMI", ennemi.getIntitule())
+      	str = str.gsub("ENNEMI", XmlMultilingueReader.lireDeterminant_Nom(ennemi))
          @causeMort = str
       end
       ennemi.meurt()
@@ -391,7 +391,7 @@ class Joueur < Personnage
       ajouterAuStock(item.clone)
       debourser(item.caracteristique.prix())
       str=XmlMultilingueReader.lireTexte("achete")
-      str=str.gsub("INTITULE",item.getIntitule())
+      str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
    end
 
@@ -407,7 +407,7 @@ class Joueur < Personnage
       retirerDuStock(item)
       encaisser(item.caracteristique.prix()/2)
       str=XmlMultilingueReader.lireTexte("vendu")
-      str=str.gsub("INTITULE",item.getIntitule())
+      str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
    end
 
@@ -510,7 +510,7 @@ class Joueur < Personnage
         @modele.vue.popUp.choixInventairePlein#AFR 
      else
         @inventaire.ajouter(item)
-        @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{item.getIntitule}.")
+        @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{XmlMultilingueReader.lireDeterminant_Nom(item)}.")
         @casePosition.retirerElement(item) #AFR (était après le end à la base)
      end
 
