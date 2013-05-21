@@ -18,9 +18,7 @@ require './XMLReader/XmlMultilingueReader.rb'
 class PopUp
   private_class_method :new
   @vue
-  
-  attr_reader :vue
-  
+  attr_reader :vue, :message
   ## 
   # CrÃ©e un nouveau PopUp. 
   # 
@@ -29,6 +27,7 @@ class PopUp
   # 
   def initialize(vue)
     @vue=vue
+    @message=message
   end
   
   
@@ -51,18 +50,15 @@ class PopUp
   #
   def affichePopUp(message)
     @vue.window.modal=false
-    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-             [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-    dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new(message))
-    dialog.show_all
-    dialog.run do |response|
-      case response
-        when Gtk::Dialog::RESPONSE_ACCEPT
-        else
+
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
+               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+      dialog.signal_connect('response') { dialog.destroy }
+      dialog.vbox.add(Gtk::Label.new(message))
+      dialog.show_all
+      dialog.run do |response|
       end
-    end
   end
   
   
@@ -74,21 +70,19 @@ class PopUp
   #
   def affichePopUpMort(message)
     @vue.window.modal=false
-    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-             [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-    dialog.signal_connect('response') { 
-    	dialog.destroy
-    	@vue.menu = MenuJeu.creer(false, @vue.modele, @vue.controller)
-    	@vue.window.set_sensitive(false)
-      @vue.controller.classementAction
-    }
-    dialog.vbox.add(Gtk::Label.new(message))
-    dialog.show_all
-    dialog.run do |response|
-      case response
-        when Gtk::Dialog::RESPONSE_ACCEPT
-        else
+    Gtk.idle_add_priority( Gtk::PRIORITY_RESIZE) do
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
+               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+      dialog.signal_connect('response') { 
+      	dialog.destroy
+      	@vue.menu = MenuJeu.creer(false, @vue.modele, @vue.controller)
+      	@vue.window.set_sensitive(false)
+        @vue.controller.classementAction
+      }
+      dialog.vbox.add(Gtk::Label.new(message))
+      dialog.show_all
+      dialog.run do |response|
       end
     end
   end
@@ -99,24 +93,23 @@ class PopUp
   #
   def afficheChoixMarchand()
     @vue.window.modal=false
-    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCommerce"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
-    dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("commerceChoix")))
-    buttonAchat=Gtk::Button.new(XmlMultilingueReader.lireTexte("achat"))
-    buttonVendre=Gtk::Button.new(XmlMultilingueReader.lireTexte("vendre"))
-    @vue.controller.achatMarchandCreer(buttonAchat,dialog)
-    dialog.vbox.add(buttonAchat)
-    @vue.controller.vendreMarchandCreer(buttonVendre,dialog)
-    dialog.vbox.add(buttonVendre)
-
-    dialog.show_all
-    dialog.run do |response|
-      case response
-        when Gtk::Dialog::RESPONSE_ACCEPT
-        else
+    Gtk.idle_add do
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCommerce"), @vue.window,
+               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+               [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+      dialog.signal_connect('response') { dialog.destroy }
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("commerceChoix")))
+      buttonAchat=Gtk::Button.new(XmlMultilingueReader.lireTexte("achat"))
+      buttonVendre=Gtk::Button.new(XmlMultilingueReader.lireTexte("vendre"))
+      @vue.controller.achatMarchandCreer(buttonAchat,dialog)
+      dialog.vbox.add(buttonAchat)
+      @vue.controller.vendreMarchandCreer(buttonVendre,dialog)
+      dialog.vbox.add(buttonVendre)
+  
+      dialog.show_all
+      dialog.run do |response|
       end
+      false
     end
   end
     

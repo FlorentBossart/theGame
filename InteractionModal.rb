@@ -62,30 +62,29 @@ class InteractionModal
       listeElements=@modele.joueur.casePosition.listeElements()
 
       # Creation du popup
-      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
-                         Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
-      dialog.signal_connect('response') { dialog.destroy }
-      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInteraction")))
-      listeElements.each{ |element| 
-        
-        button=Gtk::Button.new()
-        image= Gtk::Image.new()
-        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
-        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
-        image.set_pixbuf(pixbufElement)
-        button.image = image
-        
-        tooltips.set_tip( button, element.description(), nil )
-
-        @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
-        dialog.vbox.add(button)
-       }
-      dialog.show_all
-      dialog.run do |response|
-        case response
-          when Gtk::Dialog::RESPONSE_ACCEPT
-          else
+      Gtk.idle_add do
+        dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
+                           Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
+        dialog.signal_connect('response') { dialog.destroy }
+        dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInteraction")))
+        listeElements.each{ |element| 
+          
+          button=Gtk::Button.new()
+          image= Gtk::Image.new()
+          pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(element.getIntitule().downcase))
+          pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+          image.set_pixbuf(pixbufElement)
+          button.image = image
+          
+          tooltips.set_tip( button, element.description(), nil )
+  
+          @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
+          dialog.vbox.add(button)
+         }
+        dialog.show_all
+        dialog.run do |response|
         end
+        false
       end
 
       
