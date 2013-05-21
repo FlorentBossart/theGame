@@ -27,7 +27,6 @@ class PopUp
   # 
   def initialize(vue)
     @vue=vue
-    @message=message
   end
   
   
