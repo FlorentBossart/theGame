@@ -19,7 +19,7 @@ class PopUp
   private_class_method :new
   @vue
   
-  attr_reader :vue, :message
+  attr_reader :vue
   
   ## 
   # CrÃ©e un nouveau PopUp. 
