@@ -83,10 +83,10 @@ class InventaireModal
       
       #Récupération de l'inventaire à afficher      
       if modeAffichage == EnumStadePartie.INTERACTION_MARCHAND_ACHAT
-         inventaire = protagoniste.listeItem.itemsStock
+         inventaire = protagoniste.listeItem.itemsStock.clone
          puts "Nb items avt suppression des trop chers = " + protagoniste.listeItem.itemsStock.count.to_s
          #On supprime les items dont le prix est trop cher
-         inventaire.delete_if { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
+         inventaire.reject { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
       else
          inventaire = protagoniste.inventaire.items
       end
