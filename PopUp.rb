@@ -42,50 +42,29 @@ class PopUp
   end
   
   
-  ## 
+
+  
+   ##
   # Affiche le PopUp contenant le message
   #
-  # == Parameters: 
+  # == Parameters:
   # * <b>message :</b> representant le message a afficher
   #
   def affichePopUp(message)
+    @vue.window.modal=false
     Gtk.idle_add do
       @vue.window.modal=false
-
       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
-               Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
       dialog.signal_connect('response') { dialog.destroy }
       dialog.vbox.add(Gtk::Label.new(message))
       dialog.show_all
-
       dialog.run do |response|
       end
       false
     end
   end
-  
-  
- ##
-# Affiche le PopUp contenant le message
-#
-# == Parameters:
-# * <b>message :</b> representant le message a afficher
-#
-def affichePopUp(message)
-@vue.window.modal=false
-Gtk.idle_add do
-dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
-Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-[Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
-dialog.signal_connect('response') { dialog.destroy }
-dialog.vbox.add(Gtk::Label.new(message))
-dialog.show_all
-dialog.run do |response|
-end
-false
-end
-end
 
   
   ## 
@@ -119,6 +98,7 @@ end
   #
   def afficheChoixGuerisseur(joueur,guerisseur)
     @vue.window.modal=false
+    Gtk.idle_add do
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupSoigneur"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
              [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
@@ -145,6 +125,8 @@ end
    dialog.show_all
    dialog.run do |response|
    end
+   false
+  end
   end
   
 ## 
