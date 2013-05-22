@@ -117,8 +117,9 @@ class Ennemi < PNJ
    def meurt()
      @vivant = false
      @modele.listeEnnemis.delete(self)
-     @casePosition.retirerEnnemi(self)
+       #@casePosition.retirerEnnemi(self)
    end
+    
 
    ##
    # Permet de deplacer l'Ennemi sur une cible donnée.

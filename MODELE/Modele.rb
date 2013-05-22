@@ -410,11 +410,11 @@ class Modele
   #
   def declencherCombat(momentCombat)
     puts"Declenchement de combat"
+    
      itemsEnnemis = Array.new()
      ancienneCase=carte.getCaseAt(@joueur.anciennePositionX,@joueur.anciennePositionY)
      if(momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
        for ennemi in ancienneCase.listeEnnemis
-           puts "combat de " + ancienneCase.listeEnnemis.count.to_s + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
@@ -426,9 +426,9 @@ class Modele
            break
          end
        end
+         ancienneCase.listeEnnemis.clear
      else
        for ennemi in @joueur.casePosition.listeEnnemis
-           puts "combat de " + @joueur.casePosition.listeEnnemis.count.to_s + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
@@ -440,6 +440,7 @@ class Modele
            break
          end
        end
+         @joueur.casePosition.listeEnnemis.clear
      end
      
      if(@joueur.toujoursEnVie?())
