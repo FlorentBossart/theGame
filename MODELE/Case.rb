@@ -92,6 +92,16 @@ class Case
 	 end
       end
    end
+   
+  ##
+  #Renvoi le niveau de priorité du terrain
+  #
+  #===Retourne :
+  #* <b>niveau</b> : le niveau du type de terrain
+  #
+  def getNumTerrain()
+     return @typeTerrain.niveau
+  end
   
 
    ##

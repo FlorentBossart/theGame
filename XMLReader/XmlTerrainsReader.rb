@@ -36,7 +36,8 @@ class XmlTerrainsReader
                                                             s.elements['intitule'].text, 
                                                             eval(s.elements['isAccessible'].text),
                                                             s.elements['coutDeplacement'].text.to_f,
-                                                            s.elements['proba'].text.to_f
+                                                            s.elements['proba'].text.to_f,
+                                                            s.elements['niveau'].text.to_i
                                                             ))
         end
       return nil

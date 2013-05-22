@@ -20,8 +20,9 @@ class TypeTerrain
    @isAccessible
    @coutDeplacement
    @probaRepartition
+   @niveau
 
-    attr_reader :intitule, :isAccessible, :coutDeplacement, :probaRepartition
+    attr_reader :intitule, :isAccessible, :coutDeplacement, :probaRepartition, :niveau
 
     
    ##
@@ -32,12 +33,14 @@ class TypeTerrain
    #* <b>isAccessible :</b> un booléen indiquant si le terrain peut être franchit ou non
    #* <b>cout :</b> le cout en énergie que devra consommer le joueur pour franchir le terrain
    #* <b>proba :</b> la valeur de probabilité pour la répartition du TypeTerrain
+   #* <b>niv :</b> le niveau de priorité du terrain pour imposer ses bordures aux autres
    #
-   def initialize(intitule, isAccessible, cout, proba)
+   def initialize(intitule, isAccessible, cout, proba, niv)
       @intitule        = intitule
       @isAccessible    = isAccessible
       @coutDeplacement = cout
       @probaRepartition= proba
+      @niveau          = niv
    end
 
 
@@ -53,8 +56,8 @@ class TypeTerrain
    #===Retourne:
    #* <b>TypeTerrain :</b> une instance la la classe TypeTerrain
    #
-   def TypeTerrain.creer(intitule, isAccessible, cout, proba)
-      return new(intitule, isAccessible, cout, proba)
+   def TypeTerrain.creer(intitule, isAccessible, cout, proba, niv)
+      return new(intitule, isAccessible, cout, proba, niv)
    end
    
    
