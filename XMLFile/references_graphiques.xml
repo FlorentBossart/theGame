@@ -38,88 +38,105 @@
    <intitule_objet>montagne</intitule_objet>
    <img_ihm>./img/terrain/rocher.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>montagne_bordureN</intitule_objet>
+   <img_ihm>./img/terrain/montagne_bordureN.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>montagne_bordureS</intitule_objet>
+   <img_ihm>./img/terrain/montagne_bordureS.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>montagne_bordureE</intitule_objet>
+   <img_ihm>./img/terrain/montagne_bordureE.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>montagne_bordureO</intitule_objet>
+   <img_ihm>./img/terrain/montagne_bordureO.png</img_ihm>
+</reference>
 
 <reference>
    <intitule_objet>desert</intitule_objet>
    <img_ihm>./img/terrain/sable.png</img_ihm>
 </reference>
 <reference>
-   <intitule_objet>bordure11</intitule_objet>
-   <img_ihm>./img/terrain/bordure11.png</img_ihm>
+   <intitule_objet>desert_bordureN</intitule_objet>
+   <img_ihm>./img/terrain/desert_bordureN.png</img_ihm>
 </reference>
 <reference>
-   <intitule_objet>bordure12</intitule_objet>
-   <img_ihm>./img/terrain/bordure12.png</img_ihm>
+   <intitule_objet>desert_bordureS</intitule_objet>
+   <img_ihm>./img/terrain/desert_bordureS.png</img_ihm>
 </reference>
 <reference>
-   <intitule_objet>bordure13</intitule_objet>
-   <img_ihm>./img/terrain/bordure13.png</img_ihm>
+   <intitule_objet>desert_bordureE</intitule_objet>
+   <img_ihm>./img/terrain/desert_bordureE.png</img_ihm>
 </reference>
 <reference>
-   <intitule_objet>bordure14</intitule_objet>
-   <img_ihm>./img/terrain/bordure14.png</img_ihm>
+   <intitule_objet>desert_bordureO</intitule_objet>
+   <img_ihm>./img/terrain/desert_bordureO.png</img_ihm>
 </reference>
-<reference>
-   <intitule_objet>bordure41</intitule_objet>
-   <img_ihm>./img/terrain/bordure41.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure42</intitule_objet>
-   <img_ihm>./img/terrain/bordure42.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure43</intitule_objet>
-   <img_ihm>./img/terrain/bordure43.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure44</intitule_objet>
-   <img_ihm>./img/terrain/bordure44.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure21</intitule_objet>
-   <img_ihm>./img/terrain/bordure21.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure22</intitule_objet>
-   <img_ihm>./img/terrain/bordure22.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure23</intitule_objet>
-   <img_ihm>./img/terrain/bordure23.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure24</intitule_objet>
-   <img_ihm>./img/terrain/bordure24.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure31</intitule_objet>
-   <img_ihm>./img/terrain/bordure31.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure32</intitule_objet>
-   <img_ihm>./img/terrain/bordure32.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure33</intitule_objet>
-   <img_ihm>./img/terrain/bordure33.png</img_ihm>
-</reference>
-<reference>
-   <intitule_objet>bordure34</intitule_objet>
-   <img_ihm>./img/terrain/bordure34.png</img_ihm>
-</reference>
+
 <reference>
    <intitule_objet>eau</intitule_objet>
    <img_ihm>./img/terrain/eau.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>eau_bordureN</intitule_objet>
+   <img_ihm>./img/terrain/eau_bordureN.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>eau_bordureS</intitule_objet>
+   <img_ihm>./img/terrain/eau_bordureS.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>eau_bordureE</intitule_objet>
+   <img_ihm>./img/terrain/eau_bordureE.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>eau_bordureO</intitule_objet>
+   <img_ihm>./img/terrain/eau_bordureO.png</img_ihm>
 </reference>
 
 <reference>
    <intitule_objet>plaine</intitule_objet>
    <img_ihm>./img/terrain/plaine.png</img_ihm>
 </reference>
+<reference>
+   <intitule_objet>plaine_bordureN</intitule_objet>
+   <img_ihm>./img/terrain/plaine_bordureN.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>plaine_bordureS</intitule_objet>
+   <img_ihm>./img/terrain/plaine_bordureS.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>plaine_bordureE</intitule_objet>
+   <img_ihm>./img/terrain/plaine_bordureE.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>plaine_bordureO</intitule_objet>
+   <img_ihm>./img/terrain/plaine_bordureO.png</img_ihm>
+</reference>
 
 <reference>
    <intitule_objet>foret</intitule_objet>
    <img_ihm>./img/terrain/foret.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>foret_bordureN</intitule_objet>
+   <img_ihm>./img/terrain/foret_bordureN.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>foret_bordureS</intitule_objet>
+   <img_ihm>./img/terrain/foret_bordureS.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>foret_bordureE</intitule_objet>
+   <img_ihm>./img/terrain/foret_bordureE.png</img_ihm>
+</reference>
+<reference>
+   <intitule_objet>foret_bordureO</intitule_objet>
+   <img_ihm>./img/terrain/foret_bordureO.png</img_ihm>
 </reference>
 
 <reference>
