@@ -7,7 +7,7 @@
 # Fait partie de : TheGame 
 # 
 #===Cette classe permet de crï¿½er le menu du jeu et contient :
-#* Une fenï¿½tre reprï¿½sentant la fenetre du menu 
+#* Une fenêtre reprï¿½sentant la fenetre du menu 
 #* Un boolï¿½en indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en consï¿½quence
 #* Un contenu reprï¿½sentï¿½ par une box et qui contient les ï¿½lï¿½ments de chaque "sous-menu" (nouvelle partie, classement, ...)
 #* Le controleur pour pouvoir y accéder
