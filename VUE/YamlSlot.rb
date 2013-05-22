@@ -19,10 +19,13 @@ require 'yaml.rb'
 
 class YamlSlot
    
-   
+ 
    # Mï¿½thode statique permettant de rï¿½cupï¿½rer les informations d'un slot de sauvegarde
    # et de les ajouter ï¿½ la liste des infos d'un slot de sauvegarde (classe Slot).
    #
+   # == Parameters: 
+	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
+	#
    def YamlSlot.lireYaml(nomFicSlotYaml)
       #Ouvre le fichier YAML contenant les infos du slot "nomFicXml"
       begin
@@ -44,8 +47,7 @@ class YamlSlot
 		temps 	= tabElement[3]
 		modele 	= tabElement[4]
 		
-		
-		# Ajoute le pseudo du joueur, la difficultï¿½ et la date aux informations du slot
+		# Ajoute le pseudo du joueur, la difficultï¿½, la date, le temps de jeu et le modele aux informations du slot
       BibliothequeSlot.ajouter(nomFicSlotYaml, 
       							Slot.creer(nomFicSlotYaml, pseudo, nomDiff, date, temps, modele))
  
@@ -55,41 +57,35 @@ class YamlSlot
 	##
    # Mï¿½thode statique permettant d'ajouter les infos pour la sauvegarde d'un joueur au fichier YAML (slotX.yaml)
    #
-   # Il faut stocker (dans le fichier yaml) tous les objets nï¿½cessaires au chargement d'une partie :
-   # carte (position ennemis, joueur, terrains...) => contenus dans modele
+   # == Parameters: 
+	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
+	#* <b>modele :</b> le modele à sauvegarder
+	#
 	def YamlSlot.ecrireYaml(nomFicSlotYaml, modele)
 		
 		# Arret du temps pour l'enregistrer
 		modele.joueur.dateFinJeu = Time.now
-		puts "Arret temps jeu le " + modele.joueur.dateFinJeu.to_s
 		
 		# Calcul du temps total depuis le debut de la session de jeu
 		modele.joueur.calculerTempsTotal
-		puts "Temps total calculer"
 
       begin
 	      file = File.open("YAMLSlot/" + nomFicSlotYaml, "w")
-	      
-      	puts "pseudo : "
-      	p modele.joueur.pseudo
+
       	file.syswrite(modele.joueur.pseudo.to_yaml())
       	
-      	puts "diff : " + modele.difficulte.intitule
       	file.syswrite(modele.difficulte.intitule.to_yaml())
       	
 	      d = Date.today
 	      date = d.mday.to_s + "/" + d.mon.to_s + "/" + d.year.to_s
-	      puts "date : " + date
 	      file.syswrite(date.to_yaml())
 	      
-	      puts "temps jeu : " + modele.joueur.tempsTotal.to_s
 	      file.syswrite(modele.joueur.tempsTotal.to_yaml())
 	      
 	      file.syswrite(modele.to_yaml())
 	      
 	      # Reprise du temps apres avoir sauvegarder
 	      modele.joueur.dateDebutJeu = Time.now
-	      puts "Reprise du temps jeu le " + modele.joueur.dateDebutJeu.to_s
 	      
 	   rescue
 			raise "Impossible d'ouvrir le fichier YAMLSlot/" + nomFicSlotYaml
@@ -100,9 +96,3 @@ class YamlSlot
 	end
 
 end
-
-
-#Test
-#YamlSlot.ecrireYaml("test1", nil)
-
-
