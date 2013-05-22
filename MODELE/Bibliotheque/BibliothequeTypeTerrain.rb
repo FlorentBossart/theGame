@@ -70,7 +70,7 @@ class BibliothequeTypeTerrain
       while(valeurs[val]==BibliothequeTypeTerrain.getTypeTerrain("plaine")) do
         val = rand(valeurs.length)
       end
-      valeurs[val]
+      return valeurs[val]
    end
 
 end

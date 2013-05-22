@@ -44,6 +44,7 @@ class Audio
    #
    def Audio.playSound(intitule)
       SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], 0)
+      return self
    end
    
    
@@ -56,6 +57,7 @@ class Audio
    def Audio.playSoundLoop(intitule)
       @firstSound = intitule
       SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], -1)
+      return self
    end
    
    
@@ -66,6 +68,7 @@ class Audio
       if(@firstSound != "")
          SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 0)
       end
+      return self
    end
    
    
@@ -76,6 +79,7 @@ class Audio
       if(@firstSound != "")
          SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 128)
       end
+      return self
    end
    
    
@@ -88,6 +92,7 @@ class Audio
             SDL::Mixer.set_volume(@@listRefChannel[key], 0)
          end
       }
+      return self
    end
    
    
@@ -100,6 +105,7 @@ class Audio
             SDL::Mixer.set_volume(@@listRefChannel[key], 128)
          end
       }
+      return self
    end
    
    
@@ -108,6 +114,7 @@ class Audio
    #
    def Audio.activeSound()
       SDL::Mixer.set_volume(-1, 128)
+      return self
    end 
    
    
@@ -116,6 +123,7 @@ class Audio
    #
    def Audio.mute()
       SDL::Mixer.set_volume(-1, 0)
+      return self
    end
     
      
@@ -124,6 +132,7 @@ class Audio
    #
    def Audio.pause()
       SDL::Mixer.pause(-1)
+      return self
    end
    
    
@@ -132,6 +141,7 @@ class Audio
    #
    def Audio.resume()
       SDL::Mixer.resume(-1)
+      return self
    end
    
    
@@ -140,6 +150,7 @@ class Audio
    #
    def Audio.stop()
       SDL::Mixer.halt(-1)
+      return self
    end
    
 end

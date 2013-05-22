@@ -67,6 +67,7 @@ class TypeMangeable
    def description
      s=XmlMultilingueReader.lireTexte("descTypeMangeable")
      s=s.gsub("INTITULE",@intitule).gsub("ENERGIE",@energieRendue.to_s).gsub("PRICE",@prix.to_s)
+     return s
    end
    
    
@@ -104,6 +105,7 @@ class TypeMangeable
       s+= "Energie délivrée: #{@energieRendue} | "
       s+= "Prix: #{@prix} | "
       s+= "<<< TypeMangeable==]"
+      return s
    end
    
 end

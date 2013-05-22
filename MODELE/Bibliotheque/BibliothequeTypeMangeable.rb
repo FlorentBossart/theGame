@@ -45,7 +45,7 @@ class BibliothequeTypeMangeable
    
    
    ##
-   #Permet de recuperer un TypeMangeable de la bibliothèque.
+   #Permet de recuperer un TypeMangeable de la bibliothèque par rapport à sa clé
    #
    #===Paramètres:
    #* <b>cle :</b> la clé du TypeMangeable souhaité
@@ -57,6 +57,13 @@ class BibliothequeTypeMangeable
       return @@tableType[cle]
    end
    
+   
+   ##
+   #Permet de recuperer le TypeMangeable de la bibliothèque.
+   #
+   #===Retourne:
+   #* <b>TypeMangeable :</b> le TypeMangeable de la bibliothèque
+   #
    def BibliothequeTypeMangeable.getTypes()
      return @@tableType.values()
    end
