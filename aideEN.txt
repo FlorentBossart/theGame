@@ -1,26 +1,26 @@
 <big><u><b>I - Aim of the game</b></u></big>
 
-The goal for the player is to move as long as possible in the game environment. For this, he can fight monsters and recover their items, weapons and armor and equip it directly or sell and buy best quality equipment from vendors. The game ends when the player dies, ie when he has no more energy. The player's score is then calculated according to different characteristics (number of enemies killed, won gold, level, ...), the goal is to get the highest score possible.
+The player's goal is to move as much as possible in the game environment. For this, he can fight monsters and recover their items, as weapons and armor, and he can equip it directly or sell/buy better gear from vendors. The game ends when the player dies, state reached when he has no more energy. The player's score is then calculated according to different characteristics (number of enemies killed,  gold won, level, ...), the goal is to get the highest score possible.
 
 <big><u><b>II - Turns</b></u></big>
 
-A turn is the implementation of an action game.
+A turn is the implementation of an action.
 By game actions are included:
 - Moving (1 turn)
-- The rest (10 laps)
+- Resting (10 turns)
 - Actions preceded by pressing the interaction button (interaction with a healer, a merchant, an object) (1 turn).
 
 <big><u><b>III - Energy</b></u></big>
 
-The player has an energy bar allowing him to make moves and combat. He died when he has no more energy.
+The player has an energy bar allowing him to make moves and combat. He dies when he has no more energy.
 
 <big><u><b>IV - Experience</b></u></big>
 
-The player earns experience when fighting an enemy. Once a threshold is reached, he goes up a level, and he regains all his energy, and the threshold is increased. A low-level enemy gives less experience than a high level enemy.
+The player earns experience when fighting an enemy. Once a threshold is reached, he levels up, meaning that he regains all his energy, and the threshold is increased. A low-level enemy gives less experience than a high level enemy.
 
 <big><u><b>V - Moving</b></u></big>
 
-Moving is made by clicking on the directional keys in the game or on arrow keys. The player can move in all directions (top, left, bottom, right), but if he wants to cross the water, he can't.
+Moving is made by clicking on the directional keys in the game or on arrow keys. The player can move in all directions (top, left, bottom, right), but he can't swim.
 
 <big><u><b>VI - Fighting</b></u></big>
 
@@ -57,8 +57,15 @@ The selling menu allows you to retrieve gold exchange objects.
 
 <big><u><b>XI - Healer</b></u></big>
 
-The healer gives the player the opportunity to receive care. A treatment gives energy to the player gold exchange.
+The healer gives the player the opportunity to receive a healing. A healing gives energy to the player in exchange of gold.
 
-<big><u><b>XII - The death</b></u></big>
+<big><u><b>XII - Death</b></u></big>
 
 A player dies when he has no more energy.
+
+<big><u><b>XIII - Difficulties</b></u></big>
+
+There are 3 difficulties:
+	-Novice : small map, few ennemis, loads of items and helping buddies.
+	-Medium : Normal map, more ennemis, fewer items and helping buddies.
+	-Expert: Big map,loads of ennemis, few items and helping buddies.
