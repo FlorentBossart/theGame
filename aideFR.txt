@@ -32,7 +32,7 @@ Lors d'un combat, votre énergie est consommée en fonction de l'énergie de l'e
 
 <big><u><b>VII - Repos</b></u></big>
 
-Le repos permet au joueur de retrouver son énergie. La consommation d'un repos l'immobilise pendan 10 tours, un tour permettant de gagner 10% d'énergie.
+Le repos permet au joueur de retrouver son énergie. La consommation d'un repos l'immobilise pendant 10 tours, un tour permettant de gagner 10% d'énergie.
 Le repos peut être interrompu lorsqu'un ennemi arrive sur la case du joueur.
 Si c'est le cas, le joueur n'a pas acces au menu d'equipement et il a retrouvé autant d'énergie que de tours consommés.
 

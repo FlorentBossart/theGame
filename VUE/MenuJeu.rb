@@ -340,6 +340,9 @@ class MenuJeu
 					vue.defC(controller)
 					vue.initInterface()
 					
+					#vue.majEcouteClavier()
+					#vue.zoneCtrl.majBoutons(modeleCharger)
+					
 				}
 			end
 		}
@@ -677,7 +680,7 @@ class MenuJeu
 		
 		texteAide = ""
 		
-		fichier = File.open("aide.txt", "r")
+		fichier = File.open(XmlMultilingueReader.lireTexte("cheminFicAide"), "r")
 		fichier.each_line { |ligne|
 			texteAide = texteAide + ligne
 		}
