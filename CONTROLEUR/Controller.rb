@@ -931,9 +931,9 @@ class Controller
 	#
 	def utiliserItem(btUtiliser)
 		btUtiliser.signal_connect('clicked'){
-			puts "(U) Utilisation de l'item "+"XX"+"."
+			puts "(U) Utilisation de l'item "+ @modele.indiceItemSelectionne.to_s +"."
       Thread.new do 
-  			@modele.joueur.utiliserItem(inventaire.getItem(@modele.indiceItemSelectionne))
+  			@modele.joueur.utiliserItem(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
   			@vue.actualiser()
   			@vue.inventaireModal.onDestroy
       end
