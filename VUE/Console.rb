@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
