@@ -339,7 +339,7 @@
 		<contenu> Vous etes mort de fatigue !</contenu>
 	</texte>
 	<texte><id>combatEnCours</id>
-		<contenu> Vous avez combattu un INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
+		<contenu> Vous avez combattu INTITULE de niveau NIVEAU ayant une energie de ENERGIE.</contenu>
 	</texte>
 	<texte>
 		<id>utiliserProtec</id>
