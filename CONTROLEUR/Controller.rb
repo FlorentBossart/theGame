@@ -711,11 +711,20 @@ class Controller
 		#@vue.menu.fenetreMenu.destroy
 		
 		
-		if(@vue.menu.isInGame == true || @modele.joueur.toujoursEnVie? == false)
+		if(@vue.menu.isInGame == true)
 			@vue.window.destroy
 			puts "Destroy partie"
 		end
 		
+		# Pour detruire l'ancienne vue apres avoir recommencer une partie apres une mort
+		if(@modele.joueur != nil)
+			if(@modele.joueur.toujoursEnVie? == false)
+				@vue.window.destroy
+				puts "Destroy partie"
+			end
+		end
+		
+		# Destruction sous-menu nouvelle partie
 		fenetre.destroy
 		
 		quitterPartieAction()
@@ -726,8 +735,6 @@ class Controller
 		# Creation du modele
 		modele = Modele.creer(vue,difficulte,pseudo)
 		
-		
-		
 		puts "modele creer"
 		puts "difficulte : " + difficulte.to_s
 		controller=Controller.creer(modele,vue)
@@ -736,6 +743,8 @@ class Controller
 		vue.defC(controller)
 		puts "vue defc"
 		modele.initialiseToi() # Debut du temps � la cr�ation d'un joueur
+		
+		
 		
 		puts "init modele"
 		vue.initInterface()
