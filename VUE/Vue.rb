@@ -659,7 +659,7 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
   end
 
   def actualiser
-    @window.modal=true
+   # @window.modal=true
 
     puts "\tdebut actualiser"
     
