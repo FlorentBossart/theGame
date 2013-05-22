@@ -836,8 +836,8 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
             pixbufActuel=pixbufb
           end
           
-          x=1.0*xDep+1.0*@numEtapeAffichage*(1.0*xArr-1.0*xDep)/1.0*@nbEtapeAffichage
-          y=1.0*yDep+1.0*@numEtapeAffichage*(1.0*yArr-1.0*yDep)/1.0*@nbEtapeAffichage
+          x=xDep+@numEtapeAffichage*(xArr-xDep)/@nbEtapeAffichage
+          y=yDep+@numEtapeAffichage*(yArr-yDep)/@nbEtapeAffichage
           @frame.composite!(pixbufActuel,x,y,pixbufActuel.width, pixbufActuel.height,x, y,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
         end
       end
