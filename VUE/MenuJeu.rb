@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ## 
@@ -5,10 +6,12 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de crï¿½er le menu du jeu et contient :
+#===Cette classe permet de crï¿½er le menu du jeu et contient :
 #* Une fenï¿½tre reprï¿½sentant la fenetre du menu 
 #* Un boolï¿½en indiquant si le joueur est en cours de jeu ou non, ce qui modifiera les boutons du menu en consï¿½quence
 #* Un contenu reprï¿½sentï¿½ par une box et qui contient les ï¿½lï¿½ments de chaque "sous-menu" (nouvelle partie, classement, ...)
+#* Le controleur pour pouvoir y accéder
+#* Le modèle pour pouvoir y accéder
 # 
 
 require 'gtk2'
@@ -39,6 +42,15 @@ class MenuJeu
 	
 	private_class_method :new
 	
+	
+	##
+   # Crée un nouveau Menu
+   #
+   #=== Paramètres
+   #* <b>isEnJeu</b> : un boolï¿½en indiquant si le joueur est en jeu ou non
+   #* <b>modele</b> : le modele
+   #* <b>controleur</b> : le controleur
+   #
 	def initialize(isEnJeu, modele, controleur)
 		
 		@isInGame 		= isEnJeu
@@ -52,12 +64,15 @@ class MenuJeu
 	
 	
 	##
-   # Crï¿½e un nouveau Menu
+   # Crée un nouveau Menu
    #
-   # == Parameters:
-   # isEnJeu : un boolï¿½en indiquant si le joueur est en jeu ou non
-   # modele : le modele
-   # controleur : le controleur
+   #=== Paramètres
+   #* <b>isEnJeu</b> : un boolï¿½en indiquant si le joueur est en jeu ou non
+   #* <b>modele</b> : le modele
+   #* <b>controleur</b> : le controleur
+   #
+   #===Retourne :
+   #* <b>nouveauMenu</b> : le nouveau menu crée
    #
 	def MenuJeu.creer(isEnJeu, modele, controleur)
 		return new(isEnJeu, modele, controleur)
@@ -505,7 +520,7 @@ class MenuJeu
 	
 	##
 	# Rempli une ListStore par l'intermï¿½diaire de la liste de joueur passï¿½e en paramï¿½tre.
-	# == Parameters: 
+	#=== Paramètres
    #* <b>listeJoueur :</b> un tableau de joueur
 	#
 	def remplirListStore(listeJoueur)
@@ -533,7 +548,7 @@ class MenuJeu
 	
 	##
 	# Ajoute 6 colonnes au treeview
-	# == Parameters: 
+	#=== Paramètres
    #* <b>treeview :</b> le treeview ï¿½ configurer
 	#
 	def setup_tree_view(treeview)
@@ -595,10 +610,10 @@ class MenuJeu
 	
 	##
 	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficultï¿½
-	# == Parameters: 
+	#=== Paramètres
    # * <b>difficulte :</b> une chaine de caractï¿½res permettant de choisir la liste de joueur ï¿½ retourner en fonction de cette difficultï¿½
    #
-   # == Return:
+   #=== Retourne :
    # * <b>c :<b> Retourne un classement
    #
 	def remplirListeJoueur()
@@ -666,7 +681,6 @@ class MenuJeu
 		
 	end
 
-	
 	
 	##
    # Lorsque le joueur clique sur aide, affiche l'aide sur le jeu
