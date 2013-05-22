@@ -67,8 +67,8 @@ class InteractionModal
                            Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
         dialog.signal_connect('response') { dialog.destroy }
         dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("choixInteraction")))
-        listeElements.each{ |element| 
-          
+        #Creation des boutons
+        listeElements.each{ |element|
           button=Gtk::Button.new()
           image= Gtk::Image.new()
           pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(element.getIntitule().downcase))

@@ -1,18 +1,16 @@
-#!/usr/bin/env ruby 
+#!/usr/bin/env ruby
 
-## 
-# Fichier           : CombatModal.rb 
-# Auteur           : L3SPI - Groupe de projet B 
-# Fait partie de : TheGame 
-# 
-# Cette classe représente un CombatModal. Un CombatModal est défini par : 
+##
+# Fichier           : CombatModal.rb
+# Auteur           : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+#
+# Cette classe représente un CombatModal. Un CombatModal est défini par :
 # * Une vue auquel il est lié
-# * Des references Graphiques representant la base de donnée image
 # * Un modele sur lequel l'objet ira chercher les informations
-# 
+# * Un enum representant le moment du combat en cours (avant/apres deplacement)
+#
 
-
-#com
 require 'gtk2'
 require 'XMLReader/XmlMultilingueReader.rb'
 require 'CONTROLEUR/Controller.rb'
@@ -27,50 +25,53 @@ class CombatModal
   @momentCombat
   attr_reader :vue, :modele
   
-  ## 
-  # Crée un nouveau CombatModal à partir des informations passées en paramètre. 
-  # 
-  # == Parameters: 
+  
+  ##
+  # Crée un nouveau CombatModal à partir des informations passées en paramètre.
+  #
+  # == Parameters:
   # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachée
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
-  # 
+  #
   def initialize(vue,modele)
     @vue=vue
     @modele=modele
   end
+
   
-  
-  ## 
+  ##
   #Instancie un CombatModal
-  # 
-  # == Parameters: 
+  #
+  # == Parameters:
   # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
-  # 
+  #
   def CombatModal.creer(vue,modele)
     new(vue,modele)
   end
+
   
-  
-  ## 
+  ##
   # Cree un PopUp avec les informations sur les ennemis a combattre
-  # 
-  # == Parameters: 
+  #
+  # == Parameters:
   # * <b>momentCombat :</b> le moment où intervient le combat
-  # 
+  #
   def majCombatModal(momentCombat)
     @momentCombat=momentCombat
     @vue.window.modal=false
     ennemis=@modele.joueur.casePosition.listeEnnemis
     str=XmlMultilingueReader.lireTexte("popupCombatEnnemi_avertissement")
+    
     case momentCombat
-      when EnumMomentCombat.APRES_ACTION()
-        id="momentApresAction"
-      when EnumMomentCombat.APRES_DEPLACEMENT()
-        id="momentApresDepl"
-      when EnumMomentCombat.AVANT_DEPLACEMENT()
-        id="momentAvantDepl"
-    end 
+    when EnumMomentCombat.APRES_ACTION()
+      id="momentApresAction"
+    when EnumMomentCombat.APRES_DEPLACEMENT()
+      id="momentApresDepl"
+    when EnumMomentCombat.AVANT_DEPLACEMENT()
+      id="momentAvantDepl"
+    end
+    
     str=str+" ["+XmlMultilingueReader.lireTexte(id)+"]"
     for e in ennemis
       str=str+"\n   * "
@@ -78,53 +79,55 @@ class CombatModal
       str_ennemis=str_ennemis.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(e)).gsub("NIVEAU",e.niveau().to_s).gsub("ENERGIE",e.energie().to_s)
       str=str+str_ennemis
     end
+    
     Audio.playSound("preCombat")
     Gtk.idle_add do
       @vue.window.modal=false
       dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
       Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
       [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+      
       dialog.signal_connect('response') {
         dialog.destroy
         if(@modele.joueur.peutSEquiper)
-        @modele.choixEquipementAvantCombat(@momentCombat)
-    elsif(@modele.joueur.casePosition.presenceEnnemis?() && !@modele.joueur.peutSEquiper)
-        @modele.declencherCombat(@momentCombat)
-    end }
+          @modele.choixEquipementAvantCombat(@momentCombat)
+        elsif(@modele.joueur.casePosition.presenceEnnemis?() && !@modele.joueur.peutSEquiper)
+          @modele.declencherCombat(@momentCombat)
+        end }
+        
       dialog.vbox.add(Gtk::Label.new(str))
       dialog.show_all
       dialog.run do |response|
-      end 
+      end
       false
     end
-
   end
+
   
-  
-  ## 
+  ##
   # Cree un PopUp contenant des boutons liés aux objets equipable defensifs
-  # 
+  #
   def majEquipementDefensif()
     Gtk.idle_add do
-    @vue.window.modal=false
-    tooltips = Gtk::Tooltips.new
-    listeArmure=Array.new()
-    
-    for i in @modele.joueur.inventaire.items
-      if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
-        listeArmure.push(i)
+      @vue.window.modal=false
+      tooltips = Gtk::Tooltips.new
+      listeArmure=Array.new()
+
+      for i in @modele.joueur.inventaire.items
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
+          listeArmure.push(i)
+        end
       end
-    end
-    
-    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
-    dialog.signal_connect('response') { dialog.destroy }
-      dialog.signal_connect('delete_event') { 
+
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
+      dialog.signal_connect('response') { dialog.destroy }
+      dialog.signal_connect('delete_event') {
         @modele.suiteEquipementChoixArme(@momentCombat)
-        dialog.destroy} 
-    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
-      
-    listeArmure.each{ |item|
+        dialog.destroy}
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
+
+      listeArmure.each{ |item|
         button=Gtk::Button.new()
         image= Gtk::Image.new()
         pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
@@ -135,75 +138,74 @@ class CombatModal
 
         @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog,@momentCombat)
         dialog.vbox.add(button)
-       }
-       buttonCancel=Gtk::Button.new()
-       buttonCancel.set_label("Cancel")
-       buttonCancel.signal_connect('clicked'){
-         @modele.suiteEquipementChoixArme(@momentCombat)
-         dialog.destroy
-       }
-       dialog.vbox.add(buttonCancel)
-   dialog.show_all
-   dialog.run do |response|
-   end
-   false
+      }
+      buttonCancel=Gtk::Button.new()
+      buttonCancel.set_label("Cancel")
+      buttonCancel.signal_connect('clicked'){
+        @modele.suiteEquipementChoixArme(@momentCombat)
+        dialog.destroy
+      }
+      dialog.vbox.add(buttonCancel)
+      dialog.show_all
+      dialog.run do |response|
+      end
+      false
+    end
   end
-  end
+
   
-  
-  ## 
+  ##
   # Cree un PopUp contenant des boutons liés aux objets equipable offensifs
-  #  
+  #
   def majEquipementOffensif()
     Gtk.idle_add do
-    @vue.window.modal=false
-    tooltips = Gtk::Tooltips.new
-    listeArme=Array.new()
-    
-    for i in @modele.joueur.inventaire.items
-     if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
-       listeArme.push(i)
-     end
-    end
-    
-    dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
-    dialog.signal_connect('response') { dialog.destroy }
-    dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
-    dialog.signal_connect('delete_event') {      @modele.declencherCombat(@momentCombat)
-      dialog.destroy} 
-      
-    listeArme.each{ |item|
-      button=Gtk::Button.new()
-      image= Gtk::Image.new()
-      pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
-      pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
-      image.set_pixbuf(pixbufElement)
-      button.image = image
-      tooltips.set_tip( button, item.description, nil )
+      @vue.window.modal=false
+      tooltips = Gtk::Tooltips.new
+      listeArme=Array.new()
 
+      for i in @modele.joueur.inventaire.items
+        if(i.estEquipable?() && i.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARME)
+          listeArme.push(i)
+        end
+      end
 
-      @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog,@momentCombat)
-      dialog.vbox.add(button)
-    }
-    buttonCancel=Gtk::Button.new()
-    buttonCancel.set_label("Cancel")
-    buttonCancel.signal_connect('clicked'){
-      @modele.declencherCombat(@momentCombat)
-      dialog.destroy
-    }
-    dialog.vbox.add(buttonCancel)
-    dialog.show_all
-    dialog.run do |response|
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
+      dialog.signal_connect('response') { dialog.destroy }
+      dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
+      dialog.signal_connect('delete_event') {      @modele.declencherCombat(@momentCombat)
+        dialog.destroy}
+
+      listeArme.each{ |item|
+        button=Gtk::Button.new()
+        image= Gtk::Image.new()
+        pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule().downcase))
+        pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
+        image.set_pixbuf(pixbufElement)
+        button.image = image
+        tooltips.set_tip( button, item.description, nil )
+
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog,@momentCombat)
+        dialog.vbox.add(button)
+      }
+      buttonCancel=Gtk::Button.new()
+      buttonCancel.set_label("Cancel")
+      buttonCancel.signal_connect('clicked'){
+        @modele.declencherCombat(@momentCombat)
+        dialog.destroy
+      }
+      dialog.vbox.add(buttonCancel)
+      dialog.show_all
+      dialog.run do |response|
+      end
+      false
     end
-    false
   end
-  end
+
   
-  
-  ## 
-  # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
-  # 
+  ##
+  # Retourne une chaîne de caractères  permettant l'identification de l'objet.
+  #
   # == Returns:
   #  @intitule : String
   #
@@ -211,6 +213,5 @@ class CombatModal
     return XmlMultilingueReader.lireTexte("popupCombatModal")
   end
 
-  
 end
 
