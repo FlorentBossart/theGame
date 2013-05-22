@@ -1,30 +1,32 @@
+#COMOK
+#!/usr/bin/env ruby
+
 ##
-# Fichier        : Joueur.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : Joueur.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
-#
-#
-#
-# Cette classe represente un joueur. Un joueur est defini par :
-# == Un intitule (permet a la vue de reconnaitre l'objet)
-# == Un nombre de Repos representant le nombre de repos restant au joueur
-# == Un niveau, correspondant au niveau actuel du joueur
-# == Une valeur d'energie correspondant au niveau d'energie actuel du joueur
-# == Un seuil d'energie, correspondant a la valeur maximal d'energie du joueur
-# == Une valeur d'experience, correspondant a l'experience actuelle du joueur
-# == Un seuil d'experience, correspondant au maximum d'experience pour le niveau actuel, s'il est franchi, le joueur prend un niveau et l'experience repart a 0
-# == Un boolean tourDejaPasse indiquant si le joueur peut encore interagir ou non
-# == Un inventaire , correspondant un objet de type inventaire
-# == Une case, correspondant a la case ou se trouve actuellement le joueur
-# == Un equipement (armure, arme, bottes), representant les objets équipés par le joueur
-# == Un pseudo, correspondant au pseudo du joueur
-# == Un nombre d'ennemis tué, pour les statistiques
-# == Une distance parcourue, correspondant au nombre de déplacements, pour les statistiques
-# == Un string representant la cause de l mort
-# == Un boolean si le joueur peut s'equiper
-# == Une date de debut de jeu
-# == Une date de fin de jeu
-# == Une durée de jeu totale
+
+#===Classe permettant de gérer le Joueur.
+#Le Joueur se caractérise par :
+#* Un intitule (permet a la vue de reconnaitre l'objet)
+#* Un nombre de Repos representant le nombre de repos restant au joueur
+#* Un niveau, correspondant au niveau actuel du joueur
+#* Une valeur d'energie correspondant au niveau d'energie actuel du joueur
+#* Un seuil d'energie, correspondant a la valeur maximal d'energie du joueur
+#* Une valeur d'experience, correspondant a l'experience actuelle du joueur
+#* Un seuil d'experience, correspondant au maximum d'experience pour le niveau actuel, s'il est franchi, le joueur prend un niveau et l'experience repart a 0
+#* Un boolean tourDejaPasse indiquant si le joueur peut encore interagir ou non
+#* Un inventaire , correspondant un objet de type inventaire
+#* Une case, correspondant a la case ou se trouve actuellement le joueur
+#* Un equipement (armure, arme, bottes), representant les objets équipés par le joueur
+#* Un pseudo, correspondant au pseudo du joueur
+#* Un nombre d'ennemis tué, pour les statistiques
+#* Une distance parcourue, correspondant au nombre de déplacements, pour les statistiques
+#* Un string representant la cause de l mort
+#* Un boolean si le joueur peut s'equiper
+#* Une date de debut de jeu
+#* Une date de fin de jeu
+#* Une durée de jeu totale
 #
 #
 
@@ -41,7 +43,9 @@ require 'XMLReader/XmlClassements.rb'
 
 class Joueur < Personnage
    include Deplacable, Commercant
-   private_class_method :new
+
+
+   #=== Variables d'instance ===
    @intitule
    @nombreRepos
    @enRepos
@@ -62,8 +66,8 @@ class Joueur < Personnage
    @causeMort
    @peutSEquiper
    @dateDebutJeu # VI de type Time
-   @dateFinJeu # VI de type Time
-   @tempsTotal # Temps de jeu total en secondes
+   @dateFinJeu   # VI de type Time
+   @tempsTotal   # Temps de jeu total en secondes
 
    attr_reader :nombreRepos, :niveau, :experience,
                :experienceSeuil, :inventaire, :casePosition, :nbEnnemiTues, :distanceParcourue,
@@ -71,38 +75,24 @@ class Joueur < Personnage
    attr_accessor :armure, :arme, :bottes, :pseudo, :energie, :energieMax, :peutSEquiper,
    				:dateDebutJeu, :dateFinJeu, :tempsTotal
    
+
+
+   private_class_method :new #La construction se fera par la méhode de classe Joueur.creer(casePosition)
    
-   ##
-   # Cree un nouveau Joueur a  partir des informations passees en parametre.
-   #
-   # == Parameters:
-   # intitule : Un intitule (permet a la vue de reconnaitre l'objet)
-   # nbRepos : integer representant le nombre de repos restant au joueur
-   # energieMax : float representant le seuil d'energie maximum du joueur
-   # experienceSeuil : float representant le seuil d'experience maximum du joueur
-   # inventaire : inventaire du joueur
-   # modele : permet au joueur de communiquer avec le modele
-   # casePosition : case ou se situe le joueur
-   # pseudo : pseudo du joueur
-   #
-   def Joueur.creer(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
-      new(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
-   end
 
    
-  ##
-  # Initialise un nouveau Joueur a  partir des informations passees en parametre.
-  #
-  # == Parameters:
-  # intitule : Un intitule (permet a la vue de reconnaitre l'objet)
-  # nbRepos : integer representant le nombre de repos restant au joueur
-  # energieMax : float representant le seuil d'energie maximum du joueur
-  # experienceSeuil : float representant le seuil d'experience maximum du joueur
-  # inventaire : inventaire du joueur
-  # modele : permet au joueur de communiquer avec le modele
-  # casePosition : case ou se situe le joueur
-  # pseudo : pseudo du joueur
-  #
+   ##
+   #Crée un nouveau Joueur à  partir des informations passées en paramètre.
+   #
+   #===Paramètres :
+   #* <b>nbRepos :</b> le nombre de repos dont peut diposer le Joueur
+   #* <b>energieDepart :</b> l'énergie de départ du Joueur
+   #* <b>experienceSeuil :</b> l'expérience de départ du Joueur
+   #* <b>inventaire :</b> l'Inventaire du Joueur
+   #* <b>modele :</b> le Modele qui gère le joueur
+   #* <b>casePosition :</b> la Case sur laquelle le Joueur se trouve
+   #* <b>pseudo :</b> le pseudo du Joueur
+   #
    def initialize(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
       super(casePosition)
       @rangCase=0
@@ -129,26 +119,42 @@ class Joueur < Personnage
       @cible
    end
 
-   
+
    ##
-   # Retourne une chaine de caractere representant la cle de l'image
-   # == Returns:
-   #  @intitule : String
+   #Permet de créer un nouveau Joueur à  partir des informations passées en paramètre.
    #
-   def getIntitule()
-      return @intitule
+   #===Paramètres :
+   #* <b>nbRepos :</b> le nombre de repos dont peut diposer le Joueur
+   #* <b>energieDepart :</b> l'énergie de départ du Joueur
+   #* <b>experienceSeuil :</b> l'expérience de départ du Joueur
+   #* <b>inventaire :</b> l'Inventaire du Joueur
+   #* <b>modele :</b> le Modele qui gère le joueur
+   #* <b>casePosition :</b> la Case sur laquelle le Joueur se trouve
+   #* <b>pseudo :</b> le pseudo du Joueur
+   #===Retourne :
+   #* <b>nouveauJoueur</b> : le nouveau Joueur créé
+   #
+   def Joueur.creer(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
+      new(nbRepos,energieDepart,experienceSeuil,inventaire,modele,casePosition,pseudo)
    end
 
    
    ##
-   # Deplace le joueur
+   #Renvoie le nom commun du Joueur
    #
-   # Definit la methode _deplacement_.
-   # Elle permet le deplacement sur une cible donnée
-   # appel DebutTour chez son modele une fois fini
+   #===Retourne :
+   #* <b>intitule</b> : le nom commun du Joueur
+   #  
+   def getIntitule()
+      return @intitule
+   end
+
+
+   ##
+   #Permet de deplacer le Joueur en ciblant une direction donnée.
    #
-   # == Parameters:
-   # cible : la case ou le joueur doit se deplacer
+   #===Paramètres :
+   #* <b>cible :</b> la direction ciblée (EnumDirection.NORD, EnumDirection.SUD, EnumDirection.EST ou EnumDirection.OUEST)
    #
    def deplacement(cible)
       @cible=cible
@@ -216,16 +222,17 @@ class Joueur < Personnage
      @modele.debutTour()
    end
 
+
    ##
-   # Fait combattre le joueur
-   # Prend en compte les objets équipés 
-   # Decremente l'energie a partir de la valeur d'energie du monstre
-   # Demande au modele de supprimer l'ennemi mort si le combat est gagné, incremente nbEnnemiTues, fait gagner de l'experience renvoi une liste d'item
-   # Si l'energie de l'ennemi est égale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remporté, on signal au modele la mort du joueur, retourne un tableau vide
-   # Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
+   #Fait combattre le joueur
+   #Prend en compte les objets équipés 
+   #Decremente l'energie a partir de la valeur d'energie du monstre
+   #Demande au modele de supprimer l'ennemi mort si le combat est gagné, incremente nbEnnemiTues, fait gagner de l'experience renvoi une liste d'item
+   #Si l'energie de l'ennemi est égale a celle du joueur, alors ils s'entretuent, memes actions que lors d'un combat remporté, on signal au modele la mort du joueur, retourne un tableau vide
+   #Si le joueur avait moins d'energie, on specifie la mort du joueur, retourne un tableau vide
    #
-   # == Parameters:
-   # ennemi : l'ennemi a combattre
+   #===Paramètres :
+   #* <b>ennemi :</b> l'Ennemi à combattre
    #
    def combattreEnnemi(ennemi)
 	if(!ennemi.vivant)
@@ -278,65 +285,71 @@ class Joueur < Personnage
       return Array.new()
    end
 
+
    ##
-   # Verifie si le joueur a equipé une armure
+   #Verifie si le Joueur est equipé d'une armure
    #
-   # == Returns:
-   # boolean : true si une armure est equipée
+   #=== Retourne:
+   #* <b>hasArmure :</b> un booléen à vrai (true) si le Joueur est équipé d'une armure, à faux (false) le cas contraire
    #
    def armureEquip?()
       return @armure!=nil
    end
 
+
    ##
-   # Verifie si le joueur a equipé une arme
+   #Verifie si le Joueur est equipé d'une arme
    #
-   # == Returns:
-   # boolean : true si une arme est equipée
+   #=== Retourne:
+   #* <b>hasArme :</b> un booléen à vrai (true) si le Joueur est équipé d'une arme, à faux (false) le cas contraire
    #
    def armeEquip?()
       return @arme!=nil
    end
    
+
    ##
-   # Verifie si le joueur peut acheter l'item
+   #Verifie si le joueur peut acheter l'Item "item"
    # 
-   # == Parameters:
-   # item : l'item à acheter  
-   # == Returns:
-   # boolean : true si le joueur a un capital supérieur au prix de l'item
-   # 
+   #=== Paramètre:
+   #* <b>item :</b> l'Item dont on veux savoir si le Joueur peut l'acheter
+   #=== Retourne:
+   #* <b>canBuy :</b> un booléen à vrai (true) si le Joueur peut se permettre l'achat, à faux (false) le cas contraire
+   #
    def peutSePermettreAchat?(item)
      #return @inventaire.capital>item.prix #AFR
      return @inventaire.capital>item.caracteristique.prix
    end
    
-  ##
-     # Verifie si le joueur peut debloquer l'item
-     # 
-     # == Parameters:
-     # item : l'item à debloquer  
-     # == Returns:
-     # boolean : true si le joueur a un niveau suffisant par rapport à la rarete de l'item
-     # 
-     def peutDebloquer?(item)
-    case item.rarete
-      when EnumRarete.GROSSIER()
-        return @niveau>=5
-      when EnumRarete.INTERMEDIAIRE()
-        return @niveau>=10
-      when EnumRarete.INTERMEDIAIRE()
-        return @niveau>=15
-      when EnumRarete.MAITRE() 
-        return @niveau>=20
-    end
-  end
 
    ##
-   # Demande a l'item de s'utiliser sur le joueur
+   #Verifie si le joueur peut débloquer l'Item "item"
+   # 
+   #=== Paramètre:
+   #* <b>item :</b> l'Item dont on veux savoir si le Joueur peut le débloquer
+   #=== Retourne:
+   #* <b>canDebloc :</b> un booléen à vrai (true) si le joueur a un niveau suffisant par rapport à la rarete de l'item, 
+   #                                à faux (false) le cas contraire
+   # 
+   def peutDebloquer?(item)
+      case item.rarete
+         when EnumRarete.GROSSIER()
+            return @niveau>=5
+         when EnumRarete.INTERMEDIAIRE()
+            return @niveau>=10
+         when EnumRarete.INTERMEDIAIRE()
+            return @niveau>=15
+         when EnumRarete.MAITRE() 
+            return @niveau>=20
+      end
+   end
+
+
+   ##
+   #Permet au Joueur d'utiliser l'Item "item"
    #
-   # == Parameters:
-   # item : l'Item a utiliser
+   #=== Paramètre:
+   #* <b>item :</b> l'Item que le Joueur souhaite utiliser
    #
    def utiliserItem(item)
       item.utiliseToi(self)
@@ -344,15 +357,18 @@ class Joueur < Personnage
       return nil
    end
 
-   # Definit la methode _deplacementIntelligent_.
-   # non utilisée pour le joueur
+
+   ##
+   #Definit la methode _deplacementIntelligent_.
+   #non utilisée pour le joueur
    #
    def deplacementIntelligent()
      return nil
    end
 
+
    ##
-   # Fait passer un niveau au joueur
+   #Fait passer un niveau au joueur
    #
    def passeNiveau()
       @niveau += 1
@@ -370,11 +386,10 @@ class Joueur < Personnage
    end
 
    ##
-   # Fait gagner de l'experience au joueur, si le Seuil d'experience est depassé, fait gagner un niveau
-   # a voir le calcul du seuil d'experience
+   #Fait gagner de l'experience au joueur, si le Seuil d'experience est depassé, fait gagner un niveau
    #
-   # == Parameters:
-   # xp : float representant l'experience a ajouter
+   #=== Paramètre:
+   #* <b>xp :</b> float representant l'experience à ajouter
    #
    def gainExperience(xp)
       @experience=@experience+(xp/2)
@@ -391,14 +406,14 @@ class Joueur < Personnage
    
 
    ##
-   # Transfert un item du vendeur vers le joueur
-   # Perte d'argent du joueur
+   #Permet au Joueur d'acheter l'Item "item"
+   #Transfert un item du vendeur vers le joueur
+   #Perte d'argent du joueur
    #
-   # == Parameters:
-   # item: Item acheté
+   #=== Paramètre:
+   #* <b>item :</b> l'Item que le Joueur souhaite acheter
    #
    def acheter(item)
-      #impossibilité de passer par un indice ici
       ajouterAuStock(item.clone)
       debourser(item.caracteristique.prix())
       str=XmlMultilingueReader.lireTexte("achete")
@@ -407,11 +422,11 @@ class Joueur < Personnage
    end
 
    ##
-   # Transfert un item du vendeur vers le joueur
-   # Gain d'argent du joueur
+   #Permet au Joueur de vendre l'Item d'indice "i" de son Inventaire
+   #Gain d'argent du joueur
    #
-   # == Parameters:
-   # i: indice de l'Item vendu
+   #=== Paramètre:
+   #* <b>i :</b> l'indice dans l'Inventaire du Joueur de l'Item à vendre
    #
    def vendre(i)
       item=@inventaire.getItem(i)
@@ -422,64 +437,69 @@ class Joueur < Personnage
       @modele.notifier(str)
    end
 
+
    ##
-   # Ajoute un item dans l'inventaire
+   #Ajoute un item dans l'inventaire
    #
-   # == Parameters:
-   # item: Item a ajouter au stock
+   #=== Paramètre:
+   #* <b>item :</b> l'Item à ajouter à l'Inventaire
    #
    def ajouterAuStock(item)
       @inventaire.ajouter(item)
    end
 
+
    ##
-   # Retire un item de l'inventaire
+   #Retire un item dans l'inventaire
    #
-   # == Parameters
-   # item: Item a retirer de l'inventaie
+   #=== Paramètre:
+   #* <b>item :</b> l'Item à retirer de l'Inventaire
    #
    def retirerDuStock(item)
       @inventaire.retirer(item)
    end
 
    ##
-   # Encaisse une somme d'argent
-   # methode d'ajout de revenue
+   #Permet au Joueur d'encaisser une somme d'argent "revenu"
    #
-   # == Parameters:
-   # revenue: int a encaisser
+   #===Paramètre :
+   #* <b>revenu :</b> la somme d'argent à encaisser
    #
-   def encaisser(revenue)
-      @inventaire.capital+=revenue
+   def encaisser(revenu)
+      @inventaire.capital+=revenu
       str=XmlMultilingueReader.lireTexte("empocher")
-      str=str.gsub("REVENUE",revenue.to_s)
+      str=str.gsub("REVENUE",revenu.to_s)
       @modele.notifier(str)
    end
 
+
    ##
-   # Debourse une somme d'argent
+   #Permet au Joueur de debourser une somme d'argent "somme"
    #
-   # == Parameters:
-   # revenue: somme a debourser
+   #===Paramètre :
+   #* <b>somme :</b> la somme d'argent à débourser
    #
-   def debourser(revenue)
-      @inventaire.capital-=revenue
+   def debourser(somme)
+      @inventaire.capital-=somme
       str=XmlMultilingueReader.lireTexte("debourser")
-      str=str.gsub("REVENUE",revenue.to_s)
+      str=str.gsub("REVENUE",somme.to_s)
       @modele.notifier(str)
    end
+
+
    ##
-   # Verifie si le joueur est toujours en vie
+   #Verifie si le joueur est toujours en vie
    #
-   # == Returns:
-   # boolean: true si @energie>0
+   #=== Retourne:
+   #* <b>life :</b> un booléen à vrai (true) si le Joueur est toujours en vie, à faux (false) le cas contraire
    #
    def toujoursEnVie?()
       return @energie > 0
    end
 
+
    ##
-   # Consomme un repos
+   #Permert au Joueur de consommer un de ses repos
    #
    def utiliserRepos()
      @enRepos=true
@@ -508,11 +528,12 @@ class Joueur < Personnage
       @enRepos=false
    end
 
+
    ##
-   # Ramasse un item
+   #Ramasse un Item
    #
-   # == Parameters
-   # item: Item a ramasser
+   #=== Paramètre:
+   #* <b>item :</b> l'Item à ramasser
    #
    def ramasserItem(item)
      @itemAttenteAjout=item
@@ -530,18 +551,19 @@ class Joueur < Personnage
    
    
    ##
-   # Calcule le temps de jeu total du joueur, en prenant en compte le temps pass� sur une session de jeu pr�c�dente (sauvegarde)
+   #Calcule le temps de jeu total du joueur, en prenant en compte le temps pass� sur une session de jeu pr�c�dente (sauvegarde)
    #
    def calculerTempsTotal
    	@tempsTotal = @tempsTotal + (@dateFinJeu - @dateDebutJeu)
    	@modele.convertirTemps(@tempsTotal)
    end
+
    
    ##
-   # Fait mourir le joueur, arrete le temps de jeu, ecrit le score du joueur dans le classement et affiche un popup de mort
+   #Fait mourir le joueur, arrete le temps de jeu, ecrit le score du joueur dans le classement et affiche un popup de mort
    #
-   # == Parameters
-   # <b>messageDefaite<b> : Le message de mort a afficher
+   #=== Paramètre:
+   #* <b>messageDefaite :</b> le message de mort à afficher
    #
    def meurt(messageDefaite)
    	@modele.changerStadePartie(EnumStadePartie.PERDU)
@@ -556,36 +578,13 @@ class Joueur < Personnage
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
-=begin   
-   ##
-   # Convertit un temps (en secondes) en heures, minutes, secondes
-   #
-   # == Parameters
-   # <b>temps<b> : Le temps en secondes a convertir
-   #
-   # == Returns:
-   # <b>tempsTot<b> : Une chaine repr�sentant le temps sous la forme h min sec
-   #
-   def convertirTemps(temps)
-		dureeSec = "%02.0i" % (temps % 60)
-   	dureeMinutes = "%02.0i" % ((temps / 60) % 60) # "%02.0f" => affiche 2 chiffres avant la virgule
-																				# et 0 apr�s => pour trier les strings correctement																		
-		dureeHeures = "%02.0i" % (temps / 3600)
-		
-		tempsTot = "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
-		puts tempsTot
-		return tempsTot
-		
-   end
-=end
    
 
    ##
-   # Retourne une chaine de caracteres reprenant les différentes caracteristiques
-   # de l'objet Joueur sur lequel il a été appelé
+   #Retourne une chaîne de caractères représentant le Joueur
    #
-   # == Returns:
-   # string : chaine de caractère representant le joueur
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant le Joueur (entourée par [==Joueur >>> | et <<< Joueur==])
    #
    def to_s
       s= "[==Joueur >>> | "
