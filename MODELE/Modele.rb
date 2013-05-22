@@ -414,7 +414,7 @@ class Modele
      ancienneCase=carte.getCaseAt(@joueur.anciennePositionX,@joueur.anciennePositionY)
      if(momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
        for ennemi in ancienneCase.listeEnnemis
-           puts "combat de " + ancienneCase.listeEnnemis.size + " ennemis"
+           puts "combat de " + ancienneCase.listeEnnemis.count + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
@@ -428,7 +428,7 @@ class Modele
        end
      else
        for ennemi in @joueur.casePosition.listeEnnemis
-           puts "combat de " + @joueur.casePosition.listeEnnemis.size + " ennemis"
+           puts "combat de " + @joueur.casePosition.listeEnnemis.count + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
