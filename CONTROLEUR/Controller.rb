@@ -709,12 +709,14 @@ class Controller
 		end
 		
 		#@vue.menu.fenetreMenu.destroy
-		fenetre.destroy
 		
-		if(@vue.menu.isInGame == true)
+		
+		if(@vue.menu.isInGame == true || @modele.joueur.toujoursEnVie? == false)
 			@vue.window.destroy
 			puts "Destroy partie"
 		end
+		
+		fenetre.destroy
 		
 		quitterPartieAction()
 	
@@ -723,6 +725,9 @@ class Controller
 		
 		# Creation du modele
 		modele = Modele.creer(vue,difficulte,pseudo)
+		
+		
+		
 		puts "modele creer"
 		puts "difficulte : " + difficulte.to_s
 		controller=Controller.creer(modele,vue)
@@ -731,9 +736,12 @@ class Controller
 		vue.defC(controller)
 		puts "vue defc"
 		modele.initialiseToi() # Debut du temps � la cr�ation d'un joueur
+		
 		puts "init modele"
 		vue.initInterface()
 		puts "init interface"
+		
+		
 		
 		
 		
