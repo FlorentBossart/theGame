@@ -350,6 +350,7 @@ class Controller
      Thread.new do
         elem.interaction(joueur)
      end
+    @vue.window.modal=true
   end
   
   
@@ -443,6 +444,7 @@ class Controller
   def soinAction(joueur,choix,guerisseur)
     Thread.new do
       guerisseur.guerrir(joueur,choix)
+      @vue.window.modal=true
       @modele.debutTour()
     end
   end
@@ -476,6 +478,7 @@ class Controller
       joueur.utiliserItem(elem)
     end
     print "oO Bt interaction "+elem.getIntitule()+" pressÃ©!"
+    @vue.window.modal=true
   end
   
   
@@ -888,6 +891,7 @@ class Controller
 	  #Le marchand vend l'item sélectionné par le joueur à ce dernier
 	  marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
 	  @vue.inventaireModal.onDestroy()
+      @vue.window.modal=true
       @modele.debutTour()
       
 	  end
@@ -905,6 +909,7 @@ class Controller
   			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
   			@modele.joueur.vendre(@modele.indiceItemSelectionne)
   			@vue.inventaireModal.onDestroy()
+        @vue.window.modal=true
   			@modele.debutTour()
   			#@vue.vueInventaire.setImageSelection(indiceItem)
 			end
@@ -920,6 +925,7 @@ class Controller
 			  puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
   			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
   			@vue.inventaireModal.onDestroy
+        @vue.window.modal=true
   			@vue.actualiser
 			end
 		}
@@ -935,6 +941,7 @@ class Controller
             Thread.new do 
   			   @modele.joueur.utiliserItem(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
   			   @vue.actualiser()
+           @vue.window.modal=true
   			   @vue.inventaireModal.onDestroy
             end
 		}
