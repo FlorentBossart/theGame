@@ -1,58 +1,85 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : Caracteristique.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : Caracteristique.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
+
+#===Classe abstraite permettant de définir les caractéristique des Item.
+#Les Caracteristique des Item se définissent par :
+#* Leur capacité à être stockée
+#* Leur capacité à être mangée
+#* Leur capacité à être utilisée
 #
-# Cette classe représente une caractéristique(d'item): C'est une classe abstraite.
-#
+
 
 class Caracteristique
     
-    private_class_method :new
+   private_class_method :new #Il n'est pas possible d'instancer une Caracteristique par le biais de la méhode new depuis l'extérieur
     
     
     ##
     # Appel de la méthode initialize.
     #
     def Caracteristique.creer()
-        if(self.class==Caracteristique)
-    raise "Subclass responsability"
-        end
-        return new()
+       if(self.class==Caracteristique)
+          raise "Subclass responsability"
+       end
+       return new()
     end
     
     
-    ##
-    # (Abstraite) Renvoi la clé pour accèder à l'image dans la table  de RefGraphiques.
-    #
-    def getIntitule()
-    end
+   ##
+   #(Abstraite) Renvoie le nom commun de la Caracteristique courante.
+   #
+   #===Retourne :
+   #* <b>intitule</b> : le nom commun de la Caracteristique courante
+   #
+   def getIntitule()
+   end
     
     
-    ##
-    # (Abstraite) Fait en sorte que le joueur utilise l'item possédant cette caractéristique.
-    #
-    # == Parameters:
-    # joueur : un objet Joueur corespondant au joueur qui utilise l'item
-    #
-    def utiliseToi(joueur)
-    end
+   ##
+   #(Abstraite) Fait en sorte que le Joueur utilise l'Item possédant cette Caracteristique.
+   #
+   #===Paramètre :
+   #* <b>joueur</b> : un objet Joueur corespondant au joueur qui utilise l'item
+   #
+   def utiliseToi(joueur)
+   end
     
+
+   ##
+   #Permet de déterminer si l'Item possédant cette Caracteristique peut être stockée ou non.
+   #
+   #===Retourne :
+   #* <b>isStockable</b> : un booléen à vrai (true) si l'Item possédant cette Caracteristique peut être stockée, à faux (false) le cas contraire
+   #
     def estStockable?()
         return true
     end
     
-    def estEquipable?()
+
+   ##
+   #Permet de déterminer si l'Item possédant cette Caracteristique peut équiper le Joueur ou non (exemple : une épée).
+   #
+   #===Retourne :
+   #* <b>isEquipable</b> : un booléen à vrai (true) si l'Item possédant cette Caracteristique peut équiper le Joueur, à faux (false) le cas contraire
+   #
+   def estEquipable?()
       return false
-    end
+   end
     
-    ##
-    # (Abstraite) Retourne une chaîne de caractères reprenant les différentes caractéristiques
-    # de l'objet Caracteristique sur lequel la méthode est appellée.
-    #
-    def to_s
-    end
+
+   ##
+   #(Abstraite) Retourne une chaîne de caractères représentant les différentes caractéristiques de la Caracteristique courante
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant la Caracteristique courante
+   #
+   def to_s
+   end
+
     
 end

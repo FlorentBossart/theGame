@@ -1,31 +1,33 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : PNJ.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
+# Fichier : PNJ.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de gérer des PNJ (Personnages Non Joueurs).
+#Les PNJ (Personnages Non Joueurs) sont caractérisées par :
+#* Une liste d'éléments : liste d'Items dont ils disposent
 #
-#  Cette classe abstraite représente un PNJ. 
-#  Un PNJ est défini par :
-#* Une case où il se situe
-#* Une liste d'items
-#
+
 
 require 'MODELE/Personnage.rb'
 
+
 class PNJ < Personnage
   
+   #=== Variable d'instance ===
    @listeItem
   
    attr_accessor :listeItem
    
-   private_class_method :new
-   
+   private_class_method :new #La construction se fera par la méhode de classe PNJ.creer(casePosition)
   
    ##
-   # Crée un nouveau PNJ à partir des informations passées en paramètre.
+   #Crée un nouveau PNJ à partir des informations passées en paramètre.
    #
-   # == Parameters:
+   # == Paramètre:
    #* <b>casePosition :</b> la case où se trouvera le PNJ
    #
    def initialize(casePosition)
@@ -34,10 +36,12 @@ class PNJ < Personnage
   
 
    ##
-   # Appel de la méthode initialize avec les paramètres necessaires.
+   #Permet de créer un nouveau PNJ qui se situera sur la Case "casePosition"
    #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera le PNJ
+   #===Paramètre :
+   #* <b>casePosition</b> : la case où se trouvera le PNJ
+   #===Retourne :
+   #* <b>nouveuPNJ</b> : le nouveau PNJ créé
    #
    def PNJ.creer(casePosition)
       if(self.class == PNJ)
@@ -46,4 +50,5 @@ class PNJ < Personnage
       return new(casePosition)
    end
   
+
 end

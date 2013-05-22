@@ -1,12 +1,15 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : Audio.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : Audio.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente la gestion du son .wav définie par :
-# == Une liste des sons chargés en mémoire
+#===Cette classe représente la gestion des sons du jeu définie par :
+#* Une liste des sons chargés en mémoire
+#* Une liste contenant la référence du channel de chacun des sons
+#* Une variable contenant la musique de fond du jeu
 #
 
 require 'sdl'
@@ -20,8 +23,9 @@ class Audio
    
    private_class_method :new
    
+   
    ##
-   # Permet de charger tous les sons en mémoire
+   #Permet de charger tous les sons en mémoire
    #
    def Audio.load()
       SDL::init(SDL::INIT_AUDIO) # Initialisation de l'audio SDL
@@ -31,23 +35,32 @@ class Audio
       return self
    end
    
+   
    ##
-   # Permet de jouer un son suivant son intitule
+   #Permet de jouer un son
+   #
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom du son à jouer
    #
    def Audio.playSound(intitule)
       SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], 0)
    end
    
+   
    ##
-   # Permet de jouer un son en boucle suivant son intitule
+   #Permet de jouer un son en boucle (Musique de fond)
+   #
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom du son à jouer en boucle
    #
    def Audio.playSoundLoop(intitule)
       @firstSound = intitule
       SDL::Mixer.play_channel(@@listRefChannel[intitule], @@listSoundLoad[intitule], -1)
    end
    
+   
    ##
-   # Permet de desactiver le son de fond
+   #Permet de desactiver la musique de fond
    #
    def Audio.muteSoundLoop()
       if(@firstSound != "")
@@ -57,9 +70,9 @@ class Audio
    
    
    ##
-   # Permet d'activer le son de fond
+   #Permet de reactiver la musique de fond
    #
-   def Audio.resumeSoundLoop
+   def Audio.resumeSoundLoop()
       if(@firstSound != "")
          SDL::Mixer.set_volume(@@listRefChannel[@firstSound], 128)
       end
@@ -67,7 +80,7 @@ class Audio
    
    
    ##
-   # Permet de desactiver les bruitages
+   #Permet de desactiver les bruitages
    #
    def Audio.muteBruitage()
       @@listSoundLoad.each {|key, s| 
@@ -79,7 +92,7 @@ class Audio
    
    
    ##
-   # Permet d'activer les bruitages
+   #Permet de reactiver les bruitages
    #
    def Audio.resumeBruitage()
       @@listSoundLoad.each {|key, s| 
@@ -89,36 +102,41 @@ class Audio
       }
    end
    
+   
    ##
-   # Permet d'activer les sons
+   #Permet de réactiver tous les sons (Musique de fond + bruitages)
    #
    def Audio.activeSound()
       SDL::Mixer.set_volume(-1, 128)
    end 
    
+   
    ##
-   # Permet de désactiver les sons
+   #Permet de désactiver tous les sons (Musique de fond + bruitages)
    #
    def Audio.mute()
       SDL::Mixer.set_volume(-1, 0)
    end
-      
+    
+     
    ##
-   # Permet de mettre en pause les sons
+   #Permet de mettre en pause tous les sons (Musique de fond + bruitages)
    #
    def Audio.pause()
       SDL::Mixer.pause(-1)
    end
    
+   
    ##
-   # Permet de reprendre les sons mis en pause
+   #Permet de reprendre tous les sons mis en pause (Musique de fond + bruitages)
    #
    def Audio.resume()
       SDL::Mixer.resume(-1)
    end
    
+   
    ##
-   # Permet d'arreter tous les sons
+   #Permet d'arreter tous les sons (Musique de fond + bruitages)
    #
    def Audio.stop()
       SDL::Mixer.halt(-1)
