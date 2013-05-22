@@ -9,6 +9,11 @@
 <textesJeu>
 	
 	<texte>
+		<id>cheminFicAide</id>
+	    <contenu>aideFR.txt</contenu>
+	</texte>
+	
+	<texte>
 		<id>nomMenu</id>
 	    <contenu>Menu</contenu>
 	</texte>
