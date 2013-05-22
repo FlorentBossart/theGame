@@ -62,3 +62,10 @@ Le guérisseur offre au joueur la possibilité de recevoir des soins. Un soin do
 <big><u><b>XII - La mort</b></u></big>
 
 Un joueur meurt lorsqu'il n'a plus d'énergie.
+
+<big><u><b>XIII - Difficultés</b></u></big>
+
+Il existe 3 difficultés:
+	-Novice : Carte de petite taille, peu d'ennemis, beaucoup d'objets et de personnages d'aide.
+	-Moyen : Carte de taille moyenne, quantitité d'ennemis augmenté, moins d'objets et de personnages d'aide.
+	-Expert: Carte très grande, beaucoup d'ennemis, peu d'objets et de personnages d'aide.
