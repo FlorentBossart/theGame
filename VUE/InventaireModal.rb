@@ -22,10 +22,10 @@ class InventaireModal
    @boutonInteraction
    @tabImages
    @tooltips
+   @inventaireCourant
 
   
-   #attr_accessor :fenetreInventaire
-   #attr_reader :contenu
+   attr_accessor :inventaireCourant
   
    private_class_method :new
 
@@ -67,7 +67,7 @@ class InventaireModal
   
   
   
-   ##
+  ##
    # Actualise et affiche la fenÃªtre d'inventaire
    #
    def afficherInventaire(protagoniste, modeAffichage)
@@ -83,23 +83,23 @@ class InventaireModal
       
       #Récupération de l'inventaire à afficher      
       if modeAffichage == EnumStadePartie.INTERACTION_MARCHAND_ACHAT
-         inventaire = protagoniste.listeItem.itemsStock.clone
+         inventaireMarchand = protagoniste.listeItem.itemsStock#.clone
          puts "Nb items avt suppression des trop chers = " + protagoniste.listeItem.itemsStock.count.to_s
          #On supprime les items dont le prix est trop cher
-         inventaire=inventaire.reject { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
+         @inventaireCourant=inventaireMarchand.reject { |item| !@vue.modele.joueur.peutSePermettreAchat?(item) } 
       else
-         inventaire = protagoniste.inventaire.items
+         @inventaireCourant = protagoniste.inventaire.items
       end
 
       #CrÃ©ation du tableau qui contiendra les items
-      @tableauItems = Table.new(inventaire.count/@nbColonnesMax, @nbColonnesMax, true) 
+      @tableauItems = Table.new(@inventaireCourant.count/@nbColonnesMax, @nbColonnesMax, true) 
 
 
       #On parcrous ensuite les items du protagoniste
       indice_ligne   = 0
       indice_colonne = 0
 
-      inventaire.each_with_index do |item, indice| #Pour chaque item...
+      @inventaireCourant.each_with_index do |item, indice| #Pour chaque item...
          #On crÃ©e l'image de l'item
          pixbufItemCourant = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique(item.getIntitule.downcase))
          pixbufItemCourant = pixbufItemCourant.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
@@ -151,7 +151,7 @@ class InventaireModal
       @fenetreInventaire.show_all
       return @fenetreInventaire
   
-   end
+    end
   
   
    def setBoutonInteractionActif(isActif)
