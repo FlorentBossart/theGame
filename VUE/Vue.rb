@@ -684,12 +684,11 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
         elsif(@modele.stadePartie==EnumStadePartie.JOUEUR_MVT)
             @transitionFini=false
             afficheCarteMvt()
-            puts "test mvt"
            # while(!@transitionFini) do
               #puts "jepassela"
              # sleep(0.1)
            # end
-            puts"test sleep"
+            sleep(1)
         else
           afficheCarte()
         end
