@@ -172,7 +172,7 @@ class Vue
     @window.set_title("THE GAME")
     @window.show_all()
 
-    Thread.new do @modele.debutTour() end #lancé ici : à déplacer dans bouton debut partie
+    @controller.lancerTour();
     
     @finInit = true;
     Gtk.main();

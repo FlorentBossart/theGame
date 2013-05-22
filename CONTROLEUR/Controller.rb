@@ -708,9 +708,7 @@ class Controller
 			difficulte = BibliothequeDifficulte.getDifficulte("Expert")
 		end
 		
-		#@vue.menu.fenetreMenu.destroy
-		
-		
+		# Pour supprimer ancienne vue avant d�marrage nouvelle partie
 		if(@vue.menu.isInGame == true)
 			@vue.window.destroy
 			puts "Destroy partie"
@@ -749,8 +747,6 @@ class Controller
 		puts "init modele"
 		vue.initInterface()
 		puts "init interface"
-		
-		
 		
 		
 		
@@ -954,7 +950,7 @@ class Controller
 	end
 	
 	
-    ##
+   ##
 	# Utiliser l'item sélectionné au profit du joueur lors de l'appuie sur le bouton "Utiliser" dans l'inventaire
 	#
 	def utiliserItem(btUtiliser)
@@ -967,5 +963,12 @@ class Controller
   			   @vue.inventaireModal.onDestroy
             end
 		}
+	end
+	
+	##
+	# Permet de lancer le debut d'un tour
+	#
+	def lancerTour()
+		Thread.new do @modele.debutTour() end
 	end
 end
