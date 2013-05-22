@@ -1,32 +1,33 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : EnnemiNormal.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
-#
-#  Cette classe représente un personnage non joueur ennemi normal. 
-#  Un personnage non joueur ennemi normal est défini par :
-#* Une case où il se situe
-#* Une liste d'items
-#* Un type
-#* Une energie
-#* Un niveau
-#
+# Fichier : EnnemiNormal.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de gérer des PNJ (Personnages Non Joueurs) EnnemiNormal.
+
 
 require 'MODELE/Ennemi.rb'
 require 'MODELE/Enum/EnumDirection.rb'
 
 class EnnemiNormal < Ennemi
   
+
+   private_class_method :new #La construction se fera par la méhode de classe EnnemiNormal.creer(casePosition, niveau, type,modele)
      
+
    ##
-   # Crée un nouvel Ennemi normal à partir des informations passées en paramètre.
+   #Crée nouvel EnnemiNormal à partir des informations passées en paramètre.
    #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ennemi normal
-   #* <b>niveau :</b> le niveau de l'ennemi normal
-   #* <b>type :</b> le type de l'ennemi normal
+   #===Paramètres :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ EnnemiNormal
+   #* <b>niveau :</b> le niveau du PNJ EnnemiNormal
+   #* <b>type :</b> le type de PNJ EnnemiNormal
+   #* <b>modele :</b> le modèle qui gère le PNJ EnnemiNormal
+   #===Retourne :
+   #* <b>nouvelEnnemiNormal</b> : le nouvel EnnemiNormal créé
    #
    def initialize(casePosition, niveau, type,modele)
       super(casePosition, niveau, type,modele)
@@ -34,19 +35,23 @@ class EnnemiNormal < Ennemi
   
 
    ##
-   # Appel de la méthode initialize avec les paramètres necessaires.
+   #Permet de créér nouvel EnnemiNormal à partir des informations passées en paramètre.
    #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ennemi normal
-   #* <b>niveau :</b> le niveau de l'ennemi normal
-   #* <b>type :</b> le type de l'ennemi normal
+   #===Paramètres :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ EnnemiNormal
+   #* <b>niveau :</b> le niveau du PNJ EnnemiNormal
+   #* <b>type :</b> le type de PNJ EnnemiNormal
+   #* <b>modele :</b> le modèle qui gère le PNJ EnnemiNormal
+   #===Retourne :
+   #* <b>nouvelEnnemiNormal</b> : le nouvel EnnemiNormal créé
    #
    def EnnemiNormal.creer(casePosition, niveau, type,modele)
       return new(casePosition, niveau, type,modele)
    end
    
-  ##
-   # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
+
+   ##
+   #Permet de deplacer l'Ennemi sur une cible calculée de manière aléatoire.
    #
    def deplacementIntelligent()
       cible = rand(3)
@@ -81,9 +86,12 @@ class EnnemiNormal < Ennemi
       end 
    end
    
+
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet EnnemiNormal sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères représentant l'EnnemiNormal courant
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant l'EnnemiNormal courant (énergie, niveau, type encadré de [==EnnemiNormal >>> | <<< EnnemiNormal==])
    #
    def to_s
      s= "[==EnnemiNormal >>> | "

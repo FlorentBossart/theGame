@@ -1,18 +1,20 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : Ennemi.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
-#
-#  Cette classe abstraite représente un personnage non joueur ennemi. 
-#  Un personnage non joueur ennemi est défini par :
-#* Une case où il se situe
-#* Une liste d'items
+# Fichier : Ennemi.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de gérer des PNJ (Personnages Non Joueurs) Ennemi.
+#Les PNJ (Personnages Non Joueurs) Ennemi sont caractérisées par :
+#* Un état de vit : vivant = vrai ou faux
 #* Un type
-#* Une energie
+#* Une énergie
 #* Un niveau
+#* Une référence vers le Modele qui le contient
 #
+
 
 require 'MODELE/PNJ.rb'
 require 'MODELE/Type/TypeEnnemi.rb'
@@ -23,22 +25,25 @@ require 'MODELE/Interface/Deplacable.rb'
 class Ennemi < PNJ
    include Deplacable
   
+   #=== Variable d'instance ===
    @vivant
    @type
    @energie
    @niveau
-   @modele #un ennemi connait desormais le modele puisqu'on veut qu'il prennent en charge sa mort (afin de lim le nb de pisteur)
+   @modele #un ennemi connait desormais le modele puisqu'on veut qu'il prennent en charge sa mort (afin de lim. le nb de pisteur)
    
    attr_reader :energie, :type, :niveau, :vivant
-  
+
+   private_class_method :new #La construction se fera par la méhode de classe Ennemi.creer(casePosition, niveau, type,modele)
    
    ##
    # Crée un nouvel Ennemi à partir des informations passées en paramètre.
    #
-   # == Parameters:
+   #===Paramètres :
    #* <b>casePosition :</b> la case où se trouvera le PNJ Ennemi
    #* <b>niveau :</b> le niveau du PNJ Ennemi
    #* <b>type :</b> le type de PNJ Ennemi
+   #* <b>modele :</b> le modèle qui gère le PNJ Ennemi
    #
    def initialize(casePosition, niveau, type,modele)
      @vivant = true
@@ -68,9 +73,39 @@ class Ennemi < PNJ
       end
       
    end
+
+
+
+   ##
+   #Permet de créér nouvel Ennemi à partir des informations passées en paramètre.
+   #
+   #===Paramètres :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ Ennemi
+   #* <b>niveau :</b> le niveau du PNJ Ennemi
+   #* <b>type :</b> le type de PNJ Ennemi
+   #* <b>modele :</b> le modèle qui gère le PNJ Ennemi
+   #===Retourne :
+   #* <b>nouvelEnnemi</b> : le nouvel Ennemi créé
+   #
+   def Ennemi.creer(casePosition, niveau, type,modele)
+      if(self.class == Ennemi)
+         raise "Subclass responsability"
+      end
+      return new(casePosition, niveau, type,modele)
+   end
+
+
    
-  ##
-   # Permet de remplir aleatoirement la liste d'items.
+   ##
+   #Permet de remplir aleatoirement la liste d'Item de l'Ennemi courant.
+   #
+   #===Paramètres :
+   #* <b>min :</b> le nombre minimal d'Item à ajouter à la liste d'Item de l'Ennemi
+   #* <b>min :</b> le nombre macimal d'Item à ajouter à la liste d'Item de l'Ennemi
+   #* <b>rareteMin :</b> la rareté minimal des Item à ajouter à la liste d'Item de l'Ennemi
+   #* <b>rareteMax :</b> la rareté macimal des Item à ajouter à la liste d'Item de l'Ennemi
+   #===Retourne :
+   #* <b>currEnnemi</b> : l'Ennemi courant
    #
    def remplirListeItems(min,max,rareteMin,rareteMax)
       nbItems = rand(max-min) + min
@@ -96,36 +131,22 @@ class Ennemi < PNJ
     
       return self
    end
-
-  
+ 
 
    ##
-   # Appel de la méthode initialize avec les paramètres necessaires.
-   #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera le PNJ Ennemi
-   #* <b>niveau :</b> le niveau du PNJ Ennemi
-   #* <b>type :</b> le type de PNJ Ennemi
-   #
-   def Ennemi.creer(casePosition, niveau, type,modele)
-      if(self.class == Ennemi)
-         raise "Subclass responsability"
-      end
-      return new(casePosition, niveau, type,modele)
-   end
-  
+   #Permet de faire mourrir l'Ennemi courant.
+   #  
    def meurt()
      @vivant = false
      @modele.listeEnnemis.delete(self)
-       #@casePosition.retirerEnnemi(self)
    end
     
 
    ##
-   # Permet de deplacer l'Ennemi sur une cible donnée.
+   #Permet de deplacer l'Ennemi en ciblant une direction donnée.
    #
-   # == Parameters:
-   #* <b>cible :</b> la cible de destination
+   #===Paramètres :
+   #* <b>cible :</b> la direction ciblée (EnumDirection.NORD, EnumDirection.SUD, EnumDirection.EST ou EnumDirection.OUEST)
    #
    def deplacement(cible)
      @ancienRangCase=@rangCase
@@ -152,23 +173,28 @@ class Ennemi < PNJ
   
 
    ##
-   # Permet de deplacer l'Ennemi sur une cible calculée aleatoirement.
+   #(Abstraite) Permet de deplacer l'Ennemi sur une cible calculée.
    #
    def deplacementIntelligent()
    end
   
    
    ##
-   # Retourne l'image representant le PNJ Ennemi.
+   #Renvoie le nom commun de l'Ennemi courant (permet d'accéder à l'image lui correspondant dans la table de RefGraphiques)
    #
+   #===Retourne :
+   #* <b>intitule</b> : le nom commun de l'Ennemi courant
+   #   
    def getIntitule()
       return @type.intitule
    end
   
    
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet Ennemi sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères représentant l'Ennemi courant
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant l'Ennemi courant (énergie, niveau, type)
    #
    def to_s
      s= "Energie: #{@energie} | "

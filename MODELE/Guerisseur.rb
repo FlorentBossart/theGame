@@ -1,15 +1,13 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : Guerisseur.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
-#
-#  Cette classe représente un personnage non joueur Ami Guerisseur. 
-#  Un personnage non joueur Ami Guerisseur est défini par :
-#* Une case où il se situe
-#* Une liste d'items
-#* Une image le représentant
+# Fichier : Guerisseur.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de gérer des PNJ (Personnages Non Joueurs) Guerisseur.
+#Les PNJ (Personnages Non Joueurs) Guerisseur sont caractérisées par :
 #
 
 require 'MODELE/Ami.rb'
@@ -17,13 +15,14 @@ require 'MODELE/Ami.rb'
 class Guerisseur < Ami
   
    
-   # Initialise l'instance de la classe Guerisseur
-   # avec le parametre Case _casePosition_.
+   private_class_method :new #La construction se fera par la méhode de classe Guerisseur.creer(casePosition)
+
+
    ##
-   # Crée un nouvel Ami Guerisseur à partir des informations passées en paramètre.
+   #Crée un nouveau Guerisseur à partir des informations passées en paramètre.
    #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ami guerisseur
+   #===Paramètre :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ Guerisseur
    #
    def initialize(casePosition)
       super(casePosition)
@@ -32,10 +31,12 @@ class Guerisseur < Ami
   
 
    ##
-   # Appel de la méthode initialize avec les paramètres necessaires.
+   #Permet de créer un nouveau Guerisseur qui se situera sur la Case "casePosition"
    #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ami guerisseur
+   #===Paramètre :
+   #* <b>casePosition</b> : la case où se trouvera le PNJ Guerisseur
+   #===Retourne :
+   #* <b>nouveauGuerisseur</b> : le nouveau Guerisseur créé
    #
    def Guerisseur.creer(casePosition)
       return new(casePosition)
@@ -43,11 +44,11 @@ class Guerisseur < Ami
   
 
    ##
-   # Permet au Guerisseur du guerrir un joueur.
+   #Permet au Guerisseur du guérir un joueur.
    #
-   # == Parameters:
+   #===Paramètres :
    #* <b>joueur :</b> le joueur que l'on veut guerir
-   #* <b>choix :</b> le numero du choix choisit
+   #* <b>choix :</b> le numero de la formule de soins choisie (0=25%, 1=50%, 3=75% de guérison)
    #
    def guerrir(joueur, choix)
       case choix
@@ -70,27 +71,39 @@ class Guerisseur < Ami
       else
          joueur.energie = energieG
       end
-     joueur.modele.tourPasse()
-     #joueur.modele.debutTour()
-      return nil
-      
+      joueur.modele.tourPasse()
+      return nil      
    end
-  
-  ##
-  # Represente l'interaction avec un element present sur une case (dans ce cas interargir avec un commercant)
-  #
-  def interaction(joueur)
-    joueur.modele.pnjAideEnInteraction=self  
-    joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_GUERISSEUR)
-  end
-   
-  def description
-    return      XmlMultilingueReader.lireTexte("descGuerisseur")
-  end
+
+
+   ##
+   #Permet au Guerisseur d'interargir avec le Joueur "joueur" passé en paramètre (passer en mode soin)
+   #
+   #===Paramètre :
+   #* <b>joueur</b> : le joueur avec lequel le Guerisseur doit interargir
+   #
+   def interaction(joueur)
+     joueur.modele.pnjAideEnInteraction=self  
+     joueur.modele.changerStadePartie(EnumStadePartie.INTERACTION_GUERISSEUR)
+   end   
+
+
+   ##
+   #Renvoie une chaîne de caractères représentant ce que peux faire un Guerisseur (exemple : "Je peux vous soigner")
+   #
+   #===Retourne :
+   #* <b>descGuerisseur</b> : une chaîne de caractères représentant ce que peux faire un Guerisseur
+   #
+   def description
+     return  XmlMultilingueReader.lireTexte("descGuerisseur")
+   end
+
    
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet Guerisseur sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères représentant le Guerisseur courant
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant le Guerisseur courant (intitulé et position sur la Carte encadré de [==Guerisseur >>> | et <<< Guerisseur==])
    #
    def to_s
      s= "[==Guerisseur >>> | "
