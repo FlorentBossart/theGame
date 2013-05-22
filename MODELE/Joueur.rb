@@ -126,6 +126,7 @@ class Joueur < Personnage
       @peutSEquiper=true
       @dateDebutJeu = Time.now # Debut du temps a la creation du joueur
       @tempsTotal = 0
+      @cible
    end
 
    
@@ -150,6 +151,7 @@ class Joueur < Personnage
    # cible : la case ou le joueur doit se deplacer
    #
    def deplacement(cible)
+      @cible=cible
       @anciennePositionX=@casePosition.coordonneeX
       @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
@@ -159,50 +161,59 @@ class Joueur < Personnage
       end
       if(casePosition.presenceEnnemis?())
          @modele.preparationHostilites(EnumMomentCombat.AVANT_DEPLACEMENT())
+      else
+        deplacementSuite()
       end
-      if(self.toujoursEnVie?())
-         @modele.tourDejaPasse = false;
-         dest = @casePosition.getDestination(cible)
-         if(dest != nil)
-            dest.joueur = self
-            @casePosition.joueur = nil
-            @casePosition = dest
-             str=XmlMultilingueReader.lireTexte("deplacementJoueur")
-             str=str.gsub("CASEPOS",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
-            @modele.notifier(str)
-            if(@bottes!=nil)
-              str=XmlMultilingueReader.lireTexte("enfilerBottes")
-              str=str.gsub("BOTTES",XmlMultilingueReader.lireDeterminant_Nom(@bottes)).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
-              @modele.notifier(str)
-              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
-              str=XmlMultilingueReader.lireTexte("perteEnergie")
-              str=str.gsub("ENERGIE",energiePerdue.to_s)
-              @modele.notifier(str)              
-              @energie -= energiePerdue
-              @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
-              if(@bottes.nbUtilisationsRestantes==0)
-                 @bottes=nil
-                 @modele.notifier(XmlMultilingueReader.lireTexte("perteBotte"))
-              else
-                 str=XmlMultilingueReader.lireTexte("utilBotte")
-                 str=str.gsub("NB",@bottes.nbUtilisationsRestantes.to_s)
-                 @modele.notifier(str)
-              end
-            else
-              energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
-              @energie -= energiePerdue
-              str=XmlMultilingueReader.lireTexte("perteEnergie")
-              str=str.gsub("ENERGIE",energiePerdue.to_s)
-              @modele.notifier(str)     
-            end
-            @distanceParcourue += 1
-            @modele.changerStadePartie(EnumStadePartie.JOUEUR_MVT)
-         end
-         if(!toujoursEnVie?()) 
-            @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")
-         end
-      end
+
       return nil
+   end
+   
+   def deplacementSuite()
+     puts"test deplacement suite"
+     if(self.toujoursEnVie?())
+             @modele.tourDejaPasse = false;
+             dest = @casePosition.getDestination(@cible)
+             if(dest != nil)
+                dest.joueur = self
+                @casePosition.joueur = nil
+                @casePosition = dest
+                 str=XmlMultilingueReader.lireTexte("deplacementJoueur")
+                 str=str.gsub("CASEPOS",@casePosition.coordonneeX.to_s()).gsub("CASECOORD",@casePosition.coordonneeY.to_s).gsub("COUTDEP",(@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain).to_s)
+                @modele.notifier(str)
+                if(@bottes!=nil)
+                  str=XmlMultilingueReader.lireTexte("enfilerBottes")
+                  str=str.gsub("BOTTES",XmlMultilingueReader.lireDeterminant_Nom(@bottes)).gsub("PROTEC",(@bottes.typeEquipable.pourcentageProtection()*100).to_s)
+                  @modele.notifier(str)
+                  energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain()*(1-@bottes.typeEquipable.pourcentageProtection()))
+                  str=XmlMultilingueReader.lireTexte("perteEnergie")
+                  str=str.gsub("ENERGIE",energiePerdue.to_s)
+                  @modele.notifier(str)              
+                  @energie -= energiePerdue
+                  @bottes.nbUtilisationsRestantes=@bottes.nbUtilisationsRestantes-1
+                  if(@bottes.nbUtilisationsRestantes==0)
+                     @bottes=nil
+                     @modele.notifier(XmlMultilingueReader.lireTexte("perteBotte"))
+                  else
+                     str=XmlMultilingueReader.lireTexte("utilBotte")
+                     str=str.gsub("NB",@bottes.nbUtilisationsRestantes.to_s)
+                     @modele.notifier(str)
+                  end
+                else
+                  energiePerdue= (@casePosition.typeTerrain.coutDeplacement*@modele.difficulte.pourcentageTerrain)
+                  @energie -= energiePerdue
+                  str=XmlMultilingueReader.lireTexte("perteEnergie")
+                  str=str.gsub("ENERGIE",energiePerdue.to_s)
+                  @modele.notifier(str)     
+                end
+                @distanceParcourue += 1
+                @modele.changerStadePartie(EnumStadePartie.JOUEUR_MVT)
+             end
+             if(!toujoursEnVie?()) 
+                @causeMort= XmlMultilingueReader.lireTexte("mortFatigue")
+             end
+           
+          end
+     @modele.debutTour()
    end
 
    ##

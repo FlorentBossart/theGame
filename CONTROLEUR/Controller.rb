@@ -98,7 +98,7 @@ class Controller
      @vue.zoneCtrl.bloquerBoutons(@modele)
      Thread.new do
        @modele.joueur.deplacement(EnumDirection.NORD)
-       @modele.debutTour()
+       
      end
   end
 
@@ -126,7 +126,7 @@ class Controller
      @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.SUD)
-      @modele.debutTour()
+
     end
   end
  
@@ -152,7 +152,6 @@ class Controller
      @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.OUEST)
-      @modele.debutTour()
     end
   end
         
@@ -183,7 +182,6 @@ class Controller
      @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
       @modele.joueur.deplacement(EnumDirection.EST)
-      @modele.debutTour()
     end
   end
         

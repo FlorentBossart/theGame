@@ -427,6 +427,7 @@ class Modele
          end
        end
          ancienneCase.listeEnnemis.clear
+       @joueur.deplacementSuite()
      else
        for ennemi in @joueur.casePosition.listeEnnemis
          itemsUnEnnemi = Array.new() 
