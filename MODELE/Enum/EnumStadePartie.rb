@@ -1,8 +1,9 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : EnumStadePartie.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : EnumStadePartie.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
 # Cette classe représente les différents stades de la partie définie par:
@@ -22,7 +23,7 @@
 
 class EnumStadePartie
    
-   @@NO_ETAPE                = 1
+   @@NO_ETAPE                   = 1
    @@CHOIX_LIBRE                = 2
    @@PERDU                      = 3
    @@EQUIPEMENT_ARMURE          = 4
@@ -33,13 +34,12 @@ class EnumStadePartie
    @@INTERACTION_MARCHAND_ACHAT = 9
    @@INTERACTION_MARCHAND_VENTE = 10
    @@INVENTAIRE_USAGE           = 11
-
-  @@TOUR_PASSE           = 12
-  @@JOUEUR_MVT           =13
+   @@TOUR_PASSE                 = 12
+   @@JOUEUR_MVT                 =13
    
    
    ##
-   #===Indique le stade NO_ETAPE.
+   #Indique le stade NO_ETAPE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade NO_ETAPE
@@ -50,7 +50,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade CHOIX_LIBRE.
+   #Indique le stade CHOIX_LIBRE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade CHOIX_LIBRE
@@ -61,7 +61,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade PERDU.
+   #Indique le stade PERDU.
    #
    #===Retourne:
    #* <b>stade :</b> le stade PERDU
@@ -72,7 +72,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade EQUIPEMENT_ARMURE.
+   #Indique le stade EQUIPEMENT_ARMURE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade EQUIPEMENT_ARMURE
@@ -83,7 +83,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade EQUIPEMENT_ARME.
+   #Indique le stade EQUIPEMENT_ARME.
    #
    #===Retourne:
    #* <b>stade :</b> le stade EQUIPEMENT_ARME
@@ -94,7 +94,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade INVENTAIRE_PLEIN.
+   #Indique le stade INVENTAIRE_PLEIN.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INVENTAIRE_PLEIN
@@ -105,7 +105,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade INTERACTION_MARCHAND.
+   #Indique le stade INTERACTION_MARCHAND.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INTERACTION_MARCHAND
@@ -116,7 +116,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade INTERACTION_GUERISSEUR.
+   #Indique le stade INTERACTION_GUERISSEUR.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INTERACTION_GUERISSEUR
@@ -127,7 +127,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade INTERACTION_MARCHAND_ACHAT.
+   #Indique le stade INTERACTION_MARCHAND_ACHAT.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INTERACTION_MARCHAND_ACHAT
@@ -138,7 +138,7 @@ class EnumStadePartie
 
    
    ##
-   #===Indique le stade INTERACTION_MARCHAND_VENTE.
+   #Indique le stade INTERACTION_MARCHAND_VENTE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INTERACTION_MARCHAND_VENTE
@@ -149,7 +149,7 @@ class EnumStadePartie
    
    
    ##
-   #===Indique le stade INTERACTION_MARCHAND_VENTE.
+   #Indique le stade INTERACTION_MARCHAND_VENTE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade INTERACTION_MARCHAND_VENTE
@@ -158,8 +158,8 @@ class EnumStadePartie
       return @@INVENTAIRE_USAGE
    end
    
-  ##
-   #===Indique le stade TOUR_PASSE.
+   ##
+   #Indique le stade TOUR_PASSE.
    #
    #===Retourne:
    #* <b>stade :</b> le stade TOUR_PASSE
@@ -168,14 +168,14 @@ class EnumStadePartie
       return @@TOUR_PASSE
    end
    
-      ##
-     #===Indique le stade JOUEUR_MVT.
-     #
-     #===Retourne:
-     #* <b>stade :</b> le stade JOUEUR_MVT
-     #
-     def EnumStadePartie.JOUEUR_MVT
-        return @@JOUEUR_MVT
-     end
+   ##
+   #Indique le stade JOUEUR_MVT.
+   #
+   #===Retourne:
+   #* <b>stade :</b> le stade JOUEUR_MVT
+   #
+   def EnumStadePartie.JOUEUR_MVT
+      return @@JOUEUR_MVT
+   end
 
 end

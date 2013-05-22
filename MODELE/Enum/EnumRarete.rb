@@ -1,8 +1,9 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : EnumRarete.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : EnumRarete.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
 # Cette classe représente les différents types de raretes possibles définie par:
@@ -21,7 +22,7 @@ class EnumRarete
    
    
    ##
-   #===Indique la rarete GROSSIER.
+   #Indique la rarete GROSSIER.
    #
    #===Retourne:
    #* <b>rarete :</b> la rarete GROSSIER
@@ -32,7 +33,7 @@ class EnumRarete
 
    
    ##
-   #===Indique la rarete INTERMEDIAIRE.
+   #Indique la rarete INTERMEDIAIRE.
    #
    #===Retourne:
    #* <b>rarete :</b> la rarete INTERMEDIAIRE
@@ -43,7 +44,7 @@ class EnumRarete
 
    
    ##
-   #===Indique la rarete RAFFINE.
+   #Indique la rarete RAFFINE.
    #
    #===Retourne:
    #* <b>rarete :</b> la rarete RAFFINE
@@ -54,7 +55,7 @@ class EnumRarete
 
    
    ##
-   #===Indique la rarete MAITRE.
+   #Indique la rarete MAITRE.
    #
    #===Retourne:
    #* <b>rarete :</b> la rarete MAITRE

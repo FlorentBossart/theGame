@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
@@ -5,7 +6,7 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente les différents moments où intervient un combat définie par:
+#===Cette classe représente les différents moments où intervient un combat définie par:
 #* Un moment AVANT_DEPLACEMENT
 #* Un moment APRES_DEPLACEMENT
 #* Un moment APRES_ACTION
@@ -19,7 +20,7 @@ class EnumMomentCombat
    
    
    ##
-   #===Indique le moment AVANT_DEPLACEMENT.
+   #Indique le moment AVANT_DEPLACEMENT.
    #
    #===Retourne:
    #* <b>moment :</b> le moment AVANT_DEPLACEMENT
@@ -30,7 +31,7 @@ class EnumMomentCombat
 
    
    ##
-   #===Indique le moment APRES_DEPLACEMENT.
+   #Indique le moment APRES_DEPLACEMENT.
    #
    #===Retourne:
    #* <b>moment :</b> le moment APRES_DEPLACEMENT
@@ -41,7 +42,7 @@ class EnumMomentCombat
 
    
    ##
-   #===Indique le moment APRES_ACTION.
+   #Indique le moment APRES_ACTION.
    #
    #===Retourne:
    #* <b>moment :</b> le moment APRES_ACTION

@@ -1,11 +1,12 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : EnumDirection.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : EnumDirection.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente les différents types de directions possibles définie par:
+#===Cette classe représente les différents types de directions possibles définie par:
 #* Une direction NORD
 #* Une direction SUD
 #* Une direction EST
@@ -21,7 +22,7 @@ class EnumDirection
    
    
    ##
-   #===Indique la direction NORD.
+   #Indique la direction NORD.
    #
    #===Retourne:
    #* <b>direction :</b> la direction NORD
@@ -32,7 +33,7 @@ class EnumDirection
 
    
    ##
-   #===Indique la direction SUD.
+   #Indique la direction SUD.
    #
    #===Retourne:
    #* <b>direction :</b> la direction SUD
@@ -43,7 +44,7 @@ class EnumDirection
 
    
    ##
-   #===Indique la direction EST.
+   #Indique la direction EST.
    #
    #===Retourne:
    #* <b>direction :</b> la direction EST
@@ -54,7 +55,7 @@ class EnumDirection
 
    
    ##
-   #===Indique la direction OUEST.
+   #Indique la direction OUEST.
    #
    #===Retourne:
    #* <b>direction :</b> la direction OUEST

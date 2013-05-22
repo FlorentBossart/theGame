@@ -1,11 +1,12 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : EnumEmplacementEquipement.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : EnumEmplacementEquipement.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente les différents emplacements d'équipements possibles définie par:
+#===Cette classe représente les différents emplacements d'équipements possibles définie par:
 #* Un emplacement ARMURE
 #* Un emplacement ARME
 #* Un emplacement BOTTES
@@ -19,7 +20,7 @@ class EnumEmplacementEquipement
    
    
    ##
-   #===Indique l'emplacement ARMURE.
+   #Indique l'emplacement ARMURE.
    #
    #===Retourne:
    #* <b>emplacement :</b> l'emplacement ARMURE
@@ -30,7 +31,7 @@ class EnumEmplacementEquipement
 
    
    ##
-   #===Indique l'emplacement ARME.
+   #Indique l'emplacement ARME.
    #
    #===Retourne:
    #* <b>emplacement :</b> l'emplacement ARME
@@ -41,7 +42,7 @@ class EnumEmplacementEquipement
 
    
    ##
-   #===Indique l'emplacement BOTTES.
+   #Indique l'emplacement BOTTES.
    #
    #===Retourne:
    #* <b>emplacement :</b> l'emplacement BOTTES
