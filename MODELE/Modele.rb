@@ -409,11 +409,12 @@ class Modele
   # Permet de declencher le/les combat(s)
   #
   def declencherCombat(momentCombat)
-    puts"retessst"
+    puts"Declenchement de combat"
      itemsEnnemis = Array.new()
      ancienneCase=carte.getCaseAt(@joueur.anciennePositionX,@joueur.anciennePositionY)
      if(momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
        for ennemi in ancienneCase.listeEnnemis
+           puts "combat de " + ancienneCase.listeEnnemis.size + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
@@ -427,6 +428,7 @@ class Modele
        end
      else
        for ennemi in @joueur.casePosition.listeEnnemis
+           puts "combat de " + @joueur.casePosition.listeEnnemis.size + " ennemis"
          itemsUnEnnemi = Array.new() 
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
