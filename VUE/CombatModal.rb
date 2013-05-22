@@ -119,7 +119,7 @@ class CombatModal
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
     dialog.signal_connect('response') { dialog.destroy }
-      dialog..signal_connect('delete_event') { 
+      dialog.signal_connect('delete_event') { 
         @modele.suiteEquipementChoixArme(@momentCombat)
         dialog.destroy} 
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
@@ -170,7 +170,7 @@ class CombatModal
              Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArme")))
-    dialog..signal_connect('delete_event') {      @modele.declencherCombat(@momentCombat)
+    dialog.signal_connect('delete_event') {      @modele.declencherCombat(@momentCombat)
       dialog.destroy} 
       
     listeArme.each{ |item|
