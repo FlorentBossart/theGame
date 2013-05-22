@@ -6,12 +6,12 @@
 # Fait partie de : TheGame 
 # 
 # Cette classe permet de parcourir le fichier XML des statistiques de chaque joueur 
-# et de les ajouter à la liste des joueurs classé (classe Classements).
+# et de les ajouter ï¿½ la liste des joueurs classï¿½ (classe Classements).
 #
 
-require'Classements.rb'
+require'VUE/Classements.rb'
 
-require './XMLReader/XmlMultilingueReader.rb'
+require 'XMLReader/XmlMultilingueReader.rb'
 
 require 'rexml/document'
 include REXML
@@ -20,8 +20,8 @@ class XmlClassements
 
 
    ##
-   # Méthode statique permettant de récupérer les statistiques des différents joueurs
-   # et de les ajouter à la liste des joueurs classé (classe Classements).
+   # Mï¿½thode statique permettant de rï¿½cupï¿½rer les statistiques des diffï¿½rents joueurs
+   # et de les ajouter ï¿½ la liste des joueurs classï¿½ (classe Classements).
    #
    def XmlClassements.lireXml(listeStatsJoueurs)
       #Ouvre le fichier XML contenant les statistiques de chaque joueur
@@ -34,7 +34,7 @@ class XmlClassements
 
       #Pour chaque joueur du fichier XML...
       doc.elements.each('classements_joueur/joueur') do |j|
-         #... on ajoute les stats à la liste des stats de chaque joueur
+         #... on ajoute les stats ï¿½ la liste des stats de chaque joueur
          listeStatsJoueurs.addJoueur(j.elements['nom'].text, j.elements['nb_ennemis_tues'].text.to_i,
          										j.elements['distance'].text.to_i, j.elements['or'].text.to_i,
          										j.elements['temps'].text.to_i, j.elements['score'].text.to_i,
@@ -45,11 +45,11 @@ class XmlClassements
    
    
    ##
-   # Méthode statique permettant d'ajouter les statistiques d'un joueur au fichier XML (classements.xml)
+   # Mï¿½thode statique permettant d'ajouter les statistiques d'un joueur au fichier XML (classements.xml)
    #
    def XmlClassements.ecrireXml(modele)
    	   	
-      if(File.exist?("XMLFile/classements.xml") == false)# Création du fichier s'il n'existe pas
+      if(File.exist?("XMLFile/classements.xml") == false)# Crï¿½ation du fichier s'il n'existe pas
       	begin
 	         file = File.open("XMLFile/classements.xml", "w")
 	         file.syswrite("<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n\n")

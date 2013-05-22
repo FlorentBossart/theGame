@@ -8,8 +8,8 @@
 # Cette classe permet de parcourir le fichier XML des mangeables et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeMangeable.rb'
-require 'Type/TypeMangeable.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeMangeable.rb'
+require 'MODELE/Type/TypeMangeable.rb'
 require 'rexml/document'
 include REXML
 

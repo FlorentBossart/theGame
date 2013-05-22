@@ -20,20 +20,6 @@
 <difficultes>
 
 	<difficulte>
-	    <intitule>difficulteDeTest</intitule>
-	    <longueurCarte>5</longueurCarte>
-	    <largeurCarte>3</largeurCarte>
-	    <energieDepart>1000</energieDepart>
-	    <nbRepos>3</nbRepos>
-	    <pnjAmisDepart>2</pnjAmisDepart>
-	    <pnjEnnemisDepart>2</pnjEnnemisDepart>
-	    <pnjEnnemisParGeneration>3</pnjEnnemisParGeneration>
-	    <objetsDepart>4</objetsDepart>
-	    <objetsParGeneration>2</objetsParGeneration>
-	    <nbToursInterGenerations>15</nbToursInterGenerations>
-	    <pourcentageTerrain>1</pourcentageTerrain>
-	</difficulte>
-	<difficulte>
 	    <intitule>Novice</intitule>
 	    <longueurCarte>40</longueurCarte>
 	    <largeurCarte>40</largeurCarte>

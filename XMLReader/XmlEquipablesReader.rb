@@ -8,10 +8,10 @@
 # Cette classe permet de parcourir le fichier XML des équipables et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeEquipable.rb'
-require 'Type/TypeEquipable.rb'
-require './AffichageDebug.rb'
-require './Enum/EnumRarete.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeEquipable.rb'
+require 'MODELE/Type/TypeEquipable.rb'
+require 'AffichageDebug.rb'
+require 'MODELE/Enum/EnumRarete.rb'
 
 require 'rexml/document'
 include REXML

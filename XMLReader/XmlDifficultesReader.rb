@@ -8,8 +8,8 @@
 # Cette classe permet de parcourir le fichier XML des difficultés et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeDifficulte.rb'
-require 'Type/Difficulte.rb'
+require 'MODELE/Bibliotheque/BibliothequeDifficulte.rb'
+require 'MODELE/Type/Difficulte.rb'
 require 'rexml/document'
 include REXML
 

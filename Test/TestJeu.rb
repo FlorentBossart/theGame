@@ -2,9 +2,9 @@
 
 require 'gtk2'
 
-require 'Modele.rb'
+require 'MODELE/Modele.rb'
 require 'XMLReader/XmlMultilingueReader.rb'
-require 'Audio.rb'
+require 'VUE/Audio.rb'
 #require 'Controller.rb'
 #require 'Vue.rb'
 

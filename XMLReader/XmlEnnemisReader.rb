@@ -8,8 +8,8 @@
 # Cette classe permet de parcourir le fichier XML des ennemis et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeEnnemi.rb'
-require 'Type/TypeEnnemi.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeEnnemi.rb'
+require 'MODELE/Type/TypeEnnemi.rb'
 require 'rexml/document'
 include REXML
 

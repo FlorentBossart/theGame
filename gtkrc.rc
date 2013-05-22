@@ -1,7 +1,7 @@
  
 style "Windows"
 {
-	bg_pixmap[NORMAL] = "/img/GTA.PNG"
+	bg_pixmap[NORMAL] = "/img/gui/GTA.PNG"
 	#fg[NORMAL] = "yellow"
 	#fg[INSENSITIVE] = "white"
 }

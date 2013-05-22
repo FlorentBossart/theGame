@@ -8,7 +8,7 @@
 # Cette classe permet de parcourir le fichier XML des références garphiques et le les ajouter à la "bibliothèque" RefGraphiques (classe RefGraphiques).
 #
 
-require 'Bibliotheque/ReferencesGraphiques.rb'
+require 'VUE/ReferencesGraphiques.rb'
 require 'rexml/document'
 include REXML
 
@@ -22,7 +22,7 @@ class XmlRefGraphiquesReader
    def XmlRefGraphiquesReader.lireXml(biblioRefGgraphiques)
       #Ouvre le fichier XML contenant les références graphiques des différents éléments
       begin
-         file = File.new("references_graphiques.xml")
+         file = File.new("XMLFile/references_graphiques.xml")
          doc = Document.new(file)
       rescue
          raise "Impossible d'ouvrire le fichier XML des références graphiques."

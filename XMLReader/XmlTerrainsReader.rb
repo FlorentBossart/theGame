@@ -8,8 +8,8 @@
 # Cette classe permet de parcourir le fichier XML des terrains et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeTerrain.rb'
-require 'Type/TypeTerrain.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeTerrain.rb'
+require 'MODELE/Type/TypeTerrain.rb'
 require 'rexml/document'
 include REXML
 
