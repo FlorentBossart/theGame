@@ -19,17 +19,15 @@ class EnnemiNormal < Ennemi
      
 
    ##
-   #Crée nouvel EnnemiNormal à partir des informations passées en paramètre.
+   #Crée un nouvel EnnemiNormal à partir des informations passées en paramètre.
    #
    #===Paramètres :
    #* <b>casePosition :</b> la case où se trouvera le PNJ EnnemiNormal
    #* <b>niveau :</b> le niveau du PNJ EnnemiNormal
    #* <b>type :</b> le type de PNJ EnnemiNormal
    #* <b>modele :</b> le modèle qui gère le PNJ EnnemiNormal
-   #===Retourne :
-   #* <b>nouvelEnnemiNormal</b> : le nouvel EnnemiNormal créé
    #
-   def initialize(casePosition, niveau, type,modele)
+   def initialize(casePosition, niveau, type, modele)
       super(casePosition, niveau, type,modele)
    end
   

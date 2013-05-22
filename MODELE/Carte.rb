@@ -1,25 +1,48 @@
+#COMPAR
+#AFR : reste à commenter : generationMapSemiAleatoire et repartitionType (2 méthodes)
+#!/usr/bin/env ruby
+
+##
+# Fichier : Carte.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de représenter la Carte du jeu.
+#La Carte est caractérisée par :
+#* Sa longueur
+#* Sa largeur
+#* Son tableau de Case
+#* L'identifiant du typeTerrain par défaut (chaîne de caractères)
+#
+
+
 require 'MODELE/Case.rb'
 require 'MODELE/Type/TypeTerrain.rb'
 require 'MODELE/Enum/EnumDirection.rb'
 require 'MODELE/Bibliotheque/BibliothequeTypeTerrain.rb'
-#comcom
+
 class Carte
-    #machin
+
+   #=== Variables d'instance ===
    @longueur
    @largeur
    @cases
-   @joueur
+   #@joueur #AFR : à supprimer (ie : n'a pas été pris en compte dans les comms)
    @id_terrainParDefaut
 
-   private_class_method :new
-   
    attr_reader :longueur, :largeur
+
+   private_class_method :new #La construction se fera par la méhode de classe Carte.nouvelle(long,larg,id_terrainDef)
+   
    
    ##
-   #Initialisation d'une carte avec pour argument sa longueur et sa largeur
-   #==Parameters
-   #longueur
-   #largeur
+   #Crée une nouvelle Carte à partir des informations passées en paramètres.
+   #
+   # == Paramètres :
+   #* <b>long :</b> la longueur de la Carte (en nombre de Case)
+   #* <b>larg :</b> la largeur  de la Carte (en nombre de Case)
+   #* <b>id_terrainDef :</b> l'identifiant du typeTerrain par défaut
+   #
    def initialize(long,larg,id_terrainDef)
       @longueur = long
       @largeur = larg
@@ -33,6 +56,27 @@ class Carte
       generationMapSemiAleatoire()
    end
 
+
+   ##
+   #Permet de créer une nouvelle Carte à partir des informations passées en paramètres.
+   #
+   # == Paramètres :
+   #* <b>long :</b> la longueur de la Carte (en nombre de Case)
+   #* <b>larg :</b> la largeur  de la Carte (en nombre de Case)
+   #* <b>id_terrainDef :</b> l'identifiant du typeTerrain par défaut
+   #
+   #===Retourne :
+   #* <b>nouvelleCarte</b> : la nouvelle Carte créée
+   #
+   def Carte.nouvelle(long,larg,id_terrainDef)
+      return new(long,larg,id_terrainDef)
+   end
+
+
+   ##
+   #
+   #
+   #
    def generationMapSemiAleatoire()
       0.upto((@longueur+@largeur)*2){
 	Thread.new do
@@ -43,6 +87,11 @@ class Carte
      return nil
    end
 
+
+   ##
+   #
+   #
+   #
    def repartitionType(type, proba, coordX, coordY)  
       if(coordX >= @longueur || coordY >= @largeur || coordX < 0 || coordY < 0)
          return
@@ -58,24 +107,32 @@ class Carte
       return
    end
 
+
    ##
-   #Retrouver une case à des coordonnées x et y
-   #==Parameters
-   #x la coordonnée en X
-   #y la coordonnée en Y
+   #Renvoie la Case situées aux coordonnée x et y passées en paramètres
+   #
+   #===Paramètres :
+   #* <b>x</b> : l'abscisse de la Case
+   #* <b>y</b> : l'ordonnée de la Case
+   #===Retourne :
+   #* <b>case</b> : la Case situées aux coordonnée x et y passées en paramètres
+   #
    def getCaseAt(x,y)
       return @cases[y%@largeur+(x%@longueur)*@largeur]
    end
 
-   def Carte.nouvelle(long,larg,id_terrainDef)
-      return new(long,larg,id_terrainDef)
-   end
    
+   ##
+   #Retourne une chaîne de caractères représentant la Carte courante
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant la Carte courante (longueur, largeur, Cases)
+   #
    def to_s()
      s= "[==Carte >>> | "
      s+= "Longueur: #{@longueur} | "
      s+= "Largeur: #{@largeur} | "
-     s+= "Joueur: #{@joueur} | "
+     #s+= "Joueur: #{@joueur} | "#AFR : à supprimer
      s+= "Cases: "
      for c in @cases
       s+= "#{c} ,"
@@ -86,3 +143,4 @@ class Carte
    end
 
 end
+
