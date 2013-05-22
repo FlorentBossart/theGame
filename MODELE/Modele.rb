@@ -1,4 +1,4 @@
-#COMPAR
+#COMOK
 #!/usr/bin/env ruby
 
 ##
@@ -7,11 +7,21 @@
 # Fait partie de : TheGame
 #
 # Cette classe représente le modèle du jeu défini par :
-# == Une difficulté
-# == Une carte
-# == Un joueur
-# == Une liste des ennemis présents dans le jeu et qui évoluent à chaque tour
-# == un compteur de tour de jeu
+# * Un compteur de tour statique
+# * Une vue
+# * Une difficulté
+# * Une carte
+# * Un joueur
+# * Une liste des ennemis présents dans le jeu et qui évoluent à chaque tour
+# * Un compteur de tour de jeu
+# * Un pseudo pour la partie
+# * Une liste de notifications pour la vue
+# * Un message de défaite
+# * Un item en attente d'ajout
+# * Un PNJ d'aide en cours d'interaction
+# * Un booléen indiquant si un tour a déjà été passé lorsque qu'on veut se déplacer
+# * Un identifiant du terrain par défaut
+# * Un nombre max de pisteur
 #
 
 require './AffichageDebug.rb'
@@ -32,6 +42,7 @@ require 'MODELE/Type/TypeEquipable.rb'
 require 'MODELE/Type/TypeMangeable.rb'
 require 'MODELE/Type/TypeTerrain.rb'
 require 'MODELE/Type/Difficulte.rb'
+require 'MODELE/StockMarchand.rb'
 require 'MODELE/Bibliotheque/BibliothequeTypeEnnemi.rb'
 require 'MODELE/Bibliotheque/BibliothequeTypeEquipable.rb'
 require 'MODELE/Bibliotheque/BibliothequeTypeMangeable.rb'
@@ -42,7 +53,6 @@ require 'XMLReader/XmlEnnemisReader.rb'
 require 'XMLReader/XmlEquipablesReader.rb'
 require 'XMLReader/XmlMangeablesReader.rb'
 require 'XMLReader/XmlTerrainsReader.rb'
-require 'MODELE/StockMarchand.rb'
 require 'VUE/Vue.rb'
 
 class Modele
@@ -70,6 +80,13 @@ class Modele
 
   attr_reader :difficulte, :carte, :joueur, :listeEnnemis, :stadePartie, :messageDefaite, :vue, :id_terrainParDefaut
   attr_accessor :compteurTour, :itemAttenteAjout, :pnjAideEnInteraction, :tourDejaPasse, :notifications, :nbPisteur, :indiceItemSelectionne
+  
+  ##
+  # Initialise toutes les bibliothèques
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def Modele.initialisationBibliotheques()
     XmlDifficultesReader.lireXml()
     XmlEnnemisReader.lireXml()
@@ -77,25 +94,34 @@ class Modele
     XmlMangeablesReader.lireXml()
     XmlTerrainsReader.lireXml()
     XmlMultilingueReader.lireXml()
+    return nil
   end
 
   ##
-  # Appel de la méthode initialize avec les paramètres necessaires.
+  # Creer un nouveau modèle.
   #
   # == Parameters:
   #* <b>vue :</b> la vue du jeu
+  #* <b>difficulte :</b> la difficulte du jeu
+  #* <b>pseudo :</b> le pseudo de la partie
+  #
+  # == Returns :
+  # * <b> modele: </b> Un nouveau modèle
   #
   def Modele.creer(vue,difficulte,pseudo)
     return new(vue,difficulte,pseudo)
   end
 
   ##
-  # Crée un nouveau model à partir des informations passées en paramètre.
+  # méthode initialize
   #
   # == Parameters:
   #* <b>vue :</b> la vue du jeu
-  #* <b>difficulte :</b> la difficulte de la partie
-  #* <b>pseudo :</b> le pseudo du joueur pour cette partie
+  #* <b>difficulte :</b> la difficulte du jeu
+  #* <b>pseudo :</b> le pseudo de la partie
+  #
+  # == Returns :
+  # * <b> modele: </b> Un nouveau modèle
   #
   def initialize(vue,difficulte,pseudo)
     @vue = vue
@@ -103,14 +129,36 @@ class Modele
     @pseudoPartie=pseudo
   end
 
-  def Modele.Cpt
+  ##
+  # Accesseur sur le compteur static de tour
+  #
+  # == Returns :
+  # * <b> compteur: </b> Le compteur statique
+  #
+  def Modele.Cpt()
     return @@compteurTourGlob
   end
 
+  ##
+  # Modificateur sur le compteur static de tour
+  #
+  # == Parameters:
+  # * <b> compteurTour :</b> la nouvelle valeur
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def Modele.majCpt(compteurTour)
     @@compteurTourGlob=compteurTour
+    return nil
   end
 
+  ##
+  # Méthode d'initialisation du modèle
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def initialiseToi()
 
     @nbPisteur=0
@@ -166,30 +214,53 @@ class Modele
 
     # Creation des items disséminer sur la carte
     ajoutItems(@difficulte.objetsDepart)
-
-    #PAS D'ACTUALISATION CAR MODELE SE CREER AVANT LA VUE
-
+    return nil
   end
 
+  ##
+  # Méthode changeant le stade de la partie et actualisant la vue par la suite
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def changerStadePartie(nouveauStade)
     @stadePartie=nouveauStade
     AffichageDebug.Afficher("Stade Partie=#{nouveauStade}")
-    #METHODE VUE
     @vue.actualiser()
     @stadePartie=EnumStadePartie.NO_ETAPE
     AffichageDebug.Afficher("Stade Partie Terminé")
+    return nil
   end
 
+  ##
+  # Méthode pour ajouter une notification
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def notifier(notification)
     @notifications.push(notification)
+    return nil
   end
 
+  ##
+  # Méthode pour lire les notifications, ce qui les vide également
+  #
+  # == Returns :
+  # * <b> notifications: </b> Un tableau de String
+  #
   def lireNotification()
     return @notifications.shift
   end
 
   ##
-  # Permet d'ajouter des ennemis au jeu.
+  # Méthode pour ajouter des ennemis
+  #
+  # == Parameters:
+  # * <b> nombre :</b> le nombre à ajouter
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def ajoutEnnemis(nombre)
     for i in 0..nombre-1
@@ -215,10 +286,17 @@ class Modele
       caseAleatoire.ajouterEnnemi(ennemi)
       @listeEnnemis.push(ennemi)
     end
+    return nil
   end
 
   ##
-  # Permet d'ajouter des items au jeu.
+  # Méthode pour ajouter des items
+  #
+  # == Parameters:
+  # * <b> nombre :</b> le nombre à ajouter
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def ajoutItems(nombre)
     for i in 0 .. nombre-1
@@ -240,86 +318,46 @@ class Modele
       element = Item.creer(caseAleatoire, caracteristique)
       caseAleatoire.ajouterElement(element)
     end
+    return nil
   end
 
   #METHODE POUR GERER LES ACTION DU JOUEUR ETAPES APRES ETAPES
   @@pileExecution = Array.new()
 
   ##
-  # Permet de faire passer un tour.
+  # Méthode pour faire évoluer le monde
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def tourPasse()
-
-    puts "debut tourPasse"
-
     notifier(XmlMultilingueReader.lireTexte("tourPasse"))
     @tourDejaPasse=true
     @compteurTour += 1
     @@compteurTourGlob +=1
 
-=begin
-
-      Thread.new do
-      # Deplacement des ennemis
-		  for e in @listeEnnemis
-			if(e.vivant && e.casePosition.coordonneeX>joueur.casePosition.coordonneeX-@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeX<joueur.casePosition.coordonneeX+@vue.largeurAfficheCarte*2 && e.casePosition.coordonneeY>joueur.casePosition.coordonneeY-@vue.hauteurAfficheCarte*2 && e.casePosition.coordonneeY<joueur.casePosition.coordonneeY+@vue.hauteurAfficheCarte*2)
-				e.deplacementIntelligent()
-				@@pileExecution.delete(e)
-			elsif(e.vivant)
-				@@pileExecution.unshift(e)
-			else
-				@listeEnnemis.delete(e)
-				@@pileExecution.delete(e)
-			end
-    end
-  end
-
-=end
-
-    #SANS THREAD
     for e in @listeEnnemis
       e.deplacementIntelligent()
     end
 
-    # Ajout d'ennemis
+    # Ajouts
     if(@compteurTour % @difficulte.nbToursInterGenerations == 0)
       ajoutEnnemis(@difficulte.pnjEnnemisParGeneration)
       ajoutItems(@difficulte.objetsParGeneration)
     end
 
     changerStadePartie(EnumStadePartie.TOUR_PASSE)
-
-    puts "fin tourPasse"
-
+    return nil
   end
 
-=begin
-
-   def enverDuDecors
-		Thread.new do
-			while true
-				if !@@pileExecution.empty?
-					element=@@pileExecution.pop
-					element.deplacementIntelligent
-				else
-					sleep 0.01
-				end
-			end
-		end
-   end
-
-=end
-
   ##
-  # Permet de lancer un tour:
-  # le joueur est sur une case
-  # il faut attaquer les ennemis deja present si il y en a
+  # Méthode pour débuter un tour
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def debutTour()
-    #Thread.new do
-    puts "debut debutTour"
     if(!@joueur.toujoursEnVie?())
-      puts "!!!!!!!! Vous etes MORT !!!!!!!"
       @messageDefaite=@joueur.causeMort
       @joueur.meurt(@messageDefaite)
     else
@@ -334,16 +372,31 @@ class Modele
         choixLibre()
       end
     end
-    puts "fin debutTour\n"
-    #end
-  end
-
-  def preparationHostilites(momentCombat)
-    @vue.combatModal.majCombatModal(momentCombat)
+    return nil
   end
 
   ##
-  # Permet au joueur de s'equiper
+  # Méthode pour déclencher les préparatifs de combat
+  #
+  # == Parameters:
+  # * <b> momentCombat :</b> le moment ou intervient le combat
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
+  def preparationHostilites(momentCombat)
+    @vue.combatModal.majCombatModal(momentCombat)
+    return nil
+  end
+
+  ##
+  # Méthode pour déclencher les choix d'équipement
+  #
+  # == Parameters:
+  # * <b> momentCombat :</b> le moment ou intervient le combat
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def choixEquipementAvantCombat(momentCombat)
     #on commence par les armures
@@ -366,13 +419,19 @@ class Modele
     else
       suiteEquipementChoixArme(momentCombat)
     end
+    return nil
   end
 
   ##
-  # Permet au joueur de choisir son arme
+  # Suite des choix d'équipement
+  #
+  # == Parameters:
+  # * <b> momentCombat :</b> le moment ou intervient le combat
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def suiteEquipementChoixArme(momentCombat)
-
     compteurArmes=0
 
     if(!@joueur.armeEquip?())
@@ -392,15 +451,19 @@ class Modele
     else
       declencherCombat(momentCombat)
     end
-
+    return nil
   end
 
   ##
-  # Permet de declencher le/les combat(s)
+  # Méthode pour déclencher les combats
+  #
+  # == Parameters:
+  # * <b> momentCombat :</b> le moment ou intervient le combat
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def declencherCombat(momentCombat)
-    puts"Declenchement de combat"
-
     itemsEnnemis = Array.new()
     ancienneCase=carte.getCaseAt(@joueur.anciennePositionX,@joueur.anciennePositionY)
     if(momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
@@ -411,8 +474,6 @@ class Modele
         if(@joueur.toujoursEnVie?())
           itemsEnnemis += itemsUnEnnemi
         else
-          #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
-          #@joueur.meurt(@messageDefaite)
           break
         end
       end
@@ -426,8 +487,6 @@ class Modele
         if(@joueur.toujoursEnVie?())
           itemsEnnemis += itemsUnEnnemi
         else
-          #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
-          #@joueur.meurt(@messageDefaite)
           break
         end
       end
@@ -454,15 +513,19 @@ class Modele
       end
       @joueur.peutSEquiper=true
     end
-
+    return nil
   end
 
   ##
-  # Une fois le combat fini
+  # Méthode appelé une fois les combats (éventuels) finis
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def choixLibre()
     changerStadePartie(EnumStadePartie.CHOIX_LIBRE)
     AffichageDebug.Afficher("Fin de 'choixLibre'")
+    return nil
   end
 
   ##
@@ -483,12 +546,13 @@ class Modele
     tempsTot = "#{dureeHeures} h #{dureeMinutes} min #{dureeSec} sec"
     puts tempsTot
     return tempsTot
-
   end
 
   ##
-  # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-  # de l'objet Modele sur lequel la méthode est appellée.
+  # Méthode afficher cet objet modele
+  #
+  # == Returns :
+  # * <b> s </b> String contenant la description
   #
   def to_s
     return "[MODELE] : ListeEnnemis = #{@listeEnnemis}\n *****Joueur #{@joueur}"
