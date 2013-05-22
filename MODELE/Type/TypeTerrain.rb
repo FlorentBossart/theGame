@@ -11,6 +11,7 @@
 #* Un booléen indiquant si le terrain est accessible ou non (ie si le joueur peut le traverser)
 #* Un cout de déplacement (énergie pompée au joueur lorsqu'il franchit le terrain)
 #* Une valeur de probabilité pour la répartition du TypeTerrain
+#* Un niveau de priorité pour l'affichage de ses bordures
 #
 
 
