@@ -5,7 +5,7 @@
 # Auteur         : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe reprÃƒÂ©sente le Controlleur du jeu
+#===Cette classe représente le Controlleur du jeu
 # 
 
 require 'VUE/Vue.rb'
@@ -19,23 +19,40 @@ class Controller
    @vue
    
    ##
-   # CrÃƒÂ©e un nouveau Controlleur ÃƒÂ  partir de la Vue et du Modele passÃƒÂ©s en paramÃƒÂ¨tre.
+   #Crée un nouveau Controlleur à partir de la Vue et du Modele passés en paramètre.
    #
-   # == Parameters:
-   # modele : le Modele du jeu
-   # vue    : la Vue du jeu
+   #=== Paramètres :
+   #* <b>modele</b> : le Modele du jeu
+   #* <b>vue</b>    : la Vue du jeu
    #
    def initialize(modele, vue)
       @modele = modele
       @vue    = vue
-      #Audio.playSoundLoop("stable_boy")
+      Audio.playSoundLoop("stable_boy")
    end
    
+   
+   ##
+   #Crée un nouveau Controlleur à partir de la Vue et du Modele passés en paramètre.
+   #
+   #=== Paramètres :
+   #* <b>modele</b> : le Modele du jeu
+   #* <b>vue</b>    : la Vue du jeu
+   #
+   #===Retourne :
+   #* <b>nouveauControleur</b> : le nouveau controleur crée
+   #
    def Controller.creer(modele,vue)
      new(modele,vue)
    end
 
     
+   ##
+   #Permet d'assigner des actions aux touches du clavier
+   #
+   #=== Paramètres :
+   #* <b>window</b> : la fenêtre à écouter
+   #
    def ecouteClavierCreer(window)
      window.signal_connect("key-press-event") do |w, e|
        case Gdk::Keyval.to_name(e.keyval)
@@ -75,79 +92,74 @@ class Controller
      end
    end 
      
-  ##
-  #  Fait le lien entre un bouton et l'action liÃƒÂ©e au deplacement haut
-  #
-  # == Parameters:
-  # btDeplacementHaut : le gtkButton qu'il faudra lier ÃƒÂ  l'action d'un dÃƒÂ©placement vers le haut
-  #
-  def deplacementHautCreer(btDeplacementHaut)
-      btDeplacementHaut.signal_connect('button_press_event'){
-        deplacementHautAction()
-      }
-  end
+     
+	##
+	#Fait le lien entre un bouton et l'action liée au déplacement haut
+	#
+	#== Paramètres :
+	#* <b>btDeplacementHaut</b> : le gtkButton qu'il faudra lier à l'action d'un déplacement vers le haut
+	#
+	def deplacementHautCreer(btDeplacementHaut)
+   	btDeplacementHaut.signal_connect('button_press_event'){
+   		deplacementHautAction()
+   	}
+	end
       
-
-             
-  ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton de deplacement haut
-  #
-  def deplacementHautAction
-    #print "/\ Bt dÃƒÂ©placement haut pressÃƒÂ©!\n"
-     Audio.playSound("deplacement")
-     @vue.zoneCtrl.bloquerBoutons(@modele)
-     Thread.new do
-       @modele.joueur.deplacement(EnumDirection.NORD)
-       
-     end
-  end
+              
+	##
+	#Action(s) à effectuer lors du clic sur le bouton de deplacement haut
+	#
+	def deplacementHautAction
+	   Audio.playSound("deplacement")
+	   @vue.zoneCtrl.bloquerBoutons(@modele)
+	   Thread.new do
+	   	@modele.joueur.deplacement(EnumDirection.NORD)
+	   end
+	end
 
     
-    
-  ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e au deplacement bas
-  #
-  # == Parameters:
-  # btDeplacementBas : le gtkButton qu'il faudra lier ÃƒÂ  l'action d'un dÃƒÂ©placement vers le bas
-  #
-  def deplacementBasCreer(btDeplacementBas)
-      btDeplacementBas.signal_connect('button_press_event'){
-        deplacementBasAction()
-      }
-  end
+	##
+	#Fait le lien entre un bouton et l'action liée au deplacement bas
+	#
+	#=== Paramètres :
+	#* <b>btDeplacementBas</b> : le gtkButton qu'il faudra lier à l'action d'un déplacement vers le bas
+	#
+	def deplacementBasCreer(btDeplacementBas)
+		btDeplacementBas.signal_connect('button_press_event'){
+			deplacementBasAction()
+		}
+	end
         
 
-   ##
-   # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton deplacement bas
-   #
-  def deplacementBasAction
-    #print "\/ Bt dÃƒÂ©placement bas pressÃƒÂ©!\n"
-     Audio.playSound("deplacement")
-     @vue.zoneCtrl.bloquerBoutons(@modele)
-    Thread.new do
-      @modele.joueur.deplacement(EnumDirection.SUD)
-
-    end
-  end
+	##
+	#Action(s) à effectuer lors du clic sur le bouton deplacement bas
+	#
+	def deplacementBasAction
+		Audio.playSound("deplacement")
+		@vue.zoneCtrl.bloquerBoutons(@modele)
+		Thread.new do
+			@modele.joueur.deplacement(EnumDirection.SUD)
+		end
+	end
  
     
-   ##
-   # Fait le lien entre un bouton et l'action liÃƒÂ©e au deplacement gauche
-   #
-   # == Parameters:
-   # btDeplacementGauche : le gtkButton qu'il faudra lier ÃƒÂ  l'action d'un dÃƒÂ©placement vers la gauche
-   #
-  def deplacementGaucheCreer(btDeplacementGauche)
-     btDeplacementGauche.signal_connect('button_press_event'){
-       deplacementGaucheAction()
-     }
-  end
+	##
+	#Fait le lien entre un bouton et l'action liée au deplacement gauche
+	#
+	#=== Paramètres :
+	#* <b>btDeplacementGauche</b> : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la gauche
+	#
+	def deplacementGaucheCreer(btDeplacementGauche)
+		btDeplacementGauche.signal_connect('button_press_event'){
+			deplacementGaucheAction()
+		}
+	end
+        
         
    ##
-   # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton de deplacement gauche
+   #Action(s) à effectuer lors du clic sur le bouton de deplacement gauche
    #
   def deplacementGaucheAction
-    #print "<< Bt dÃƒÂ©placement gauche pressÃƒÂ©!\n"
      Audio.playSound("deplacement")
      @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
@@ -155,15 +167,12 @@ class Controller
     end
   end
         
-
-    
-  
         
    ##
-   # Fait le lien entre un bouton et l'action liÃƒÂ©e au deplacement droit
+   #Fait le lien entre un bouton et l'action liée au deplacement droit
    #
-   # == Parameters:
-   # btDeplacementDroite : le gtkButton qu'il faudra lier ÃƒÂ  l'action d'un dÃƒÂ©placement vers la droite
+   #=== Paramètres :
+   #* <b>btDeplacementDroite</b> : le gtkButton qu'il faudra lier à l'action d'un déplacement vers la droite
    #
   def deplacementDroiteCreer(btDeplacementDroite)
       btDeplacementDroite.signal_connect('button_press_event'){
@@ -172,12 +181,10 @@ class Controller
     end
         
   
-        
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton de deplacement droit
+  #Action(s) à effectuer lors du clic sur le bouton de deplacement droit
   #
   def deplacementDroiteAction
-    #print ">> Bt dÃƒÂ©placement droite pressÃƒÂ©!\n"
      Audio.playSound("deplacement")
      @vue.zoneCtrl.bloquerBoutons(@modele)
     Thread.new do
@@ -185,13 +192,12 @@ class Controller
     end
   end
         
-
         
    ##
-   # Fait le lien entre un bouton et l'action liÃƒÂ©e au repos
+   #Fait le lien entre un bouton et l'action liée au repos
    #
-   # == Parameters:
-   # btRepos : le gtkButton qu'il faudra lier ÃƒÂ  l'action d'un repos
+   #=== Paramètres :
+   #* <b>btRepos</b> : le gtkButton qu'il faudra lier à l'action d'un repos
    #
   def reposCreer(btRepos)
       btRepos.signal_connect('clicked'){
@@ -199,11 +205,11 @@ class Controller
         }
     end
         
+        
    ##
-   # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton repos
+   #Action(s) à effectuer lors du clic sur le bouton repos
    #
   def reposAction
-    #print "ZZzzzZZZzzzz Bt repos pressÃƒÂ©!\n"
     Audio.playSound("ronfle")
     Thread.new do
       @modele.joueur.utiliserRepos() 
@@ -211,13 +217,12 @@ class Controller
     end
   end
 
-    
         
    ##
-   #  Fait le lien entre un bouton et l'action liÃƒÂ©e ÃƒÂ  l'affichage de l'inventaire
+   #Fait le lien entre un bouton et l'action liée à l'affichage de l'inventaire
    #
-   # == Parameters:
-   # btInventaire : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton inventaire
+   #=== Paramètres :
+   #* <b>btInventaire</b> : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
    #
   def inventaireCreer(btInventaire)
      btInventaire.signal_connect('clicked'){
@@ -227,21 +232,20 @@ class Controller
         
 
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton inventaire
+  #Action(s) à effectuer lors du clic sur le bouton inventaire
   #
   def inventaireAction
-    @vue.window.modal = false #AFR
+    @vue.window.modal = false
     @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_USAGE)
-    print "oO Bt inventaire pressÃƒÂ©!"
   end
 
   
   ##
-  #  Fait le lien entre un bouton et l'action liÃ© au choix Jeter
+  #Fait le lien entre un bouton et l'action liée au choix Jeter
   #
-  # == Parameters:
-  # btInventaire : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton inventaire
-  # dialog: PopUp lie au bouton
+  #=== Paramètres :
+  #* <b>btInventaire</b> : le gtkButton qu'il faudra lier à l'action du clic sur le bouton inventaire
+  #* <b> dialog</b> : PopUp liée au bouton
   #
  def choixInventairePleinCreer(buttonJeter,dialog)
     buttonJeter.signal_connect('clicked'){
@@ -252,19 +256,22 @@ class Controller
        
 
  ##
- # Action(s) aÂ  effectuer lors du clic sur le bouton Jeter (choix)
+ #Action(s) à effectuer lors du clic sur le bouton Jeter (choix)
+  #
+  #=== Paramètres :
+  #* <b>buttonJeter</b> : le gtkButton qu'il faudra lier à l'action du clic sur le bouton Jeter
  #
  def choixInventairePleinAction(buttonJeter)
-   @vue.window.modal = false #AFR
+   @vue.window.modal = false
    @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INVENTAIRE_PLEIN)
-   print "oO Bt inventaire pressÃƒÂ©!"
+   print "oO Bt inventaire pressé!"
  end
   
 
    ##
-   # Fait le lien entre un bouton et l'action liÃƒÂ©e ÃƒÂ  l'affichage du menu
+   #Fait le lien entre un bouton et l'action liée à l'affichage du menu
    #
-   # == Parameters:
+   #=== Paramètres :
    # btMenu : le gtkButton qu'il faudra lier aux actions d'affichage du menu
    #
   def menuCreer(btMenu)
@@ -275,16 +282,13 @@ class Controller
         
         
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton menu
+  #Action(s) à effectuer lors du clic sur le bouton menu
   #
   def menuAction
-    puts "<--> Creation du menu"
-    if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, crï¿½ation menu avec moins de bouton
+    if(!@modele.joueur.toujoursEnVie?()) # Si le joueur est mort, création menu avec moins de bouton
     	@vue.menu = MenuJeu.creer(false, @modele, self)
-    #else
-    	#@vue.menu = MenuJeu.creer(true, @modele, self)
     end
-    puts "-- Affichage du menu"
+    
     @vue.window.modal = false;
     @vue.window.set_sensitive(false)
     @vue.menu.afficherMenu()
@@ -293,10 +297,10 @@ class Controller
 
     
   ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e au menu d'interactions
+  #Fait le lien entre un bouton et l'action liée au menu d'interactions
   #
-  # == Parameters:
-  # btInteraction : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton interaction
+  #=== Paramètres :
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   #
   def interactionCreer(btInteraction)
       btInteraction.signal_connect('clicked'){
@@ -305,27 +309,22 @@ class Controller
   end
         
    
-        
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton interaction
+  #Action(s) à effectuer lors du clic sur le bouton interaction
   #
   def interactionAction()
-    print "oO Bt interaction pressÃƒÂ©!"
-    #@vue.zoneCtrl.bloquerBoutons(@modele)
     @vue.interactionModal.majInteractionModal()
   end
 
-    
 
-      
   ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e a un element
+  #Fait le lien entre un bouton et l'action liée a un element
   #
-  # == Parameters:
-  # btInteraction : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton interaction
+  #=== Paramètres :
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   # elem : element avec lequel on souhaite interagir
   # joueur : afin d'effectuer l'action de l'element sur le joueur
-  # dialog: popup liÃƒÂ© au bouton
+  # dialog: popup liée au bouton
   #
   def interactionElementCreer(btInteraction,elem,joueur,dialog)
       btInteraction.signal_connect('clicked'){
@@ -336,14 +335,13 @@ class Controller
       
       
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur un bouton <element>
+  #Action(s) à effectuer lors du clic sur un bouton <element>
   #
-  # == Parameters:
+  #=== Paramètres :
   # elem : element avec lequel on souhaite interagir
   # joueur : afin d'effectuer l'action de l'element sur le joueur
   #
   def interactionElementAction(elem,joueur)
-    print "oO Bt interaction "+elem.getIntitule+" pressÃƒÂ©!"
      Audio.playSound("coin")
      Thread.new do
         elem.interaction(joueur)
@@ -353,30 +351,26 @@ class Controller
   
   
   ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e a un menu d'achat
+  #Fait le lien entre un bouton et l'action liée a un menu d'achat
   #
-  # == Parameters:
-  # btInteraction : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton interaction
-  # dialog: popup liÃƒÂ© au bouton
+  #=== Paramètres :
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # dialog: popup lié au bouton
   #
   def achatMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
     dialog.destroy
     achatMarchandAction()
-    
   }
   end
   
   
-
-  
-  
   ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e a un menu de vente
+  #Fait le lien entre un bouton et l'action liée a un menu de vente
   #
-  # == Parameters:
-  # btInteraction : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton interaction
-  # dialog: popup liÃƒÂ© au bouton
+  #=== Paramètres :
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
+  # dialog: popup lié au bouton
   #
   def vendreMarchandCreer(btInteraction,dialog)
   btInteraction.signal_connect('clicked'){
@@ -385,16 +379,12 @@ class Controller
   }
   end
   
+  
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton d'achat
+  #Action(s) à effectuer lors du clic sur le bouton d'achat
   #
   def achatMarchandAction()
-    print "oO Bt achatMarchandAction  pressÃƒÂ©!"
-    #@modele.joueur.encaisser(10000) #TODO : supprimmer cette ligne
-    
-    #AFR
     if @modele.joueur.inventaire.estPlein?
-        puts "Inventaire plein avant achat"
         @vue.popUp.choixInventairePlein
     else 
        @vue.inventaireModal.afficherInventaire(@modele.pnjAideEnInteraction, EnumStadePartie.INTERACTION_MARCHAND_ACHAT)
@@ -403,38 +393,35 @@ class Controller
   
   
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton de vente
+  #Action(s) à effectuer lors du clic sur le bouton de vente
   #
-  def vendreMarchandAction()
-    print "oO Bt venndreMarchandAction  pressÃƒÂ©!"
-    puts "====>>> Affichage de l'inventaire en mode vente" 
+  def vendreMarchandAction() 
     @vue.inventaireModal.afficherInventaire(@modele.joueur, EnumStadePartie.INTERACTION_MARCHAND_VENTE)
   end
       
   
   ##
-  # Fait le lien entre un bouton et l'action liÃƒÂ©e au soin
+  #Fait le lien entre un bouton et l'action liée au soin
   #
-  # == Parameters:
-  # btInteraction : le gtkButton qu'il faudra lier ÃƒÂ  l'action du clic sur le bouton interaction
+  #=== Paramètres :
+  # btInteraction : le gtkButton qu'il faudra lier à l'action du clic sur le bouton interaction
   # joueur : le joueur qui doit recevoir le soin
   # choix : integer correspondant au soin choisi
   # guerisseur : le guerisseur repondant a la demande de soin
-  # dialog: popup liÃƒÂ© au bouton
+  # dialog: popup lié au bouton
   #
   def soinCreer(btInteraction,joueur, choix, guerisseur,dialog)
   btInteraction.signal_connect('clicked'){
     dialog.destroy
     soinAction(joueur,choix,guerisseur)
-
   }
   end
   
   
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton de soins
+  #Action(s) à effectuer lors du clic sur le bouton de soins
   #
-  # == Parameters:
+  #=== Paramètres :
   # joueur : le joueur qui doit recevoir le soin
   # choix : integer correspondant au soin choisi
   # guerisseur : le guerisseur repondant a la demande de soin
@@ -449,12 +436,12 @@ class Controller
       
   
   ##
-  # equipe un item lors de l'appuie sur le bouton correspondant
+  #Equipe un item lors de l'appuie sur le bouton correspondant
   #
-  # == Parameters:
+  #=== Paramètres :
   # joueur : le joueur qui doit equiper l'item
   # elem : element a equiper
-  # dialog: popup liÃƒÂ© au bouton
+  # dialog: popup lié au bouton
   #
   def equiperItemCreer(btInteraction,elem,joueur,dialog,momentCombat)
       btInteraction.signal_connect('clicked'){
@@ -465,9 +452,9 @@ class Controller
       
       
   ##
-  # Action(s) ÃƒÂ  effectuer lors du clic sur le bouton d'equipement d'element
+  #Action(s) à effectuer lors du clic sur le bouton d'equipement d'element
   #
-  # == Parameters:
+  #=== Paramètres :
   # joueur : le joueur qui doit equiper l'item
   # elem : element a equiper
   #
@@ -477,7 +464,6 @@ class Controller
       joueur.utiliserItem(elem)
 
     end
-    print "oO Bt interaction "+elem.getIntitule()+" pressÃƒÂ©!"
     if(elem.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
       @modele.suiteEquipementChoixArme(momentCombat)
     else
@@ -487,18 +473,15 @@ class Controller
   end
   
   
-
-  
 ##### Pour le menu  
   
   ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btContinuerPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Continuer partie
+   #=== Paramètres :
+   # btContinuerPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur Continuer partie
    #
    def continuerPartieCreer(btContinuerPartie,fenetre)
-      #btContinuerPartie.signal_connect('clicked'){
       btContinuerPartie.signal_connect('button_press_event'){
           continuerPartieAction()
           fenetre.destroy()
@@ -507,24 +490,20 @@ class Controller
    
           
 	##
-	# Action(s) Ã  effectuer lors du clic sur le bouton ContinuerPartie
+	#Action(s) Ã  effectuer lors du clic sur le bouton ContinuerPartie
 	#
 	def continuerPartieAction()
-		puts "Clique sur continuer partie"
-		#@vue.menu.fenetreMenu.destroy
-		#puts "Destruction du menu"
 		@vue.window.set_sensitive(true)
 	end
   
   
   ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btNewPartie : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur NouvellePartie
+   #=== Paramètres :
+   # btNewPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur NouvellePartie
    #
    def nouvellePartieCreer(btNewPartie,fenetre)
-     # btNewPartie.signal_connect('clicked'){
      btNewPartie.signal_connect('button_press_event'){
           nouvellePartieAction()
         fenetre.destroy()
@@ -533,24 +512,20 @@ class Controller
      
           
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton NouvellePartie
+	#Action(s) à effectuer lors du clic sur le bouton NouvellePartie
 	#
 	def nouvellePartieAction
-		puts "Clique sur nouvelle partie"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherNouvellePartie()
 	end
 
       
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btChargerPartie : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur ChargerPartie
+   #=== Paramètres :
+   # btChargerPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur ChargerPartie
    #
    def chargerPartieCreer(btChargerPartie,fenetre)
-      #btChargerPartie.signal_connect('clicked'){
       btChargerPartie.signal_connect('button_press_event'){
           chargerPartieAction()
           fenetre.destroy()
@@ -558,24 +533,20 @@ class Controller
    end  
           
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton ChargerPartie
+	#Action(s) à effectuer lors du clic sur le bouton ChargerPartie
 	#
 	def chargerPartieAction
-		puts "Clique sur charger partie"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherChargerPartie()
 	end
 
    
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btSauvegarderPartie : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur SauvegarderPartie
+   #=== Paramètres :
+   # btSauvegarderPartie : le gtkButton qu'il faudra lier à l'action d'un clic sur SauvegarderPartie
    #
    def sauvegarderPartieCreer(btSauvegarderPartie,fenetre)
-     # btSauvegarderPartie.signal_connect('clicked'){
       btSauvegarderPartie.signal_connect('button_press_event'){
           sauvegarderPartieAction()
         fenetre.destroy()
@@ -584,25 +555,20 @@ class Controller
  
           
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton SauvegarderPartie
+	#Action(s) à effectuer lors du clic sur le bouton SauvegarderPartie
 	#
 	def sauvegarderPartieAction
-		puts "Clique sur sauvegarder partie"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherSauvegarderPartie()
 	end
 
 
-
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btClassement : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur Classement
+   #=== Paramètres :
+   # btClassement : le gtkButton qu'il faudra lier à l'action d'un clic sur Classement
    #
    def classementCreer(btClassement,fenetre)
-     # btClassement.signal_connect('clicked'){
      btClassement.signal_connect('button_press_event'){
           classementAction()
         fenetre.destroy()
@@ -611,24 +577,20 @@ class Controller
    
           
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton Classement
+	#Action(s) à effectuer lors du clic sur le bouton Classement
 	#
 	def classementAction
-		puts "Clique sur classement"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherClassement()
 	end
 
 
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btOptions : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur Options
+   #=== Paramètres :
+   # btOptions : le gtkButton qu'il faudra lier à l'action d'un clic sur Options
    #
    def optionsCreer(btOptions,fenetre)
-     # btOptions.signal_connect('clicked'){
      btOptions.signal_connect('button_press_event'){
           optionsAction()
         fenetre.destroy()
@@ -637,23 +599,19 @@ class Controller
  
   
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton Options
+	#Action(s) à effectuer lors du clic sur le bouton Options
 	#
 	def optionsAction
-		puts "Clique sur options"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherOptions()
 	end
 
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btAide : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur Aide
+   #=== Paramètres :
+   # btAide : le gtkButton qu'il faudra lier à l'action d'un clic sur Aide
    #
    def aideCreer(btAide,fenetre)
-      #btAide.signal_connect('clicked'){
       btAide.signal_connect('button_press_event'){
           aideAction()
           fenetre.destroy()
@@ -662,21 +620,23 @@ class Controller
     
           
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton Aide
+	#Action(s) à effectuer lors du clic sur le bouton Aide
 	#
 	def aideAction
-		puts "Clique sur aide"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherAide()
 	end
 	
 	
 	##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btCommencerNewPartie : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur "C'est Parti" dans nouvelle partie
+   #=== Paramètres :
+   #* <b>btCommencerNewPartie</b> : le gtkButton qu'il faudra lier à l'action d'un clic sur "C'est Parti" dans nouvelle partie
+   #* <b>entryPseudo</b> : le gtkEntry où le joueur entre son pseudo
+   #* <b>boutRadioNovice</b> : le gtkRadioButton correspondant à la difficulté Novice
+   #* <b>boutRadioMoyen</b> : le gtkRadioButton correspondant à la difficulté Moyen
+   #* <b>boutRadioExpert</b> : le gtkRadioButton correspondant à la difficulté Expert
+   #* <b>fenetre</b> : la gtkWindow à détruire
    #
    def commencerNewPartieCreer(btCommencerNewPartie, entryPseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert,fenetre)
       btCommencerNewPartie.signal_connect('clicked'){
@@ -689,36 +649,37 @@ class Controller
  
  
 	##
-	# Action(s) a effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
+	#Action(s) a effectuer lors du clic sur le bouton "C'est Parti" dans nouvelle partie
 	#
+	#=== Paramètres :
+   #* <b>pseudo</b> : la chaine de caracteres correspondant au pseudo du joueur
+   #* <b>boutRadioNovice</b> : le gtkRadioButton correspondant à la difficulté Novice
+   #* <b>boutRadioMoyen</b> : le gtkRadioButton correspondant à la difficulté Moyen
+   #* <b>boutRadioExpert</b> : le gtkRadioButton correspondant à la difficulté Expert
+   #* <b>fenetre</b> : la gtkWindow à détruire
+   #
 	def commencerNewPartieAction(pseudo, boutRadioNovice, boutRadioMoyen, boutRadioExpert, fenetre)
-		puts "Clique sur C'est Parti"
 		if(pseudo == "")
 			pseudo = "JoueurInconnu"
 		end
-		puts "pseudo : |" + pseudo + "|"
+		
 		if(boutRadioNovice.active?)
-			puts "Difficulte choisi : Novice"
 			difficulte = BibliothequeDifficulte.getDifficulte("Novice")
 		elsif(boutRadioMoyen.active?)
-			puts "Difficulte choisi : Moyen"
 			difficulte = BibliothequeDifficulte.getDifficulte("Moyen")
 		elsif(boutRadioExpert.active?)
-			puts "Difficulte choisi : Expert"
 			difficulte = BibliothequeDifficulte.getDifficulte("Expert")
 		end
 		
 		# Pour supprimer ancienne vue avant démarrage nouvelle partie
 		if(@vue.menu.isInGame == true)
 			@vue.window.destroy
-			puts "Destroy partie"
 		end
 		
 		# Pour detruire l'ancienne vue apres avoir recommencer une partie apres une mort
 		if(@modele.joueur != nil)
 			if(@modele.joueur.toujoursEnVie? == false)
 				@vue.window.destroy
-				puts "Destroy partie"
 			end
 		end
 		
@@ -733,85 +694,77 @@ class Controller
 		# Creation du modele
 		modele = Modele.creer(vue,difficulte,pseudo)
 		
-		puts "modele creer"
-		puts "difficulte : " + difficulte.to_s
 		controller=Controller.creer(modele,vue)
-		puts "controller creer"
 		vue.defM(modele)
 		vue.defC(controller)
-		puts "vue defc"
-		modele.initialiseToi() # Debut du temps ï¿½ la crï¿½ation d'un joueur
-		
-		
-		
-		puts "init modele"
+		modele.initialiseToi() # Debut du temps à la création d'un joueur
 		vue.initInterface()
-		puts "init interface"
-		
-		
-		
 	end
 
 
 	##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # btValiderOptions : le gtkButton qu'il faudra lier ï¿½ l'action d'un clic sur Valider (dans options)
+   #=== Paramètres :
+   #* <b>btValiderOptions</b> : le gtkButton qu'il faudra lier à l'action d'un clic sur Valider (dans options)
+   #* <b>radioButtonOui</b> : le gtkRadioButton correspondant à l'activation du son
+   #* <b>radioButtonNon</b> : le gtkRadioButton correspondant à la nonactivation du son
+   #* <b>radioBO2</b> : le gtkRadioButton correspondant à l'activation des bruitages
+   #* <b>radioBN2</b> : le gtkRadioButton correspondant à la non activation des bruitages
+   #* <b>comboBoxListeLangue</b> : le gtkComboBox correspondant au choix de la langue
+   #* <b>fenetre</b> : la gtkWindow à détruire
    #
    def validerOptionsCreer(btValiderOptions, radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue, fenetre)
-         btValiderOptions.signal_connect('clicked'){
-             validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
-             fenetre.destroy()
-         }
+      btValiderOptions.signal_connect('clicked'){
+          validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
+          fenetre.destroy()
+      }
    end
  
  
 	##
-	# Action(s) ï¿½ effectuer lors du clic sur le bouton Valider (dans options)
+	#Action(s) à effectuer lors du clic sur le bouton Valider (dans options)
 	#
-   def validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)
-		puts "Clique sur Valider (dans options)"
-		
+	#=== Paramètres :
+   #* <b>radioButtonOui</b> : le gtkRadioButton correspondant à l'activation du son
+   #* <b>radioButtonNon</b> : le gtkRadioButton correspondant à la nonactivation du son
+   #* <b>radioBO2</b> : le gtkRadioButton correspondant à l'activation des bruitages
+   #* <b>radioBN2</b> : le gtkRadioButton correspondant à la non activation des bruitages
+   #* <b>comboBoxListeLangue</b> : le gtkComboBox correspondant au choix de la langue
+   #
+   def validerOptionsAction(radioButtonOui, radioButtonNon, radioBO2, radioBN2, comboBoxListeLangue)		
 		if(radioButtonOui.active?)
 			Audio.resumeSoundLoop()
-			puts "Son active"
 		elsif(radioButtonNon.active?)
 			Audio.muteSoundLoop()
-			puts "son desactive"
 		end
 		
       if(radioBO2.active?)
         Audio.resumeBruitage()
-        puts "Son des bruitages active"
       elsif(radioBN2.active?)
         Audio.muteBruitage()
-        puts "Son des bruitages desactive"
       end
 
 		if(comboBoxListeLangue.active == 0)
 			XmlMultilingueReader.setLangue("FR")
-			puts "Langue FR"
 		elsif(comboBoxListeLangue.active == 1)
 			XmlMultilingueReader.setLangue("EN")
-			puts "Langue EN"
 		end
 		
 		if(@vue.menu.isInGame == true)
 			@vue.majLangue()
 		end
-	
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
+
 		@vue.menu.afficherMenu()
 	end
 
 
    ##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
+   #=== Paramètres :
    # btRetour : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur Retour
+   #* <b>fenetre</b> : la gtkWindow à détruire
    #
    def retourCreer(btRetour,fenetre)
       btRetour.signal_connect('clicked'){
@@ -822,24 +775,21 @@ class Controller
  
  
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton Retour
+	#Action(s) à effectuer lors du clic sur le bouton Retour
 	#
 	def retourAction
-		puts "Clique sur Retour"
-		#@vue.menu.viderFenetre(@vue.menu.contenu)
-		#puts "Vidage du contenu du menu principal"
 		@vue.menu.afficherMenu()
 	end
 	
 	
 	##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
+   #=== Paramètres :
    # btQuitter : le gtkButton qu'il faudra lier Ã¯Â¿Â½ l'action d'un clic sur Quitter Partie
+   #* <b>fenetre</b> : la gtkWindow à détruire
    #
    def quitterPartieCreer(btQuitter,fenetre)
-      #btQuitter.signal_connect('clicked'){
       btQuitter.signal_connect('button_press_event'){
           quitterPartieAction()
          fenetre.destroy()
@@ -848,19 +798,18 @@ class Controller
  
  
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur le bouton Quitter Partie
+	#Action(s) à effectuer lors du clic sur le bouton Quitter Partie
 	#
 	def quitterPartieAction
-		puts "Clique sur Quitter Partie"
 		Gtk.main_quit
 	end
 	
 	
 	##
-   # Liaison de l'action sur le bouton
+   #Liaison de l'action sur le bouton
    #
-   # == Parameters:
-   # fenetre : la gtk::Window qu'il faudra lier a l'action d'un clic sur la croix de fermeture (croix rouge sous windows)
+   #=== Paramètres :
+   #* <b>fenetre</b> : la gtkWindow à détruire lors d'un clic sur la croix de fermeture (croix rouge sous windows)
    #
    def destroyMenuCreer(fenetre)
       fenetre.signal_connect('delete_event'){
@@ -870,10 +819,12 @@ class Controller
  
  
 	##
-	# Action(s) Ã¯Â¿Â½ effectuer lors du clic sur la croix de fermeture (croix rouge sous windows)
+	#Action(s) à effectuer lors du clic sur la croix de fermeture (croix rouge sous windows)
+	#
+	#=== Paramètres :
+   #* <b>fenetre</b> : la gtkWindow à détruire lors d'un clic sur la croix de fermeture (croix rouge sous windows)
 	#
 	def destroyMenuAction(fenetre)
-		puts "Fermeture du menu par la croix rouge !"
 		if(@vue.menu.isInGame == true)
 			@modele.vue.window.set_sensitive(true)
 		else
@@ -883,14 +834,17 @@ class Controller
 	end
 	
 
-### Gestion des Ã©vÃ©nements de la fenÃªtre d'inventaire ###
+### Gestion des événements de la fenêtre d'inventaire ###
  
 	##
-	# SÃ©lectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+	#Sélectionne un item lors de l'appuie sur le bouton qui lui correspond dans l'inventaire
+	#
+	#=== Paramètres :
+   #* <b>btItem</b> : la gtkButton correspondant à l'item cliqué
+   #* <b>indiceItem</b> : int représentant le numéro de l'item sélectionné
 	#
 	def selectionnerItem(btItem,indiceItem)
 		btItem.signal_connect('button_press_event'){
-			puts "(S) SÃ©lection de l'item "+indiceItem.to_s+"."
 			@vue.inventaireModal.setImageSelection(indiceItem)
 			@vue.inventaireModal.setBoutonInteractionActif(true)
 			@modele.indiceItemSelectionne = indiceItem
@@ -898,14 +852,16 @@ class Controller
 	end
 	
 	##
-	# AchÃ¨te l'item sÃ©lectionnÃ© lors de l'appuie sur le bouton "Acheter" dans l'inventaire
+	#Achète l'item sélectionné lors de l'appuie sur le bouton "Acheter" dans l'inventaire
+	#
+	#=== Paramètres :
+   #* <b>btAcheter</b> : la gtkButton correspondant au bouton "Acheter"
 	#
 	def acheterItem(btAcheter)
 	  btAcheter.signal_connect('clicked'){
-	  puts "(S) Achat de l'item "+"XX"+"."
 	  Thread.new do
       marchand = @modele.pnjAideEnInteraction
-	  #Le marchand vend l'item sÃ©lectionnÃ© par le joueur Ã  ce dernier
+	  #Le marchand vend l'item sélectionné par le joueur Ã  ce dernier
 	 # marchand.vendre(@modele.joueur, marchand.listeItem.itemsStock[@modele.indiceItemSelectionne])
 	  	  marchand.vendre(@modele.joueur, @vue.inventaireModal.inventaireCourant[@modele.indiceItemSelectionne])
 	  @vue.inventaireModal.onDestroy()
@@ -917,30 +873,31 @@ class Controller
 	end
 	
 	##
-	# Vends l'item sÃ©lectionnÃ© lors de l'appuie sur le bouton "Vendre" dans l'inventaire
+	#Vends l'item sélectionné lors de l'appuie sur le bouton "Vendre" dans l'inventaire
+	#
+	#=== Paramètres :
+   #* <b>btVendre</b> : la gtkButton correspondant au bouton "Vendre"
 	#
 	def vendreItem(btVendre)
 		btVendre.signal_connect('clicked'){
-			puts "(S) Vente de l'item " + @modele.indiceItemSelectionne.to_s + "."
 			Thread.new do
-  			#@modele.joueur.encaisser(  @modele.joueur.inventaire.prix( @modele.indiceItemSelectionne))
-  			#@modele.joueur.retirerDuStock(@modele.indiceItemSelectionne)
   			@modele.joueur.vendre(@modele.indiceItemSelectionne)
   			@vue.inventaireModal.onDestroy()
         @vue.window.modal=true
   			@modele.debutTour()
-  			#@vue.vueInventaire.setImageSelection(indiceItem)
 			end
 		}
 	end
 	
 	##
-	# Jette l'item sÃ©lectionnÃ© lors de l'appuie sur le bouton "Jeter" dans l'inventaire
+	#Jette l'item sélectionné lors de l'appuie sur le bouton "Jeter" dans l'inventaire
+	#
+	#=== Paramètres :
+   #* <b>btVendre</b> : la gtkButton correspondant au bouton "Jeter"
 	#
 	def jeterItem(btJeter)
 		btJeter.signal_connect('clicked'){
-			Thread.new do 
-			  puts "(S) Jet de l'item " +@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne).to_s + "."
+			Thread.new do
   			@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
   			@vue.inventaireModal.onDestroy
         @vue.window.modal=true
@@ -950,12 +907,14 @@ class Controller
 	end
 	
 	
-   ##
-	# Utiliser l'item sÃ©lectionnÃ© au profit du joueur lors de l'appuie sur le bouton "Utiliser" dans l'inventaire
+    ##
+	#Utiliser l'item sélectionné au profit du joueur lors de l'appuie sur le bouton "Utiliser" dans l'inventaire
+	#
+	#=== Paramètres :
+   #* <b>btVendre</b> : la gtkButton correspondant au bouton "Utiliser"
 	#
 	def utiliserItem(btUtiliser)
 		btUtiliser.signal_connect('clicked'){
-			puts "(U) Utilisation de l'item "+ @modele.indiceItemSelectionne.to_s + "."
             Thread.new do 
   			   @modele.joueur.utiliserItem(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
   			   @vue.actualiser()
@@ -966,7 +925,7 @@ class Controller
 	end
 	
 	##
-	# Permet de lancer le debut d'un tour
+	#Permet de lancer un tour de jeu
 	#
 	def lancerTour()
 		Thread.new do @modele.debutTour() end
