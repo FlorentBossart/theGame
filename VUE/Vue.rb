@@ -825,7 +825,7 @@ def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
           end
           zoomPix=pixbuf.scale(w,h,Gdk::Pixbuf::INTERP_BILINEAR)
           @frame.composite!(zoomPix,xArr,yArr,zoomPix.width, zoomPix.height,xArr,yArr,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
-        else
+        elsif(traitement=="depl")
           if(
               (   @numEtapeAffichage<=@nbEtapeAffichage*(1.0/6) )  ||
               (   @numEtapeAffichage> @nbEtapeAffichage*(1.0/3) && @numEtapeAffichage<=@nbEtapeAffichage*0.5  )   ||
