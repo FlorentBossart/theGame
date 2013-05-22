@@ -347,11 +347,6 @@ class Modele
   
    def preparationHostilites(momentCombat)
      @vue.combatModal.majCombatModal(momentCombat)
-     if(@joueur.peutSEquiper)
-         choixEquipementAvantCombat()
-     elsif(@joueur.casePosition.presenceEnnemis?() && !@joueur.peutSEquiper)
-         declencherCombat()
-     end
    end
    
    
@@ -407,6 +402,7 @@ class Modele
   # Permet de declencher le/les combat(s)
   #
   def declencherCombat()
+    puts"retessst"
      itemsEnnemis = Array.new()
      
      for ennemi in @joueur.casePosition.listeEnnemis

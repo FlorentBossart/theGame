@@ -77,7 +77,25 @@ class CombatModal
       str=str+str_ennemis
     end
     Audio.playSound("preCombat")
-    @vue.popUp.affichePopUp(str)
+    Gtk.idle_add do
+      @vue.window.modal=false
+      dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupAttention"), @vue.window,
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT])
+      dialog.signal_connect('response') {
+        dialog.destroy
+        if(@modele.joueur.peutSEquiper)
+        @modele.choixEquipementAvantCombat()
+    elsif(@modele.joueur.casePosition.presenceEnnemis?() && !@modele.joueur.peutSEquiper)
+        @modele.declencherCombat()
+    end }
+      dialog.vbox.add(Gtk::Label.new(str))
+      dialog.show_all
+      dialog.run do |response|
+      end 
+      false
+    end
+
   end
   
   
@@ -85,6 +103,7 @@ class CombatModal
   # Cree un PopUp contenant des boutons liés aux objets equipable defensifs
   # 
   def majEquipementDefensif()
+    Gtk.idle_add do
     @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
     listeArmure=Array.new()
@@ -116,6 +135,8 @@ class CombatModal
    dialog.show_all
    dialog.run do |response|
    end
+   false
+  end
   end
   
   
@@ -123,6 +144,7 @@ class CombatModal
   # Cree un PopUp contenant des boutons liés aux objets equipable offensifs
   #  
   def majEquipementOffensif()
+    Gtk.idle_add do
     @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
     listeArme=Array.new()
@@ -155,6 +177,8 @@ class CombatModal
     dialog.show_all
     dialog.run do |response|
     end
+    false
+  end
   end
   
   
