@@ -1,12 +1,13 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : BibliothequeTypeMangeable.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : BibliothequeTypeMangeable.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente la bibliothèque des types d'item mangeable définie par:
-#* Une table de hachage statique contenant les types d'item mangeable (les clés sont des intitulés sous forme de chaine de caractères)
+#===Cette classe représente la bibliothèque des types mangeable définie par:
+#* Une table de hachage statique contenant les TypeMangeable (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
 class BibliothequeTypeMangeable
@@ -17,11 +18,11 @@ class BibliothequeTypeMangeable
     
    
    ##
-   #===Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #Ajouter un TypeMangeable dans la bibliothèque (écrase si déjà présente).
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type mangeable à ajouter
-   #* <b>type :</b> le type du type mangeable à ajouter
+   #* <b>cle :</b> la clé du TypeMangeable à ajouter
+   #* <b>type :</b> le type du TypeMangeable à ajouter
    #
    def BibliothequeTypeMangeable.ajouter(cle,type)
      AffichageDebug.Afficher("Ajout dans BibliothequeTypeMangeable-> clé:#{cle}, type:#{type}")
@@ -31,10 +32,10 @@ class BibliothequeTypeMangeable
    
    
    ##
-   #===Retirer un type de la bibliothèque.
+   #Retirer un TypeMangeable de la bibliothèque.
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type mangeable à retirer
+   #* <b>cle :</b> la clé du TypeMangeable à retirer
    #
    def BibliothequeTypeMangeable.retirer(cle)
      AffichageDebug.Afficher("Suppression dans BibliothequeTypeMangeable-> clé:#{cle}")
@@ -44,13 +45,13 @@ class BibliothequeTypeMangeable
    
    
    ##
-   #===Permet de recuperer un type mangeable de la bibliothèque.
+   #Permet de recuperer un TypeMangeable de la bibliothèque.
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type mangeable souhaité
+   #* <b>cle :</b> la clé du TypeMangeable souhaité
    #
    #===Retourne:
-   #* <b>TypeMangeable :</b> le type mangeable souhaité
+   #* <b>TypeMangeable :</b> le TypeMangeable souhaité
    #
    def BibliothequeTypeMangeable.getTypeMangeable(cle)
       return @@tableType[cle]
@@ -62,16 +63,26 @@ class BibliothequeTypeMangeable
    
    
    ##
-   #===Permet de recuperer un type mangeable de la bibliothèque au hasard. 
+   #Permet de recuperer un TypeMangeable de la bibliothèque au hasard. 
    #
    #===Retourne:
-   #* <b>TypeMangeable :</b> un type mangeable au hasard
+   #* <b>TypeMangeable :</b> un TypeMangeable au hasard
    #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasard()
       valeurs=@@tableType.values()
       return valeurs[rand(valeurs.length)]
    end
    
+   ##
+   #Permet de recuperer un TypeMangeable au hasard suivant sa rareté.
+   #
+   #===Paramètres:
+   #* <b>rareteMin :</b> valeur minimum de rareté
+   #* <b>rareteMax :</b> valeur maximum de rareté
+   #
+   #===Retourne:
+   #* <b>TypeMangeable :</b> le TypeMangeable au hasard
+   #
    def BibliothequeTypeMangeable.getTypeMangeableAuHasardRarete(rareteMin,rareteMax)
       valeurs=@@tableType.values()
       valeursPossible=Array.new()

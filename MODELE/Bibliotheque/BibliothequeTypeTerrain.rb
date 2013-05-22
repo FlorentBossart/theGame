@@ -1,12 +1,13 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : BibliothequeTypeTerrain.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : BibliothequeTypeTerrain.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente la bibliothèque des types de terrain définie par:
-#* Une table de hachage statique contenant les types de terrain (les clés sont des intitulés sous forme de chaine de caractères)
+#===Cette classe représente la bibliothèque des types de terrain définie par:
+#* Une table de hachage statique contenant les TypeTerrain (les clés sont des intitulés sous forme de chaine de caractères)
 #
 
 class BibliothequeTypeTerrain
@@ -17,11 +18,11 @@ class BibliothequeTypeTerrain
    
    
    ##
-   #===Ajouter un type dans la bibliothèque (écrase si déjà présente).
+   #===Ajouter un TypeTerrain dans la bibliothèque (écrase si déjà présente).
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type de terrain à ajouter
-   #* <b>type :</b> le type du type de terrain à ajouter
+   #* <b>cle :</b> la clé du TypeTerrain à ajouter
+   #* <b>type :</b> le type du TypeTerrain à ajouter
    #
    def BibliothequeTypeTerrain.ajouter(cle,type)
       AffichageDebug.Afficher("Ajout dans BibliothequeTypeTerrain-> clé:#{cle}, type:#{type}")
@@ -31,10 +32,10 @@ class BibliothequeTypeTerrain
 
    
    ##
-   # Retirer un type de la bibliothèque.
+   # Retirer un TypeTerrain de la bibliothèque.
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type de terrain à retirer
+   #* <b>cle :</b> la clé du TypeTerrain à retirer
    #
    def BibliothequeTypeTerrain.retirer(cle)
       AffichageDebug.Afficher("Suppression dans BibliothequeTypeTerrain-> clé:#{cle}")
@@ -44,13 +45,13 @@ class BibliothequeTypeTerrain
 
    
    ##
-   #===Permet de recuperer un type de terrain de la bibliothèque.
+   #===Permet de recuperer un TypeTerrain de la bibliothèque.
    #
    #===Paramètres:
-   #* <b>cle :</b> la clé du type de terrain souhaité
+   #* <b>cle :</b> la clé du TypeTerrain souhaité
    #
    #===Retourne:
-   #* <b>TypeTerrain :</b> le type de terrain souhaité
+   #* <b>TypeTerrain :</b> le TypeTerrain souhaité
    #
    def BibliothequeTypeTerrain.getTypeTerrain(cle)
       return @@tableType[cle]
@@ -58,10 +59,10 @@ class BibliothequeTypeTerrain
 
    
    ##
-   #===Permet de recuperer un type de terrain de la bibliothèque au hasard. 
+   #===Permet de recuperer un TypeTerrain de la bibliothèque au hasard. 
    #
    #===Retourne:
-   #* <b>TypeTerrain :</b> un type de terrain au hasard
+   #* <b>TypeTerrain :</b> un TypeTerrain au hasard
    #
    def BibliothequeTypeTerrain.getTypeTerrainAuHasard()
       valeurs=@@tableType.values()
