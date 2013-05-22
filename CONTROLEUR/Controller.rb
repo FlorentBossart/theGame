@@ -17,7 +17,7 @@ class Controller
 
    @modele
    @vue
-   attr_accessor :marchand
+   
    ##
    # CrÃ©e un nouveau Controlleur Ã  partir de la Vue et du Modele passÃ©s en paramÃ¨tre.
    #
