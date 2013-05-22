@@ -353,7 +353,7 @@ class Modele
   ##
   # Permet au joueur de s'equiper
   #
-  def choixEquipementAvantCombat()
+  def choixEquipementAvantCombat(momentCombat)
      #on commence par les armures
      compteurArmures=0
      
@@ -367,17 +367,20 @@ class Modele
        AffichageDebug.Afficher("compteurArmures=#{compteurArmures}")
        if(compteurArmures!=0)
           changerStadePartie(EnumStadePartie.EQUIPEMENT_ARMURE)  
-          @vue.actualiser()          
+          @vue.actualiser()   
+       else    
+         suiteEquipementChoixArme(momentCombat)   
        end
+     else
+       suiteEquipementChoixArme(momentCombat) 
      end
-     suiteEquipementChoixArme()
   end
 
   
   ##
   # Permet au joueur de choisir son arme
   #
-  def suiteEquipementChoixArme()
+  def suiteEquipementChoixArme(momentCombat)
 
     compteurArmes=0
     
@@ -392,29 +395,48 @@ class Modele
       if(compteurArmes != 0)
           changerStadePartie(EnumStadePartie.EQUIPEMENT_ARME)      
           @vue.actualiser
+      else
+        declencherCombat(momentCombat)
       end
+    else
+      declencherCombat(momentCombat)
     end
-    declencherCombat()
+    
   end
 
 
   ##
   # Permet de declencher le/les combat(s)
   #
-  def declencherCombat()
+  def declencherCombat(momentCombat)
     puts"retessst"
      itemsEnnemis = Array.new()
-     
-     for ennemi in @joueur.casePosition.listeEnnemis
-       itemsUnEnnemi = Array.new() 
-       itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
-       
-       if(@joueur.toujoursEnVie?())
-         itemsEnnemis += itemsUnEnnemi 
-       else
-         #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
-         #@joueur.meurt(@messageDefaite)
-         break
+     ancienneCase=carte.getCaseAt(@joueur.anciennePositionX,@joueur.anciennePositionY)
+     if(momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
+       for ennemi in ancienneCase.listeEnnemis
+         itemsUnEnnemi = Array.new() 
+         itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
+         
+         if(@joueur.toujoursEnVie?())
+           itemsEnnemis += itemsUnEnnemi 
+         else
+           #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
+           #@joueur.meurt(@messageDefaite)
+           break
+         end
+       end
+     else
+       for ennemi in @joueur.casePosition.listeEnnemis
+         itemsUnEnnemi = Array.new() 
+         itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
+         
+         if(@joueur.toujoursEnVie?())
+           itemsEnnemis += itemsUnEnnemi 
+         else
+           #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
+           #@joueur.meurt(@messageDefaite)
+           break
+         end
        end
      end
      

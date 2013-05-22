@@ -24,6 +24,7 @@ class CombatModal
   private_class_method :new
   @vue
   @modele
+  @momentCombat
   attr_reader :vue, :modele
   
   ## 
@@ -58,6 +59,7 @@ class CombatModal
   # * <b>momentCombat :</b> le moment où intervient le combat
   # 
   def majCombatModal(momentCombat)
+    @momentCombat=momentCombat
     @vue.window.modal=false
     ennemis=@modele.joueur.casePosition.listeEnnemis
     str=XmlMultilingueReader.lireTexte("popupCombatEnnemi_avertissement")
@@ -85,9 +87,9 @@ class CombatModal
       dialog.signal_connect('response') {
         dialog.destroy
         if(@modele.joueur.peutSEquiper)
-        @modele.choixEquipementAvantCombat()
+        @modele.choixEquipementAvantCombat(@momentCombat)
     elsif(@modele.joueur.casePosition.presenceEnnemis?() && !@modele.joueur.peutSEquiper)
-        @modele.declencherCombat()
+        @modele.declencherCombat(@momentCombat)
     end }
       dialog.vbox.add(Gtk::Label.new(str))
       dialog.show_all
@@ -115,8 +117,7 @@ class CombatModal
     end
     
     dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupCombat"), @vue.window,
-             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
-             [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT])
+             Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT)
     dialog.signal_connect('response') { dialog.destroy }
     dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("equipArmure")))
       
@@ -129,9 +130,16 @@ class CombatModal
         button.image = image
         tooltips.set_tip( button, item.description, nil )
 
-        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
+        @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog,@momentCombat)
         dialog.vbox.add(button)
        }
+       buttonCancel=Gtk::Button.new()
+       buttonCancel.set_label("Cancel")
+       buttonCancel.signal_connect('clicked'){
+         @modele.suiteEquipementChoixArme(@momentCombat)
+         dialog.destroy
+       }
+       dialog.vbox.add(buttonCancel)
    dialog.show_all
    dialog.run do |response|
    end
@@ -171,9 +179,16 @@ class CombatModal
       tooltips.set_tip( button, item.description, nil )
 
 
-      @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog)
+      @vue.controller.equiperItemCreer(button,item,@modele.joueur,dialog,@momentCombat)
       dialog.vbox.add(button)
     }
+    buttonCancel=Gtk::Button.new()
+    buttonCancel.set_label("Cancel")
+    buttonCancel.signal_connect('clicked'){
+      @modele.declencherCombat(@momentCombat)
+      dialog.destroy
+    }
+    dialog.vbox.add(buttonCancel)
     dialog.show_all
     dialog.run do |response|
     end
