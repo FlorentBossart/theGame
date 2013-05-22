@@ -1,35 +1,60 @@
+#COMOK
+#!/usr/bin/env ruby
+
 ##
-# Auteur YANNIS VESSEREAU
-# Version 0.1 : Date : 10/04/2013
+# Fichier : TypeEnnemi.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+#
+#===Cette classe représente un type d'ennemi. Un TypeEnnemi se défini par :
+#* Un intitulé unique permettant de le distinguer
+#* Une energie de base représentant l'energie de base du TypeEnnemi
 #
 
 
-# Classe TypeEnnemi modelisant le type d'un ennemi
 class TypeEnnemi
 
-   @intitule        # Represente l'image du type (acces biblio)
-   @energieBase  # Represente l'energie de base du type
+   @intitule
+   @energieBase
 
-   # Lecture 
    attr_reader :intitule, :energieBase
 
    private_class_method :new
    
-   # Initialise l'instance de la classe TypeEnnemi
-   # avec les parametres String _intitule_ et Float _energieBase_.
+
+   ##
+   #Crée un nouveau TypeEnnemi à partir des informations passées en paramètre.
+   #
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné au type d'ennemi à créer
+   #* <b>energieBase :</b> l'énergie de base du TypeEnnemi
+   #
    def initialize(intitule, energieBase)
       @intitule = intitule
       @energieBase = energieBase
    end
 
-   # Appel de la méthode initialize.
+   
+   ##
+   #Appel de la méthode initialize.
+   #
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné au type d'ennemi à créer
+   #* <b>energieBase :</b> l'énergie de base du TypeEnnemi
+   #
+   #===Retourne:
+   #* <b>TypeEnnemi :</b> une instance la la classe TypeEnnemi
+   #
    def TypeEnnemi.creer(intitule, energieBase)
       return new(intitule, energieBase)
    end
 
+   
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet TypeEnnemi sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères reprenant les différentes caractéristiques de l'objet TypeEnnemi sur lequel la méthode est appellée.
+   # 
+   #===Retourne:
+   #* <b>Chaine :</b> une chaine représentant le TypeEnnemi
    #
    def to_s
       s= "[==TypeEnnemi >>> | "

@@ -1,16 +1,17 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier        : TypeTerrain.rb
-# Auteur         : L3SPI - Groupe de projet B
+# Fichier : TypeTerrain.rb
+# Auteur : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente un type de terrain. Un type de terrain de défini par :
-# == Un intitulé unique permettant de le distinguer
-# == Un booléen indiquant si le terrain est accessible ou non (ie si le joueur peut le traverser)
-# == Un cout de déplacement (énergie pompée au joueur lorsqu'il franchit le terrain)
+#===Cette classe représente un type de terrain. Un type de terrain de défini par :
+#* Un intitulé unique permettant de le distinguer
+#* Un booléen indiquant si le terrain est accessible ou non (ie si le joueur peut le traverser)
+#* Un cout de déplacement (énergie pompée au joueur lorsqu'il franchit le terrain)
+#* Une valeur de probabilité pour la répartition du TypeTerrain
 #
-# Note : On pourrait mettre -1 en cout de déplacement pour stipuler qu'un terrain n'est pas franchissable
 
 
 class TypeTerrain
@@ -22,13 +23,15 @@ class TypeTerrain
 
     attr_reader :intitule, :isAccessible, :coutDeplacement, :probaRepartition
 
+    
    ##
-   # Crée un nouveau TypeTerrain à partir des informations passées en paramètre.
+   #Crée un nouveau TypeTerrain à partir des informations passées en paramètre.
    #
-   # == Parameters:
-   # intitule : une chaine de caractères correspondant au nom courrament donné au type de terrain à créer
-   # isAccessible : un booléen indiquant si le terrain peut être franchit ou non
-   # cout : le cout en énergie que devra consommer le joueur pour franchir le terrain
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné au type de terrain à créer
+   #* <b>isAccessible :</b> un booléen indiquant si le terrain peut être franchit ou non
+   #* <b>cout :</b> le cout en énergie que devra consommer le joueur pour franchir le terrain
+   #* <b>proba :</b> la valeur de probabilité pour la répartition du TypeTerrain
    #
    def initialize(intitule, isAccessible, cout, proba)
       @intitule        = intitule
@@ -38,14 +41,28 @@ class TypeTerrain
    end
 
 
+   ##
+   #Appel de la méthode initialize.
+   #
+   #===Paramètres:
+   #* <b>intitule :</b> une chaine de caractères correspondant au nom courrament donné au type de terrain à créer
+   #* <b>isAccessible :</b> un booléen indiquant si le terrain peut être franchit ou non
+   #* <b>cout :</b> le cout en énergie que devra consommer le joueur pour franchir le terrain
+   #* <b>proba :</b> la valeur de probabilité pour la répartition du TypeTerrain
+   #
+   #===Retourne:
+   #* <b>TypeTerrain :</b> une instance la la classe TypeTerrain
+   #
    def TypeTerrain.creer(intitule, isAccessible, cout, proba)
       return new(intitule, isAccessible, cout, proba)
    end
    
    
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet TypeTerrain sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères reprenant les différentes caractéristiques de l'objet TypeTerrain sur lequel la méthode est appellée.
+   # 
+   #===Retourne:
+   #* <b>Chaine :</b> une chaine représentant le TypeTerrain
    #
    def to_s
       s= "[==TypeTerrain >>> | "
