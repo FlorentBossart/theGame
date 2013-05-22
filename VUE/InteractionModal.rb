@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby 
+#COMOK
 
 ## 
 # Fichier           : InteractionModal.rb 
