@@ -458,9 +458,9 @@ class Controller
   # elem : element a equiper
   # dialog: popup liÃ© au bouton
   #
-  def equiperItemCreer(btInteraction,elem,joueur,dialog)
+  def equiperItemCreer(btInteraction,elem,joueur,dialog,momentCombat)
       btInteraction.signal_connect('clicked'){
-        equiperItemAction(joueur,elem)
+        equiperItemAction(joueur,elem,momentCombat)
         dialog.destroy
      }
   end
@@ -473,11 +473,18 @@ class Controller
   # joueur : le joueur qui doit equiper l'item
   # elem : element a equiper
   #
-  def equiperItemAction(joueur,elem)
+  def equiperItemAction(joueur,elem,momentCombat)
     Thread.new do
+
       joueur.utiliserItem(elem)
+
     end
     print "oO Bt interaction "+elem.getIntitule()+" pressÃ©!"
+    if(elem.caracteristique.typeEquipable.sePorteSur == EnumEmplacementEquipement.ARMURE)
+      @modele.suiteEquipementChoixArme(momentCombat)
+    else
+      @modele.declencherCombat(momentCombat)
+    end
     @vue.window.modal=true
   end
   

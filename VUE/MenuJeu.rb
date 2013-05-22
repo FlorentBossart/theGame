@@ -423,6 +423,7 @@ class MenuJeu
 		@contenu.add(boutRetour)
 		
 		@contenu.set_border_width(20)
+		@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		
 		@fenetreMenu.show_all
 
