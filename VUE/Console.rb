@@ -1,4 +1,12 @@
-"#!/usr/bin/env ruby"
+#!/usr/bin/env ruby
+
+##
+# Fichier            : Console.rb
+# Auteur            : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+#
+# Cette classe représente la console du jeu, elle permet d'afficher les différents message du jeu
+#
 
 require 'gtk2'
 
@@ -6,11 +14,17 @@ class Console < Gtk::ScrolledWindow
 
   @console #la console
   
+  ##
+  #Constructeur de la console
+  #
   def initialize()
     super()
     initInterface();
   end
 
+  ##
+  #Creation de la console (visuel)
+  #
   def initInterface()
     #editeur de texte
     @console = Gtk::TextView.new();
@@ -33,7 +47,12 @@ class Console < Gtk::ScrolledWindow
     @console.show();
   end
 
-  #affichage d'un texte
+  ##
+  #Permet l'affichage d'un texte dans la console
+  #
+  #===Paramètres :
+  #* <b>texte</b> : le message à afficher dans la console
+  #
   def afficherTexte(texte)
     nomMarque="finTxt"
     #on recupere le buffer du textview

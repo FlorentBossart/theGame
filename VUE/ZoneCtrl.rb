@@ -25,6 +25,13 @@ class ZoneCtrl <  Gtk::Frame
   @menu #le bouton menu
   @interaction #le bouton d'interaction
   
+  ##
+  #Constructeur de la zone de controle
+  #
+  #===Paramètres :
+  #* <b>vue</b> : la vue du jeu
+  #* <b>controller</b> : le controller du jeu
+  #
   def initialize(vue,controller)
     super() #Frame
     @vue=vue
@@ -32,10 +39,20 @@ class ZoneCtrl <  Gtk::Frame
     initInterface()
   end
 
+  ##
+  #Création d'une nouvelle zone de controle
+  #
+  #===Paramètres :
+  #* <b>vue</b> : la vue du jeu
+  #* <b>controller</b> : le controleur du jeu
+  #
   def ZoneCtrl.creer(vue,controller)
     new(vue,controller)
   end
 
+  ##
+  #Création et association de tout les bontons au controleur
+  #
   def initInterface()
     #creation image bouton
     @gauche = Gtk::EventBox.new.add(Gtk::Image.new(@vue.referencesGraphiques.getRefGraphique("gauche")))
@@ -85,7 +102,12 @@ class ZoneCtrl <  Gtk::Frame
     show_all();
   end
 
-  #rend les boutons actif ou non celon cla présence d'eau
+  ##
+  #Permet de rendre les boutons actif ou non celon la présence d'eau
+  #
+  #===Paramètres :
+  #* <b>modele</b> : Permet de savoir si une case est accessible en fonction de la position du joueur
+  #
   def majBoutons(modele)
     @haut.sensitive=modele.joueur.casePosition.caseNord.estAccessible?()
     @bas.sensitive=modele.joueur.casePosition.caseSud.estAccessible?()
@@ -96,7 +118,9 @@ class ZoneCtrl <  Gtk::Frame
     @interaction.sensitive=modele.joueur.casePosition.presenceAides?()
   end
 
-  #bloque tout les boutons lors d'un déplacement
+  ##
+  #Bloque tout les boutons lors d'un déplacement
+  #
   def bloquerBoutons(modele)
     @haut.sensitive=false
     @bas.sensitive=false
@@ -107,7 +131,9 @@ class ZoneCtrl <  Gtk::Frame
     @interaction.sensitive=false
   end
 
-  #mise a jour de la langue
+  ##
+  #Mise à jour de la langue
+  #
   def majLangue()
     @repos.label=(XmlMultilingueReader.lireTexte("boutonRepos"))
     @inventaire.label=(XmlMultilingueReader.lireTexte("boutonInventaire"))

@@ -21,6 +21,12 @@ class Zaf < Gtk::Frame
   @niveau #le niveau du joueur
   @vue #la vue
   
+  
+  ##
+  #Constructeur de la zone d'affichage
+  #===Paramètres :
+  #* <b>vue</b> : la vue du jeu
+  #
   def initialize(vue)
     super();
     @vue = vue;
@@ -29,6 +35,9 @@ class Zaf < Gtk::Frame
     initInterface();
   end
 
+  ##
+  #Permet la création des différentes jauges
+  #
   def initInterface()
     
     hbox = Gtk::HBox.new(true, 2);
@@ -58,7 +67,12 @@ class Zaf < Gtk::Frame
     show_all();
   end
 
-  #mise a jour de l'affichage des données du joueur
+  ##
+  #Permet la mise à jour de l'affichage grace au joueur
+  #
+  #===Paramètres :
+  #* <b>joueur</b> : le joueur
+  #
   def majZaf(joueur)
     @jauges.majJauge(joueur)
     while(!joueur.modele.notifications.empty?)
@@ -66,7 +80,9 @@ class Zaf < Gtk::Frame
     end
   end
 
-  #mise a jour de la langue lors d'un changement
+  ##
+  #Permet la mise à jour de la langue lors d'un changement
+  #
   def majLangue()
     @niveau.label=XmlMultilingueReader.lireTexte("niveau");
   end
