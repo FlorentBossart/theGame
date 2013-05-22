@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,7 +6,7 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de créer une liste de statistiques des joueurs et ce pour chaque difficulté. Elle contient donc :
+#===Cette classe permet de créer une liste de statistiques des joueurs et ce pour chaque difficulté. Elle contient donc :
 #* Une liste représentant les statistiques des joueurs novices
 #* Une liste représentant les statistiques des joueurs moyens
 #* Une liste représentant les statistiques des joueurs experts
@@ -30,7 +31,7 @@ class Classements
 
    ##
    # Permet d'ajouter un joueur et ses statistiques à la liste correspondant à sa difficulté
-   # == Parameters: 
+   #=== Paramètres : 
    #* <b>nom :</b> une chaine de caractères correspondant au nom du joueur
    #* <b>nbEnnemisTues :</b> un entier correspondant au nombre d'ennemis tués par le joueur
    #* <b>distance :</b> un entier correspondant à la distance totale parcourue par le joueur
@@ -54,9 +55,11 @@ class Classements
 
    ##
    # Permet de récupérer la liste des statistiques des joueurs en fonction de la difficulté
-   # == Parameters: 
+   #
+   #=== Paramètres : 
    #* <b>difficulte :</b> une chaine de caractères correspondant à la difficulté du joueur qui permet de choisir la liste à retourner
-   # == Returns: 
+   #
+   #===Retourne : 
    #* <b>@listeStatsX :</b> un tableau contenant les statistiques des joueurs ayant la difficulté X
    # 
    def getListeJoueur(difficulte)
