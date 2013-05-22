@@ -111,8 +111,11 @@ class InventaireModal
          #On crÃ©e une EventBox avec l'image de l'item
          eventBoxCourante = EventBox.new.add(imageCourante)
          #eventBoxCourante.set_tooltip_text item.getIntitule + " (" + item.caracteristique.prix.to_s + ")"
-         @tooltips.set_tip( eventBoxCourante, item.getIntitule + " (" + item.caracteristique.prix.to_s + ")", nil )
-
+         if modeAffichage == EnumStadePartie.INTERACTION_MARCHAND_ACHAT
+            @tooltips.set_tip( eventBoxCourante, item.getIntitule + " (" + item.caracteristique.prix.to_s + ")", nil )
+         else
+            @tooltips.set_tip( eventBoxCourante, item.getIntitule + " (" + (item.caracteristique.prix/2).to_s + ")", nil )
+         end
          #On lie l'Ã©vÃ©nement de clic de l'eventBox au Controlleur
          @vue.controller.selectionnerItem(eventBoxCourante,indice)
 
