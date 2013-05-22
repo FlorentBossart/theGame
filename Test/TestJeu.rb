@@ -10,15 +10,12 @@ require 'VUE/Audio.rb'
 
 Gtk.init
 
-XmlMultilingueReader.setLangue("EN")
+XmlMultilingueReader.setLangue("FR")
 
 # Remplissage des bibliothèque
 Modele.initialisationBibliotheques()
 
 Audio.load()
-
-#difficulte = BibliothequeDifficulte.getDifficulte("Novice")
-#pseudo = "Fake"
 
 #Création vue
 vue = Vue.new
