@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,7 +6,7 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier Yaml d'un slot de sauvegarde. Elle permet de lire les infos du fichier yaml
+#===Cette classe permet de parcourir le fichier Yaml d'un slot de sauvegarde. Elle permet de lire les infos du fichier yaml
 # mais ï¿½galement d'ï¿½crire dedans pour sauvegarder les informations d'une partie.
 #
 
@@ -23,7 +24,7 @@ class YamlSlot
    # Mï¿½thode statique permettant de rï¿½cupï¿½rer les informations d'un slot de sauvegarde
    # et de les ajouter ï¿½ la liste des infos d'un slot de sauvegarde (classe Slot).
    #
-   # == Parameters: 
+   #=== Paramètres : 
 	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
 	#
    def YamlSlot.lireYaml(nomFicSlotYaml)
@@ -57,7 +58,7 @@ class YamlSlot
 	##
    # Mï¿½thode statique permettant d'ajouter les infos pour la sauvegarde d'un joueur au fichier YAML (slotX.yaml)
    #
-   # == Parameters: 
+   #=== Paramètres : 
 	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
 	#* <b>modele :</b> le modele à sauvegarder
 	#
