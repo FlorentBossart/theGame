@@ -418,13 +418,14 @@ class Modele
          itemsUnEnnemi += @joueur.combattreEnnemi(ennemi)
          
          if(@joueur.toujoursEnVie?())
-           itemsEnnemis += itemsUnEnnemi 
+           itemsEnnemis += itemsUnEnnemi
          else
            #@messageDefaite=@joueur.causeMort + " -> lors du combat avec " + ennemi.getIntitule()
            #@joueur.meurt(@messageDefaite)
            break
          end
        end
+       ancienneCase.listeEnnemis.clear
      else
        for ennemi in @joueur.casePosition.listeEnnemis
          itemsUnEnnemi = Array.new() 
@@ -438,6 +439,7 @@ class Modele
            break
          end
        end
+         @joueur.casePosition.listeEnnemis.clear
      end
      
      if(@joueur.toujoursEnVie?())
