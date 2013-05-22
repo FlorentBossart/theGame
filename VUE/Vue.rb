@@ -6,8 +6,38 @@
 # Auteur          : L3SPI - Groupe de projet B
 # Fait partie de  : TheGame
 #
-# Cette classe est responsable de l'affichage du jeu dan sa totalité et regroupe différents sous-éléments graphiques.
-#
+# Cette classe est responsable de l'affichage du jeu dan sa totalité et regroupe différents sous-éléments graphiques. Elle est définie par:
+# * Une zone d'affichage
+# * Un menu
+# * Une zone de contrôle
+# * Un pixbuf 'background' pour copier le contenu de la carte
+# * Un pixbuf 'frame' pour les animations
+# * Un drawingArea pour afficher la carte
+# * Un combat modal
+# * Une interaction modale
+# * Une pop up
+# * Une fenêtre
+# * Un inventaire modal
+# * Un modele
+# * Une bibliothèque de référence graphique
+# * Une carte (celle du modèle)
+# * Un controleur
+# * Une dimension de case
+# * La même dimension en Float
+# * Un 'delay':vitesse des animations
+# * Un numero d'etape d'affichage des visualisations
+# * Un nombre d'étape d'affichage des visualisations
+# * Un 'timeout_id': la référence de l'animation en cours
+# * les différentes positions occupable dans une case
+# * les ennemis à animer (liste de structures d'informations)
+# * les aides à animer (liste de structures d'informations)
+# * Une hauteurVisible
+# * Une largeurVisible
+# * Une coordonnée x actuel du coin supérieur gauche
+# * Une coordonnée y actuel du coin supérieur gauche
+# * Un état d'initialisation de la vue
+# * Un état d'activité d'une animation
+# * 8 états d'écoutes pour les 8 touches ecoutées
 
 require 'gtk2'
 require 'VUE/Zaf.rb'
@@ -24,7 +54,7 @@ require 'XMLReader/XmlRefGraphiquesReader.rb'
 
 class Vue
 
-  #éléments graphiques
+
   @zaf
   @menu
   @zoneCtrl
@@ -36,31 +66,25 @@ class Vue
   @popUp
   @window
   @inventaireModal
-  
-  #composants externes
   @carte
-  @referencesGraphiques  #fichier xml des images
+  @referencesGraphiques  
   @modele
   @controller
-  
-  #données de la vue
   @tailleCase
   @tailleCase_f
-  @delay  # vitesse des animations
-  @numEtapeAffichage #  numero de l'etape d'affichage des visualisations
-  @nbEtapeAffichage # nombre d'éape d'affichage des visualisations
-  @timeout_id # la référence de l'animation en cours
-  @positions  # les différentes positions occupable dans une case
-  @structureEnnemisDeplacement #  les ennemis à animer
-  @structureAidesGenere#  les aides à animer
-  @hauteurAfficheCarte #  hauteurVisible
-  @largeurAfficheCarte #  largeurVisible
-  @x #  coordonnée x actuel du coin supérieur gauche
-  @y #  coordonnée y actuel du coin supérieur gauche
-  @finInit# état d'initialisation de la vue
-  @transitionFini# état d'activité d'une animation
-  
-  #touches ecoutees
+  @delay  
+  @numEtapeAffichage
+  @nbEtapeAffichage 
+  @timeout_id 
+  @positions  
+  @structureEnnemisDeplacement 
+  @structureAidesGenere
+  @hauteurAfficheCarte 
+  @largeurAfficheCarte 
+  @x 
+  @y 
+  @finInit
+  @transitionFini
   @ecouteUp
   @ecouteDown
   @ecouteLeft
