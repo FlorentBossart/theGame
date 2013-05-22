@@ -18,7 +18,7 @@ Modele.initialisationBibliotheques()
 Audio.load()
 
 #Création vue
-vue = Vue.new
+vue = Vue.creer()
 
 #Création modele
 modele = Modele.creer(vue,nil,nil)

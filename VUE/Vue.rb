@@ -110,6 +110,25 @@ class Vue
 
     @finInit = false
     
+    @referencesGraphiques = ReferencesGraphiques.new()
+    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
+    
+    @tailleCase=130
+    @tailleCase_f=@tailleCase.to_f
+    @hauteurAfficheCarte = 4
+    @largeurAfficheCarte = 10
+    @timeout_id=nil
+    @delay=20
+    @numEtapeAffichage=0
+    @nbEtapeAffichage=40
+    @positions=Array.new([[@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],
+      [2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
+    @structureEnnemisDeplacement  = Array.new()
+    @structureAidesGenere = Array.new()
+    @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
+    @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
+    @carte = @modele.carte
+    
     @inventaireModal=InventaireModal.creer(self)
     @zaf = Zaf.new(self)
     @menu = MenuJeu.creer(true, @modele, @controller)
@@ -136,24 +155,7 @@ class Vue
       expose(w, e)
     end
     
-    @tailleCase=130
-    @tailleCase_f=@tailleCase.to_f
-    @hauteurAfficheCarte = 4
-    @largeurAfficheCarte = 10
-    @timeout_id=nil
-    @delay=20
-    @numEtapeAffichage=0
-    @nbEtapeAffichage=40
-    @positions=Array.new([[@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,0.1],[0.1,@tailleCase_f/3],
-      [2*@tailleCase_f/3,@tailleCase_f/3],[@tailleCase_f/3,2*@tailleCase_f/3],[0.1,0.1]])
-    @structureEnnemisDeplacement  = Array.new()
-    @structureAidesGenere = Array.new()
-    @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
-    @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
-    @carte = @modele.carte
     
-    @referencesGraphiques = ReferencesGraphiques.new()
-    XmlRefGraphiquesReader.lireXml(@referencesGraphiques)
 
     bloquerEcouteClavier()
     @controller.ecouteClavierCreer(@window)
