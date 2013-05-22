@@ -7,7 +7,7 @@
 # Fait partie de : TheGame
 
 #===Classe permettant de gérer des PNJ (Personnages Non Joueurs) Guerisseur.
-#Les PNJ (Personnages Non Joueurs) Guerisseur sont caractérisées par :
+#Les PNJ (Personnages Non Joueurs) Guerisseur sont caractérisés par :
 #
 
 require 'MODELE/Ami.rb'

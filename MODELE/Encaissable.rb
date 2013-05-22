@@ -30,7 +30,7 @@ class Encaissable < Caracteristique
    ##
    #Crée un nouvel Encaissable comportant pour montant le montant passé au paramètre
    #
-   # == Paramètres:
+   #=== Paramètres:
    #* <b>montant</b> : le montant qui sera reversé lorsque l'Encaissable sera encaissé
    #
    def initialize(montant)
@@ -43,7 +43,7 @@ class Encaissable < Caracteristique
    ##
    #Permer de créer un nouvel Encaissable comportant pour montant le montant passé au paramètre
    #
-   # == Paramètres:
+   #=== Paramètres:
    #* <b>montant</b> : le montant qui sera reversé lorsque l'Encaissable sera encaissé
    #===Retourne :
    #* <b>nouvelEncaissable</b> : le nouvel Encaissable créé

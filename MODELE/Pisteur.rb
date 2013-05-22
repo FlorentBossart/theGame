@@ -1,19 +1,15 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : Pisteur.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
-#
-#  Cette classe représente un personnage non joueur ennemi pisteur.
-#  Un personnage non joueur ennemi pisteur est défini par :
-#* Une case où il se situe
-#* Une liste d'items
-#* Un type
-#* Une energie
-#* Un niveau
-#* Un joueur à pister
-#* Une distance de pistage
+# Fichier : Pisteur.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
+
+#===Classe permettant de gérer des PNJ (Personnages Non Joueurs) Ennemi Pisteur.
+#Un Pisteur est caractérisé par :
+#* Un Joueur à pister
+#* Une distance de pistage (= champ d'action du Pisteur)
 #
 
 require 'MODELE/Ennemi.rb'
@@ -21,18 +17,24 @@ require 'MODELE/Joueur.rb'
 
 class Pisteur < Ennemi
 
+
+   #=== Variable d'instance ===
    @joueur
    @distancePistage
 
-    
+
+   private_class_method :new #La construction se fera par la méhode de classe Pisteur.creer(casePosition, niveau, type,modele, joueur)
+
+
    ##
-   # Crée un nouvel Ennemi pisteur à partir des informations passées en paramètre.
-   #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ennemi pisteur
-   #* <b>niveau :</b> le niveau de l'ennemi pisteur
-   #* <b>type :</b> le type de l'ennemi pisteur
-   #* <b>joueur :</b> le joueur à pister
+   #Crée un nouveau Pisteur à partir des informations passées en paramètre.
+   #   
+   #===Paramètres :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ Pisteur
+   #* <b>niveau :</b> le niveau du PNJ Pisteur
+   #* <b>type :</b> le type de PNJ Pisteur
+   #* <b>modele :</b> le modèle qui gère le PNJ Pisteur
+   #* <b>joueur :</b> le Joueur pisté
    #
    def initialize(casePosition, niveau, type,modele, joueur)
       super(casePosition, niveau, type,modele)
@@ -42,13 +44,16 @@ class Pisteur < Ennemi
 
    
    ##
-   # Appel de la méthode initialize avec les paramètres necessaires.
-   #
-   # == Parameters:
-   #* <b>casePosition :</b> la case où se trouvera l'ennemi pisteur
-   #* <b>niveau :</b> le niveau de l'ennemi pisteur
-   #* <b>type :</b> le type de l'ennemi pisteur
-   #* <b>joueur :</b> le joueur à pister
+   #Permet de crée un nouveau Pisteur à partir des informations passées en paramètre.
+   #   
+   #===Paramètres :
+   #* <b>casePosition :</b> la case où se trouvera le PNJ Pisteur
+   #* <b>niveau :</b> le niveau du PNJ Pisteur
+   #* <b>type :</b> le type de PNJ Pisteur
+   #* <b>modele :</b> le modèle qui gère le PNJ Pisteur
+   #* <b>joueur :</b> le Joueur pisté
+   #===Retourne :
+   #* <b>nouveauPisteur</b> : le Pisteur créé
    #
    def Pisteur.creer(casePosition, niveau, type,modele, joueur)
       return new(casePosition, niveau, type,modele, joueur)
@@ -56,7 +61,7 @@ class Pisteur < Ennemi
 
    
    ##
-   # Permet de deplacer l'Ennemi sur une cible calculée suivant la position du joueur.
+   #Permet de deplacer l'Ennemi sur une cible calculée suivant la position du joueur.
    #
    def deplacementIntelligent()
       cj = @joueur.casePosition # CaseJoueur
@@ -172,9 +177,9 @@ class Pisteur < Ennemi
 
    
    ##
-   # Permet de savoir si une case à déjà était marqué.
+   #Permet de savoir si une case à déjà été marquée.
    #
-   # == Parameters:
+   #===Paramètres :
    #* <b>uneCase :</b> la case à vérifier
    #* <b>list_case :</b> la liste qui contient les cases marquées
    #* <b>indice :</b> l'indice du dernier ajout
@@ -189,16 +194,20 @@ class Pisteur < Ennemi
       return false
   end
 
-  def meurt()
+
+   ##
+   #Fait mourrir le Pisteur
+   #
+   def meurt()
      @modele.nbPisteur=@modele.nbPisteur-1
      super()
    end 
   
   
    ##
-   # Permet de savoir si une case est la cible
+   # Permet de savoir si une case est la cible (celle qui contient le Joueur pisté)
    #
-   # == Parameters:
+   #===Paramètres :
    #* <b>uneCase :</b> la case à vérifier
    #
    def estCible?(uneCase)
@@ -211,8 +220,10 @@ class Pisteur < Ennemi
 
    
    ##
-   # Retourne une chaîne de caractères reprenant les différentes caractéristiques
-   # de l'objet Pisteur sur lequel la méthode est appellée.
+   #Retourne une chaîne de caractères représentant le Pisteur courant
+   #
+   #===Retourne :
+   #* <b>s</b> : une chaîne de caractères représentant le Pisteur courant
    #
    def to_s
      s= "[==Pisteur >>> | "
