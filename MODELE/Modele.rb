@@ -425,7 +425,6 @@ class Modele
            break
          end
        end
-       ancienneCase.listeEnnemis.clear
      else
        for ennemi in @joueur.casePosition.listeEnnemis
          itemsUnEnnemi = Array.new() 
@@ -439,7 +438,6 @@ class Modele
            break
          end
        end
-         @joueur.casePosition.listeEnnemis.clear
      end
      
      if(@joueur.toujoursEnVie?())
