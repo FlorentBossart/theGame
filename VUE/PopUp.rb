@@ -18,10 +18,10 @@ class PopUp
   @vue
   attr_reader :vue, :message
   ##
-  # CrÃ©e un nouveau PopUp.
+  # CrÃƒÂ©e un nouveau PopUp.
   #
   # == Parameters:
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃƒÂ©e
   #
   def initialize(vue)
     @vue=vue
@@ -33,7 +33,7 @@ class PopUp
   # Instancie un PopUp
   #
   # == Parameters:
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃƒÂ©e
   #
   def PopUp.creer(vue)
     new(vue)
@@ -45,6 +45,9 @@ class PopUp
   #
   # == Parameters:
   # * <b>message :</b> representant le message a afficher
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def affichePopUp(message)
     # @vue.window.modal=false
@@ -62,6 +65,7 @@ class PopUp
       end
       false
     end
+    return nil
   end
 
   
@@ -70,6 +74,9 @@ class PopUp
   #
   # == Parameters:
   # * <b>message :</b> representant le message a afficher
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def affichePopUpMort(message)
     Gtk.idle_add do
@@ -90,11 +97,15 @@ class PopUp
       end
       false
     end
+    return nil
   end
 
   
   ##
   # Affiche le PopUp contenant un choix entre le menu d'achat ou le menu de vente d'un marchand
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def afficheChoixMarchand()
     @vue.window.modal=false
@@ -118,15 +129,19 @@ class PopUp
       end
       false
     end
+    return nil
   end
 
   
   ##
-  # Affiche le PopUp contenant un choix entre les diffÃ©rentes options de soins
+  # Affiche le PopUp contenant un choix entre les diffÃƒÂ©rentes options de soins
   #
   # == Parameters:
   # * <b> joueur : </b> afin qu'il puisse acheter/recevoir des soins
   # * <b> guerisseur : </b> PNJ qui fourni un service de type soin
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def afficheChoixGuerisseur(joueur,guerisseur)
     @vue.window.modal=false
@@ -159,11 +174,15 @@ class PopUp
       end
       false
     end
+    return nil
   end
 
   
   ##
   # Affiche le PopUp contenant un choix entre le menu d'achat ou le menu de vente d'un marchand
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def choixInventairePlein()
     @vue.window.modal=false
@@ -181,11 +200,15 @@ class PopUp
     dialog.show_all
     dialog.run do |response|
     end
+    return nil
   end
 
   
   ##
-  # Retourne une chaÃ®ne de caractÃ¨res  permettant l'identification de l'objet.
+  # Retourne une chaÃƒÂ®ne de caractÃƒÂ¨res  permettant l'identification de l'objet.
+  #
+  # == Returns :
+  # * <b> string: </b> message indiquant la nature de l'objet
   #
   def to_s
     return XmlMultilingueReader.lireTexte("popUp")
