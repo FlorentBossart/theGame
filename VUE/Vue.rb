@@ -155,8 +155,6 @@ class Vue
       expose(w, e)
     end
     
-    
-
     bloquerEcouteClavier()
     @controller.ecouteClavierCreer(@window)
     
