@@ -24,7 +24,6 @@ require 'VUE/Slot.rb'
 
 # On inclu le module Gtk, cela �vite de pr�fixer les classes par Gtk::
 include Gtk
-include Gtk::RC
 
 class MenuJeu
 	
@@ -46,13 +45,8 @@ class MenuJeu
 		@controleur 	= controleur
 		@modele 			= modele
 		
-		#Configuration aspect graphique de l'interface par un Gtkrc
+		#Configuration de l'aspect graphique de l'interface par un Gtkrc
 		Gtk::RC.parse("gtkrc.rc")
-		
-		#@fenetreMenu 	= Gtk::Window.new()
-		#@fenetreMenu.set_default_size(300,300)
-		
-		#@fenetreMenu.set_default_size(669,534)
 		
 	end
 	
@@ -62,20 +56,11 @@ class MenuJeu
    #
    # == Parameters:
    # isEnJeu : un bool�en indiquant si le joueur est en jeu ou non
+   # modele : le modele
+   # controleur : le controleur
    #
 	def MenuJeu.creer(isEnJeu, modele, controleur)
 		return new(isEnJeu, modele, controleur)
-	end
-	
-	
-	##
-   # Vide la fen�tre de tous ses composants.
-   #
-   # == Parameters:
-   # box : une boite � supprimer de la fenetre
-   #
-	def viderFenetre(box)
-		@fenetreMenu.remove(box)
 	end
 	
 	
@@ -87,15 +72,13 @@ class MenuJeu
 	  	fenMenuPrincipal.name = "fenMenuPrincipal" # R�f�rence pour le fichier gtkrc.rc
 		fenMenuPrincipal.set_title(XmlMultilingueReader.lireTexte("nomMenu"))
 		
-		#fenMenuPrincipal.set_default_size(669,534) # Marche pas !
 		fenMenuPrincipal.set_width_request(669)
 		fenMenuPrincipal.set_height_request(534)
 		fenMenuPrincipal.set_resizable(false)
 	
-		#@contenu = VBox.new(false, 6)
 		@contenu = VBox.new(false, 0)
 		
-		# Cr�ation des boutons
+		# Cr�ation des boutons (eventBox)
 		if(@isInGame == false)
 						
 			ebNewPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("NewPartie")))
@@ -123,21 +106,7 @@ class MenuJeu
 			@contenu.add(ebAide)
 			@contenu.add(ebQuitter)
 			
-=begin
-			boutNewPartie 		= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
-			boutChargerPartie = Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
-			boutClassement 	= Button.new(XmlMultilingueReader.lireTexte("Classement"))
-			boutOptions 		= Button.new(XmlMultilingueReader.lireTexte("Options"))
-			boutAide 			= Button.new(XmlMultilingueReader.lireTexte("Aide"))
-			boutQuitter 		= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
-			
-			@contenu.add(boutNewPartie)
-			@contenu.add(boutChargerPartie)
-			@contenu.add(boutClassement)
-			@contenu.add(boutOptions)
-			@contenu.add(boutAide)
-			@contenu.add(boutQuitter)
-=end
+			# Alignement du menu suivant la langue
 			if(XmlMultilingueReader.getLangue() == "FR")
 				@contenu.set_spacing(6)
 				align = Alignment.new(0.85, 0.9, 0, 0)
@@ -145,6 +114,7 @@ class MenuJeu
 				@contenu.set_spacing(6)
 				align = Alignment.new(0.8, 0.9, 0, 0)
 			end
+			
 		else
 			ebContinuerPartie = EventBox.new.add(Label.new(XmlMultilingueReader.lireTexte("ContinuerPartie")))
 			ebContinuerPartie.events = Gdk::Event::BUTTON_PRESS_MASK
@@ -178,25 +148,8 @@ class MenuJeu
 			@contenu.add(ebOptions)
 			@contenu.add(ebAide)
 			@contenu.add(ebQuitter)
-=begin			
-			boutContinuerPartie		= Button.new(XmlMultilingueReader.lireTexte("ContinuerPartie"))
-			boutNewPartie 				= Button.new(XmlMultilingueReader.lireTexte("NewPartie"))
-			boutChargerPartie 		= Button.new(XmlMultilingueReader.lireTexte("ChargerPartie"))
-			boutSauvegarderPartie 	= Button.new(XmlMultilingueReader.lireTexte("SauvegarderPartie"))
-			boutClassement 			= Button.new(XmlMultilingueReader.lireTexte("Classement"))
-			boutOptions 				= Button.new(XmlMultilingueReader.lireTexte("Options"))
-			boutAide 					= Button.new(XmlMultilingueReader.lireTexte("Aide"))
-			boutQuitter 				= Button.new(XmlMultilingueReader.lireTexte("Quitter"))
-				
-			@contenu.add(boutContinuerPartie)
-			@contenu.add(boutNewPartie)
-			@contenu.add(boutChargerPartie)
-			@contenu.add(boutSauvegarderPartie)
-			@contenu.add(boutClassement)
-			@contenu.add(boutOptions)
-			@contenu.add(boutAide)
-			@contenu.add(boutQuitter)
-=end			
+			
+			# Alignement du menu suivant la langue
 			if(XmlMultilingueReader.getLangue() == "FR")
 				align = Alignment.new(0.85, 0.9, 0, 0)
 			else
@@ -209,6 +162,7 @@ class MenuJeu
    	fenMenuPrincipal.set_window_position Gtk::Window::POS_CENTER
 		fenMenuPrincipal.show_all
 		
+		# Association des actions aux eventBox
 		if(@isInGame == true)
 			ebContinuerPartie.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
 			ebContinuerPartie.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
@@ -243,17 +197,7 @@ class MenuJeu
 		ebQuitter.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 		@controleur.quitterPartieCreer(ebQuitter,fenMenuPrincipal)
 		
-			
 		@controleur.destroyMenuCreer(fenMenuPrincipal)
-=begin
-		@controleur.nouvellePartieCreer(boutNewPartie,fenMenuPrincipal)		
-		@controleur.chargerPartieCreer(boutChargerPartie,fenMenuPrincipal)
-		@controleur.classementCreer(boutClassement,fenMenuPrincipal)
-		@controleur.optionsCreer(boutOptions,fenMenuPrincipal)
-		@controleur.aideCreer(boutAide,fenMenuPrincipal)
-		@controleur.quitterPartieCreer(boutQuitter,fenMenuPrincipal)
-		@controleur.destroyMenuCreer(fenMenuPrincipal)
-=end
 		
 	end
 	
@@ -325,7 +269,7 @@ class MenuJeu
 		tabSlot = Array.new
 		
 		# Remplissage des frames contenant les diff�rentes EventBox
-		# Ces EventBox contiennent elles-m�mes des infos (@contenus dans le fichier yaml) sur le slot de sauvegarde en question
+		# Ces EventBox contiennent elles-m�mes des infos (contenus dans le fichier yaml) sur le slot de sauvegarde en question
 		0.upto(4) do |i|
 			frame = Frame.new(XmlMultilingueReader.lireTexte("emplacement") + " " + (i+1).to_s)
 			nomFicYaml = "slot" + (i+1).to_s + ".yaml"
@@ -376,43 +320,31 @@ class MenuJeu
 					modeleCharger = tabSlot[index].modele
 					Modele.majCpt(modeleCharger.compteurTour)
 					
-					modeleCharger.joueur.tempsTotal = tabSlot[index].temps # On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
-					puts "temps de jeu session d'avant : " + modeleCharger.joueur.tempsTotal.to_s
+					# On reprend le temps de la save pour l'ajouter au temps de la session de jeu en cours
+					modeleCharger.joueur.tempsTotal = tabSlot[index].temps
 					modeleCharger.joueur.dateDebutJeu = Time.now
-					puts "Debut du temps de jeu le " + modeleCharger.joueur.dateDebutJeu.to_s
 					
 					@fenetreMenu.destroy
 					
 					if(@isInGame == true)
 						#Destruction ancienne vue partie
 						@modele.vue.window.destroy
-						puts "Destroy partie"
 					end
 					
 					# Creation de la vue charg�e
 					vue = modeleCharger.vue
-					puts "Vue creer"
 					
-					
-					#controller = Controller.creer(modele,vue)
 					controller = modeleCharger.vue.controller
-					puts "controller creer"
-					
+				
 					vue.defM(modeleCharger)
 					vue.defC(controller)
-					puts "vue defc"
-					#modele.initialiseToi()
-					#puts "init modele"
 					vue.initInterface()
-					puts "init interface"
-					
 					
 				}
 			end
 		}
 		
-		
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
+   	@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.show_all
 
 		@controleur.retourCreer(boutRetour,@fenetreMenu)
@@ -516,7 +448,7 @@ class MenuJeu
 		
 		nb = Notebook.new()
 		
-		tabLabel = Array.new
+		tabLabel 	= Array.new
 		tabLabel[0] = Label.new("Novice")
 		tabLabel[1] = Label.new("Moyen")
 		tabLabel[2] = Label.new("Expert")
@@ -524,7 +456,7 @@ class MenuJeu
 		# Rempli toutes les listes de joueurs de toutes les difficultes : retourne un classement
 		c = remplirListeJoueur()		
 
-		  0.upto(2) do |i|
+		0.upto(2) do |i|
 			# Cr�ation des treeView
 			treeview = TreeView.new
 			
@@ -539,6 +471,7 @@ class MenuJeu
 			
 			# Cr�ation et ajout des treeviews dans des scrolledWindows
 			scrolled_win = ScrolledWindow.new.add(treeview)
+			
 			# Affichage ou non des scrollBars
 			scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
 			
@@ -557,7 +490,7 @@ class MenuJeu
 		@contenu.pack_start(boutRetour, false, false)
 		
 		@contenu.set_border_width(20)
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
+    	@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -584,7 +517,6 @@ class MenuJeu
 			colonne[2] = listeJoueur[i][2]	# Correspond � la distance totale parcourue par le joueur
 			colonne[3] = listeJoueur[i][3]	# Correspond � l'or total accumul� par le joueur
 			dureeTotale = listeJoueur[i][4]	# Correspond au temps de jeu total du joueur en secondes
-			#colonne[4] = @modele.joueur.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
 			colonne[4] = @modele.convertirTemps(dureeTotale) # Renvoi une chaine sous la forme "h min sec"
 			colonne[5] = listeJoueur[i][5]	# Correspond au score du joueur
 		end
@@ -607,7 +539,7 @@ class MenuJeu
 	
 	  # Les propri�t�s affectent la colonne enti�re
 	  # On utilise Pango pour obtenir le gras
-    renderer.weight = Pango::FontDescription::WEIGHT_BOLD
+     renderer.weight = Pango::FontDescription::WEIGHT_BOLD
     
 	  column   = TreeViewColumn.new(XmlMultilingueReader.lireTexte("pseudo"), renderer,  :text => 0)
 	  # ======= Pour pouvoir trier la colonne
@@ -660,7 +592,10 @@ class MenuJeu
 	##
 	# Rempli et retourne une liste de statistiques de joueurs en fonction de la difficult�
 	# == Parameters: 
-   #* <b>difficulte :</b> une chaine de caract�res permettant de choisir la liste de joueur � retourner en fonction de cette difficult�
+   # * <b>difficulte :</b> une chaine de caract�res permettant de choisir la liste de joueur � retourner en fonction de cette difficult�
+   #
+   # == Return:
+   # * <b>c :<b> Retourne un classement
    #
 	def remplirListeJoueur()
 		c = Classements.new()
@@ -718,7 +653,7 @@ class MenuJeu
 		@contenu.add(maHBoxLangue)
 		@contenu.add(boutValider)
 		@contenu.set_border_width(20)
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
+    	@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 		
@@ -735,10 +670,6 @@ class MenuJeu
 	def afficherAide()
     	@fenetreMenu  = Window.new(Gtk::Window::TOPLEVEL)
 		@fenetreMenu.set_title(XmlMultilingueReader.lireTexte("Aide"))
-		
-		#@fenetreMenu.set_resizable(false)
-		#@fenetreMenu.set_size_request(500, 500)
-		#@fenetreMenu.resize(300, 500)
 		@fenetreMenu.set_height_request(500)
 		
 		@contenu = VBox.new(false, 10)
@@ -755,15 +686,9 @@ class MenuJeu
 		labelAide.set_markup(texteAide)
 		labelAide.wrap = true
 		
-		#textview = TextView.new
-		#textview.buffer.text = texteAide
-		#textview.wrap_mode = TextTag::WRAP_WORD
-		#textview.left_margin = 10
-		#textview.right_margin = 10
-		
 		scrolled_win = ScrolledWindow.new
-		#scrolled_win.add(textview)
 		scrolled_win.add_with_viewport(labelAide)
+		
 		# Affichage ou non des scrollBars
 		scrolled_win.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
 		
@@ -772,7 +697,7 @@ class MenuJeu
 		@contenu.add(scrolled_win)
 		@contenu.pack_start(boutRetour, false, false)
 		@contenu.set_border_width(20)
-    @fenetreMenu.set_window_position Gtk::Window::POS_CENTER
+    	@fenetreMenu.set_window_position Gtk::Window::POS_CENTER
 		@fenetreMenu.add(@contenu)
 		@fenetreMenu.show_all
 
@@ -782,7 +707,3 @@ class MenuJeu
 
 	
 end
-
-#Test
-#m = MenuJeu.creer(false);
-#m2 = MenuJeu.creer(true);
