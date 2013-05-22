@@ -15,26 +15,22 @@ class Jauges
   @or #l'or du joueur
   @nbRepos #nombre de repos du joueur
   @niveau #niveau actuel du joueur
+  
   def initialize()
-    #Gtk.init();
     @or = Gtk::Label.new("0");
     @nbRepos = Gtk::Label.new("0");
     @niveau = Gtk::Label.new("0");
     initInterface();
-
-    #Gtk.main();
-
   end
 
   def initInterface()
     @barExperience = Gtk::ProgressBar.new();
     @barEnergie = Gtk::ProgressBar.new();
-
     @barExperience.show();
     @barEnergie.show();
-
   end
 
+  #mise a jour de toute les jauges avec le joueur en parametre
   def majJauge(joueur)
     majJaugeOr(joueur.inventaire().capital());
     majJaugeNbRepos(joueur.nombreRepos());
@@ -65,10 +61,12 @@ class Jauges
     @barExperience.set_text(XmlMultilingueReader.lireTexte("experience")+ " : " +sprintf("%.2f",quantite.to_s) + " / " + sprintf("%.2f",max.to_s()));
   end
 
+  #met a jour le niveau du joueur
   def majNiveau(niveau)
     @niveau.set_text(niveau.to_s());
   end
 
+  #retourne le niveau du joueur
   def getNiveau()
     return @niveau;
   end

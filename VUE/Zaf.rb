@@ -16,33 +16,27 @@ require 'XMLReader/XmlMultilingueReader.rb'
 #affiche console + jauges
 
 class Zaf < Gtk::Frame
-  @console
-  @jauges
-  @niveau
-  @vue
+  @console #la console
+  @jauges #les jauges d'affichage
+  @niveau #le niveau du joueur
+  @vue #la vue
   
   def initialize(vue)
     super();
     @vue = vue;
     @console = Console.new();
-    #@jauges = Jauges.new(0,5,50,80,100,1);
     @jauges = Jauges.new();
     initInterface();
-
-
   end
 
   def initInterface()
-
+    
     hbox = Gtk::HBox.new(true, 2);
-
     #ajout console
     hbox.add(@console);
+    #bas de la vue
     hbox2 = Gtk::HBox.new(true, 4);
     tabNiveau = Gtk::Table.new(1,6,true)
-    
-   
-
     vbox = Gtk::VBox.new(true,4);
     vbox.add(hbox2);
 
@@ -57,23 +51,22 @@ class Zaf < Gtk::Frame
     tabNiveau.attach(@niveau,2,3,0,1)
     tabNiveau.attach(@jauges.getNiveau(),3,4,0,1)
     vbox.add(tabNiveau);
-    
-    
-    hbox.add(vbox);
 
+    hbox.add(vbox);
     add(hbox);
 
     show_all();
-
   end
 
+  #mise a jour de l'affichage des données du joueur
   def majZaf(joueur)
     @jauges.majJauge(joueur)
     while(!joueur.modele.notifications.empty?)
       @console.afficherTexte("-->"+joueur.modele.lireNotification()+"\n")
     end
   end
-  
+
+  #mise a jour de la langue lors d'un changement
   def majLangue()
     @niveau.label=XmlMultilingueReader.lireTexte("niveau");
   end

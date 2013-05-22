@@ -13,18 +13,17 @@ require 'CONTROLEUR/Controller.rb'
 
 class ZoneCtrl <  Gtk::Frame
   private_class_method :new
-  
-  @vue
-  @controller
-  
-  @gauche
-  @droite
-  @haut
-  @bas
-  @repos
-  @inventaire
-  @menu
-  @interaction
+
+  @vue #la vue
+  @controller #le controller pour l'association des bouton
+  @gauche #le bouton gauche
+  @droite #le bouton droite
+  @haut #le bouton haut
+  @bas #le bouton bas
+  @repos #le bouton repos
+  @inventaire #le bouton de l'inventaire
+  @menu #le bouton menu
+  @interaction #le bouton d'interaction
   
   def initialize(vue,controller)
     super() #Frame
@@ -76,7 +75,7 @@ class ZoneCtrl <  Gtk::Frame
     hbox2.add(@gauche)
     hbox2.add(Gtk::Label.new(""))
     hbox2.add(@droite)
-    
+
     #ligne3
     hbox3.add(@menu)
     hbox3.add(@bas)
@@ -84,9 +83,9 @@ class ZoneCtrl <  Gtk::Frame
 
     add(vbox);
     show_all();
-
   end
-  
+
+  #rend les boutons actif ou non celon cla présence d'eau
   def majBoutons(modele)
     @haut.sensitive=modele.joueur.casePosition.caseNord.estAccessible?()
     @bas.sensitive=modele.joueur.casePosition.caseSud.estAccessible?()
@@ -96,15 +95,16 @@ class ZoneCtrl <  Gtk::Frame
     @inventaire.sensitive=!modele.joueur.inventaire.items.empty?()
     @interaction.sensitive=modele.joueur.casePosition.presenceAides?()
   end
-  
+
+  #bloque tout les boutons lors d'un déplacement
   def bloquerBoutons(modele)
-      @haut.sensitive=false
-      @bas.sensitive=false
-      @gauche.sensitive=false
-      @droite.sensitive=false
-      @repos.sensitive=false
-      @inventaire.sensitive=false
-      @interaction.sensitive=false
+    @haut.sensitive=false
+    @bas.sensitive=false
+    @gauche.sensitive=false
+    @droite.sensitive=false
+    @repos.sensitive=false
+    @inventaire.sensitive=false
+    @interaction.sensitive=false
   end
 
   #mise a jour de la langue
