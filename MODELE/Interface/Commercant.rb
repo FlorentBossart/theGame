@@ -1,11 +1,12 @@
+#COMOK
 #!/usr/bin/env ruby
 
 ##
-# Fichier         : Commercant.rb
-# Auteur          : L3SPI - Groupe de projet B
-# Fait partie de  : TheGame
+# Fichier : Commercant.rb
+# Auteur : L3SPI - Groupe de projet B
+# Fait partie de : TheGame
 #
-# Cette interface definit les actions d'un commercant.
+#===Cette interface definit les actions d'un Commercant.
 #
 
 require 'AbstractInterface.rb'
@@ -15,11 +16,11 @@ module Commercant
    
    
    ##
-   #===Permet au commercant d'acheter un item à un vendeur.
+   #Permet au Commercant d'acheter un Item à un vendeur.
    #
    #===Paramètres:
-   #* <b>vendeur :</b> le vendeur à qui on achéte l'item
-   #* <b>item :</b> l'item acheté
+   #* <b>vendeur :</b> le Personnage à qui on achéte l'Item
+   #* <b>Item :</b> l'Item acheté
    #
    def acheter(vendeur, item)
       Commercant.api_not_implemented(self)
@@ -27,11 +28,11 @@ module Commercant
 
    
    ##
-   #===Permet au commercant de vendre un item à un acheteur.
+   #Permet au Commercant de vendre un Item à un acheteur.
    #
    #===Paramètres:
-   #* <b>acheteur :</b> l'acheteur à qui on vend l'item
-   #* <b>item :</b> l'item vendu
+   #* <b>acheteur :</b> le Personnage à qui on vend l'Item
+   #* <b>Item :</b> l'Item vendu
    #
    def vendre(acheteur, item)
       Commercant.api_not_implemented(self)
@@ -39,10 +40,10 @@ module Commercant
 
    
    ##
-   #===Permet au commercant d'ajouter un item à son stock.
+   #Permet au Commercant d'ajouter un Item à son stock.
    #
    #===Paramètres:
-   #* <b>item :</b> l'item à ajouter au stock
+   #* <b>Item :</b> l'Item à ajouter au stock
    #
    def ajouterAuStock(item)
       Commercant.api_not_implemented(self)
@@ -50,10 +51,10 @@ module Commercant
 
    
    ##
-   #===Permet au commercant de retirer un item de son stock.
+   #Permet au Commercant de retirer un Item de son stock.
    #
    #===Paramètres:
-   #* <b>item :</b> l'item à retirer du stock
+   #* <b>Item :</b> l'Item à retirer du stock
    #
    def retirerDuStock(item)
       Commercant.api_not_implemented(self)
@@ -61,7 +62,7 @@ module Commercant
 
    
    ##
-   #===Encaisse une somme d'argent
+   #Encaisse une somme d'argent
    #
    #===Paramètres:
    #* <b>revenue :</b> le revenue à encaisser
@@ -72,7 +73,7 @@ module Commercant
 
    
    ##
-   #===Debourse une somme d'argent
+   #Debourse une somme d'argent
    #
    #===Paramètres:
    #* <b>revenue :</b> le revenue à debourser
