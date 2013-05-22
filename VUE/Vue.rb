@@ -1,4 +1,4 @@
-#COMPAR
+#COMOK
 #!/usr/bin/env ruby
 
 ##
@@ -78,6 +78,9 @@ class Vue
   ##
   #Permet de créer une nouvelle vue
   #
+  # == Returns :
+  # * <b> vue: </b> une nouvelle vue
+  #
   def Vue.creer()
     new()
   end
@@ -88,8 +91,12 @@ class Vue
   #===Paramètres :
   #* <b>modele</b> : Le modèle
   #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def defM(modele)
     @modele = modele
+    return nil
   end
 
   ##
@@ -98,12 +105,19 @@ class Vue
   #===Paramètres :
   #* <b>controller</b> : Le contrôleur
   #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def defC(controller)
     @controller=controller
+    return nil
   end
 
   ##
   #Initialise la vue
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def initInterface()
     Gtk.init()
@@ -176,10 +190,14 @@ class Vue
     
     @finInit = true;
     Gtk.main();
+    return nil
   end
 
   ##
   #Dessine dans la vue de la carte l'état actuel du jeu dans cette zone
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def afficheCarte()
     0.upto(@hauteurAfficheCarte-1) do |x|
@@ -189,10 +207,14 @@ class Vue
       end
     end
     @carteVue.window.draw_pixbuf(nil, @background, 0, 0, 0, 0, @background.width, @background.height, Gdk::RGB::DITHER_NORMAL, 0, 0)
+    return nil
   end
 
   ##
   #Entraine une animation des déplacments/création des PNJ
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def afficheCarteDyn()
     @structureEnnemisDeplacement.clear()
@@ -212,10 +234,14 @@ class Vue
         timeout()
       end
     end
+    return nil
   end
 
   ##
   #Entraine une animation pour le déplacement du joueur
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def afficheCarteMvt()
     if(@modele.joueur.direction==EnumDirection.NORD||@modele.joueur.direction==EnumDirection.SUD)
@@ -270,10 +296,23 @@ class Vue
     else
       raise "actualisation pas synchro"
     end
+    return nil
   end
-
+ 
+  ##
+  #Affiche le contenu d'une case dans un pixbuf
+  #
+  #===Paramètres :
+  #* <b>xAff</b> : L'abscisse de la case à afficher dans le pixbuf
+  #* <b>yAff</b> : L'ordonnée de la case à afficher dans le pixbuf
+  #* <b>caseAffiche</b> : La case à afficher
+  #* <b>afficheJoueur</b> : Booléen indiquant si on doit afficher le joueur ou non (même si présent dans la case)
+  #* <b>pixbufBase</b> : Le pixbuf dans lequel on affiche la case
+  #  
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def afficheCase(xAff,yAff,caseAffiche,afficherJoueur,pixbufBase)
-
     #terrain
     pixbufTerrain = Gdk::Pixbuf.new(@referencesGraphiques.getRefGraphique(caseAffiche.getIntitule().downcase))
     pixbufTerrain=pixbufTerrain.scale(@tailleCase, @tailleCase,Gdk::Pixbuf::INTERP_BILINEAR)
@@ -367,6 +406,17 @@ class Vue
     return nil
   end
 
+  ##
+  #Prépare l'animation des activités PNJ, en mettant de coté dans des listes, des structures contenant les informations sur les PNJ se créant dans la case donnée.
+  #
+  #===Paramètres :
+  #* <b>xAff</b> : L'abscisse de la case à afficher dans le pixbuf
+  #* <b>yAff</b> : L'ordonnée de la case à afficher dans le pixbuf
+  #* <b>caseAffiche</b> : La case à afficher
+  #  
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def afficheCaseDyn(xAff,yAff,caseAffiche)
 
     #terrain
@@ -464,22 +514,14 @@ class Vue
       pixbufElementb=pixbufElementb.scale(@tailleCase_f/3, @tailleCase_f/3,Gdk::Pixbuf::INTERP_BILINEAR)
 
       rg=e.rangCase
-      #puts "rg = " + rg.to_s
       xPos=@positions[rg][0]
-      #puts "xPos = " + xPos.to_s
       yPos=@positions[rg][1]
-      #puts "yPos = " + yPos.to_s
-
-      #COORD SUR CARTE -> INVERSEES PAR / AU PIXBUF
+      
       xAncien=e.anciennePositionX
       yAncien=e.anciennePositionY
 
       xArr=xAff
       yArr=yAff
-
-      # Rajout� par ludo
-      #xDep = 0
-      #yDep = 0
 
       if(e.vientDEtreGenere?())
         if(!(xAncien==-1 && yAncien==-1))
@@ -492,13 +534,9 @@ class Vue
       else
         ancienneCase=@modele.carte().getCaseAt(xAncien,yAncien)
 
-        #puts e.getIntitule+" "+xAncien.to_s+" "+yAncien.to_s()
-        #puts e.getIntitule+" "+e.casePosition.coordonneeX.to_s+" "+e.casePosition.coordonneeY.to_s
-        if(ancienneCase==e.casePosition)
-          #puts "ici "+e.getIntitule()
+       if(ancienneCase==e.casePosition)
           @background.composite!(pixbufElement, xAff+xPos,yAff+yPos, pixbufElement.width, pixbufElement.height,xAff+xPos, yAff+yPos,1, 1, Gdk::Pixbuf::INTERP_NEAREST,255)
         else
-          #puts "la "+e.getIntitule()
           traitement="depl"
           rgAncien=e.ancienRangCase
           xPosAncien=@positions[rgAncien][0]
@@ -543,95 +581,75 @@ class Vue
         yArr=yArr+yPos
 
         @structureEnnemisDeplacement.push([traitement,xDep,yDep,xArr,yArr,pixbufElement,pixbufElementb])
-        #puts "XDEP"+xDep.to_s
-        #puts "YDEP"+yDep.to_s
-        #puts "XARR"+xArr.to_s
-        #puts "YARR"+yArr.to_s
       end
     end
     return nil
   end
 
+  
+  ##
+  #Accesseur sur la zone d'affichage
+  #
+  # == Returns :
+  # * <b> zaf: </b> La zaf
+  #
   def getZaf()
     return @zaf
   end
 
-  def actualiser
-    # @window.modal=true
-
-    puts "\tdebut actualiser"
-
-    #if(@@threadAffichage == false)
-    # @@threadAffichage = true
-    # @modele.enverDuDecors
-    #Thread.new do
-    # while(true) do
-    #maj Carte Et Zaf
+  ##
+  #Méthode d'actualisation de la vue. Elle s'oriente par rapport au stade de partie du modèle. Grâce à ce stade elle sait quel genre d'affichage elle fournit(statique,dynamique pour les PNJ, mouvement du joueur) et quelles interactions elle doit proposer pour le joueur.
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
+  def actualiser()
     @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
     @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
-    #COORD DU COIN GAUCHE SUP DE LA VUE
-
+    
     if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || @modele.compteurTour==0)
       @transitionFini=false
       afficheCarteDyn()
       while(!@transitionFini) do
-        #puts "jepassela"
         sleep(0.1)
       end
     elsif(@modele.stadePartie==EnumStadePartie.JOUEUR_MVT)
       @transitionFini=false
       afficheCarteMvt()
-      # while(!@transitionFini) do
-      #puts "jepassela"
-      # sleep(0.1)
-      # end
       sleep(1)
     else
       afficheCarte()
     end
 
-    #afficheCarte()
     @zaf.majZaf(@modele.joueur)
-    #sleep(0.01)
-    # end
-    #end
-    #end
+    
     case @modele.stadePartie
 
-    #ETAPE CHOIX LIBRE
-    when EnumStadePartie.CHOIX_LIBRE
-      #@zoneCtrl.majBoutons(@modele)
-      #majEcouteClavier()
-      #ETAPE PARTIE PERDUE
     when EnumStadePartie.PERDU
       @zoneCtrl.bloquerBoutons(@modele)
       bloquerEcouteClavier()
-      #ETAPE EQUIPEMENT ARMURE
+ 
     when EnumStadePartie.EQUIPEMENT_ARMURE
       @combatModal.majEquipementDefensif()
-      #ETAPE EQUIPEMENT ARME
+      
     when EnumStadePartie.EQUIPEMENT_ARME
       @combatModal.majEquipementOffensif()
-      #ETAPE INVENTAIRE PLEIN
-    when EnumStadePartie.INVENTAIRE_PLEIN
-
-      #ETAPE INTERACTION MARCHAND
+      
     when EnumStadePartie.INTERACTION_MARCHAND
       @popUp.afficheChoixMarchand()
-      #ETAPE INTERACTION MARCHAND ACHAT
-    when EnumStadePartie.INTERACTION_MARCHAND_ACHAT
-
-      #ETAPE INTERACTION MARCHAND VENTE
-    when EnumStadePartie.INTERACTION_MARCHAND_VENTE
-
-      #ETAPE INTERACTOIN GUERISSEUR
+      
     when EnumStadePartie.INTERACTION_GUERISSEUR
       @popUp.afficheChoixGuerisseur(@modele.joueur, @modele.pnjAideEnInteraction)
     end #fin case
-
-    puts "\tfin actualiser"
+    return nil
   end
 
+  ##
+  #Mise à jour des touches clavier interargissant avec le jeu.
+  #  
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def majEcouteClavier()
     @ecouteUp=@modele.joueur.casePosition.caseNord.estAccessible?()
     @ecouteDown=@modele.joueur.casePosition.caseSud.estAccessible?()
@@ -641,8 +659,15 @@ class Vue
     @ecouteToucheInventaire=!@modele.joueur.inventaire.items.empty?()
     @ecouteToucheMenu=true
     @ecouteToucheInteraction=@modele.joueur.casePosition.presenceAides?()
+    return nil
   end
 
+  ##
+  #Bloque toute écoute du clavier.
+  #  
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def bloquerEcouteClavier()
     @ecouteUp=false
     @ecouteDown=false
@@ -652,14 +677,31 @@ class Vue
     @ecouteToucheInventaire=false
     #@ecouteToucheMenu=false
     @ecouteToucheInteraction=false
+    return nil
   end
 
-  #mise a jour de la langue
+  ##
+  #Mise a jour de la langue
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def majLangue()
     @zaf.majLangue();
     @zoneCtrl.majLangue();
+    return nil
   end
 
+  ##
+  #  Méthode pour le signal expose des animations.
+  #
+  #===Paramètres :
+  #* <b>widget</b> : Le widget relié au signal
+  #* <b>event</b> : L'évenement
+  #  
+  # == Returns :
+  # * <b> true: </b> default value
+  #
   def expose(widget, event)
     rowstride = @frame.rowstride
 
@@ -676,7 +718,12 @@ class Vue
     true
   end
 
-  # Timeout handler to regenerate the frame
+  ##
+  # Timeout pour régénérer la frame pour les animation d'action PNJ
+  #
+  # == Returns :
+  # * <b> true: </b> default value
+  #
   def timeout()
     @background.copy_area(0, 0, @background.width, @background.height,
     @frame, 0, 0)
@@ -747,7 +794,12 @@ class Vue
     true
   end
 
-  # Timeout handler to regenerate the frame
+  ##
+  # Timeout pour régénérer la frame pour les mouvements du joueur
+  #
+  # == Returns :
+  # * <b> true: </b> default value
+  #
   def timeoutMvt(pix,pixb)
     @background.copy_area(0, 0, @background.width, @background.height,
     @frame, 0, 0)
@@ -759,25 +811,21 @@ class Vue
       ecartH=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
       x=0
       y=ecartH
-      #puts ecartH
     when EnumDirection.SUD
       parcours=@pixFond.height-@background.height
       ecartH=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
       x=0
       y=ecartH
-      #puts ecartH
     when EnumDirection.EST
       parcours=@pixFond.width-@background.width
       ecartL=((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i - @tailleCase
       x=ecartL
       y=0
-      #puts ecartL
     when EnumDirection.OUEST
       parcours=@pixFond.width-@background.width
       ecartL=-((@nbEtapeAffichage-@numEtapeAffichage)*((parcours).to_f)/@nbEtapeAffichage).to_i
       x=ecartL
       y=0
-      #puts ecartL
     end
 
     if(
