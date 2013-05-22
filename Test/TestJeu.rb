@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'gtk2'
-
 require 'MODELE/Modele.rb'
 require 'XMLReader/XmlMultilingueReader.rb'
 require 'VUE/Audio.rb'
+
 #require 'Controller.rb'
 #require 'Vue.rb'
 
@@ -20,20 +20,20 @@ Audio.load()
 #difficulte = BibliothequeDifficulte.getDifficulte("Novice")
 #pseudo = "Fake"
 
-#Cr�ation vue
+#Création vue
 vue = Vue.new
 
-#Cr�ation modele
+#Création modele
 modele = Modele.creer(vue,nil,nil)
 
-#Cr�ation controlleur
+#Création controlleur
 controleur = Controller.creer(modele, vue)
 
 vue.defM(modele)
 vue.defC(controleur)
 #modele.initialiseToi()
 
-#Cr�ation menu
+#Création menu
 menu = MenuJeu.creer(false, modele, controleur)
 vue.menu = menu
 
