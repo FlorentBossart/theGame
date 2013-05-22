@@ -43,7 +43,14 @@ class Slot
 	   @modele		= modele
    end
     
-    # Appel de la mÃ©thode initialize.
+   # Appel de la mÃ©thode initialize.
+	# == Parameters: 
+	#* <b>intitule :</b> une chaine de caractères correspondant au nom du fichier de sauvegarde (X.yaml)
+	#* <b>pseudo :</b> une chaine de caractères correspondant au nom du joueur
+	#* <b>intituleDifficulte :</b> une chaine de caractères correspondant au nom de de la difficulté
+	#* <b>date :</b> une Date correspondant à la date de sauvegarde
+	#* <b>temps :</b> un entier correspondant au temps de jeu total du joueur en secondes
+	#* <b>modele :</b> le modele de la partie qu'il faut sauvegarder
     def Slot.creer(intitule, pseudo, intituleDifficulte, date, temps, modele)
         return new(intitule, pseudo, intituleDifficulte, date, temps, modele)
     end
@@ -59,10 +66,3 @@ class Slot
    end
 
 end
-
-
-#Test de la classe
-=begin
-nouvelleSlot = Slot.creer("slot1","Ludovic","Expert",Date.today,nil)
-puts nouvelleSlot
-=end
