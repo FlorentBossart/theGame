@@ -5,8 +5,8 @@
 # Auteur           : L3SPI - Groupe de projet B
 # Fait partie de : TheGame
 #
-# Cette classe représente un CombatModal. Un CombatModal est défini par :
-# * Une vue auquel il est lié
+# Cette classe reprÃ©sente un CombatModal. Un CombatModal est dÃ©fini par :
+# * Une vue auquel il est liÃ©
 # * Un modele sur lequel l'objet ira chercher les informations
 # * Un enum representant le moment du combat en cours (avant/apres deplacement)
 #
@@ -27,10 +27,10 @@ class CombatModal
   
   
   ##
-  # Crée un nouveau CombatModal à partir des informations passées en paramètre.
+  # CrÃ©e un nouveau CombatModal Ã  partir des informations passÃ©es en paramÃ¨tre.
   #
   # == Parameters:
-  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachÃ©e
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   #
   def initialize(vue,modele)
@@ -43,9 +43,10 @@ class CombatModal
   #Instancie un CombatModal
   #
   # == Parameters:
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   #
+  
   def CombatModal.creer(vue,modele)
     new(vue,modele)
   end
@@ -55,7 +56,10 @@ class CombatModal
   # Cree un PopUp avec les informations sur les ennemis a combattre
   #
   # == Parameters:
-  # * <b>momentCombat :</b> le moment où intervient le combat
+  # * <b>momentCombat :</b> le moment oÃ¹ intervient le combat
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def majCombatModal(momentCombat)
     @momentCombat=momentCombat
@@ -101,11 +105,15 @@ class CombatModal
       end
       false
     end
+    return nil
   end
 
   
   ##
-  # Cree un PopUp contenant des boutons liés aux objets equipable defensifs
+  # Cree un PopUp contenant des boutons liÃ©s aux objets equipable defensifs
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def majEquipementDefensif()
     Gtk.idle_add do
@@ -151,11 +159,15 @@ class CombatModal
       end
       false
     end
+    return nil
   end
 
   
   ##
-  # Cree un PopUp contenant des boutons liés aux objets equipable offensifs
+  # Cree un PopUp contenant des boutons liÃ©s aux objets equipable offensifs
+  #
+  # == Returns :
+  # * <b> nil: </b> default value
   #
   def majEquipementOffensif()
     Gtk.idle_add do
@@ -200,14 +212,15 @@ class CombatModal
       end
       false
     end
+    return nil
   end
 
   
   ##
-  # Retourne une chaîne de caractères  permettant l'identification de l'objet.
+  # Retourne une chaÃ®ne de caractÃ¨res  permettant l'identification de l'objet.
   #
-  # == Returns:
-  #  @intitule : String
+  # == Returns :
+  # * <b> string: </b> message indiquant la nature de l'objet
   #
   def to_s
     return XmlMultilingueReader.lireTexte("popupCombatModal")

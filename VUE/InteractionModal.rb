@@ -5,9 +5,9 @@
 # Auteur           : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe représente une InteractionModal. Un InteractionModal est défini par : 
-# * Une vue auquel il est lié
-# * Des references Graphiques representant la base de donnée image
+# Cette classe reprÃ©sente une InteractionModal. Un InteractionModal est dÃ©fini par : 
+# * Une vue auquel il est liÃ©
+# * Des references Graphiques representant la base de donnÃ©e image
 # * Un modele sur lequel l'objet ira chercher les informations
 # 
 
@@ -26,10 +26,10 @@ class InteractionModal
   @modele
   
   ## 
-  # Crée une nouvelle InteractionModal à partir des informations passées en paramètre. 
+  # CrÃ©e une nouvelle InteractionModal Ã  partir des informations passÃ©es en paramÃ¨tre. 
   # 
   # == Parameters: 
-  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> represente la vue auquel la fenetre de CombatModal est attachÃ©e
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   # 
   def initialize(modele,vue)
@@ -42,7 +42,7 @@ class InteractionModal
   # Instancie une InterfaceModal
   # 
   # == Parameters: 
-  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachée
+  # * <b>vue :</b> representant la vue auquel la fenetre de CombatModal est attachÃ©e
   # * <b>modele :</b> represente le modele sur lequel l'objet ira chercher les informations
   # 
   def InteractionModal.creer(modele,vue)
@@ -54,6 +54,9 @@ class InteractionModal
   # Cree un PopUp affichant les choix disponibles sur la case actuelle du joueur
   # affiche qu'il n'y a rien a faire s'il n'y a rien sur la case
   # 
+  # == Returns :
+  # * <b> nil: </b> default value
+  #
   def majInteractionModal()
     @vue.window.modal=false
     tooltips = Gtk::Tooltips.new
@@ -75,7 +78,7 @@ class InteractionModal
           pixbufElement=pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
           image.set_pixbuf(pixbufElement)
           button.image = image
-          
+          #ajout d'infobulles
           tooltips.set_tip( button, element.description(), nil )
   
           @vue.controller.interactionElementCreer(button,element,@modele.joueur,dialog)
@@ -85,9 +88,8 @@ class InteractionModal
         dialog.run do |response|
         end
         false
-      end
-
-      
+      end  
+    # S'il n'y a pas d'Ã©lÃ©ments, alors on affiche un popup affichant qu'il n'y a rien a faire (cas normalement inexistant, le bouton etant bloquÃ© s'il n'y a rien)
     else
        dialog = Gtk::Dialog.new(XmlMultilingueReader.lireTexte("popupInteraction"), @vue.window,
                          Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
@@ -96,12 +98,16 @@ class InteractionModal
       dialog.vbox.add(Gtk::Label.new(XmlMultilingueReader.lireTexte("nothingToDoInteraction")))
       dialog.show_all
     end
+    return nil
   end
   
   
   ## 
-  # Retourne une chaîne de caractères  permettant l'identification de l'objet. 
+  # Retourne une chaÃ®ne de caractÃ¨res  permettant l'identification de l'objet. 
   # 
+  # == Returns :
+  # * <b> string: </b> message indiquant la nature de l'objet
+  #
   def to_s
     return XmlMultilingueReader.lireTexte("interactionModal")
   end
