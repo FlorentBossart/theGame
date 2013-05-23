@@ -1,11 +1,12 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
-# Fichier        : XmlDifficultesReader.rb 
+# Fichier        : XmlEnnemisReader.rb 
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des difficultés et de les ajouter à la bibliothèque correspondante.
+# Cette classe permet de parcourir le fichier XML des Difficulte et de les ajouter à la bibliothèque correspondante.
 #
 
 require 'MODELE/Bibliotheque/BibliothequeDifficulte.rb'
@@ -17,7 +18,8 @@ class XmlDifficultesReader
 
 
    ##
-   # Méthode statique permettant de récupérer les difficultés et de les ajouter
+   #Méthode statique permettant de récupérer les caractéristiques des différentes Difficulte dans le fichier XML (difficultes.xml)
+   #et de les ajouter à la bibliothèque de Difficulte (classe BibliothequeDifficulte).
    #
    def XmlDifficultesReader.lireXml()
       #Ouvre le fichier XML contenant les références 

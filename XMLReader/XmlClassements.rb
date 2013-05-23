@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,23 +6,25 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des statistiques de chaque joueur 
-# et de les ajouter � la liste des joueurs class� (classe Classements).
+# Cette classe permet de parcourir le fichier XML des statistiques de chaque Joueur 
+# et de les ajouter à la liste des joueurs classés (classe Classements).
 #
 
 require'VUE/Classements.rb'
-
 require 'XMLReader/XmlMultilingueReader.rb'
-
 require 'rexml/document'
+
 include REXML
 
 class XmlClassements
 
 
    ##
-   # M�thode statique permettant de r�cup�rer les statistiques des diff�rents joueurs
-   # et de les ajouter � la liste des joueurs class� (classe Classements).
+   #Méthode statique permettant de récupérer les statistiques des différents joueurs dans le fichier XML (classements.xml)
+   #et de les ajouter à la liste des joueurs classés (classe Classements).
+   #
+   #===Paramètre :
+   #* <b>listeStatsJoueurs :</b> la liste des statistiques à laquelle ajouter les statistiques lues à partir du fichier XML
    #
    def XmlClassements.lireXml(listeStatsJoueurs)
       #Ouvre le fichier XML contenant les statistiques de chaque joueur
@@ -34,7 +37,7 @@ class XmlClassements
 
       #Pour chaque joueur du fichier XML...
       doc.elements.each('classements_joueur/joueur') do |j|
-         #... on ajoute les stats � la liste des stats de chaque joueur
+         #... on ajoute les stats à la liste des stats de chaque joueur
          listeStatsJoueurs.addJoueur(j.elements['nom'].text, j.elements['nb_ennemis_tues'].text.to_i,
          										j.elements['distance'].text.to_i, j.elements['or'].text.to_i,
          										j.elements['temps'].text.to_i, j.elements['score'].text.to_i,
@@ -45,11 +48,14 @@ class XmlClassements
    
    
    ##
-   # M�thode statique permettant d'ajouter les statistiques d'un joueur au fichier XML (classements.xml)
+   #Méthode statique permettant d'écrire les statistiques du joueur dans le fichier XML (classements.xml)
+   #
+   #===Paramètre :
+   #* <b>modele :</b> le modele à partir duquel on récupère les statistiques du Joueur
    #
    def XmlClassements.ecrireXml(modele)
    	   	
-      if(File.exist?("XMLFile/classements.xml") == false)# Cr�ation du fichier s'il n'existe pas
+      if(File.exist?("XMLFile/classements.xml") == false)# Création du fichier s'il n'existe pas
       	begin
 	         file = File.open("XMLFile/classements.xml", "w")
 	         file.syswrite("<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n\n")
@@ -99,7 +105,7 @@ class XmlClassements
       
       score = Element.new("score")
       
-      # L'intitule de la difficulte est toujours en francais dans le modele
+      # L'intitule de la difficulté est toujours en francais dans le Modele
       if(modele.difficulte.intitule == "Novice")
       	facteurDiff = 3
       elsif(modele.difficulte.intitule == "Moyen")
@@ -118,20 +124,17 @@ class XmlClassements
       doc.root.add_element(joueur)
       
       # MAJ du fichier xml du classement des joueurs
-		begin
+	  begin
 	      # w : Write-only, truncates existing file to zero length or creates a new file for writing.
 	      file = File.open("XMLFile/classements.xml", "w")
 	      file.write(doc)
-		rescue
+	  rescue
 			raise "Impossible d'ouvrir le fichier XMLFile/classements.xml"
-		ensure
+	  ensure
 			file.close
-		end
+	  end
 
 	end
 	
 end
-
-#Test
-#XmlClassements.ecrireXml(nil)
 
