@@ -417,6 +417,8 @@ class Joueur < Personnage
       str=XmlMultilingueReader.lireTexte("achete")
       str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
+      tourPasse()
+      puts "passe la"
    end
 
    ##
@@ -433,6 +435,8 @@ class Joueur < Personnage
       str=XmlMultilingueReader.lireTexte("vendu")
       str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
+      tourPasse()
+      puts "passe la2"
    end
 
 
@@ -455,6 +459,7 @@ class Joueur < Personnage
    #
    def retirerDuStock(item)
       @inventaire.retirer(item)
+      tourPasse()
    end
 
    ##
