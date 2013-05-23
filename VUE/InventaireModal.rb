@@ -1,4 +1,4 @@
-#COMpar
+#COMok
 #!/usr/bin/env ruby
 
 ##
@@ -160,25 +160,23 @@ class InventaireModal
   
     end
   
-  
+   ##
+   #Permet de définir si le bouton d'interraction de l'InventaireModal doit être actif ou non (cliquable ou grisé)
+   #
+   #===Paramètre :
+   #* <b>isActif :</b> un booléen à vrai (true) si le bouton d'interraction doit être actif, à faux (false) le cas contraire
+   #
    def setBoutonInteractionActif(isActif)
       @boutonInteraction.set_sensitive(isActif)
    end
   
 
    ##
-   #Fonction invoquée lorsque la popup de l'inventaire est fermée
-   #Cette fonction permet de faire un clear des éléments graphiques et du tableau des images
-   #et de masquer la fenère d'InventaireModale
+   #Fonction invoquée lorsque la popup de l'inventaire est fermée.
+   #Cette fonction permet de faire un clear des éléments graphiques et du tableau des images et de masquer la fenêtre d'InventaireModale
    #
    def onDestroy
-      puts "Fermeture de l'inventaire !"
-      #Supression du tableau d'items (il sera régénéré)
-      #@contenu.remove(@tableauItems)
-      #@contenu.remove(@boutonInteraction)
-      # @fenetreInventaire.remove(@contenu)
       @fenetreInventaire.modal = false
-      #@fenetreInventaire.hide_all
       @tabImages.clear
       @fenetreInventaire.destroy
    end
@@ -186,27 +184,26 @@ class InventaireModal
 
 
    ##
-   # Fonction modifiant l'image de l'item sélectionné par celle de l'item fraichement sélectionné
+   #Fonction modifiant l'image de l'Item sélectionné par celle de l'item fraichement sélectionné
    #
-   # == Paramètres :
-   # indice : l'indice de l'item sélectionné
+   #===Paramètre :
+   #* <b>indice :</b> l'indice de l'Item sélectionné
    #
    def setImageSelection(indice)
       pixbufElement = Gdk::Pixbuf.new(@vue.referencesGraphiques.getRefGraphique("itemSelect")) #TODO : placer dans referencesGraphiques
       pixbufElement = pixbufElement.scale(40,40,Gdk::Pixbuf::INTERP_BILINEAR)
       @tabImages[@tabImages.count-1].pixbuf = @tabImages[indice].pixbuf
-      #@tabImages[@tabImages.count-1].file = @tabImages[indice].file
    end
 
 
 
    ##
-   # Fonction modifiant le mode d'affichage de l'inventaire pour le rendre adaptable Ã  différentes situations possibles
-   # Exemple : situation de rejet d'un item, situation de vente d'un item etc...
-   # Le but principal ce cette fonction est donc de modifier le bouton d"interraction en conséquence du mode choisi
+   #Fonction modifiant le mode d'affichage de l'InventaireModal pour le rendre adaptable aux différentes situations possibles.
+   #Exemple : situation de rejet d'un Item, situation de vente d'un Item etc...
+   #Le but principal ce cette fonction est donc de modifier le bouton d"interraction en conséquence du mode choisi
    #
-   #===Paramètres :
-   # modeAffichage : le mode d'affichage de l'inventaire (cf EnumStadePartie)
+   #===Paramètre :
+   #* <b>modeAffichage :</b> le mode d'affichage de l'Inventaire (cf EnumStadePartie)
    #
    def setModeAffichage(modeAffichage)
       case modeAffichage
@@ -240,3 +237,4 @@ class InventaireModal
 
 
 end #Fin de la classe InventaireModal
+
