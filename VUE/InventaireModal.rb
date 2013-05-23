@@ -16,7 +16,6 @@
 #* Un tableau d'images
 #* Une fabrique à infobulles (tooltips)
 #* Un Inventaire courant (l'Inventaire affiché par la fenêtre à un instant t)
-#*
 #
 
 
