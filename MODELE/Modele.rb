@@ -357,6 +357,7 @@ class Modele
   # * <b> nil: </b> default value
   #
   def debutTour()
+    changerStadePartie(EnumStadePartie.NO_ETAPE)
     if(!@joueur.toujoursEnVie?())
       @messageDefaite=@joueur.causeMort
       @joueur.meurt(@messageDefaite)
@@ -513,6 +514,7 @@ class Modele
       end
       @joueur.peutSEquiper=true
     end
+    changerStadePartie(EnumStadePartie.NO_ETAPE)
     return nil
   end
 

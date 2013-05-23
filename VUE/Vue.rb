@@ -640,7 +640,7 @@ class Vue
     elsif(@modele.stadePartie==EnumStadePartie.JOUEUR_MVT)
       @transitionFini=false
       afficheCarteMvt()
-      sleep(1)
+      sleep(0.5)
     else
       afficheCarte()
     end
@@ -753,6 +753,10 @@ class Vue
     @frame, 0, 0)
     @numEtapeAffichage+=1
 
+    if(@structureAidesGenere.empty? && @structureEnnemisDeplacement.empty?)
+      @numEtapeAffichage=@nbEtapeAffichage
+    end
+    
     for a in @structureAidesGenere
       xArr=a[0]
       yArr=a[1]

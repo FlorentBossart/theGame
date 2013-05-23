@@ -161,7 +161,6 @@ class Joueur < Personnage
       @anciennePositionX=@casePosition.coordonneeX
       @anciennePositionY=@casePosition.coordonneeY
       @direction=cible
-      puts "direction change pour "+cible.to_s()
       if(@modele.tourDejaPasse == false)
          @modele.tourPasse()
       end
@@ -175,7 +174,6 @@ class Joueur < Personnage
    end
    
    def deplacementSuite()
-     puts"test deplacement suite"
      if(self.toujoursEnVie?())
              @modele.tourDejaPasse = false;
              dest = @casePosition.getDestination(@cible)
