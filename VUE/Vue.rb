@@ -639,7 +639,7 @@ class Vue
       @transitionFini=false
       afficheCarteMvt()
       sleep(0.5)
-    else
+      elsif(!@modele.stadePartie==EnumStadePartie.PERDU)
       afficheCarte()
     end
 
