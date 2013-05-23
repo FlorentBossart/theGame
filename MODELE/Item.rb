@@ -130,13 +130,13 @@ class Item < Elem
      else
        @caracteristique.utiliseToi(joueur)
        joueur.casePosition.retirerElement(self)
-       joueur.modele.tourPasse()
      end
+     joueur.modele.tourPasse()
      @casePosition=nil
-       if(joueur.inventaire.estPlein?()==false)
+     if(joueur.inventaire.estPlein?()==false)
 
-         joueur.modele.debutTour()
-       end
+       joueur.modele.debutTour()
+     end
      joueur.modele.vue.actualiser
      return nil
    end

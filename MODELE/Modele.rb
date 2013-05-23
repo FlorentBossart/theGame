@@ -514,7 +514,7 @@ class Modele
       end
       @joueur.peutSEquiper=true
     end
-    if(!momentCombat==EnumMomentCombat.AVANT_DEPLACEMENT())
+    if(momentCombat!=EnumMomentCombat.AVANT_DEPLACEMENT())
       changerStadePartie(EnumStadePartie.NO_ETAPE)
     end
     return nil

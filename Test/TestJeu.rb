@@ -1,12 +1,18 @@
-#!/usr/bin/env ruby
+#COMOK
+#!/usr/bin/env ruby 
+
+## 
+# Fichier        : TestJeu.rb 
+# Auteur         : L3SPI - Groupe de projet B 
+# Fait partie de : TheGame 
+# 
+# Cette classe permet de lancer le jeu.
+#
 
 require 'gtk2'
 require 'MODELE/Modele.rb'
 require 'XMLReader/XmlMultilingueReader.rb'
 require 'VUE/Audio.rb'
-
-#require 'Controller.rb'
-#require 'Vue.rb'
 
 Gtk.init
 

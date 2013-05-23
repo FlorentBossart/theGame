@@ -351,7 +351,6 @@ class Joueur < Personnage
    #
    def utiliserItem(item)
       item.utiliseToi(self)
-      @modele.tourPasse()
       return nil
    end
 
