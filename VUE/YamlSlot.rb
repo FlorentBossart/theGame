@@ -7,7 +7,7 @@
 # Fait partie de : TheGame 
 # 
 #===Cette classe permet de parcourir le fichier Yaml d'un slot de sauvegarde. Elle permet de lire les infos du fichier yaml
-# mais ï¿½galement d'ï¿½crire dedans pour sauvegarder les informations d'une partie.
+# mais également d'écrire dedans pour sauvegarder les informations d'une partie.
 #
 
 # Pour enregistrer la date du jour dans les informations de sauvegarde
@@ -21,8 +21,8 @@ require 'yaml.rb'
 class YamlSlot
    
  
-   # Mï¿½thode statique permettant de rï¿½cupï¿½rer les informations d'un slot de sauvegarde
-   # et de les ajouter ï¿½ la liste des infos d'un slot de sauvegarde (classe Slot).
+   # Méthode statique permettant de rï¿½cupï¿½rer les informations d'un slot de sauvegarde
+   # et de les ajouter à la liste des infos d'un slot de sauvegarde (classe Slot).
    #
    #=== Paramètres : 
 	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
@@ -48,7 +48,7 @@ class YamlSlot
 		temps 	= tabElement[3]
 		modele 	= tabElement[4]
 		
-		# Ajoute le pseudo du joueur, la difficultï¿½, la date, le temps de jeu et le modele aux informations du slot
+		# Ajoute le pseudo du joueur, la difficulté, la date, le temps de jeu et le modele aux informations du slot
       BibliothequeSlot.ajouter(nomFicSlotYaml, 
       							Slot.creer(nomFicSlotYaml, pseudo, nomDiff, date, temps, modele))
  
@@ -56,7 +56,7 @@ class YamlSlot
    
 
 	##
-   # Mï¿½thode statique permettant d'ajouter les infos pour la sauvegarde d'un joueur au fichier YAML (slotX.yaml)
+   # Méthode statique permettant d'ajouter les infos pour la sauvegarde d'un joueur au fichier YAML (slotX.yaml)
    #
    #=== Paramètres : 
 	#* <b>nomFicSlotYaml :</b> une chaine de caractères correspondant au nom du fichier yaml à lire
