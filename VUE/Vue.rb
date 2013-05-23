@@ -317,8 +317,6 @@ class Vue
       @timeout_id = Gtk.timeout_add(@delay) do
         timeoutMvt(pixbufJoueur,pixbufJoueurb)
       end
-    else
-      raise "actualisation pas synchro"
     end
     return nil
   end
@@ -631,7 +629,7 @@ class Vue
     @x=@modele.joueur.casePosition.coordonneeX-@hauteurAfficheCarte/2
     @y=@modele.joueur.casePosition.coordonneeY-@largeurAfficheCarte/2
     
-    if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || @modele.compteurTour==0)
+    if(@modele.stadePartie==EnumStadePartie.TOUR_PASSE || (@modele.compteurTour==0 && @modele.stadePartie==EnumStadePartie.DEB_TOUR))
       @transitionFini=false
       afficheCarteDyn()
       while(!@transitionFini) do
@@ -649,6 +647,14 @@ class Vue
     
     case @modele.stadePartie
 
+    when EnumStadePartie.CHOIX_LIBRE
+      majEcouteClavier()
+      @zoneCtrl.majBoutons(@modele)  
+     
+    when EnumStadePartie.CHOIX_LIBRE
+      @zoneCtrl.bloquerBoutons(@modele)
+      bloquerEcouteClavier()  
+    
     when EnumStadePartie.PERDU
       @zoneCtrl.bloquerBoutons(@modele)
       bloquerEcouteClavier()
@@ -815,8 +821,8 @@ class Vue
       Gtk.timeout_remove(@timeout_id)
       @numEtapeAffichage=0
       @timeout_id=nil
-      majEcouteClavier()
-      @zoneCtrl.majBoutons(@modele)
+      #majEcouteClavier()
+      #@zoneCtrl.majBoutons(@modele)
       @transitionFini=true
     end
     true
@@ -876,8 +882,8 @@ class Vue
       Gtk.timeout_remove(@timeout_id)
       @numEtapeAffichage=0
       @timeout_id=nil
-      majEcouteClavier()
-      @zoneCtrl.majBoutons(@modele)
+      #majEcouteClavier()
+      #@zoneCtrl.majBoutons(@modele)
       @transitionFini=true
     end
     true
