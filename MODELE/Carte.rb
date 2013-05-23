@@ -1,5 +1,4 @@
 #COMPAR
-#AFR : reste à commenter : generationMapSemiAleatoire et repartitionType (2 méthodes)
 #!/usr/bin/env ruby
 
 ##
@@ -74,8 +73,7 @@ class Carte
 
 
    ##
-   #
-   #
+   #Permet de générer une map en posant des points centraux de génération d'environnement puis l'environnement se répartit selon une probabilité de répartition
    #
    def generationMapSemiAleatoire()
       0.upto((@longueur+@largeur)*2){
@@ -89,9 +87,12 @@ class Carte
 
 
    ##
-   #
-   #
-   #
+   #Permet la répartition du type d'environnement passé en paramètre
+   #== Paramètres :
+   #* <b>proba :</b> Probabilité de répartition de l'environnement
+   #* <b>type :</b> Type de terrain à poser et à propager sur la carte
+   #* <b>coordX :</b> Coordonnée en X du point de génération d'environnement a poser
+   #* <b>coordY :</b> Coordonnée en Y du point de génération d'environnement a poser
    def repartitionType(type, proba, coordX, coordY)  
       if(coordX >= @longueur || coordY >= @largeur || coordX < 0 || coordY < 0)
          return

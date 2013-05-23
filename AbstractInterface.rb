@@ -13,6 +13,8 @@ module AbstractInterface
   class InterfaceNotImplementedError < NoMethodError
   end
   
+  ##
+  #Inclus automatiquement le module Methods à l'inclusion d'AbstractInterface
   def self.included(klass)
     klass.send(:include, AbstractInterface::Methods)
     klass.send(:extend, AbstractInterface::Methods)
@@ -20,6 +22,8 @@ module AbstractInterface
   
   module Methods
     
+    ##
+    #Permet d'obliger l'implémentation d'une méthode
     def api_not_implemented(klass)
       caller.first.match(/in \`(.+)\'/)
       method_name = $1
