@@ -1,4 +1,4 @@
-#COMok
+#COMOK
 #!/usr/bin/env ruby
 
 ##
@@ -210,28 +210,15 @@ class InventaireModal
          when EnumStadePartie.INVENTAIRE_PLEIN then
             @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("boutonJeter"))
             @vue.controller.jeterItem(@boutonInteraction)
-            #@vue.controller.jeterItem(@boutonInteraction) #AFR
-         #when EnumStadePartie.EQUIPEMENT_ARME then
-         #   @boutonInteraction = @@boutonEquiper
-         #   @vue.controller.equiperItem(@boutonInteraction) #AFR
-         #when EnumStadePartie.EQUIPEMENT_ARMURE then
-         #   @boutonInteraction = @@boutonEquiper
-         #   @vue.controller.equiperItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_ACHAT then
             @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("achat"))
             @vue.controller.acheterItem(@boutonInteraction)
-
-            #@vue.controller.acheterItem(@boutonInteraction) #AFR
          when EnumStadePartie.INTERACTION_MARCHAND_VENTE then
             @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("vendre"))
             @vue.controller.vendreItem(@boutonInteraction)
-
-            #@vue.controller.vendreItem(@boutonInteraction) #AFR
          when EnumStadePartie.INVENTAIRE_USAGE then
             @boutonInteraction=Button.new(XmlMultilingueReader.lireTexte("boutonUtiliser"))
             @vue.controller.utiliserItem(@boutonInteraction)
-
-            #@vue.controller.utiliserItem(@boutonInteraction) #AFR
         end
    end
 
