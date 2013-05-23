@@ -416,8 +416,6 @@ class Joueur < Personnage
       str=XmlMultilingueReader.lireTexte("achete")
       str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
-       # tourPasse()
-       #puts "passe la"
    end
 
    ##
@@ -434,8 +432,6 @@ class Joueur < Personnage
       str=XmlMultilingueReader.lireTexte("vendu")
       str=str.gsub("INTITULE",XmlMultilingueReader.lireDeterminant_Nom(item))
       @modele.notifier(str)
-       #tourPasse()
-       #puts "passe la2"
    end
 
 
@@ -567,17 +563,14 @@ class Joueur < Personnage
    #* <b>messageDefaite :</b> le message de mort à afficher
    #
    def meurt(messageDefaite)
+     sleep(2)
    	@modele.changerStadePartie(EnumStadePartie.PERDU)
          
       # Arret du temps de jeu
 		@dateFinJeu = Time.now
-		puts "---> date fin : " + @dateFinJeu.to_s
-		puts "diff a ajouter : " + (@dateFinJeu - @dateDebutJeu).to_s
 		calculerTempsTotal
 		
 		XmlClassements.ecrireXml(@modele)
-		sleep(2)
-    @modele.changerStadePartie(EnumStadePartie.NO_ETAPE)
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
