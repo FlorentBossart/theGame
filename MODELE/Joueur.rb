@@ -576,6 +576,8 @@ class Joueur < Personnage
 		calculerTempsTotal
 		
 		XmlClassements.ecrireXml(@modele)
+		sleep(2)
+    @modele.changerStadePartie(EnumStadePartie.NO_ETAPE)
 		@modele.vue.popUp.affichePopUpMort(messageDefaite)
    end
    
