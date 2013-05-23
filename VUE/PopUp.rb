@@ -87,6 +87,7 @@ class PopUp
       
       dialog.signal_connect('response') {
         dialog.destroy
+		  @vue.actualiser()
         @vue.menu = MenuJeu.creer(false, @vue.modele, @vue.controller)
         @vue.window.set_sensitive(false)
         @vue.controller.classementAction

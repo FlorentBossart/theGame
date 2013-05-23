@@ -330,7 +330,6 @@ class MenuJeu
 			if(tabSlot[index] != nil)	# Si le slot "existe"
 				eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND1) # Change le curseur en forme de main
 				eb.signal_connect('button_press_event') { 
-					puts " Chargement du slot" + (index+1).to_s 
 					
 					modeleCharger = tabSlot[index].modele
 					Modele.majCpt(modeleCharger.compteurTour)
@@ -344,6 +343,13 @@ class MenuJeu
 					if(@isInGame == true)
 						#Destruction ancienne vue partie
 						@modele.vue.window.destroy
+					end
+					
+					# Pour detruire l'ancienne vue apres avoir charger une partie apres une mort
+					if(@modele.joueur != nil)
+						if(@modele.joueur.toujoursEnVie? == false)
+							@modele.vue.window.destroy
+						end
 					end
 					
 					# Creation de la vue charg�e
@@ -425,8 +431,7 @@ class MenuJeu
 			eb.realize # Cr�er la fenetre GDK (Gdk::Window) associ�es au widget
 			eb.window.cursor = Gdk::Cursor.new(Gdk::Cursor::HAND2) # Change le curseur en forme de main
 			
-			eb.signal_connect('button_press_event') {
-				puts "\tSauvegarde sur le slot" + (index+1).to_s 
+			eb.signal_connect('button_press_event') { 
 				YamlSlot.ecrireYaml("slot" + (index+1).to_s + ".yaml", @modele)
 				
 				@fenetreMenu.destroy
