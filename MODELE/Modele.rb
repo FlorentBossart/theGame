@@ -185,7 +185,7 @@ class Modele
     end
 
     # Creation du joueur
-    @joueur = Joueur.creer(@difficulte.nbRepos, @difficulte.energieDepart, 100, Inventaire.creer(3), self, caseJoueur, @pseudoPartie)
+    @joueur = Joueur.creer(@difficulte.nbRepos, @difficulte.energieDepart, 100, Inventaire.creer(12), self, caseJoueur, @pseudoPartie)
     caseJoueur.joueur = @joueur # Attribution du joueur à la case
 
     # Creation des PNJ Amis de depart
