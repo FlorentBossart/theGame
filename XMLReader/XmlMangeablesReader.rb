@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,20 +6,22 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des mangeables et de les ajouter à la bibliothèque correspondante.
+# Cette classe permet de parcourir le fichier XML des types de Mangeable et de les ajouter à la bibliothèque correspondante.
 #
 
 require 'MODELE/Bibliotheque/BibliothequeTypeMangeable.rb'
 require 'MODELE/Type/TypeMangeable.rb'
 require 'rexml/document'
+
 include REXML
 
 class XmlMangeablesReader
     
     
-    ##
-    # Méthode statique permettant de récupérer les mangeables et de les ajouter
-    #
+   ##
+   #Méthode statique permettant de récupérer les caractéristiques des différents types de Mangeable dans le fichier XML (types_mangeables.xml)
+   #et de les ajouter à la bibliothèque de types de Mangeable (classe BibliothequeTypeMangeable).
+   #
     def XmlMangeablesReader.lireXml()
         #Ouvre le fichier XML contenant les références 
         begin
