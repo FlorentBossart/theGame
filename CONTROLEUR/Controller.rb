@@ -215,7 +215,9 @@ class Controller
 		Thread.new do
 			@modele.joueur.utiliserRepos() 
 			@modele.debutTour()
+      @modele.changerStadePartie(EnumStadePartie.NO_ETAPE())
 		end
+	  
 	end
 
         

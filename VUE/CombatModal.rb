@@ -93,7 +93,7 @@ class CombatModal
       
       dialog.signal_connect('response') {
         dialog.destroy
-        if(@modele.joueur.peutSEquiper)
+        if(@modele.joueur.peutSEquiper && @modele.joueur.peutSEquiper==true)
           @modele.choixEquipementAvantCombat(@momentCombat)
         elsif(@modele.joueur.casePosition.presenceEnnemis?() && !@modele.joueur.peutSEquiper)
           @modele.declencherCombat(@momentCombat)
