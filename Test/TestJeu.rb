@@ -1,35 +1,43 @@
 #!/usr/bin/env ruby
 
 require 'gtk2'
-
-require 'Modele.rb'
+require 'MODELE/Modele.rb'
 require 'XMLReader/XmlMultilingueReader.rb'
-require 'Audio.rb'
-require 'Controller.rb'
+require 'VUE/Audio.rb'
+
+#require 'Controller.rb'
+#require 'Vue.rb'
 
 Gtk.init
 
-#XmlMultilingueReader.setLangue("FR")
+XmlMultilingueReader.setLangue("FR")
 
 # Remplissage des biblioth√®que
-#Modele.initialisationBibliotheques()
+Modele.initialisationBibliotheques()
 
 Audio.load()
 
-#CrÈation vue
-vue = Vue.new
+#Cr√©ation vue
+vue = Vue.creer()
 
-#CrÈation modele
-modele = Modele.creer(vue, nil, nil)
+#Cr√©ation modele
+modele = Modele.creer(vue,nil,nil)
 
-#CrÈation controlleur
+#Cr√©ation controlleur
 controleur = Controller.creer(modele, vue)
 
-#CrÈation menu
+vue.defM(modele)
+vue.defC(controleur)
+#modele.initialiseToi()
+
+#Cr√©ation menu
 menu = MenuJeu.creer(false, modele, controleur)
-vue.defMenu(menu)
+vue.menu = menu
+
 
 menu.afficherMenu()
 Gtk.main()
+#vue.initInterface(true)
+
 
 

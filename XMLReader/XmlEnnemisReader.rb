@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,20 +6,22 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des ennemis et de les ajouter à la bibliothèque correspondante.
+# Cette classe permet de parcourir le fichier XML des types d'ennemis et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeEnnemi.rb'
-require 'Type/TypeEnnemi.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeEnnemi.rb'
+require 'MODELE/Type/TypeEnnemi.rb'
 require 'rexml/document'
 include REXML
 
 class XmlEnnemisReader
     
     
-    ##
-    # Méthode statique permettant de récupérer les ennemis et de les ajouter
-    #
+
+   ##
+   #Méthode statique permettant de récupérer les caractéristiques des différents types d'Ennemi dans le fichier XML (types_ennemis.xml)
+   #et de les ajouter à la bibliothèque de types d'Ennemi (classe BibliothequeTypeEnnemi).
+   #
     def XmlEnnemisReader.lireXml()
         #Ouvre le fichier XML contenant les références 
         begin

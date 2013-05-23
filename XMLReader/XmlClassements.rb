@@ -1,3 +1,4 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
@@ -5,21 +6,25 @@
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des statistiques de chaque joueur 
-# et de les ajouter à la liste des joueurs classé (classe Classements).
+# Cette classe permet de parcourir le fichier XML des statistiques de chaque Joueur 
+# et de les ajouter Ã  la liste des joueurs classÃ©s (classe Classements).
 #
 
-require'Classements.rb'
-
+require'VUE/Classements.rb'
+require 'XMLReader/XmlMultilingueReader.rb'
 require 'rexml/document'
+
 include REXML
 
 class XmlClassements
 
 
    ##
-   # Méthode statique permettant de récupérer les statistiques des différents joueurs
-   # et de les ajouter à la liste des joueurs classé (classe Classements).
+   #MÃ©thode statique permettant de rÃ©cupÃ©rer les statistiques des diffÃ©rents joueurs dans le fichier XML (classements.xml)
+   #et de les ajouter Ã  la liste des joueurs classÃ©s (classe Classements).
+   #
+   #===ParamÃ¨tre :
+   #* <b>listeStatsJoueurs :</b> la liste des statistiques Ã  laquelle ajouter les statistiques lues Ã  partir du fichier XML
    #
    def XmlClassements.lireXml(listeStatsJoueurs)
       #Ouvre le fichier XML contenant les statistiques de chaque joueur
@@ -32,7 +37,7 @@ class XmlClassements
 
       #Pour chaque joueur du fichier XML...
       doc.elements.each('classements_joueur/joueur') do |j|
-         #... on ajoute les stats à la liste des stats de chaque joueur
+         #... on ajoute les stats Ã  la liste des stats de chaque joueur
          listeStatsJoueurs.addJoueur(j.elements['nom'].text, j.elements['nb_ennemis_tues'].text.to_i,
          										j.elements['distance'].text.to_i, j.elements['or'].text.to_i,
          										j.elements['temps'].text.to_i, j.elements['score'].text.to_i,
@@ -43,11 +48,14 @@ class XmlClassements
    
    
    ##
-   # Méthode statique permettant d'ajouter les statistiques d'un joueur au fichier XML (classements.xml)
+   #MÃ©thode statique permettant d'Ã©crire les statistiques du joueur dans le fichier XML (classements.xml)
    #
-   def XmlClassements.ecrireXml(modele) # Prendre un Modele en paramètre ?
+   #===ParamÃ¨tre :
+   #* <b>modele :</b> le modele Ã  partir duquel on rÃ©cupÃ¨re les statistiques du Joueur
+   #
+   def XmlClassements.ecrireXml(modele)
    	   	
-      if(File.exist?("XMLFile/classements.xml") == false)# Création du fichier s'il n'existe pas
+      if(File.exist?("XMLFile/classements.xml") == false)# CrÃ©ation du fichier s'il n'existe pas
       	begin
 	         file = File.open("XMLFile/classements.xml", "w")
 	         file.syswrite("<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n\n")
@@ -75,61 +83,58 @@ class XmlClassements
       
       joueur = Element.new("joueur")
       
-      nom = Element.new("nom")
-      #nom.text = "BestOfTheBest" # modele.joueur.pseudo # gérer par la classe Joueur 
+      nom = Element.new("nom") 
       nom.text = modele.joueur.pseudo
       joueur.add_element(nom)
       
       nbEnnemisTues = Element.new("nb_ennemis_tues")
-     # nbEnnemisTues.text = 32 # modele.joueur.nbEnnemiTues # gérer par la classe Joueur
       nbEnnemisTues.text = modele.joueur.nbEnnemiTues
       joueur.add_element(nbEnnemisTues)
       
       dist = Element.new("distance")
-     # dist.text = 3200 # modele.joueur.distanceParcourue # gérer par la classe Joueur
-      dist.text = modele.joueur.distanceParcourue # gérer par la classe Joueur
+      dist.text = modele.joueur.distanceParcourue
       joueur.add_element(dist)
       
       argent = Element.new("or")
-      #argent.text = 33333 # modele.joueur.inventaire.capital # gérer par la classe Inventaire
-      argent.text = modele.joueur.inventaire.capital # gérer par la classe Inventaire
+      argent.text = modele.joueur.inventaire.capital
       joueur.add_element(argent)
       
       tps = Element.new("temps")
-      #tps.text = 36005 # ??? modele.joueur.tempsTotal # gérer par la classe Modele
       tps.text = modele.joueur.tempsTotal
       joueur.add_element(tps)
       
       score = Element.new("score")
-      #score.text = 9865 # Mettre ici la formule de calcul du score
-      if(modele.compteurTour == 0) # A supprimer quand le jeu sera finalisé
-      	modele.compteurTour = 1 # A supprimer quand le jeu sera finalisé
+      
+      # L'intitule de la difficultÃ© est toujours en francais dans le Modele
+      if(modele.difficulte.intitule == "Novice")
+      	facteurDiff = 3
+      elsif(modele.difficulte.intitule == "Moyen")
+      	facteurDiff = 2
+      else
+      	facteurDiff = 1
       end
-      score.text = (modele.joueur.distanceParcourue*1000 / modele.compteurTour) + modele.joueur.inventaire.capital
+      score.text = ((modele.joueur.distanceParcourue*100 + modele.joueur.nbEnnemiTues*10) / facteurDiff)+
+      					modele.joueur.inventaire.capital
       joueur.add_element(score)
       
       diff = Element.new("difficulte")
-      #diff.text = "Expert" # modele.difficulte.intitule # gérer par la classe Modele
-      diff.text = modele.difficulte.intitule # gérer par la classe Modele
+      diff.text = modele.difficulte.intitule
       joueur.add_element(diff)
       
       doc.root.add_element(joueur)
       
       # MAJ du fichier xml du classement des joueurs
-		begin
+	  begin
 	      # w : Write-only, truncates existing file to zero length or creates a new file for writing.
 	      file = File.open("XMLFile/classements.xml", "w")
 	      file.write(doc)
-		rescue
+	  rescue
 			raise "Impossible d'ouvrir le fichier XMLFile/classements.xml"
-		ensure
+	  ensure
 			file.close
-		end
+	  end
 
 	end
 	
 end
-
-#Test
-#XmlClassements.ecrireXml(nil)
 

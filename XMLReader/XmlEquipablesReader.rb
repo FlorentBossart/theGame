@@ -1,27 +1,29 @@
+#COMOK
 #!/usr/bin/env ruby 
 
 ## 
-# Fichier        : XmlEquipablesReader.rb 
+# Fichier        : XmlEquipablessReader.rb 
 # Auteur         : L3SPI - Groupe de projet B 
 # Fait partie de : TheGame 
 # 
-# Cette classe permet de parcourir le fichier XML des équipables et de les ajouter à la bibliothèque correspondante.
+# Cette classe permet de parcourir le fichier XML des types d'Equipable et de les ajouter à la bibliothèque correspondante.
 #
 
-require 'Bibliotheque/BibliothequeTypeEquipable.rb'
-require 'Type/TypeEquipable.rb'
-require './AffichageDebug.rb'
-require './Enum/EnumRarete.rb'
+require 'MODELE/Bibliotheque/BibliothequeTypeEquipable.rb'
+require 'MODELE/Type/TypeEquipable.rb'
+require 'AffichageDebug.rb'
+require 'MODELE/Enum/EnumRarete.rb'
 
 require 'rexml/document'
 include REXML
 
 class XmlEquipablesReader
     
-    
-    ##
-    # Méthode statique permettant de récupérer les équipables et de les ajouter
-    #
+        
+   ##
+   #Méthode statique permettant de récupérer les caractéristiques des différents types d'Equipable dans le fichier XML (types_equipables.xml)
+   #et de les ajouter à la bibliothèque de types d'Equipable (classe BibliothequeTypeEquipable).
+   #
     def XmlEquipablesReader.lireXml()
         #Ouvre le fichier XML contenant les références 
         begin

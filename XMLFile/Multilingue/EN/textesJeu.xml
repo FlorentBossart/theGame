@@ -9,8 +9,17 @@
 <textesJeu>
 
 	<texte>
+		<id>cheminFicAide</id>
+	    <contenu>aideEN.txt</contenu>
+	</texte>
+	
+	<texte>
 		<id>nomMenu</id>
 	    <contenu>Menu</contenu>
+	</texte>
+	<texte>
+		<id>...</id>
+	    <contenu>...</contenu>
 	</texte>
 	
 	<texte>
@@ -55,6 +64,68 @@
 	    <contenu>Date</contenu>
 	</texte>
 	
+	<texte>
+		<id>pseudo</id>
+	    <contenu>Pseudo</contenu>
+	</texte>
+	<texte>
+		<id>ennemisTues</id>
+	    <contenu>Killed enemies</contenu>
+	</texte>
+	<texte>
+		<id>distanceParcourue</id>
+	    <contenu>Distance travelled (m)</contenu>
+	</texte>
+	<texte>
+		<id>orTotal</id>
+	    <contenu>Total gold</contenu>
+	</texte>
+	<texte>
+		<id>tempsJeu</id>
+	    <contenu>Game's time</contenu>
+	</texte>
+	<texte>
+		<id>score</id>
+	    <contenu>Score</contenu>
+	</texte>
+	<texte>
+		<id>infoClassement</id>
+	    <contenu>This is ranking's players following the difficulty. Every column can be sorted out by clicking its name.</contenu>
+	</texte>
+	
+	<texte>
+		<id>langue</id>
+	    <contenu>Language</contenu>
+	</texte>
+	<texte>
+		<id>musique?</id>
+	    <contenu>Music ?</contenu>
+	</texte>
+	<texte>
+		<id>bruitage?</id>
+	    <contenu>Sound effects ?</contenu>
+	</texte>
+	<texte>
+		<id>oui</id>
+	    <contenu>Oui</contenu>
+	</texte>
+	<texte>
+		<id>non</id>
+	    <contenu>Non</contenu>
+	</texte>
+	<texte>
+		<id>francais</id>
+	    <contenu>French</contenu>
+	</texte>
+	<texte>
+		<id>anglais</id>
+	    <contenu>English</contenu>
+	</texte>
+	<texte>
+		<id>valider</id>
+	    <contenu>Confirm</contenu>
+	</texte>
+	
 	
 	<texte>
 		<id>ContinuerPartie</id>
@@ -74,7 +145,7 @@
 	</texte>
 	<texte>
 		<id>Classement</id>
-	    <contenu>Rank</contenu>
+	    <contenu>Ranking</contenu>
 	</texte>
 	<texte>
 		<id>Options</id>
@@ -279,7 +350,7 @@
 	</texte>
 	<texte>
 		<id>mortFatigue</id>
-		<contenu>You died from exhaustion !.</contenu>
+		<contenu>You died from exhaustion !</contenu>
 	</texte>
 	<texte>
 		<id>combatEnCours</id>
@@ -287,7 +358,7 @@
 	</texte>
 	<texte>
 		<id>utiliserProtec</id>
-		<contenu>You equipped you INTITULE which shield you for PROTEC %.</contenu>
+		<contenu>You equipped your INTITULE which shield you for PROTEC %.</contenu>
 	</texte>
 	<texte>
 		<id>protectTotale</id>
@@ -299,7 +370,7 @@
 	</texte>
 	<texte>
 		<id>mortCombat</id>
-		<contenu>You died fighting !!</contenu>
+		<contenu>You died fighting against ENNEMI !!</contenu>
 	</texte>
 	<texte>
 		<id>passageNiveau</id>
@@ -368,6 +439,22 @@
 	<texte>
 		<id>pistage</id>
 		<contenu>PISTEUR of the (CX-CY) case is chasing you !</contenu>
+	</texte>
+	<texte>
+		<id>choixInventairePlein</id>
+		<contenu>Your inventory is full !</contenu>
+	</texte>
+	<texte>
+		<id>fenetreInventairePlein</id>
+		<contenu>You inventory is full, what do you want to do ?</contenu>
+	</texte>
+	<texte>
+		<id>boutonJeter</id>
+		<contenu>Throw</contenu>
+	</texte>
+	<texte>
+		<id>boutonUtiliser</id>
+		<contenu>Use</contenu>
 	</texte>
 </textesJeu>
 

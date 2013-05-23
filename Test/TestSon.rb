@@ -1,6 +1,6 @@
 # Test
 
-require 'Audio.rb'
+require 'VUE/Audio.rb'
 
 Audio.load()
 Audio.playSoundLoop("mario")
