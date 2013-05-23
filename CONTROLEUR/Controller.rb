@@ -878,6 +878,7 @@ class Controller
 				marchand.vendre(@modele.joueur, @vue.inventaireModal.inventaireCourant[@modele.indiceItemSelectionne])
 				@vue.inventaireModal.onDestroy()
 				@vue.window.modal=true
+        @modele.tourPasse()
 				@modele.debutTour()
 			end
 		}
@@ -895,6 +896,7 @@ class Controller
 				@modele.joueur.vendre(@modele.indiceItemSelectionne)
 				@vue.inventaireModal.onDestroy()
 				@vue.window.modal=true
+				@modele.tourPasse()
 				@modele.debutTour()
 			end
 		}
@@ -911,6 +913,7 @@ class Controller
 			Thread.new do
 				@modele.joueur.retirerDuStock(@modele.joueur.inventaire.getItem(@modele.indiceItemSelectionne))
 				@vue.inventaireModal.onDestroy
+				@modele.debutTour()
 				@vue.window.modal=true
 				@vue.actualiser
 			end

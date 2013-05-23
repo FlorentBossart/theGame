@@ -125,18 +125,18 @@ class Item < Elem
    #* <b>joueur</b> : le joueur avec lequel l'Item doit interargir
    #
    def interaction(joueur)
+     pleinTmp=joueur.inventaire.estPlein?()
      if(estStockable?())
        joueur.ramasserItem(self)
      else
        @caracteristique.utiliseToi(joueur)
        joueur.casePosition.retirerElement(self)
+       joueur.modele.tourPasse()
      end
-     joueur.modele.tourPasse()
      @casePosition=nil
-     if(joueur.inventaire.estPlein?()==false)
-
-       joueur.modele.debutTour()
-     end
+     if(pleinTmp==false)
+         joueur.modele.debutTour()
+      end
      joueur.modele.vue.actualiser
      return nil
    end

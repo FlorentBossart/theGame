@@ -547,7 +547,6 @@ class Joueur < Personnage
         @modele.notifier(XmlMultilingueReader.lireTexte("ramasserItem")+"#{XmlMultilingueReader.lireDeterminant_Nom(item)}.")
         @casePosition.retirerElement(item) #AFR (était après le end à la base)
      end
-
      @modele.tourPasse()
    end
    
